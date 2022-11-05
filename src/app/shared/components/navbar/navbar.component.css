@@ -1,0 +1,18 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+.mat-toolbar {
+    height: 90px;
+    padding: 0px;
+}
+
+img {
+    width: 120px;
+    height: auto;
+}
+button {
+    border-radius: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
