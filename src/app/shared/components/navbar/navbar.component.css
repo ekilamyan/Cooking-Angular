@@ -3,16 +3,20 @@
   }
 
 .mat-toolbar {
+    background-color: white;
     height: 90px;
     padding: 0px;
 }
 
 img {
-    width: 120px;
+    width: 130px;
     height: auto;
 }
+
 button {
-    border-radius: 10px;
-    margin-right: 10px;
-    margin-left: 10px;
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
+    border-radius: 25px;
+    margin-right: 5px;
+    margin-left: 5px;
 }
