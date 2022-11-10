@@ -1,1 +1,23 @@
-<p>my-pantry works!</p>
+<div class="main-container">
+    <div class="page-title">
+        <h1>
+            My Pantry
+        </h1>
+        <hr>
+    </div>
+    <div class="pantry-content">
+        <mat-card class="card-container" (click)="openDialog()">
+            <mat-card-title class="card-title">
+                <h1>Seafood</h1>
+            </mat-card-title>
+            <div class="card-body">
+                <ul>
+                    <li *ngFor="let item of test; let i = index">
+                        <h3>{{item}}</h3>
+                        <hr>
+                    </li>
+                </ul>
+            </div>
+        </mat-card>
+    </div>
+</div>

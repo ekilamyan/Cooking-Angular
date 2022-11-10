@@ -1,1 +1,173 @@
+<div class="recipe-title" fxLayout.gt-md="row" fxLayoutAlign.gt-md="space-between center">
+    <div class="title" fxFlex="90">
+        {{this.recipe.title}}
+    </div>
+    <div class="buttons" fxFlex="10" fxLayoutAlign="end center">
+        <button mat-icon-button>
+            <svg data-name="feather-icon/printer" xmlns="http://www.w3.org/2000/svg" width="27" height="27"
+                viewBox="0 0 20 22.041">
+                <path
+                    d="M4.166,20.2a.88.88,0,0,1-.833-.918V16.531H2.5A2.636,2.636,0,0,1,0,13.776V9.184A2.636,2.636,0,0,1,2.5,6.429h.833V.918A.879.879,0,0,1,4.167,0h10A.878.878,0,0,1,15,.918v5.51h.833a2.636,2.636,0,0,1,2.5,2.755v4.592a2.636,2.636,0,0,1-2.5,2.755H15v2.755a.88.88,0,0,1-.834.918ZM5,18.367h8.333v-5.51H5v2.718c0,.012,0,.025,0,.038s0,.025,0,.037Zm10.834-3.673a.879.879,0,0,0,.833-.918V9.184a.878.878,0,0,0-.833-.918H2.5a.879.879,0,0,0-.833.918v4.592a.879.879,0,0,0,.833.918h.833V11.938a.88.88,0,0,1,.833-.918h10a.88.88,0,0,1,.834.918v2.756Zm-2.5-8.265V1.837H5V6.429Z"
+                    transform="translate(0.833 0.918)">
+                </path>
+            </svg>
+        </button>
+        <button mat-icon-button>
+            <svg data-name="feather-icon/share copy" xmlns="http://www.w3.org/2000/svg" width="27" height="27"
+                viewBox="0 0 32 32">
+                <path
+                    d="M20,26.669a1.318,1.318,0,0,1-.77-.251l-8.558-6.113L2.108,26.418a1.319,1.319,0,0,1-.77.251A1.362,1.362,0,0,1,.41,26.3,1.314,1.314,0,0,1,0,25.333V4A4,4,0,0,1,4,0H17.333a4,4,0,0,1,4,4V25.333A1.34,1.34,0,0,1,20,26.669Zm-9.329-9.336a1.329,1.329,0,0,1,.776.248l7.225,5.161V4a1.335,1.335,0,0,0-1.334-1.333H4A1.335,1.335,0,0,0,2.666,4V22.742l7.225-5.161A1.324,1.324,0,0,1,10.666,17.333Z"
+                    transform="translate(5.333 2.667)">
+                </path>
+            </svg>
+        </button>
+    </div>
+</div>
 
+<div class="wrapper" fxLayout.gt-md="row" fxLayoutAlign.gt-md="space-between center">
+    <div class="image-wrapper">
+        <img src="{{this.recipe.image}}" width="680" />
+    </div>
+    <div class="nutrition-wrapper">
+        <div class="nutrition-label">
+            <h2>Nutrition Label</h2>
+            <ul class="nutrients" fxLayout="column" fxLayoutAlign="center">
+                <li *ngFor="let item of nutritionList; let i = index">
+                    <span class="name">{{item.name}}</span>
+                    <span class="data">{{item.amount}} {{item.unit}}</span>
+                    <hr>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="recipe-instruction-container" fxLayout.gt-md="row">
+
+    <div class="ingredients-container" fxFlex="50">
+        <h2>Ingredients</h2>
+        <ul class="ingredients">
+            <li *ngFor="let ingredient of ingredientList; let i = index">
+                <div class="bullet-point" fxFlex="10">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+                        <path
+                            d="M11,22A11,11,0,0,1,3.222,3.222,11,11,0,1,1,18.778,18.778,10.928,10.928,0,0,1,11,22ZM11,2a9,9,0,1,0,9,9A9.01,9.01,0,0,0,11,2Z"
+                            transform="translate(0 0)"></path>
+                    </svg>
+                </div>
+                <div class="ingredient" fxFlex="90"> 
+                    {{ingredient}} 
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="instructions-container" fxFlex="50">
+        <h2>Instructions</h2>
+        <ul class="instructions">
+            <li *ngFor="let step of instructionsList; let i = index">
+                <div class="bullet-point" fxFlex="10">
+                    <p class="step-decor" fxLayoutAlign="center center"> {{i + 1}} </p>
+                </div>
+                <p class="instruction" fxFlex="90">
+                    {{step}}
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+
+<!--
+    
+
+<div class="main-container">
+    <div class="showcase-container">
+        <h1>
+            Fix Title 
+            {{recipe.title}}
+            <svg data-name="feather-icon/share copy" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                viewBox="0 0 32 32">
+                <path
+                    d="M20,26.669a1.318,1.318,0,0,1-.77-.251l-8.558-6.113L2.108,26.418a1.319,1.319,0,0,1-.77.251A1.362,1.362,0,0,1,.41,26.3,1.314,1.314,0,0,1,0,25.333V4A4,4,0,0,1,4,0H17.333a4,4,0,0,1,4,4V25.333A1.34,1.34,0,0,1,20,26.669Zm-9.329-9.336a1.329,1.329,0,0,1,.776.248l7.225,5.161V4a1.335,1.335,0,0,0-1.334-1.333H4A1.335,1.335,0,0,0,2.666,4V22.742l7.225-5.161A1.324,1.324,0,0,1,10.666,17.333Z"
+                    transform="translate(5.333 2.667)">
+                </path>
+            </svg>
+        </h1>
+
+        
+    </div>
+
+    <div class="helpful-info">
+        <div class="info">
+            <h3>PREP TIME</h3>
+            <h2>{{recipe.readyInMinutes}} MIN</h2>
+        </div>
+        <div class="info">
+            <h3>SERVINGS</h3>
+            <h2>{{recipe.servings}} PEOPLE</h2>
+        </div>
+        <div class="info">
+            <h3>WEIGHT WATCHERS</h3>
+            <h2>{{recipe.weightWatcherSmartPoints}} POINTS</h2>
+        </div>
+        <div class="print">
+            <svg data-name="feather-icon/printer" xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                viewBox="0 0 20 22.041">
+                <path
+                    d="M4.166,20.2a.88.88,0,0,1-.833-.918V16.531H2.5A2.636,2.636,0,0,1,0,13.776V9.184A2.636,2.636,0,0,1,2.5,6.429h.833V.918A.879.879,0,0,1,4.167,0h10A.878.878,0,0,1,15,.918v5.51h.833a2.636,2.636,0,0,1,2.5,2.755v4.592a2.636,2.636,0,0,1-2.5,2.755H15v2.755a.88.88,0,0,1-.834.918ZM5,18.367h8.333v-5.51H5v2.718c0,.012,0,.025,0,.038s0,.025,0,.037Zm10.834-3.673a.879.879,0,0,0,.833-.918V9.184a.878.878,0,0,0-.833-.918H2.5a.879.879,0,0,0-.833.918v4.592a.879.879,0,0,0,.833.918h.833V11.938a.88.88,0,0,1,.833-.918h10a.88.88,0,0,1,.834.918v2.756Zm-2.5-8.265V1.837H5V6.429Z"
+                    transform="translate(0.833 0.918)">
+                </path>
+            </svg>
+        </div>
+    </div>
+
+    <div class="recipe-container">
+        <div class="ingredients-container">
+            <h2>Ingredients</h2>
+
+            <ul class="ingredients">
+                <li *ngFor="let ingredient of ingredientList; let i = index">
+                    <div class="bullet-point">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+                            <path
+                                d="M11,22A11,11,0,0,1,3.222,3.222,11,11,0,1,1,18.778,18.778,10.928,10.928,0,0,1,11,22ZM11,2a9,9,0,1,0,9,9A9.01,9.01,0,0,0,11,2Z"
+                                transform="translate(0 0)"></path>
+                        </svg>
+                    </div>
+                    <button class="ingredient">{{ingredient}}</button>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="instructions-container">
+            <h2>Instructions</h2>
+
+            <ul class="instructions">
+                <li *ngFor="let step of instructionsList; let i = index">
+                    <div class="bullet-point">
+                        <h1 class="step-decor">{{i + 1}}</h1>
+                    </div>
+                    <p class="instruction">{{step}}</p>
+                </li>
+            </ul>
+
+
+        </div>
+    </div>
+
+    <!--<app-suggestions></app-suggestions> 
+
+</div>
+-->
+
+<!--
+  <svg xmlns="http://www.w3.org/2000/svg" width="22.001" height="22.001" viewBox="0 0 22.001 22.001">
+    <path d="M1.772,16.988A11,11,0,0,1,15.477.953a1,1,0,0,1-.814,1.827A9,9,0,1,0,20,11.006v-.92a1,1,0,0,1,2,0v.921A11,11,0,0,1,1.772,16.988Zm8.521-3.264-3-3A1,1,0,1,1,8.708,9.31L11,11.6l9.293-9.3a1,1,0,1,1,1.415,1.414l-10,10.01a1,1,0,0,1-1.414,0Z" transform="translate(0 0)"></path>
+  </svg>
+-->

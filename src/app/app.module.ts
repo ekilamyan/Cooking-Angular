@@ -12,9 +12,13 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { MyPantryComponent } from './my-pantry/my-pantry.component';
 import { RecipeInstructionsPageComponent } from './recipe-instructions-page/recipe-instructions-page.component';
 import { SignInComponent } from './sign-in/sign-in.component';
+
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { SuggestionsComponent } from './shared/components/suggestions/suggestions.component';
+import { IngredientDialogComponent } from './ingredient-dialog/ingredient-dialog.component';
+import { RecipeSearchDialogComponent } from './recipe-search-dialog/recipe-search-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -27,6 +31,8 @@ import { SuggestionsComponent } from './shared/components/suggestions/suggestion
     FooterComponent,
     NavbarComponent,
     SuggestionsComponent,
+    IngredientDialogComponent,
+    RecipeSearchDialogComponent,
 
   ],
   imports: [

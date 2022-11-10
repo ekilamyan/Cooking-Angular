@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Seafood</h1>
+<mat-chip-list #chipList aria-label="ingredients" fxLayout="row wrap">
+    <mat-chip *ngFor="let item of data; let i = index">
+        {{this.data[i]}}
+        <button matChipRemove (click)="removeIngredient(i)">
+            <mat-icon>cancel</mat-icon>
+        </button>
+    </mat-chip>
+</mat-chip-list>
+
+<form class="ingredient-search" [formGroup]="ingredientSearchForm" fxLayoutAlign="center">
+    <input class="inputBox" type="text" placeholder="Search for an ingredient..." formControlName="ingredient"
+        [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of ingredients" (click)="addIngredient(option)">
+            {{capitalizeFirstLetter(option.name)}}
+        </mat-option>
+    </mat-autocomplete>
+</form>
+
+<div mat-dialog-actions>
+    <button mat-flat-button mat-dialog-close>Save Changes</button>
+</div>

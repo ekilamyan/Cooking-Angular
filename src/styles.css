@@ -1,22 +1,16 @@
-
-
-@import url(https://fonts.googleapis.com/css2?family=Inter&display=swap);
-
 @media only screen and (max-width: 600px) {
     body {
         max-width: 100%;
         background-color: lightblue;
-        margin-top: 0px;
     }
 }
 
 @media only screen and (min-width: 600px) {
     body {
-        max-width: 1000px;
+        max-width: 1100px;
         margin-right: auto;
         margin-left: auto;
         height: 100vh;
-        margin-top: 0px;
     }
 }
 
@@ -25,7 +19,7 @@
     src: local("Playfair"), url(assets/Fonts/PlayfairDisplay-Black.ttf) format("truetype");
 }
 
-h2 {
-    font-weight: 200;
-    font-family: "Inter", sans-serif;
+@font-face {
+    font-family: "Inter";
+    src: local("Inter"), url(assets/Fonts/Inter-Regular.ttf) format("truetype");
 }

@@ -20,3 +20,16 @@ button {
     margin-right: 5px;
     margin-left: 5px;
 }
+.mat-accordion {
+    margin: 10px;
+}
+
+.mat-expansion-panel {
+    box-shadow: none;
+}
+
+.mat-expansion-panel-header {
+    padding: 0px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

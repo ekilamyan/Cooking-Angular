@@ -44,7 +44,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { OverlayModule } from '@angular/cdk/overlay';
-// import { FlexLayoutModule } from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 @NgModule({
     exports: [
@@ -55,7 +56,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
         CdkTableModule,
         CdkTreeModule,
         DragDropModule, 
-//        FlexLayoutModule,
+        FlexLayoutModule,
         MatAutocompleteModule,
         MatBadgeModule,
         MatBottomSheetModule,

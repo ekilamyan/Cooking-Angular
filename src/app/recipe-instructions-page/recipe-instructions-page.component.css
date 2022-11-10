@@ -1,0 +1,208 @@
+/* title */
+.recipe-title {
+    padding: 10px 0px 20px 0px;
+}
+
+.title {
+    font-family: "Playfair", serif;
+    font-size: 60px;
+    line-height: 1;
+    color: #303030;
+}
+
+/* Image & nutrition label */
+.showcase-container h1{
+    font-family: "Playfair", serif;
+    font-size: 60px;
+    padding-bottom: 20px;
+    width: 100%;
+}
+
+h1 svg {
+    float: right;
+    margin-top: 40px;
+    margin-right: 10px;
+}
+
+img {
+    border-radius: 10px;
+}
+
+
+/*nutrition-label*/
+.nutrition-label {
+    padding: 25px;
+    height: 370px;
+    width: 300px;
+    border-radius: 15px;
+    background-color: whitesmoke;
+}
+
+hr {
+    margin-bottom: 3px;
+}
+
+.nutrients {
+    padding: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.nutrition-label  li {
+    list-style-type :none;
+}
+
+
+.nutrition-label  .data {
+    float: right;
+    color: black;
+}
+
+.nutrition-label li {
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+    color: grey;
+    padding: 1px;
+}
+
+h2 {
+    font-family: "Playfair", serif;
+    font-size: 30px;
+}
+
+
+/* Ingredients & instruction*/
+
+.recipe-instruction-container {
+    padding: 20px 0px 20px 0px;
+}
+
+.ingredients, .instructions {
+    list-style: none;
+    padding: 0px;
+}
+
+.ingredients li {
+    line-height: 1.5;
+    padding-top: 10px;
+}
+
+.ingredients .ingredient {
+    padding-right: 50px;
+    font-size: 18px;
+    font-family: "Inter", sans-serif;
+}
+
+.instructions .instruction {
+    font-size: 18px;
+    font-family: "Inter", sans-serif;
+}
+
+.instructions {
+    padding-top: 10px;
+    font-size: 18px;
+    font-family: "Inter", sans-serif;
+}
+
+.instruction {
+    line-height: 1.5;
+}
+
+.bullet-point {
+    margin-top: 2px;
+}
+
+.step-decor {
+    font-size: 14px;
+    text-align: center;
+    color: white;
+    height: 25px;
+    width: 25px;
+    background-color: #426aa8;
+    border-radius: 50px;
+}
+
+
+/* lists on page 
+.recipe-container {
+    width: 100%;
+}
+
+
+
+.bullet-point {
+    padding-top: 2px;
+    float: left;
+    width: 10%;
+  }
+
+.step-decor {
+    padding-top: 2px;
+    font-size: 14px;
+    text-align: center;
+    color: white;
+    height: 25px;
+    width: 25px;
+    background-color: #426aa8;
+    border-radius: 50%;
+}
+
+
+ul {
+    font-size: 18px;
+    font-weight: 450;
+}
+
+li {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: "Inter", sans-serif;
+}
+
+
+button:focus{
+    text-decoration: line-through;
+}
+*/
+
+
+
+
+/*helpfull-info*/
+.helpful-info {
+    width: 100%;
+    padding-bottom: 70px;
+}
+
+.helpful-info .info {
+    float: left;
+    padding-right: 20px;
+    padding-left: 20px;
+    text-align: center;
+    border: 1px solid white;
+    border-right-color: rgb(211, 211, 211);
+}
+
+.helpful-info .info h3 {
+    font-size: 14px;
+    color: grey;
+}
+
+.helpful-info .info h2 {
+    font-size: 14px;
+    color: black;
+    font-family: "Inter", sans-serif;
+}
+
+.helpful-info .print {
+    float: left;
+    padding-top: 15px;
+    padding-left: 20px;
+}
+
+.helpful-info .print svg{
+    fill: #525252;
+}
+
+

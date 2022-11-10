@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'homepage', component: HomepageComponent },
   { path: 'signin', component: SignInComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'recipe-instructions', component: RecipeInstructionsPageComponent },
+  { path: 'recipe-instructions', component: RecipeInstructionsPageComponent, data: {id: '000000'}},
   { path: 'my-pantry', component: MyPantryComponent }
 ];
 
