@@ -1,0 +1,30 @@
+/* card */
+img {
+    border-radius: 10px;
+    transition: 0.3s;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+img:hover {
+    transform: scale(1.07);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 500;
+    font-family: "Inter", sans-serif;
+    transition: 0.2s;
+}
+
+.title:hover {
+    color: coral;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.card {
+    width: 345px;
+}

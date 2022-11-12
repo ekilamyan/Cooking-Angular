@@ -13,7 +13,7 @@ import { AutocompleteService } from '../shared/services/autocomplete.service';
 })
 export class MyPantryComponent implements OnInit {
 
-  public test: string[] = ["Trout", "Salmon", "Shrimp", "Halibit", "Whitening", "Albacore", "Sea Urchin", "Caviar"];
+  public test: string[] = ["Trout", "Salmon", "Shrimp", "Halibut", "Whitening", "Albacore", "Sea Urchin", "Caviar"];
   
   public ingredients: PantryIngredient[] = [];
   public hasRanSearch = false;

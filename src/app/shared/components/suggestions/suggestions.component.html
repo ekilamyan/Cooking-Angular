@@ -1,1 +1,8 @@
-<p>suggestions works!</p>
+<div class="suggestions-wrapper" fxFlex="100" fxLayout="row" fxLayoutAlign="space-between end">
+    <div class="card" *ngFor=" let i of recipes">
+        <img src="{{i.image}}" width="345" />
+        <div class="title" fxLayout="row wrap">
+            {{i.title}}asdas
+        </div>
+    </div>
+</div>
