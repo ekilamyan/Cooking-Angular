@@ -1,0 +1,53 @@
+/* heading */
+.page-title h1 {
+    font-family: "Playfair", serif;
+    font-size: 40px;
+    width: 100%;
+    float: left;
+    margin-top: 40px;
+}
+
+hr {
+    border: 0;
+    clear: both;
+    display: block;
+    width: 100%;
+    background-color: #000000;
+    height: 1px;
+}
+
+.pantry-content {
+    padding-top: 50px;
+}
+
+/* Input box */
+.inputBox {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid rgba(255,255,255, 0.25);
+    border-style: solid;
+    border-color: rgb(92, 92, 92);
+    border-radius: 10px;
+    font-size: 18px;
+    margin-top: 20px;
+    font-family: "Inter", sans-serif;
+}
+
+.mat-option {
+    font-family: "Inter", sans-serif;
+}
+
+
+/*  filter buttons */
+.mat-stroked-button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 18px;
+    margin-top: 20px;
+    font-family: "Inter", sans-serif; 
+}
+
+.mat-menu-item {
+    width: 100%;
+}

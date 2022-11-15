@@ -1,0 +1,46 @@
+<div class="main-container">
+    <div class="page-title">
+        <h1>Search Results</h1>
+        <hr>
+    </div>
+
+    <div class="search-bar" fxLayout="row" fxLayoutAlign="space-between center">
+        <form class="ingredient-search" [formGroup]="recipeSearchForm" fxFlex="50" fxLayoutAlign="center">
+            <input class="inputBox" type="text" placeholder="Search for a Recipe..." formControlName="recipe"
+                [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+
+                <mat-option *ngFor="let option of recipes">
+                    <!-- (click)="navToRecipeIntructions(option.id)" -->
+                    {{capitalizeFirstLetter(option.title)}}
+                </mat-option>
+
+            </mat-autocomplete>
+        </form>
+
+        <div class="filter-button" fxFlex="20">
+            <button mat-stroked-button [matMenuTriggerFor]="menu"> Diets </button>
+            <!-- [matMenuTriggerFor]="menu" must be the same on the next line -->
+            <mat-menu class="menu-content" #menu="matMenu">
+                <button mat-menu-item>afhaj flkasfqiewuoi iouqwe orqwoier ulkjsaflk</button>
+                <button mat-menu-item>Item 2</button>
+            </mat-menu>
+        </div>
+
+        <div class="filter-button" fxFlex="20">
+            <button mat-stroked-button [matMenuTriggerFor]="menu"> Intolerances </button>
+            <!-- [matMenuTriggerFor]="menu" must be the same on the next line -->
+            <mat-menu class="menu-content" #menu="matMenu">
+                <button mat-menu-item>asfoiasklfklasf</button>
+                <button mat-menu-item>Item 2</button>
+            </mat-menu>
+        </div>
+
+
+
+    </div>
+
+    <div class="search-content">
+
+    </div>
+</div>

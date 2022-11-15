@@ -6,6 +6,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { RecipeInstructionsPageComponent } from './recipe-instructions-page/recipe-instructions-page.component';
 import { MyPantryComponent } from './my-pantry/my-pantry.component';
+import { SearchPageComponent } from './search-page/search-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/recipe-instructions', pathMatch: 'full' },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'signin', component: SignInComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'recipe-instructions', component: RecipeInstructionsPageComponent, data: {id: '000000'}},
-  { path: 'my-pantry', component: MyPantryComponent }
+  { path: 'my-pantry', component: MyPantryComponent },
+  { path: 'search', component: SearchPageComponent }
 ];
 
 @NgModule({

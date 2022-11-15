@@ -30,6 +30,7 @@
 }
 
 .mat-dialog-actions {
+    margin-top: auto;
     justify-content: center;
 }
 

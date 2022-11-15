@@ -1,18 +1,19 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { RecipeSearchDialogComponent } from '../recipe-search-dialog/recipe-search-dialog.component';
 import { RecipeSearch } from '../shared/models/recipe-search.model';
 import { AutocompleteService } from '../shared/services/autocomplete.service';
 
 @Component({
-  selector: 'app-recipe-search-dialog',
-  templateUrl: './recipe-search-dialog.component.html',
-  styleUrls: ['./recipe-search-dialog.component.css']
+  selector: 'app-search-page',
+  templateUrl: './search-page.component.html',
+  styleUrls: ['./search-page.component.css']
 })
-export class RecipeSearchDialogComponent implements OnInit {
+export class SearchPageComponent implements OnInit {
   public recipes: RecipeSearch[] = [];
   public hasRanSearch = false;
 
@@ -20,8 +21,7 @@ export class RecipeSearchDialogComponent implements OnInit {
     recipe: new FormControl(''),
   });
 
-  constructor(public dialogRef: MatDialogRef<RecipeSearchDialogComponent>,
-    private service: AutocompleteService, private formBuilder: FormBuilder, private snackBar: MatSnackBar, private route: Router) {
+  constructor(private service: AutocompleteService, private formBuilder: FormBuilder, private snackBar: MatSnackBar, private route: Router) {
 
   }
 
@@ -53,11 +53,4 @@ export class RecipeSearchDialogComponent implements OnInit {
   capitalizeFirstLetter(word: string) {
     return word.charAt(0).toUpperCase() + word.slice(1);
   }
-
-  navToRecipeIntructions(id: string) {
-    // this.route.navigate(['/recipe-search']);
-    this.route.navigate(['/search'], {queryParams:{id}});
-    this.dialogRef.close();
-  }
-
 }

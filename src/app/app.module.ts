@@ -18,6 +18,7 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { SuggestionsComponent } from './shared/components/suggestions/suggestions.component';
 import { IngredientDialogComponent } from './ingredient-dialog/ingredient-dialog.component';
 import { RecipeSearchDialogComponent } from './recipe-search-dialog/recipe-search-dialog.component';
+import { SearchPageComponent } from './search-page/search-page.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { RecipeSearchDialogComponent } from './recipe-search-dialog/recipe-searc
     SuggestionsComponent,
     IngredientDialogComponent,
     RecipeSearchDialogComponent,
+    SearchPageComponent,
 
   ],
   imports: [
