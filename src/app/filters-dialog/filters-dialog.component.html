@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>Filters</h1>
+<mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Cuisines" >
+        <div class="cuisines-button-container" fxLayout="row wrap" fxLayoutAlign="space-around center">
+            <mat-checkbox mat-flat-mat-checkbox *ngFor="let country of cuisines;" (click)="addRemoveFilter(country)">
+                {{country}}
+            </mat-checkbox>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Diets">
+        <div class="diets-button-container" fxLayout="row wrap" fxLayoutAlign="space-around center">
+            <mat-checkbox mat-flat-mat-checkbox *ngFor="let diet of diets;" (click)="addRemoveFilter(diet)">
+                {{diet}}
+            </mat-checkbox>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Intolerances">
+        <div class="intolerances-button-container" fxLayout="row wrap" fxLayoutAlign="space-around center">
+            <mat-checkbox mat-flat-mat-checkbox *ngFor="let intolerance of intolerances;" (click)="addRemoveFilter(intolerance)">
+                {{intolerance}}
+            </mat-checkbox>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Type">
+        <div class="types-button-container" fxLayout="row wrap" fxLayoutAlign="center center">
+            <mat-checkbox mat-flat-mat-checkbox *ngFor="let type of mealTypes;" (click)="addRemoveFilter(type)">
+                {{type}}
+            </mat-checkbox>
+        </div>
+    </mat-tab>
+</mat-tab-group>

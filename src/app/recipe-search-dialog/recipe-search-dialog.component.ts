@@ -4,8 +4,9 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { RecipeSearch } from '../shared/models/recipe-search.model';
-import { AutocompleteService } from '../shared/services/autocomplete.service';
+import { RecipeSearch } from 'src/app/shared/models/recipe-search.model';
+import { AutocompleteService } from 'src/app/shared/services/autocomplete.service';
+import { SearchService } from '../shared/services/search.service';
 
 @Component({
   selector: 'app-recipe-search-dialog',
@@ -21,8 +22,8 @@ export class RecipeSearchDialogComponent implements OnInit {
   });
 
   constructor(public dialogRef: MatDialogRef<RecipeSearchDialogComponent>,
-    private service: AutocompleteService, private formBuilder: FormBuilder, private snackBar: MatSnackBar, private route: Router) {
-
+    private service: AutocompleteService, private formBuilder: FormBuilder, private snackBar: MatSnackBar, private route: Router,
+    private searchService: SearchService) {
   }
 
   ngOnInit(): void {
@@ -54,9 +55,19 @@ export class RecipeSearchDialogComponent implements OnInit {
     return word.charAt(0).toUpperCase() + word.slice(1);
   }
 
-  navToRecipeIntructions(id: string) {
+
+  // passing string to another component 
+  navToSearchPage(id: string, searchedWord: string) {
     // this.route.navigate(['/recipe-search']);
-    this.route.navigate(['/search'], {queryParams:{id}});
+    // console.log ('navToRecipeIntructions called');
+
+    if (this.route.url.includes('search')) {
+      this.searchService.lastSearchId.next(id);
+    } else {
+      this.searchService.lastSearchId.next(id);
+      this.route.navigate(['search']);
+    }
+    
     this.dialogRef.close();
   }
 

@@ -23,3 +23,9 @@
     font-family: "Inter";
     src: local("Inter"), url(assets/Fonts/Inter-Regular.ttf) format("truetype");
 }
+
+.mat-stroked-button,
+.mat-menu-item {
+    font-family: "Inter", sans-serif;
+    
+}

@@ -1,5 +1,6 @@
 /* card */
 img {
+    width: 250px;
     border-radius: 10px;
     transition: 0.3s;
     margin-top: 10px;
@@ -26,6 +27,6 @@ img:hover {
 }
 
 .card {
-    width: 345px;
+    width: 250px;
     margin-bottom: auto;
 }

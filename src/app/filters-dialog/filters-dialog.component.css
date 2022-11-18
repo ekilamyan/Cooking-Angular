@@ -1,0 +1,74 @@
+::ng-deep.mat-dialog-container {
+    padding: 30px;
+    border-radius: 18px;
+    width: 700px;
+    height: auto;
+}
+
+.mat-dialog-title {
+    font-size: 40px;
+    font-family: "Playfair", serif;
+}
+
+/* Styles for tab labels */
+::ng-deep.mat-tab-label {
+    border-radius: 10px;
+    font-size: 18px;
+    font-family: "Inter", sans-serif;
+
+}
+
+/* Styles for the active tab label */
+::ng-deep.mat-tab-label.mat-tab-label-active {
+    color: black;
+    background-color: white !important;
+}
+
+/* Styles for the ink bar */
+::ng-deep.mat-ink-bar {
+    background-color: green;
+}
+
+
+::ng-deep.mat-checkbox {
+    width: 130px;
+    font-size: 16px;
+    font-family: "Inter", sans-serif;
+}
+
+/* cuisines */
+.cuisines-button-container {
+    height: 190px;
+}
+
+/* diets */
+.diets-button-container {
+    height: 190px;
+}
+
+.diets-button-container ::ng-deep.mat-checkbox {
+    width: 160px;
+    margin: 5px;
+}
+
+/* intolerances */
+.intolerances-button-container {
+    height: 190px;
+}
+
+.intolerances-button-container ::ng-deep.mat-checkbox {
+    width: 120px;
+    margin: 5px;
+}
+
+
+/* type */
+.types-button-container {
+    height: 190px;
+}
+
+.types-button-container ::ng-deep.mat-checkbox {
+    width: 120px;
+    margin: 5px;
+}
+

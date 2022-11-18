@@ -16,9 +16,12 @@ hr {
     height: 1px;
 }
 
-.pantry-content {
-    padding-top: 50px;
+/* Chips */
+.clear-all-chips {
+    background-color: rgb(233, 143, 143);
 }
+
+
 
 /* Input box */
 .inputBox {
@@ -41,13 +44,52 @@ hr {
 /*  filter buttons */
 .mat-stroked-button {
     width: 100%;
-    padding: 10px;
+    padding: 9px;
     border-radius: 10px;
     font-size: 18px;
     margin-top: 20px;
+    border-style: solid;
+    border-color: rgb(92, 92, 92);
     font-family: "Inter", sans-serif; 
 }
 
 .mat-menu-item {
-    width: 100%;
+    font-size: 16px;
+}
+
+
+
+/* suggestions in content */
+
+/* card */
+img {
+    width: 250px;
+    border-radius: 10px;
+    transition: 0.3s;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+img:hover {
+    transform: scale(1.07);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 500;
+    font-family: "Inter", sans-serif;
+    transition: 0.2s;
+}
+
+.title:hover {
+    color: coral;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.card {
+    width: 250px;
+    margin-bottom: auto;
 }

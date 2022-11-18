@@ -19,6 +19,7 @@ import { SuggestionsComponent } from './shared/components/suggestions/suggestion
 import { IngredientDialogComponent } from './ingredient-dialog/ingredient-dialog.component';
 import { RecipeSearchDialogComponent } from './recipe-search-dialog/recipe-search-dialog.component';
 import { SearchPageComponent } from './search-page/search-page.component';
+import { FiltersDialogComponent } from './filters-dialog/filters-dialog.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { SearchPageComponent } from './search-page/search-page.component';
     IngredientDialogComponent,
     RecipeSearchDialogComponent,
     SearchPageComponent,
+    FiltersDialogComponent,
 
   ],
   imports: [

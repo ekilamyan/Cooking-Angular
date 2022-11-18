@@ -11,11 +11,11 @@ import { SearchPageComponent } from './search-page/search-page.component';
 const routes: Routes = [
   { path: '', redirectTo: '/recipe-instructions', pathMatch: 'full' },
   { path: 'homepage', component: HomepageComponent },
-  { path: 'signin', component: SignInComponent },
+  { path: 'sign-in', component: SignInComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'recipe-instructions', component: RecipeInstructionsPageComponent, data: {id: '000000'}},
   { path: 'my-pantry', component: MyPantryComponent },
-  { path: 'search', component: SearchPageComponent }
+  { path: 'search', component: SearchPageComponent}
 ];
 
 @NgModule({
