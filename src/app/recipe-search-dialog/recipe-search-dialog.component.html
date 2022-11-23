@@ -4,7 +4,7 @@
     <input class="inputBox" type="text" placeholder="Search for a Recipe..." formControlName="recipe"
         [matAutocomplete]="auto">
     <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let option of recipes" (click)="navToSearchPage(option.id, option.title)">
+        <mat-option *ngFor="let option of recipes" (click)="navToSearchPage(option.id)">
             {{capitalizeFirstLetter(option.title)}}
         </mat-option>
     </mat-autocomplete>

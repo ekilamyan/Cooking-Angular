@@ -43,10 +43,10 @@
     <div class="search-content">
         <!-- <app-suggestions *ngIf=" id !== ''" [recipeId]="returnRecipeId()" [numOfResults]="5"></app-suggestions> -->
         <div class="suggestions-wrapper" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
-            <div class="card" *ngFor=" let i of recipes" (click)="navToRecipeIntructions(i.id)">
-                <img src="{{i.image}}"/>
+            <div class="card" *ngFor=" let recipe of recipes let i = index" (click)="navToRecipeIntructions(recipe.id)">
+                <img src="{{recipe.image}}" />
                 <div class="title" fxLayout="row wrap">
-                    {{i.title}}
+                    {{recipe.title}}
                 </div>
             </div>
         </div>

@@ -41,10 +41,13 @@ export class SearchPageComponent implements OnInit {
     private searchService: SearchService) {
 
     this.route.snapshot
-
   }
 
   ngOnInit(): void {
+
+
+    // public categoryTitles = ['Breakfast', 'Gluten Free', 'Vegan', 'Pizza', 'Smoothies', 'Desserts'];
+
     /*
     - search Service has a behavior subject called 'last search' which is a global subscribalble variable
     - we set it value using 'this.searchService.lastSearch.next(id);' in dialog
@@ -52,7 +55,8 @@ export class SearchPageComponent implements OnInit {
     */
 
     this.id = this.searchService.lastSearchId.value;
-    this.searchSubscription = this.searchService.lastSearchId.subscribe( (id: string) => {
+    this.searchSubscription = this.searchService.lastSearchId.subscribe((id: string) => {
+
       this.id = id;
       this.ids = '';
       this.recipes = [];
@@ -60,27 +64,48 @@ export class SearchPageComponent implements OnInit {
       // console.log(id);
 
       if (this.id) {
-        this.suggestionsService.getIds(this.id, 2).subscribe((temp: any[]) => {
-          this.ids = this.id + ',';
-          for (let i = 0; i < temp.length; i++) {
-            this.ids = this.ids + temp[i].id;
-            if (i < temp.length - 1) {
-              this.ids = this.ids + ',';
+        /* For random crecipes with categories */
+        if (id == 'breakfast' || id == 'gluten free' || id == 'vegan' || id == 'dessert') {
+          this.id = id;
+          this.suggestionsService.getRandomIdsByCuisine(this.id, 4).subscribe((temp: any) => {
+            for (let i = 0; i < temp.recipes.length; i++) {
+              this.recipes[i] = temp.recipes[i];
             }
-          }
-          this.suggestionsService.getSuggestionsBulk(this.ids).subscribe((esh: any[]) => {
-            for (let i = 0; i < esh.length; i++) {
-              this.recipes[i] = esh[i];
-            }
-            this.searchedWord = this.recipes[0].title;
           });
-        });  
+
+        } else {
+          /* For results from a actual search */
+          /* Get list of ids */
+          if (id == 'pizza') {
+            this.id = '210327';
+          } 
+          else if (id == 'smoothie') {
+            this.id = '125319';
+          }
+          this.suggestionsService.getIds(this.id, 3).subscribe((temp: any[]) => {
+            console.log(this.id)
+            this.ids = this.id + ',';
+            for (let i = 0; i < temp.length; i++) {
+              this.ids = this.ids + temp[i].id;
+              if (i < temp.length - 1) {
+                this.ids = this.ids + ',';
+              }
+            }
+            /* find recipes with list of ids */
+            this.suggestionsService.getSuggestionsBulk(this.ids).subscribe((esh: any[]) => {
+              for (let i = 0; i < esh.length; i++) {
+                this.recipes[i] = esh[i];
+              }
+              this.searchedWord = this.recipes[0].title;
+            });
+          });
+        }
       }
     })
-  
+
     this.recipeSearchForm = this.formBuilder.group({
       'recipe': ['']
-    }); 
+    });
 
 
     this.recipeSearchForm.get('recipe')?.valueChanges.pipe(
@@ -133,7 +158,7 @@ export class SearchPageComponent implements OnInit {
   }
 
   navToRecipeIntructions(id: string) {
-    this.newRoute.navigate(['/recipe-instructions'], {queryParams:{id}});
+    this.newRoute.navigate(['/recipe-instructions'], { queryParams: { id } });
   }
 
   /*

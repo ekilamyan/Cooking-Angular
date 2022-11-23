@@ -1,8 +1,8 @@
-<div class="suggestions-wrapper" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
-    <div class="card" *ngFor=" let i of recipes">
-        <img src="{{i.image}}" width="345" />
-        <div class="title" fxLayout="row wrap">
-            {{i.title}}
+<div class="suggestions-wrapper" fxLayout="row" fxLayoutAlign="space-between stretch">
+    <div class="card" *ngFor=" let recipe of recipes"  fxLayout="column" fxLayoutAlign="start start" (click)="navToRecipeIntructions(recipe.id)">
+        <img src="{{recipe.image}}"/>
+        <div class="card-body" fxLayout="row wrap">
+            <h2 class="card-title">{{recipe.title}}</h2>
         </div>
     </div>
 </div>

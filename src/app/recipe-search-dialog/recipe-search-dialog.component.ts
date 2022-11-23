@@ -22,7 +22,8 @@ export class RecipeSearchDialogComponent implements OnInit {
   });
 
   constructor(public dialogRef: MatDialogRef<RecipeSearchDialogComponent>,
-    private service: AutocompleteService, private formBuilder: FormBuilder, private snackBar: MatSnackBar, private route: Router,
+    private service: AutocompleteService, private formBuilder: FormBuilder, private snackBar: MatSnackBar, 
+    private route: Router,
     private searchService: SearchService) {
   }
 
@@ -57,7 +58,7 @@ export class RecipeSearchDialogComponent implements OnInit {
 
 
   // passing string to another component 
-  navToSearchPage(id: string, searchedWord: string) {
+  navToSearchPage(id: string) {
     // this.route.navigate(['/recipe-search']);
     // console.log ('navToRecipeIntructions called');
 
