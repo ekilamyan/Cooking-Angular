@@ -21,9 +21,12 @@ export class IngredientDialogComponent implements OnInit {
     ingredient: new FormControl(''),
   });
 
-  constructor(public dialogRef: MatDialogRef<IngredientDialogComponent>,
+  constructor(
+    public dialogRef: MatDialogRef<IngredientDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private service: AutocompleteService, private formBuilder: FormBuilder, private snackBar: MatSnackBar) {
+    private service: AutocompleteService, 
+    private formBuilder: FormBuilder, 
+    private snackBar: MatSnackBar) {
 
   }
 
@@ -63,9 +66,7 @@ export class IngredientDialogComponent implements OnInit {
     if (i !== -1) {
       this.data.splice(i, 1);
 
-      this.snackBar.open(this.capitalizeFirstLetter(this.data[i]) + ' Removed', 'Dismiss', {
-        duration: (this.durationInSeconds + 3) * 1000,
-      });
+      
     }
   }
 

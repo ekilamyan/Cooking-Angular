@@ -4,43 +4,52 @@
         <hr>
     </div>
 
+    <div class="filters">
+        <mat-chip-list #chipList>
+            <mat-chip *ngFor="let item of filters; let i = index">
+                {{filters[i]}}
+                <button matChipRemove (click)="removeFilter(i)">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip>
+
+            <mat-chip class="clear-all-chips" *ngIf="filters.length >= 2">
+                Clear All
+                <button matChipRemove (click)="removeAllChips()">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip>
+
+        </mat-chip-list>
+    </div>
+
     <div class="search-bar" fxLayout="row" fxLayoutAlign="space-between center">
-        <form class="ingredient-search" [formGroup]="recipeSearchForm" fxFlex="50" fxLayoutAlign="center">
-            <input class="inputBox" type="text" placeholder="Search for a Recipe..." formControlName="recipe"
+        <form class="ingredient-search" [formGroup]="recipeSearchForm" fxFlex="85">
+            <input class="inputBox" type="text" placeholder={{searchedWord}} formControlName="recipe"
                 [matAutocomplete]="auto">
             <mat-autocomplete #auto="matAutocomplete">
-
-                <mat-option *ngFor="let option of recipes">
+                <mat-option *ngFor="let option of autocompleteRecipes" (click)="changeResults(option.id)">
                     <!-- (click)="navToRecipeIntructions(option.id)" -->
                     {{capitalizeFirstLetter(option.title)}}
                 </mat-option>
-
             </mat-autocomplete>
         </form>
 
-        <div class="filter-button" fxFlex="20">
-            <button mat-stroked-button [matMenuTriggerFor]="menu"> Diets </button>
-            <!-- [matMenuTriggerFor]="menu" must be the same on the next line -->
-            <mat-menu class="menu-content" #menu="matMenu">
-                <button mat-menu-item>afhaj flkasfqiewuoi iouqwe orqwoier ulkjsaflk</button>
-                <button mat-menu-item>Item 2</button>
-            </mat-menu>
+        <div class="filter-button" fxFlex="10">
+            <button mat-stroked-button (click)="openDialog()">Filters</button>
         </div>
-
-        <div class="filter-button" fxFlex="20">
-            <button mat-stroked-button [matMenuTriggerFor]="menu"> Intolerances </button>
-            <!-- [matMenuTriggerFor]="menu" must be the same on the next line -->
-            <mat-menu class="menu-content" #menu="matMenu">
-                <button mat-menu-item>asfoiasklfklasf</button>
-                <button mat-menu-item>Item 2</button>
-            </mat-menu>
-        </div>
-
-
-
     </div>
 
     <div class="search-content">
-
+        <!-- <app-suggestions *ngIf=" id !== ''" [recipeId]="returnRecipeId()" [numOfResults]="5"></app-suggestions> -->
+        <div class="suggestions-wrapper" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
+            <div class="card" *ngFor=" let recipe of recipes let i = index" (click)="navToRecipeIntructions(recipe.id)">
+                <img src="{{recipe.image}}" />
+                <div class="title" fxLayout="row wrap">
+                    {{recipe.title}}
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>

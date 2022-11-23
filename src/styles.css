@@ -39,3 +39,8 @@
     border-radius: 5px;
     border-color: #3479E3;
 }
+.mat-stroked-button,
+.mat-menu-item {
+    font-family: "Inter", sans-serif;
+    
+}

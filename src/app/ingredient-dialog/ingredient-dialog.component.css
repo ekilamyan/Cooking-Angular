@@ -4,7 +4,8 @@
     min-height: 300px;
     padding: 30px;
     border-radius: 20px;
-    background-color: #f1f5fa;
+    background-color: white;
+    /* background-color: #f1f5fa; */
 }
 
 .mat-dialog-title {

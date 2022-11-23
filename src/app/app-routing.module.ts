@@ -8,7 +8,7 @@ import { MyPantryComponent } from './my-pantry/my-pantry.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/recipe-instructions', pathMatch: 'full' },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'homepage', component: HomepageComponent },
   { path: 'dashboard', component: DashboardComponent },
   {

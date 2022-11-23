@@ -1,1 +1,40 @@
-<app-suggestions></app-suggestions>
+<div class="main-container">
+    <div class="showcase-container">
+        <div class="items" *ngFor="let recipe of recipes">
+            <div class="showcase-area">
+                <img fxFlex="60" src="{{recipe.image}}">
+                <div class="info" fxFlex="40" fxLayout="column" fxLayoutAlign="space-between end">
+                    {{recipe.title}}
+                    <p> Try your hand at {{recipe.title}} a very delicious and delightfull meal.</p>
+                    <button mat-icon-button class="example-icon" (click)="navToRecipeIntructions(recipe.id)">
+                        <svg width="16px" height="16px" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M7.293,15.707a1,1,0,0,1,0-1.414L12.586,9H1A1,1,0,1,1,1,7H12.586L7.293,1.707A1,1,0,0,1,8.708.293l7,7a1,1,0,0,1,0,1.423l-7,7a1,1,0,0,1-1.415,0Z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-container-title">
+        <h1>Popular Categories</h1>
+    </div>
+
+    <div class="popular-categories-showcase" fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="card" *ngFor="let category of categoryTitles; let i = index" fxLayout="column"
+            fxLayoutAlign="center center" (click)="navToSearchPage(categoryTitlesForSearching[i])">
+            <img src={{categoryImages[i]}} />
+            <div class="card-body">
+                <h2 class="card-title">{{categoryTitles[i]}}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-container-title">
+        <h1>Try Something New</h1>
+    </div>
+    <app-suggestions></app-suggestions>
+
+</div>

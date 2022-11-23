@@ -3,8 +3,8 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { IngredientDialogComponent } from '../ingredient-dialog/ingredient-dialog.component';
-import { PantryIngredient } from '../shared/models/pantry-ingredient.model';
-import { AutocompleteService } from '../shared/services/autocomplete.service';
+import { PantryIngredient } from 'src/app/shared/models/pantry-ingredient.model';
+import { AutocompleteService } from 'src/app/shared/services/autocomplete.service';
 
 @Component({
   selector: 'app-my-pantry',
@@ -13,8 +13,7 @@ import { AutocompleteService } from '../shared/services/autocomplete.service';
 })
 export class MyPantryComponent implements OnInit {
 
-  public test: string[] = ["Trout", "Salmon", "Shrimp", "Halibut", "Whitening", "Albacore", "Sea Urchin", "Caviar"];
-  
+  public pantry: string[] = ["Trout", "Salmon", "Shrimp", "Halibut", "Whitening", "Albacore", "Sea Urchin", "Caviar"];
   public ingredients: PantryIngredient[] = [];
   public hasRanSearch = false;
 
@@ -23,7 +22,9 @@ export class MyPantryComponent implements OnInit {
     ingredient: new FormControl(''),
   });
 
-  constructor(private service: AutocompleteService, private formBuilder: FormBuilder, public dialog: MatDialog) {
+  constructor(private service: AutocompleteService, 
+    private formBuilder: FormBuilder, 
+    public dialog: MatDialog) {
 
   }
 
@@ -36,13 +37,13 @@ export class MyPantryComponent implements OnInit {
   }
 
   refreshIngredients() {
-    this.test.sort();
+    this.pantry.sort();
   }
   
   // Functions that need to be fixed when working on the backend
   openDialog(): void {
     const dialogRef = this.dialog.open(IngredientDialogComponent, {
-      data: this.test,
+      data: this.pantry,
       //width: '700px',
       panelClass: 'custom-modalbox'
     });

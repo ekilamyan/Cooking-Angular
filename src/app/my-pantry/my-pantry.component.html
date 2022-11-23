@@ -5,6 +5,7 @@
         </h1>
         <hr>
     </div>
+
     <div class="pantry-content">
         <mat-card class="card-container" (click)="openDialog()">
             <mat-card-title class="card-title">
@@ -12,7 +13,7 @@
             </mat-card-title>
             <div class="card-body">
                 <ul>
-                    <li *ngFor="let item of test; let i = index">
+                    <li *ngFor="let item of pantry; let i = index">
                         <h3>{{item}}</h3>
                         <hr>
                     </li>
@@ -20,4 +21,5 @@
             </div>
         </mat-card>
     </div>
+    
 </div>
