@@ -23,6 +23,7 @@ img {
 
 img:hover{
     transform: scale(1.08);
+    /* opacity: 0.1; */
 }
 
 .card-body {
@@ -38,10 +39,37 @@ img:hover{
     transition: all ease 0.6s;
 }
 
+/* layers */
+.inner {
+    position: absolute;
+  }
 
-/* <div class="card" fxLayout="column" fxLayoutAlign="center center">
-            <img src="assets/photos/smoothie.jpg"/>
-            <div class="card-body">
-                <h2 class="card-title">Smoothies</h2>
-            </div>
-        </div> */
+    
+
+    /* 
+
+    <div class="one">
+        <p>prep time: 10 min</p>
+        <p>matching ingredients: 10</p>
+    </div>
+    <div class="two">
+        <img src="{{recipe.image}}" />
+        <div class="card-body" fxLayout="row wrap">
+            <h2 class="card-title">{{recipe.title}}</h2>
+        </div>
+    </div> 
+
+    */
+
+
+    /* 
+    .one:hover + .two {
+        display: block;
+        color: red;
+      } 
+    */
+
+    /* 
+    <div class="myDIV">Hover over me.</div>
+    <div class="hide">I am shown when someone hovers over the div above.</div> 
+    */

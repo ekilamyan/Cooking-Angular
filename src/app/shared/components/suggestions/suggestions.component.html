@@ -1,4 +1,4 @@
-<div class="suggestions-wrapper" fxLayout="row" fxLayoutAlign="space-between stretch">
+<div class="suggestions-wrapper" fxLayout="row wrap" fxLayoutAlign="space-between stretch">
     <div class="card" *ngFor=" let recipe of recipes"  fxLayout="column" fxLayoutAlign="start start" (click)="navToRecipeIntructions(recipe.id)">
         <img src="{{recipe.image}}"/>
         <div class="card-body" fxLayout="row wrap">
@@ -6,3 +6,33 @@
         </div>
     </div>
 </div>
+
+<!-- <p style="color: blue; font-size: 46px;"></p> -->
+
+<!-- 
+<div class="suggestions-wrapper" fxLayout="row" fxLayoutAlign="space-between stretch">
+    <div class="card" *ngFor=" let recipe of recipes"  fxLayout="column" fxLayoutAlign="start start" (click)="navToRecipeIntructions(recipe.id)">
+        <div class="image" style="background-image: {{ recipe.image }};"></div>
+        <div class="card-body" fxLayout="row wrap">
+            <h2 class="card-title">{{recipe.title}}</h2>
+        </div>
+    </div>
+</div>
+
+<div class="suggestions-wrapper" fxLayout="row" fxLayoutAlign="space-between stretch">
+    <div class="card" *ngFor=" let recipe of recipes" (click)="navToRecipeIntructions(recipe.id)">
+        <div class="outer">
+            <div class="inner">
+                <p>prep time: 10 min</p>
+                <p>matching ingredients: 10</p>
+            </div>
+            <div class="inner">
+                <img src="{{recipe.image}}" />
+                <div class="card-body" fxLayout="row wrap">
+                    <h2 class="card-title">{{recipe.title}}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+-->

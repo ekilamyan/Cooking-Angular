@@ -41,7 +41,6 @@
     </div>
 
     <div class="search-content">
-        <!-- <app-suggestions *ngIf=" id !== ''" [recipeId]="returnRecipeId()" [numOfResults]="5"></app-suggestions> -->
         <div class="suggestions-wrapper" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
             <div class="card" *ngFor=" let recipe of recipes let i = index" (click)="navToRecipeIntructions(recipe.id)">
                 <img src="{{recipe.image}}" />
@@ -51,5 +50,4 @@
             </div>
         </div>
     </div>
-
 </div>

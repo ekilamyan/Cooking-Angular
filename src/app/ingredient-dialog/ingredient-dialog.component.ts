@@ -24,8 +24,8 @@ export class IngredientDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<IngredientDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private service: AutocompleteService, 
-    private formBuilder: FormBuilder, 
+    private service: AutocompleteService,
+    private formBuilder: FormBuilder,
     private snackBar: MatSnackBar) {
 
   }
@@ -65,8 +65,6 @@ export class IngredientDialogComponent implements OnInit {
     this.data[i] = '';
     if (i !== -1) {
       this.data.splice(i, 1);
-
-      
     }
   }
 

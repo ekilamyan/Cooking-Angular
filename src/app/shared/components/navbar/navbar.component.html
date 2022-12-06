@@ -3,7 +3,7 @@
     <a class="logo"><img src="assets/Logos/logo.png" alt=""></a>
   </div>
   <span class="example-spacer"></span>
-  <button [routerLink]="['/recipe-instructions']" mat-flat-button>Start Cooking</button>
+  <button [routerLink]="['/start-cooking']" mat-flat-button>Start Cooking</button>
   <button [routerLink]="['/my-pantry']" mat-flat-button>My Pantry</button>
   <button [routerLink]="['/dashboard']" mat-flat-button>Dashboard</button>
   <!-- <button [routerLink]="['/sign-in']" mat-flat-button>sign-in</button> -->
@@ -14,7 +14,7 @@
       </path>
     </svg>
   </button>
-  <button mat-icon-button class="example-icon">
+  <button mat-icon-button class="example-icon" [routerLink]="['/settings']">
     <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M21,17 C21.5522848,17 22,17.4477153 22,18 C22,18.5522848 21.5522848,19 21,19 L21,19 L2.99999996,19 C2.44771521,19 1.99999996,18.5522848 1.99999996,18 C1.99999996,17.4477153 2.44771521,17 2.99999996,17 L2.99999996,17 Z M21,11 C21.5522848,11 22,11.4477152 22,12 C22,12.5522848 21.5522848,13 21,13 L21,13 L2.99999996,13 C2.44771521,13 1.99999996,12.5522848 1.99999996,12 C1.99999996,11.4477152 2.44771521,11 2.99999996,11 L2.99999996,11 Z M21,4.99999997 C21.5522848,4.99999997 22,5.44771522 22,5.99999997 C22,6.55228473 21.5522848,6.99999997 21,6.99999997 L21,6.99999997 L2.99999996,6.99999997 C2.44771521,6.99999997 1.99999996,6.55228473 1.99999996,5.99999997 C1.99999996,5.44771522 2.44771521,4.99999997 2.99999996,4.99999997 L2.99999996,4.99999997 Z">

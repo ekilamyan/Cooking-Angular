@@ -20,6 +20,8 @@ import { IngredientDialogComponent } from './ingredient-dialog/ingredient-dialog
 import { RecipeSearchDialogComponent } from './recipe-search-dialog/recipe-search-dialog.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { FiltersDialogComponent } from './filters-dialog/filters-dialog.component';
+import { SettingsComponent } from './settings/settings.component';
+import { StartCookingComponent } from './start-cooking/start-cooking.component';
 
 
 @NgModule({
@@ -37,6 +39,8 @@ import { FiltersDialogComponent } from './filters-dialog/filters-dialog.componen
     RecipeSearchDialogComponent,
     SearchPageComponent,
     FiltersDialogComponent,
+    SettingsComponent,
+    StartCookingComponent,
 
   ],
   imports: [
