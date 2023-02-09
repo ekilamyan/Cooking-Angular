@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -6,14 +10,38 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.css'],
 })
+
 export class SignInComponent implements OnInit {
-  email: any;
-  getErrorMessage() {
-    throw new Error('Method not implemented.');
+  public username = '';
+  public password = '';
+  
+
+  loginForm = new FormGroup({       /* ask vav if this is correct*/
+    username: new FormControl(''),
+    password: new FormControl(''),
+  });
+
+  constructor(private route:Router, /*private oginService: LoginService,*/ public dialog: MatDialog, private snackBar: MatSnackBar) {
   }
-  hide: any;
 
-  constructor() {}
+  ngOnInit(): void {
+    // this.loginService.user.subscribe ( (user: User) => {
+    //   if (user) {
+    //     this.route.navigate(['/']);
+    //   }
+    // })
+  }
 
-  ngOnInit(): void {}
+  // tryLogin(): void {
+  //   const username = this.loginForm.get('username')?.value;
+  //   const password = this.loginForm.get('password')?.value;
+  //   this.loginService.login(username, password);
+  // }
+
+  // openDialog(): void {
+  //   const dialogRef = this.dialog.open(SettingsDialogComponent, {
+  //     width: '1000px',
+  //     height: '600px',
+  //   });
+  // }
 }

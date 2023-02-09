@@ -1,0 +1,57 @@
+<body fxLayout="column" fxLayoutAlign="center center">
+
+    <div class="container">
+        <a class="logo" fxLayoutAlign="center center"><img src="assets/Logos/logo.png" alt=""></a>
+        <div class="title" fxLayout="column" fxLayoutAlign="space-between stretch">
+            <h1>Sign Up</h1>
+            <label>Please fill in this form to create an account!</label>
+        </div>
+
+        <hr>
+
+        <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Personal Details</ng-template>
+
+            <div class="names" fxLayout="row" fxLayoutAlign="space-between center">
+                <mat-form-field appearance="outline" fxFlex="47">
+                    <mat-label>First Name</mat-label>
+                    <input matInput placeholder="First Name" formControlName="name">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="47">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput placeholder="Last Name" formControlName="lastname">
+                </mat-form-field>
+            </div>
+
+            <div class="login-info" fxLayout="column" fxLayoutAlign="space-between stretch">
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Email" formControlName="email">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button> </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Confirm Password</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="column" fxLayoutAlign="space-around center">
+                <!-- <button mat-flat-button color="primary" matStepperNext [disabled]="!disableBtn">Next</button> -->
+                <button mat-flat-button color="primary" (click)="openDialog()"> Next </button>
+            </div>
+        </form>
+    </div>
+</body>

@@ -1,22 +1,27 @@
-<div class="hero">
-    <div class="content">
-        <form class="form">
-            <div class="">
-                <label>Email</label>
-                <input class="input" type="text" placeholder="johndoe@gmail.com"/>
+<body fxLayoutAlign="center center">
+    <div class="box">
+        <div class="container" id="container">
+            <div class="form-container sign-up-container">
+
             </div>
-            <div>
-                <label>Password</label>
-                <input class="input" type="text" placeholder="**********"/>
+            <div class="form-container sign-in-container">
+                <form [formGroup]="loginForm">
+                    <h1>Sign in</h1>
+                    <input type="email" placeholder="Email" formControlName="username">
+                    <input type="password" placeholder="Password" formControlName="password">
+                    <button [routerLink]="['/dashboard']"> Sign In</button> <!--(click)="tryLogin()" -->
+                </form>
             </div>
-            <button class="btn-primary">Login</button>
-        </form>
-        <div class="">
-            <h1>Cooking Time!</h1>
-            <div>Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda 
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae 
-            et a id nisi.
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-right">
+                        <h1>Let's Get Cooking!</h1>
+                        <p> Sign up to begin exploring the endless possibilities</p>
+                        <button target="_self" class="ghost" id="signUp">Sign Up</button>
+                        <!-- (click)="openDialog()" -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</body>

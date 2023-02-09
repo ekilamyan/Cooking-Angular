@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, Observable, Subscribable, Subscription } from 'rxjs';
 import { RecipeSearch } from '../shared/models/recipe-search.model';
 import { AutocompleteService } from 'src/app/shared/services/autocomplete.service';
-import { FiltersDialogComponent } from '../filters-dialog/filters-dialog.component';
+import { FiltersDialogComponent } from '../dialogs/filters-dialog/filters-dialog.component';
 import { Recipe } from '../shared/models/recipe.model';
 import { SuggestionsService } from '../shared/services/suggestions.service';
 import { SearchService } from '../shared/services/search.service';

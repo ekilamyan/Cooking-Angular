@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { RecipeSearch } from 'src/app/shared/models/recipe-search.model';
 import { AutocompleteService } from 'src/app/shared/services/autocomplete.service';
-import { SearchService } from '../shared/services/search.service';
+import { SearchService } from '../../shared/services/search.service';
 
 @Component({
   selector: 'app-recipe-search-dialog',

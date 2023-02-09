@@ -1,0 +1,33 @@
+::ng-deep.mat-dialog-container {
+    width: 700px;
+    min-height: 200px;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.mat-dialog-title {
+    font-size: 40px;
+    font-family: "Playfair", serif;
+}
+
+form h1 {
+    font-size: 30px;
+    font-family: "Playfair", serif;
+    margin-bottom: 5px;
+}
+
+p {
+    color: rgb(139, 139, 139);
+}
+
+.mat-checkbox {
+    font-family: "Inter", sans-serif;
+}
+
+.diets-button-container {
+    margin-bottom: 30px;
+}
+
+.intolerances-button-container {
+    margin-bottom: 30px;
+}

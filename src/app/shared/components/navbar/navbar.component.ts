@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { RecipeSearchDialogComponent } from 'src/app/recipe-search-dialog/recipe-search-dialog.component';
+import { RecipeSearchDialogComponent } from 'src/app/dialogs/recipe-search-dialog/recipe-search-dialog.component';
 
 @Component({
   selector: 'app-navbar',

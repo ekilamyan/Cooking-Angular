@@ -3,8 +3,8 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { PantryIngredient } from '../shared/models/pantry-ingredient.model';
-import { AutocompleteService } from '../shared/services/autocomplete.service';
+import { PantryIngredient } from '../../shared/models/pantry-ingredient.model';
+import { AutocompleteService } from '../../shared/services/autocomplete.service';
 
 @Component({
   selector: 'app-ingredient-dialog',

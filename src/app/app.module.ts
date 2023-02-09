@@ -16,12 +16,14 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { SuggestionsComponent } from './shared/components/suggestions/suggestions.component';
-import { IngredientDialogComponent } from './ingredient-dialog/ingredient-dialog.component';
-import { RecipeSearchDialogComponent } from './recipe-search-dialog/recipe-search-dialog.component';
+import { IngredientDialogComponent } from './dialogs/ingredient-dialog/ingredient-dialog.component';
+import { RecipeSearchDialogComponent } from './dialogs/recipe-search-dialog/recipe-search-dialog.component';
 import { SearchPageComponent } from './search-page/search-page.component';
-import { FiltersDialogComponent } from './filters-dialog/filters-dialog.component';
+import { FiltersDialogComponent } from './dialogs/filters-dialog/filters-dialog.component';
 import { SettingsComponent } from './settings/settings.component';
 import { StartCookingComponent } from './start-cooking/start-cooking.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { IntolerancesDialogComponent } from './dialogs/intolerances-dialog/intolerances-dialog.component';
 
 
 @NgModule({
@@ -41,7 +43,8 @@ import { StartCookingComponent } from './start-cooking/start-cooking.component';
     FiltersDialogComponent,
     SettingsComponent,
     StartCookingComponent,
-
+    SignUpComponent,
+    IntolerancesDialogComponent,
   ],
   imports: [
     BrowserAnimationsModule,

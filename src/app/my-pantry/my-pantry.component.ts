@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { IngredientDialogComponent } from '../ingredient-dialog/ingredient-dialog.component';
+import { IngredientDialogComponent } from '../dialogs/ingredient-dialog/ingredient-dialog.component';
 import { PantryIngredient } from 'src/app/shared/models/pantry-ingredient.model';
 import { AutocompleteService } from 'src/app/shared/services/autocomplete.service';
 import { MatSnackBar } from '@angular/material/snack-bar';

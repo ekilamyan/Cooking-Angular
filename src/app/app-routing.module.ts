@@ -9,12 +9,14 @@ import { SearchPageComponent } from './search-page/search-page.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SettingsComponent } from './settings/settings.component';
 import { StartCookingComponent } from './start-cooking/start-cooking.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'start-cooking', component: StartCookingComponent },
   { path: 'homepage', component: HomepageComponent },
   { path: 'sign-in', component: SignInComponent },
+  { path: 'sign-up', component: SignUpComponent },
   { path: 'dashboard', component: DashboardComponent },
   {
     path: 'recipe-instructions',
