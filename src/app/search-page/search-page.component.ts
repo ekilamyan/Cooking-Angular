@@ -16,6 +16,7 @@ import { SearchService } from '../shared/services/search.service';
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.css']
 })
+
 export class SearchPageComponent implements OnInit {
   public autocompleteRecipes: RecipeSearch[] = [];
   public filters = [];
@@ -64,7 +65,7 @@ export class SearchPageComponent implements OnInit {
       // console.log(id);
 
       if (this.id) {
-        /* For random crecipes with categories */
+        /* For random recipes with categories */
         if (id == 'breakfast' || id == 'gluten free' || id == 'vegan' || id == 'dessert') {
           this.id = id;
           this.suggestionsService.getRandomIdsByCuisine(this.id, 4).subscribe((temp: any) => {
@@ -78,7 +79,7 @@ export class SearchPageComponent implements OnInit {
           /* Get list of ids */
           if (id == 'pizza') {
             this.id = '210327';
-          } 
+          }
           else if (id == 'smoothie') {
             this.id = '125319';
           }
@@ -143,8 +144,6 @@ export class SearchPageComponent implements OnInit {
       this.filters.splice(i, 1);
     }
   }
-
-
   removeAllChips() {
     this.filters = [];
   }

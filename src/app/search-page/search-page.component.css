@@ -78,6 +78,7 @@ img:hover {
 .title {
     font-size: 18px;
     font-weight: 500;
+    margin-bottom: 20px;
     font-family: "Inter", sans-serif;
     transition: 0.2s;
 }

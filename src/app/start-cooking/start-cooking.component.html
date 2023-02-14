@@ -4,6 +4,18 @@
         <h1>Start Cooking</h1>
         <hr>
 
+        <div class="search-content">
+            <div class="results-wrapper" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
+                <div class="card" *ngFor=" let recipe of recipes, let i = index"
+                    (click)="navToRecipeIntructions(recipe.id)">
+                    <img src="{{recipe.image}}" />
+                    <div class="title" fxLayout="row wrap">
+                        {{recipe.title}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <hr>
 
         <div class="tip" fxLayout="column" fxLayoutAlign="center center">
@@ -14,4 +26,5 @@
 
         <hr>
     </div>
+
 </div>

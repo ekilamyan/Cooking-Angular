@@ -10,7 +10,7 @@ export class AutocompleteService {
   public baseIngredientUrl = 'https://api.spoonacular.com/food/ingredients/autocomplete';
   public baseRecipeUrl = 'https://api.spoonacular.com/recipes/autocomplete';
 
-  public apiKey = '7c71dbc02a1b4b1b8cc6ce764cef2be7';
+  public apiKey = '3418ce6d893644b08478660f70b775f4';
 
   // 8319610fbfb04bbb93883d1d8ad1f890
   // 3418ce6d893644b08478660f70b775f4

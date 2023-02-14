@@ -8,7 +8,7 @@ import { Observable, throwError } from 'rxjs';
 export class RecipeInstructionsService {
 
   public baseUrl = 'https://api.spoonacular.com/recipes/';
-  public apiKey = '8319610fbfb04bbb93883d1d8ad1f890';
+  public apiKey = '3418ce6d893644b08478660f70b775f4';
 
   // 8319610fbfb04bbb93883d1d8ad1f890
   // 3418ce6d893644b08478660f70b775f4
