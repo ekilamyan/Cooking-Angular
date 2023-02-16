@@ -11,7 +11,7 @@ export class SuggestionsService {
   public baseUrl_2 = 'https://api.spoonacular.com/recipes/informationBulk?';
   public baseUrl_3 = 'https://api.spoonacular.com/recipes/random';
 
-  public apiKey = '3418ce6d893644b08478660f70b775f4';
+  public apiKey = '8319610fbfb04bbb93883d1d8ad1f890';
 
   // 8319610fbfb04bbb93883d1d8ad1f890
   // 3418ce6d893644b08478660f70b775f4

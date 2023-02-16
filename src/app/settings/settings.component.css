@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
+
 /* heading */
 .page-title h1 {
     font-family: "Playfair", serif;
@@ -16,6 +19,51 @@ hr {
     height: 1px;
 }
 
-.pantry-content {
-    padding-top: 50px;
+
+/* profile container and items */
+.profile-container {
+    margin-top: 30px;
+}
+
+.content-container {
+    /* padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-style: solid;
+    border-color: rgb(92, 92, 92);
+    border-radius: 10px; */
+}
+
+.profile-item h2 {
+    font-size: 15px;
+    line-height: 12px;
+    color: rgb(172, 172, 172);
+    font-family: "Inter", sans-serif;
+    margin: 0px;
+}
+
+.profile-item h1 {
+    color: black;
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+/* profile container and items */
+.intolerances-container {
+    margin-top: 30px;
+}
+
+.intolerances-container h2 {
+    font-size: 15px;
+    color: rgb(172, 172, 172);
+    font-family: "Inter", sans-serif;
+    margin: 0px;
+    font-weight: 600;
+}
+
+.intolerances-box {
+    background-color: rgb(235, 235, 235);
+    width: 80%;
+    height: 300px;
+    border-radius: 10px;
 }

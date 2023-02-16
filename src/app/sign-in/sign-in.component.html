@@ -1,26 +1,37 @@
-<body fxLayoutAlign="center center">
-    <div class="box">
-        <div class="container" id="container">
-            <div class="form-container sign-up-container">
+<body fxLayout="column" fxLayoutAlign="center center">
+    <div class="content">
+        <div class="info" fxFlex="50" fxLayout="column" fxLayoutAlign="center center">
+            <form [formGroup]="loginForm" fxLayout="column" fxLayoutAlign="center center">
+                <h1>Sign in</h1>
+                <div class="login" fxLayout="column" fxLayoutAlign="space-between stretch">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="Email" formControlName="email">
+                    </mat-form-field>
 
-            </div>
-            <div class="form-container sign-in-container">
-                <form [formGroup]="loginForm">
-                    <h1>Sign in</h1>
-                    <input type="email" placeholder="Email" formControlName="username">
-                    <input type="password" placeholder="Password" formControlName="password">
-                    <button [routerLink]="['/dashboard']"> Sign In</button> <!--(click)="tryLogin()" -->
-                </form>
-            </div>
-            <div class="overlay-container">
-                <div class="overlay">
-                    <div class="overlay-panel overlay-right">
-                        <h1>Let's Get Cooking!</h1>
-                        <p> Sign up to begin exploring the endless possibilities</p>
-                        <button target="_self" class="ghost" id="signUp">Sign Up</button>
-                        <!-- (click)="openDialog()" -->
-                    </div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+
                 </div>
+            </form>
+
+            <div fxLayout="column" fxLayoutAlign="space-around center">
+                <!--  [disabled]="!disableBtn" -->
+                <button mat-flat-button color="primary" [routerLink]="['/dashboard']"> Login </button>
+            </div>
+
+        </div>
+        <div class="sign-up" fxLayoutAlign="center center">
+            <div class="sign-up-container" fxLayout="column" fxLayoutAlign="space-between center" >
+                <h1>Lets get Started</h1>
+                <p>Sign up and begin your culinary journey with us from the comfort of your home!</p>
+                <button mat-flat-button [routerLink]="['/sign-up']"> Sign up </button>
             </div>
         </div>
     </div>

@@ -12,12 +12,15 @@ import { Router } from '@angular/router';
 })
 
 export class SignInComponent implements OnInit {
+  hide = true;
+  disableBtn = false;
+
   public username = '';
   public password = '';
   
 
   loginForm = new FormGroup({       /* ask vav if this is correct*/
-    username: new FormControl(''),
+    email: new FormControl(''),
     password: new FormControl(''),
   });
 
@@ -25,6 +28,11 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.loginForm.valueChanges.subscribe((changedObj: any) => {
+      this.disableBtn = this.loginForm.valid;
+      console.log(this.disableBtn);
+    });
     // this.loginService.user.subscribe ( (user: User) => {
     //   if (user) {
     //     this.route.navigate(['/']);
