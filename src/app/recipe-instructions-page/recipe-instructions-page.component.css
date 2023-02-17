@@ -1,3 +1,26 @@
+@media print {
+
+    .navbar,
+    .recipe-title,
+    .wrapper {
+        display: none;
+    }
+
+    .recipe-instruction-container * {
+        font-size: 24px;
+    }
+
+}
+
+/* adjust media queure and .test for printing*/
+.test {
+    visibility: hidden;
+    list-style-type: none;
+    font-size: 24px;
+}
+
+
+
 /* title */
 .recipe-title {
     padding: 10px 0px 20px 0px;
@@ -11,7 +34,7 @@
 }
 
 /* Image & nutrition label */
-.showcase-container h1{
+.showcase-container h1 {
     font-family: "Playfair", serif;
     font-size: 60px;
     padding-bottom: 20px;
@@ -48,12 +71,12 @@ hr {
     margin-bottom: 0px;
 }
 
-.nutrition-label  li {
-    list-style-type :none;
+.nutrition-label li {
+    list-style-type: none;
 }
 
 
-.nutrition-label  .data {
+.nutrition-label .data {
     float: right;
     color: black;
 }
@@ -70,14 +93,35 @@ h2 {
     font-size: 30px;
 }
 
+/* quick facts */
 
-/* Ingredients & instruction*/
-
-.recipe-instruction-container {
-    padding: 20px 0px 20px 0px;
+.quick-facts {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-.ingredients, .instructions {
+h5 {
+    margin: 0px;
+    color: grey;
+    font-family: "Inter", sans-serif;
+}
+
+h4 {
+    margin: 0px;
+    font-family: "Inter", sans-serif;
+}
+
+.quick-facts hr {
+    border: none;
+    margin: 20px;
+    border-left: 1px solid hsla(200, 10%, 50%, 100);
+    height: 35px;
+    width: 1px;
+}
+
+/* Ingredients & instruction*/
+.ingredients,
+.instructions {
     list-style: none;
     padding: 0px;
 }
@@ -201,8 +245,6 @@ button:focus{
     padding-left: 20px;
 }
 
-.helpful-info .print svg{
+.helpful-info .print svg {
     fill: #525252;
 }
-
-

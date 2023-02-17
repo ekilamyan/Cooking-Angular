@@ -19,7 +19,7 @@ import { SearchService } from '../shared/services/search.service';
 
 export class SearchPageComponent implements OnInit {
   public autocompleteRecipes: RecipeSearch[] = [];
-  public filters = [];
+  public filters = [''];
   public hasRanSearch = false;
   public id: string = '';
   public searchedWord = '';
