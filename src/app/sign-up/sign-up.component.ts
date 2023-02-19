@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { IntolerancesDialogComponent } from '../dialogs/intolerances-dialog/intolerances-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { LoginService } from '../shared/services/login.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -26,7 +27,7 @@ export class SignUpComponent implements OnInit {
   public selectedDiets = [''];
   public selectedIntolerances = [''];
 
-  constructor(private formBuilder: FormBuilder, public dialog: MatDialog) { }
+  constructor(private formBuilder: FormBuilder, public dialog: MatDialog, private loginService: LoginService) { }
 
   ngOnInit(): void {
 
@@ -52,6 +53,10 @@ export class SignUpComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(IntolerancesDialogComponent, { disableClose: true });
+  }
+
+  logout(): void {
+    this.loginService.logout();
   }
 }
 

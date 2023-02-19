@@ -23,7 +23,7 @@
 
             <div fxLayout="column" fxLayoutAlign="space-around center">
                 <!--  [disabled]="!disableBtn" -->
-                <button mat-flat-button color="primary" [routerLink]="['/dashboard']"> Login </button>
+                <button mat-flat-button color="primary" (click)="tryLogin()"> Login </button>
             </div>
 
         </div>

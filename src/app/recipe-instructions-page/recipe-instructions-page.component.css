@@ -20,7 +20,6 @@
 }
 
 
-
 /* title */
 .recipe-title {
     padding: 10px 0px 20px 0px;
@@ -32,6 +31,20 @@
     line-height: 1;
     color: #303030;
 }
+
+
+/* buttons */
+.buttons svg:hover {
+    fill: red;
+    transition: 0.2s;
+}
+
+.buttons svg {
+    fill: black;
+    transition: 0.2s;
+}
+
+
 
 /* Image & nutrition label */
 .showcase-container h1 {
@@ -137,6 +150,10 @@ h4 {
     font-family: "Inter", sans-serif;
 }
 
+.ingredient {
+    text-align: left;
+}
+
 .instructions .instruction {
     font-size: 18px;
     font-family: "Inter", sans-serif;
@@ -152,9 +169,27 @@ h4 {
     line-height: 1.5;
 }
 
-.bullet-point {
-    margin-top: 2px;
+
+
+/* bullet point */
+li button {
+    padding: 0px;
+    margin: 0px;
+
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
 }
+
+.bullet-point svg{
+    padding-top: 2px;
+}
+
+
 
 .step-decor {
     font-size: 14px;
@@ -165,52 +200,6 @@ h4 {
     background-color: #426aa8;
     border-radius: 50px;
 }
-
-
-/* lists on page 
-.recipe-container {
-    width: 100%;
-}
-
-
-
-.bullet-point {
-    padding-top: 2px;
-    float: left;
-    width: 10%;
-  }
-
-.step-decor {
-    padding-top: 2px;
-    font-size: 14px;
-    text-align: center;
-    color: white;
-    height: 25px;
-    width: 25px;
-    background-color: #426aa8;
-    border-radius: 50%;
-}
-
-
-ul {
-    font-size: 18px;
-    font-weight: 450;
-}
-
-li {
-    width: 100%;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-family: "Inter", sans-serif;
-}
-
-
-button:focus{
-    text-decoration: line-through;
-}
-*/
-
-
 
 
 /*helpfull-info*/
@@ -248,3 +237,10 @@ button:focus{
 .helpful-info .print svg {
     fill: #525252;
 }
+
+
+
+
+
+
+

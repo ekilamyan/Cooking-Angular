@@ -15,6 +15,7 @@ export class RecipeInstructionsPageComponent implements OnInit {
   public searchItem = new RecipeSearch(null);
   public recipe = new Recipe(null);
 
+  public checked = true;
   public ingredientCount = 0;
 
   public nutritionList: Nutrients[] = [];

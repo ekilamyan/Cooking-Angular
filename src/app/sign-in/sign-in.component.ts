@@ -3,6 +3,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { User } from '../shared/models/user.model';
+import { LoginService } from '../shared/services/login.service';
 
 
 @Component({
@@ -24,7 +26,7 @@ export class SignInComponent implements OnInit {
     password: new FormControl(''),
   });
 
-  constructor(private route:Router, /*private oginService: LoginService,*/ public dialog: MatDialog, private snackBar: MatSnackBar) {
+  constructor(private route:Router, private loginService: LoginService, public dialog: MatDialog, private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -33,23 +35,22 @@ export class SignInComponent implements OnInit {
       this.disableBtn = this.loginForm.valid;
       console.log(this.disableBtn);
     });
-    // this.loginService.user.subscribe ( (user: User) => {
-    //   if (user) {
-    //     this.route.navigate(['/']);
-    //   }
-    // })
+
+    this.loginService.user.subscribe ( (user: User) => {
+      if (user) {
+        this.route.navigate(['/']);
+      }
+    })
   }
 
-  // tryLogin(): void {
-  //   const username = this.loginForm.get('username')?.value;
-  //   const password = this.loginForm.get('password')?.value;
-  //   this.loginService.login(username, password);
-  // }
+  tryLogin(): void {
+    const email = this.loginForm.get('email')?.value;
+    const password = this.loginForm.get('password')?.value;
+    alert(email + password);
+    this.loginService.login(email, password);
+  }
 
-  // openDialog(): void {
-  //   const dialogRef = this.dialog.open(SettingsDialogComponent, {
-  //     width: '1000px',
-  //     height: '600px',
-  //   });
-  // }
+  logout(): void {
+    this.loginService.logout();
+  }
 }

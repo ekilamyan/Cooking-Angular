@@ -50,8 +50,8 @@ export class SearchPageComponent implements OnInit {
     // public categoryTitles = ['Breakfast', 'Gluten Free', 'Vegan', 'Pizza', 'Smoothies', 'Desserts'];
 
     /*
-    - search Service has a behavior subject called 'last search' which is a global subscribalble variable
-    - we set it value using 'this.searchService.lastSearch.next(id);' in dialog
+    - search Service has a behavior subject called 'last search' which is a global subscribe-alble variable
+    - we set its value using 'this.searchService.lastSearch.next(id);' in dialog
     - after it is used we unsubscribe from it on 'ngOnDestroy' from this file 
     */
 
