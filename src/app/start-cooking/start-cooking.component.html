@@ -5,11 +5,10 @@
         <hr>
 
         <div class="search-content">
-            <div class="results-wrapper" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
-                <div class="card" *ngFor=" let recipe of recipes, let i = index"
-                    (click)="navToRecipeIntructions(recipe.id)">
+            <div class="suggestions-wrapper" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
+                <div class="card" *ngFor=" let recipe of recipes" (click)="navToRecipeIntructions(recipe.id)">
                     <img src="{{recipe.image}}" />
-                    <div class="title" fxLayout="row wrap">
+                    <div class="title" fxLayout="wrap">
                         {{recipe.title}}
                     </div>
                 </div>

@@ -3,9 +3,16 @@
     <a class="logo"><img src="assets/Logos/logo.png" alt=""></a>
   </div>
   <span class="example-spacer"></span>
-  <button [routerLink]="['/start-cooking']" mat-flat-button>Start Cooking</button>
-  <button [routerLink]="['/my-pantry']" mat-flat-button>My Pantry</button>
-  <button [routerLink]="['/dashboard']" mat-flat-button>Dashboard</button>
+  <button *ngIf="this.url != '/start-cooking'" [routerLink]="['/start-cooking']" mat-flat-button>Start Cooking</button>
+  <button *ngIf="this.url == '/start-cooking'" class="active-button" [routerLink]="['/start-cooking']" mat-flat-button>Start Cooking</button>
+   <button *ngIf="this.url != '/my-pantry'" [routerLink]="['/my-pantry']" mat-flat-button> My Pantry </button>
+  <button *ngIf="this.url == '/my-pantry'" class="active-button" [routerLink]="['/my-pantry']" mat-flat-button> My Pantry </button>
+ 
+ 
+   <button *ngIf="this.url != '/dashboard'" [routerLink]="['/dashboard']" mat-flat-button> Dashboard </button>
+  <button *ngIf="this.url == '/dashboard'" class="active-button" [routerLink]="['/dashboard']" mat-flat-button> Dashboard </button>
+ 
+ 
   <!-- <button [routerLink]="['/sign-in']" mat-flat-button>sign-in</button> -->
   <button mat-icon-button (click)="openDialog()">
     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 26.667 26.667">
@@ -21,4 +28,4 @@
       </path>
     </svg>
   </button>
-</mat-toolbar>
+ </mat-toolbar>

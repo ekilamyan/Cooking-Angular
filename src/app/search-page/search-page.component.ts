@@ -10,6 +10,7 @@ import { FiltersDialogComponent } from '../dialogs/filters-dialog/filters-dialog
 import { Recipe } from '../shared/models/recipe.model';
 import { SuggestionsService } from '../shared/services/suggestions.service';
 import { SearchService } from '../shared/services/search.service';
+import { resourceLimits } from 'worker_threads';
 
 @Component({
   selector: 'app-search-page',
@@ -25,6 +26,7 @@ export class SearchPageComponent implements OnInit {
   public searchedWord = '';
 
   public recipes: Recipe[] = [];
+  public filteredRecipes: Recipe[] = [];
   public ids = '';
   private searchSubscription = new Subscription();
 
@@ -46,7 +48,6 @@ export class SearchPageComponent implements OnInit {
 
   ngOnInit(): void {
 
-
     // public categoryTitles = ['Breakfast', 'Gluten Free', 'Vegan', 'Pizza', 'Smoothies', 'Desserts'];
 
     /*
@@ -58,11 +59,18 @@ export class SearchPageComponent implements OnInit {
     this.id = this.searchService.lastSearchId.value;
     this.searchSubscription = this.searchService.lastSearchId.subscribe((id: string) => {
 
+      console.log(this.id);
+
       this.id = id;
       this.ids = '';
       this.recipes = [];
+      this.filteredRecipes = [];
       this.removeAllChips();
       // console.log(id);
+
+      if (this.id.length < 1) {
+        this.newRoute.navigate(['/dashboard'])
+      }
 
       if (this.id) {
         /* For random recipes with categories */
@@ -84,7 +92,6 @@ export class SearchPageComponent implements OnInit {
             this.id = '125319';
           }
           this.suggestionsService.getIds(this.id, 3).subscribe((temp: any[]) => {
-            console.log(this.id)
             this.ids = this.id + ',';
             for (let i = 0; i < temp.length; i++) {
               this.ids = this.ids + temp[i].id;
@@ -98,6 +105,7 @@ export class SearchPageComponent implements OnInit {
                 this.recipes[i] = esh[i];
               }
               this.searchedWord = this.recipes[0].title;
+              console.log(this.recipes);
             });
           });
         }
@@ -137,6 +145,7 @@ export class SearchPageComponent implements OnInit {
       data: this.filters,
       panelClass: 'custom-modalbox'
     });
+
   }
 
   removeFilter(i: number) {
@@ -160,74 +169,32 @@ export class SearchPageComponent implements OnInit {
     this.newRoute.navigate(['/recipe-instructions'], { queryParams: { id } });
   }
 
-  /*
-  filterRecipe(recipe: Recipe) {
-    // cuisines
-    // dishTypes
-    // diets
-    if (this.filters.length < 1){
-      return recipe.filtered
-    } else {
-      
-      if (recipe.cuisines.length < 1) {
-        return recipe.filtered;
-      } 
-      else {
-        for (let i = 0; i < this.filters.length && !recipe.filtered; i++) {
-          if (recipe.cuisines.includes(this.filters[i])) {
-            recipe.filtered = true;
-          }
-        }
-      }
-
-
-
-      if(recipe.dishTypes.length < 1) {
-        return recipe.filtered;
-      }
-      if(recipe.diets.length < 1) {
-        return recipe.filtered;
-      }
-    }
-
-
-    for(let i = 0; i < this.filters.length && recipe.filtered; i++) {
-
-    }
-    recipe.cuisines.includes('');
-    recipe.filtered = true
+  removeRecipe(recipe: Recipe) {
+    return true;
+    // let remove = false;
+    // for (let i = 0; i < this.filters.length; i++) {
+    //   if (recipe.cuisines.includes(this.filters[i])) {
+    //     remove = true;
+    //   }
+    //   if (recipe.diets.includes(this.filters[i])) {
+    //     remove = false;
+    //   }
+    //   if (recipe.dishTypes.includes(this.filters[i])) {
+    //     remove = true;
+    //   }
+    //   if (recipe.glutenFree == true) {
+    //     remove = true;
+    //   }
+    //   if (recipe.dairyFree == true) {
+    //     remove = true;
+    //   }
+    //   if (recipe.vegan == true) {
+    //     remove = true;
+    //   }
+    //   if (recipe.vegetarian == true) {
+    //     remove = true;
+    //   }
+    // }
+    // return !remove;
   }
-    */
-
-
 }
-
-/*
-public cuisineMap = new Map ([
-  ['African', false],
-  ['American', false],
-  ['British',false],
-  ['Cajun',false],
-  ['Caribbean',false],
-  ['Chinese',false],
-  ['European',false],
-  ['French',false],
-  ['German',false],
-  ['Greek',false],
-  ['Indian',false],
-  ['Irish',false],
-  ['Italian',false],
-  ['Japanese',false],
-  ['Jewish',false],
-  ['Korean',false],
-  ['Latin American',false],
-  ['Mediterranean',false],
-  ['Mexican',false],
-  ['Middle Eastern',false],
-  ['Southern',false],
-  ['Spanish',false],
-  ['Thai',false],
-  ['Vietnamese',false],
-]);
-
-*/

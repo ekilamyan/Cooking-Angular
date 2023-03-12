@@ -6,20 +6,25 @@ import { IngredientDialogComponent } from '../dialogs/ingredient-dialog/ingredie
 import { PantryIngredient } from 'src/app/shared/models/pantry-ingredient.model';
 import { AutocompleteService } from 'src/app/shared/services/autocomplete.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { UserDataService } from '../shared/services/user-data.service';
+import { User } from '../shared/models/user.model';
+import { LoginService } from '../shared/services/login.service';
 
 @Component({
   selector: 'app-my-pantry',
   templateUrl: './my-pantry.component.html',
   styleUrls: ['./my-pantry.component.css']
 })
+
 export class MyPantryComponent implements OnInit {
 
   public pantry: string[] = ["Trout", "Salmon", "Shrimp", "Halibut", "Whitening", "Albacore", "Sea Urchin", "Caviar"];
   public ingredients: PantryIngredient[] = [];
   public hasRanSearch = false;
+  public user: User;
 
   public durationInSeconds = 2;
-
 
   ingredientSearchForm = new FormGroup({
     ingredient: new FormControl(''),
@@ -28,11 +33,17 @@ export class MyPantryComponent implements OnInit {
   constructor(private service: AutocompleteService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
-    private snackBar: MatSnackBar) {
-
+    private snackBar: MatSnackBar,
+    private myPantry: UserDataService,
+    private loginService: LoginService) {
   }
 
   ngOnInit(): void {
+    this.myPantry.getUserData(this.loginService.user.value.email).subscribe((temp: any) => {
+      this.user = new User(temp);
+      console.log(this.user);
+    })
+
     // this.refreshIngredients();
     this.ingredientSearchForm = this.formBuilder.group({
       'ingredient': ['']
@@ -40,8 +51,7 @@ export class MyPantryComponent implements OnInit {
 
     this.ingredientSearchForm.get('ingredient')?.valueChanges.pipe(
       debounceTime(400),
-      distinctUntilChanged())
-      .subscribe((searchTerm: string) => {
+      distinctUntilChanged()).subscribe((searchTerm: string) => {
         if (!searchTerm || searchTerm === '') {
           this.ingredients = [];
           return;
@@ -51,7 +61,7 @@ export class MyPantryComponent implements OnInit {
           this.ingredients = [];
           this.hasRanSearch = true;
           for (let i = 0; i < temp.length; i++) {
-            if (temp[i].aisle == 'Seafood' || temp[i].aisle == 'Canned and Jarred') {            // Fix parammeter based on category
+            if (temp[i].aisle == 'Seafood' || temp[i].aisle == 'Canned and Jarred') {   // Fix parammeter based on category
               this.ingredients.push(new PantryIngredient(temp[i]));
             }
           }

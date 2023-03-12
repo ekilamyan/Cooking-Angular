@@ -67,3 +67,7 @@ hr {
     height: 300px;
     border-radius: 10px;
 }
+
+button {
+    margin-top: 10px;
+}

@@ -1,11 +1,14 @@
 <h1 mat-dialog-title>Recipe Search</h1>
 
-<form class="ingredient-search" [formGroup]="recipeSearchForm" fxLayoutAlign="center">
-    <input class="inputBox" type="text" placeholder="Search for a Recipe..." formControlName="recipe"
-        [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let option of recipes" (click)="navToSearchPage(option.id)">
-            {{capitalizeFirstLetter(option.title)}}
-        </mat-option>
-    </mat-autocomplete>
+<form class="recipe-search-form" [formGroup]="recipeSearchForm" fxLayoutAlign="center">
+    <mat-form-field class="inputBox" appearance="outline">
+        <mat-label> Search for a Recipe...</mat-label>
+        <input matInput placeholder="Search for a Recipe..." formControlName="recipe" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+            <!-- <mat-spinner></mat-spinner> -->
+            <mat-option *ngFor="let option of recipes" (click)="navToSearchPage(option.id)">
+                {{capitalizeFirstLetter(option.title)}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
 </form>

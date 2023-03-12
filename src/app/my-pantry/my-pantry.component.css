@@ -22,14 +22,15 @@ hr {
 }
 
 /* Input box */
+.form {
+    width: 100%;
+}
+
 .inputBox {
     width: 100%;
-    padding: 15px;
-    border: 1px solid rgba(255,255,255, 0.25);
-    border-style: solid;
-    border-color: rgb(92, 92, 92);
     border-radius: 10px;
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: 300;
     margin-top: 20px;
     font-family: "Inter", sans-serif;
 }
@@ -37,6 +38,7 @@ hr {
 /* Card body / title */
 .card-container {
     background-color: #bcdbff;
+    cursor: pointer;
     width: 300px;
     padding: 20px;
     transition: 0.3s;
@@ -63,11 +65,11 @@ hr {
 
 
 /* Card Body */
-.card-body  li{
+.card-body li {
     list-style: none;
 }
 
-.card-body  ul{
+.card-body ul {
     padding: 10px;
     margin-bottom: 30px;
 }
@@ -81,4 +83,47 @@ h3 {
 
 hr {
     border-color: #363636;
+}
+
+
+
+/* //input outline color */
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: black !important;
+    /* // opacity: 1!important; */
+}
+
+
+/* // mat-input error carent color */
+::ng-deep .mat-form-field-invalid .mat-input-element,
+.mat-warn .mat-input-element {
+    caret-color: red !important;
+}
+
+/* // mat-label normal state style */
+::ng-deep .mat-form-field-label {
+    color: rgba(0, 0, 0, .6) !important;
+    /* // color: $mainColor!important; */
+}
+
+
+/* borders */
+
+/* left side */
+::ng-deep .mat-form-field-outline-start {
+    border-radius: 10px 0 0 10px !important;
+    min-width: 10px !important;
+}
+
+/*right side */
+::ng-deep .mat-form-field-outline-end {
+    border-radius: 0 10px 10px 0 !important;
+}
+
+
+/* input background color */
+::ng-deep.mat-form-field-outline-start,
+::ng-deep.mat-form-field-outline-gap,
+::ng-deep.mat-form-field-outline-end {
+    background-color: rgb(255, 255, 255) !important;
 }

@@ -7,15 +7,19 @@
         <hr>
     </div>
 
-    <div class="search-bar" fxLayout="row" fxLayoutAlign="space-between center">
-        <form class="ingredient-search" [formGroup]="ingredientSearchForm" fxLayoutAlign="center" fxFlex="100">
-            <input class="inputBox" type="text" placeholder="Search for an ingredient..." formControlName="ingredient"
-                [matAutocomplete]="auto">
-            <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let option of ingredients" (click)="addIngredient(option)">
-                    {{capitalizeFirstLetter(option.name)}}
-                </mat-option>
-            </mat-autocomplete>
+    <div class="search-bar">
+        <form class="ingredient-search" [formGroup]="ingredientSearchForm">
+
+            <mat-form-field class="inputBox" appearance="outline">
+                <mat-label> Search for an ingredient. . .</mat-label>
+                <input matInput placeholder="Search for an ingredient..." formControlName="ingredient" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <!-- <mat-spinner></mat-spinner> -->
+                    <mat-option *ngFor="let option of ingredients" (click)="addIngredient(option)">
+                        {{capitalizeFirstLetter(option.name)}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
         </form>
     </div>
 
@@ -34,6 +38,28 @@
             </div>
         </mat-card>
     </div>
+
+
+
+
+    <!-- <div class="pantry-content">
+        <mat-card class="card-container" (click)="openDialog()">
+            <mat-card-title class="card-title">
+                <h1>Seafood</h1>
+            </mat-card-title>
+            <div class="card-body">
+                <ul>
+                    <li *ngFor="let item of pantry; let i = index">
+                        <h3>{{item}}</h3>
+                        <hr>
+                    </li>
+                </ul>
+            </div>
+        </mat-card>
+    </div> -->
+
+
+
 
     <hr>
     <div class="tip" fxLayout="column" fxLayoutAlign="center center">

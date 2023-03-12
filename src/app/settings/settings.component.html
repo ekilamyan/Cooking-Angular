@@ -13,18 +13,18 @@
             <div class="names" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="60">
                 <div class="profile-item" fxLayout="column" fxLayoutAlign="center start">
                     <h2>FIRST NAME</h2>
-                    <h1>Bobbity</h1>
+                    <h1>{{name}}</h1>
                 </div>
 
                 <div class="profile-item" fxLayout="column" fxLayoutAlign="center start">
                     <h2>LAST NAME</h2>
-                    <h1>Hambartsumyan</h1>
+                    <h1>{{lastName}}</h1>
                 </div>
             </div>
 
             <div class="profile-item" fxLayout="column" fxLayoutAlign="center start">
                 <h2>EMAIL</h2>
-                <h1>bobbityHambartsumyan34@gmail.com</h1>
+                <h1>{{email}}</h1>
             </div>
         </div>
 
@@ -34,7 +34,7 @@
 
             </div>
         </div>
+
+        <button mat-flat-button color="warn" mat-flat-button (click)="logout()"> Log out </button>
     </div>
-
-
 </div>

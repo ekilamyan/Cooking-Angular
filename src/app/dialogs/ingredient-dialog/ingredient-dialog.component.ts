@@ -49,7 +49,7 @@ export class IngredientDialogComponent implements OnInit {
           this.ingredients = [];
           this.hasRanSearch = true;
           for (let i = 0; i < temp.length; i++) {
-            if (temp[i].aisle == 'Seafood' || temp[i].aisle == 'Canned and Jarred') {            // Fix parammeter based on category
+            if (temp[i].aisle == 'Savory Snacks' || 'Nuts' || 'Dried Fruits') {            // Fix parammeter based on category
               this.ingredients.push(new PantryIngredient(temp[i]));
             }
           }

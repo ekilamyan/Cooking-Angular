@@ -27,7 +27,7 @@ export class SignUpComponent implements OnInit {
   public selectedDiets = [''];
   public selectedIntolerances = [''];
 
-  constructor(private formBuilder: FormBuilder, public dialog: MatDialog, private loginService: LoginService) { }
+  constructor(private formBuilder: FormBuilder, public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -53,10 +53,6 @@ export class SignUpComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(IntolerancesDialogComponent, { disableClose: true });
-  }
-
-  logout(): void {
-    this.loginService.logout();
   }
 }
 

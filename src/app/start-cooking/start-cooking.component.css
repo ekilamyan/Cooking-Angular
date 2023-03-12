@@ -20,42 +20,38 @@ hr {
     padding-top: 50px;
 }
 
-/* Tip */
- .tip h2, p {
-    margin-bottom: 3px;
- }
+/* suggestions in content */
 
-
-.results-wrapper img {
-    object-fit: cover;
-
+/* card */
+img {
     width: 250px;
+    border-radius: 10px;
     transition: 0.3s;
     margin-top: 10px;
     margin-bottom: 10px;
+}
 
-    border-radius: 10px;
-    transform: scale(1);
-    transition: 0.4s;
+img:hover {
+    transform: scale(1.07);
+    transition: 0.3s;
     cursor: pointer;
 }
 
-.results-wrapper .title {
-    margin-top: 5px;
+.title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
     font-family: "Inter", sans-serif;
-    font-weight: 300;
+    transition: 0.2s;
+}
+
+.card {
+    width: 250px;
+    margin-bottom: auto;
+}
+
+.card:hover .title {
+    color: coral;
+    transition: 0.3s;
     cursor: pointer;
-}
-
-.results-wrapper img:hover{
-    transform: scale(1.1);
-}
-
-.results-wrapper .card .title{
-    transition: all ease 0.6s;
-}
-
-.results-wrapper .card:hover .title{
-    color: #ff642f;
-    transition: all ease 0.6s;
 }

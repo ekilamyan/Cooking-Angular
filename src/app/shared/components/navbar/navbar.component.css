@@ -1,35 +1,67 @@
 .example-spacer {
     flex: 1 1 auto;
   }
-
-.mat-toolbar {
+ 
+ 
+ .mat-toolbar {
     background-color: white;
     height: 90px;
     padding: 0px;
-}
-
-img {
+ }
+ 
+ 
+ img {
     width: 130px;
     height: auto;
-}
-
-button {
+ }
+ 
+ 
+ button {
     font-family: "Inter", sans-serif;
     font-size: 18px;
     border-radius: 25px;
     margin-right: 5px;
     margin-left: 5px;
-}
-.mat-accordion {
+ }
+ 
+ 
+ .active-button {
+    background-color: #ff642f;
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
+    border-radius: 25px;
+    margin-right: 5px;
+    margin-left: 5px;
+ }
+ 
+ 
+ 
+ 
+ button {
+    transition: all ease 0.2s;
+ }
+ 
+ 
+ button:hover {
+    transform: scale(1.1);
+    transition: all ease 0.2s;
+ }
+ 
+ 
+ .mat-accordion {
     margin: 10px;
-}
-
-.mat-expansion-panel {
+ }
+ 
+ 
+ .mat-expansion-panel {
     box-shadow: none;
-}
-
-.mat-expansion-panel-header {
+ }
+ 
+ 
+ .mat-expansion-panel-header {
     padding: 0px;
     margin-top: 20px;
     margin-bottom: 20px;
-}
+ }
+ 

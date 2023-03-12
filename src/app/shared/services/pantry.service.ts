@@ -11,7 +11,7 @@ export class PantryService {
   public baseURL2 = 'https://api.spoonacular.com/food/ingredients/autocomplete';
   public baseURL3 = 'https://api.spoonacular.com/recipes/findByIngredients'
   public baseURL4 = 'https://api.spoonacular.com/recipes/informationBulk?';
-  public apiKey = '3418ce6d893644b08478660f70b775f4';
+  public apiKey = '1b6ab20e881548079dd54b364da82051';
   
   // 8319610fbfb04bbb93883d1d8ad1f890
   // 3418ce6d893644b08478660f70b775f4
@@ -26,7 +26,7 @@ export class PantryService {
   }
 
   getMyRecipesIds(ingredients: string): Observable<any>{
-    return this.http.get(this.baseURL3 + '?ingredients=' + ingredients + '&apiKey=' + this.apiKey + '&number=10&limitLicense=true&ignorePantry=true&ranking=2');
+    return this.http.get(this.baseURL3 + '?ingredients=' + ingredients + '&apiKey=' + this.apiKey + '&number=5&limitLicense=true&ignorePantry=true&ranking=2');
   }
 
   getRecipesBulk(ids: string): Observable<any> {

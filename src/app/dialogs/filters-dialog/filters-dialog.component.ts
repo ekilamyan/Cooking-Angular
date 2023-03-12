@@ -40,7 +40,7 @@ export class FiltersDialogComponent implements OnInit {
     this.setupFormFilters('mealTypes');
   }
 
-  private setupFormFilters(type: string) {
+  public setupFormFilters(type: string) {
     let filters: Array<string> = [];
 
     switch (type) {
@@ -73,7 +73,7 @@ export class FiltersDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    
   }
 
   addRemoveFilter(i: string) {
@@ -87,33 +87,3 @@ export class FiltersDialogComponent implements OnInit {
     }
   }
 }
-
-/*
-    removeIngredient(i: number) {
-    this.data[i] = '';
-    if (i !== -1) {
-      this.data.splice(i, 1);
-
-      this.snackBar.open(this.capitalizeFirstLetter(this.data[i]) + ' Removed', 'Dismiss', {
-        duration: (this.durationInSeconds + 3) * 1000,
-      });
-    }
-  }
-
-
-  addIngredient(i: PantryIngredient) {
-    if (this.data.includes(this.capitalizeFirstLetter(i.name))) {
-      this.snackBar.open('Ingredient already in pantry', 'Dismiss', {
-        duration: this.durationInSeconds * 1000,
-      });
-    } else {
-      this.data.splice((this.data.length - 1), 0, this.capitalizeFirstLetter(i.name));
-      this.refreshIngredients();
-      this.ingredientSearchForm.reset();
-
-      this.snackBar.open(this.capitalizeFirstLetter(i.name) + ' added', 'Dismiss', {
-        duration: (this.durationInSeconds + 3) * 1000,
-      });
-    }
-  }
-*/

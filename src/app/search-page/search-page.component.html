@@ -26,14 +26,19 @@
 
     <div class="search-bar" fxLayout="row" fxLayoutAlign="space-between center">
         <form class="ingredient-search" [formGroup]="recipeSearchForm" fxFlex="85">
-            <input class="inputBox" type="text" placeholder={{searchedWord}} formControlName="recipe"
-                [matAutocomplete]="auto">
-            <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let option of autocompleteRecipes" (click)="changeResults(option.id)">
-                    <!-- (click)="navToRecipeIntructions(option.id)" -->
-                    {{capitalizeFirstLetter(option.title)}}
-                </mat-option>
-            </mat-autocomplete>
+
+            <mat-form-field class="inputBox" appearance="outline">
+                <mat-label> Search for a recipe... </mat-label>
+                <input matInput placeholder="{{searchedWord}}" formControlName="recipe" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <!-- <mat-spinner></mat-spinner> -->
+                    <mat-option *ngFor="let option of autocompleteRecipes" (click)="changeResults(option.id)">
+                        <!-- (click)="navToRecipeIntructions(option.id)" -->
+                        {{capitalizeFirstLetter(option.title)}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
         </form>
 
         <div class="filter-button" fxFlex="10">
@@ -44,9 +49,11 @@
     <div class="search-content">
         <div class="suggestions-wrapper" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
             <div class="card" *ngFor=" let recipe of recipes" (click)="navToRecipeIntructions(recipe.id)">
-                <img src="{{recipe.image}}" />
-                <div class="title" fxLayout="wrap">
-                    {{recipe.title}}
+                <div class="filtering-mechanism" *ngIf="removeRecipe(recipe)">
+                    <img src="{{recipe.image}}" />
+                    <div class="title" fxLayout="wrap">
+                        {{recipe.title}}
+                    </div>
                 </div>
             </div>
         </div>

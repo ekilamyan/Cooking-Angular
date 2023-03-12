@@ -17,10 +17,6 @@ export class StartCookingComponent implements OnInit {
   constructor(private myRecipes: PantryService, public newRoute: Router,) {
   }
 
-
-
-
-
   ngOnInit(): void {
 
     this.recipes = [];
@@ -35,7 +31,9 @@ export class StartCookingComponent implements OnInit {
 
       this.myRecipes.getRecipesBulk(this.recipeIds).subscribe((temp: any[]) => { 
         for(let i = 0; i < this.recipeIds.length; i++) {
-          this.recipes[i] = temp[i];
+          if (temp[i]) {
+            this.recipes[i] = temp[i];
+          }
         }
       });
     });
