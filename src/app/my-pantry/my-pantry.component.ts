@@ -40,6 +40,7 @@ export class MyPantryComponent implements OnInit {
 
   ngOnInit(): void {
     this.myPantry.getUserData(this.loginService.user.value.email).subscribe((temp: any) => {
+      console.log(temp);
       this.user = new User(temp);
       console.log(this.user);
     })

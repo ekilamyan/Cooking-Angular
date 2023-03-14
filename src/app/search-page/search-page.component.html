@@ -48,12 +48,10 @@
 
     <div class="search-content">
         <div class="suggestions-wrapper" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
-            <div class="card" *ngFor=" let recipe of recipes" (click)="navToRecipeIntructions(recipe.id)">
-                <div class="filtering-mechanism" *ngIf="removeRecipe(recipe)">
-                    <img src="{{recipe.image}}" />
-                    <div class="title" fxLayout="wrap">
-                        {{recipe.title}}
-                    </div>
+            <div class="card" *ngFor="let recipe of filteredRecipes" (click)="navToRecipeIntructions(recipe.id)">
+                <img src="{{recipe.image}}" />
+                <div class="title" fxLayout="wrap">
+                    {{recipe.title}}
                 </div>
             </div>
         </div>

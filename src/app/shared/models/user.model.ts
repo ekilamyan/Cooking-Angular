@@ -7,7 +7,7 @@ export class User {
     last_name: string;
     saved_recipes: string []; 
     user_diets: string []; 
-    saved_ingredients: SavedIngredients; 
+    user_ingredients: SavedIngredients; 
     saved_intolerances: string []; 
 
     constructor(data: any) {
@@ -16,8 +16,9 @@ export class User {
             this.first_name = data.first_name;
             this.last_name = data.last_name;
             this.saved_recipes = []; 
-            this.user_diets = []; 
-            this.saved_ingredients = new SavedIngredients(data.saved_ingredients); 
+            this.user_diets = [];
+            console.log(data.user_ingredients);
+            this.user_ingredients = new SavedIngredients(data.user_ingredients); 
             this.saved_intolerances = []; 
             
         }
@@ -28,7 +29,7 @@ export class User {
             this.last_name = '';
             this.saved_recipes = []; 
             this.user_diets = []; 
-            this.saved_ingredients = new SavedIngredients(null);
+            this.user_ingredients = new SavedIngredients(null);
             this.saved_intolerances = []; 
         }
     }

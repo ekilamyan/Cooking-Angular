@@ -16,10 +16,10 @@ export class SavedIngredients {
 
     constructor(data: any) {
         if (data) {
-            this.baking = [];
-            this.cannedJarred = [];
-            this.condiments = [];
-            this.dairy = [];
+            this.baking = data.baking;
+            this.cannedJarred = data.cannedJarred;
+            this.condiments = data.condiments;
+            this.dairy = data.dairy;
             this.jarredGoods = [];
             this.meats = [];
             this.oilsDressings = [];

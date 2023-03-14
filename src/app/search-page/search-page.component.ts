@@ -68,9 +68,9 @@ export class SearchPageComponent implements OnInit {
       this.removeAllChips();
       // console.log(id);
 
-      if (this.id.length < 1) {
-        this.newRoute.navigate(['/dashboard'])
-      }
+      // if (this.id.length < 1) {
+      //   this.newRoute.navigate(['/dashboard'])
+      // }
 
       if (this.id) {
         /* For random recipes with categories */
@@ -102,10 +102,11 @@ export class SearchPageComponent implements OnInit {
             /* find recipes with list of ids */
             this.suggestionsService.getSuggestionsBulk(this.ids).subscribe((esh: any[]) => {
               for (let i = 0; i < esh.length; i++) {
-                this.recipes[i] = esh[i];
+                this.recipes[i] = new Recipe(esh[i]);
               }
               this.searchedWord = this.recipes[0].title;
-              console.log(this.recipes);
+              this.applyFilters();
+              console.log(this.filteredRecipes);
             });
           });
         }
@@ -146,6 +147,43 @@ export class SearchPageComponent implements OnInit {
       panelClass: 'custom-modalbox'
     });
 
+    dialogRef.afterClosed().subscribe( (res: any) => {
+        this.applyFilters();
+    })
+  }
+
+  applyFilters() {
+    if (this.filters.length === 0) {
+      this.filteredRecipes = this.recipes;
+      return;
+    }
+
+    const tempRecipies: Recipe[] = [];
+
+    for (let i = 0; i < this.recipes.length; i++) {
+      const filtersTag = this.recipes[i].filterTags;
+
+      if (this.hasAllFilterTags(filtersTag)) {
+        tempRecipies.push(this.filteredRecipes[i]);
+      }
+    }
+
+    this.filteredRecipes = tempRecipies;
+  }
+
+  hasAllFilterTags(recipeFiltersTag: string[]): boolean {
+    for (let i = 0; i < this.filters.length; i++) {
+      const filter = this.filters[i];
+      console.log(this.filters[i]);
+      console.log(i);
+      console.log("check filter: " + filter);
+
+      if (!recipeFiltersTag.includes(filter)) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   removeFilter(i: number) {
@@ -170,6 +208,7 @@ export class SearchPageComponent implements OnInit {
   }
 
   removeRecipe(recipe: Recipe) {
+    console.log("rmeove receipe alled");
     return true;
     // let remove = false;
     // for (let i = 0; i < this.filters.length; i++) {

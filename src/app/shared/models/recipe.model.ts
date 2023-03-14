@@ -33,6 +33,8 @@ export class Recipe {
      analyzedInstructions: AnalyzedInstructions[];
      filtered: boolean;
 
+     filterTags: string[] = [];
+
     constructor(data: any) {
        if(data) {
           this.vegetarian = data.vegetarian;
@@ -58,12 +60,24 @@ export class Recipe {
           this.imageType = data.imageType;
           this.nutrition = new Nutrition(data.nutrition);
           this.summary = data.summary;
-          this.cuisines = []
+          this.cuisines = data.cuisines;
           this.dishTypes = [];
           this.diets = []
           this.instructions = data.instructions;
           this.analyzedInstructions = [];
           this.filtered = false;
+
+          for (let i = 0; i < this.cuisines.length; i++) {
+             this.filterTags.push(this.cuisines[i]);
+          }
+
+          if (this.vegan) {
+             this.filterTags.push('Vegan');
+          }
+
+          if (this.vegetarian) {
+             this.filterTags.push('Vegetarian');
+          }
        } 
        else {
           this.vegetarian = false;
