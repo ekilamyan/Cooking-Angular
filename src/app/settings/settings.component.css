@@ -25,13 +25,6 @@ hr {
     margin-top: 30px;
 }
 
-.content-container {
-    /* padding: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-style: solid;
-    border-color: rgb(92, 92, 92);
-    border-radius: 10px; */
-}
 
 .profile-item h2 {
     font-size: 15px;
@@ -48,26 +41,64 @@ hr {
     font-size: 24px;
 }
 
-/* profile container and items */
-.intolerances-container {
-    margin-top: 30px;
+/* intolerances container and items */
+.intolerances-section h1 {
+    font-family: "Playfair", serif;
+    font-size: 40px;
+    margin-bottom: 8px;
 }
 
-.intolerances-container h2 {
+.intolerances-section {
+    margin-top: 40px;
+}
+
+.intolerances-container {
+    margin-top: 30px;
+    height: auto;
+}
+
+.mat-icon {
+    color: rgb(0, 0, 0);
+}
+
+.intolerances h2 {
     font-size: 15px;
+    
     color: rgb(172, 172, 172);
     font-family: "Inter", sans-serif;
     margin: 0px;
-    font-weight: 600;
+}
+
+.diets-container {
+    color: black;
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
+}
+
+.intolerances-container {
+    margin: 0px;
+    color: black;
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
+}
+
+.intolerances-section .mat-checkbox {
+    padding: 5px;
 }
 
 .intolerances-box {
-    background-color: rgb(235, 235, 235);
+    /* background-color: rgb(235, 235, 235); */
     width: 80%;
     height: 300px;
     border-radius: 10px;
 }
 
-button {
-    margin-top: 10px;
+.button-container {
+    margin-top: 30px;
 }
+
+.button-container button {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+

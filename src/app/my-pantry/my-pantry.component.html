@@ -12,7 +12,8 @@
 
             <mat-form-field class="inputBox" appearance="outline">
                 <mat-label> Search for an ingredient. . .</mat-label>
-                <input matInput placeholder="Search for an ingredient..." formControlName="ingredient" [matAutocomplete]="auto">
+                <input matInput placeholder="Search for an ingredient..." formControlName="ingredient"
+                    [matAutocomplete]="auto">
                 <mat-autocomplete #auto="matAutocomplete">
                     <!-- <mat-spinner></mat-spinner> -->
                     <mat-option *ngFor="let option of ingredients" (click)="addIngredient(option)">
@@ -23,14 +24,33 @@
         </form>
     </div>
 
-    <div class="pantry-content">
-        <mat-card class="card-container" (click)="openDialog()">
+    <div class="user-pantry" fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap="1">
+        <app-pantry-list *ngIf="userIngredients.baking.length" category="Baking" [ingredients]="userIngredients.baking" color="#ffe3e3"></app-pantry-list>
+        <app-pantry-list *ngIf="userIngredients.cannedJarred.length" category="Canned & Jarred" [ingredients]="userIngredients.cannedJarred" color="#e4fcc7"></app-pantry-list>
+        <app-pantry-list *ngIf="userIngredients.condiments.length"category="Condiments" [ingredients]="userIngredients.condiments" color="#fce2c7"></app-pantry-list>
+        <app-pantry-list *ngIf="userIngredients.dairy.length" category="Dairy" [ingredients]="userIngredients.dairy" color="#f5fffe"></app-pantry-list>
+        <app-pantry-list *ngIf="userIngredients.meats.length" category="Meats" [ingredients]="userIngredients.meats" color="#ff9c91"></app-pantry-list>
+        <app-pantry-list *ngIf="userIngredients.oilsDressings.length" category="Oils & Dressings" [ingredients]="userIngredients.oilsDressings" color="#fcfcc7"></app-pantry-list>
+        <app-pantry-list *ngIf="userIngredients.pastaRice.length" category="Pastas & Rice" [ingredients]="userIngredients.pastaRice" color="#fcea97"></app-pantry-list>
+        <app-pantry-list *ngIf="userIngredients.produce.length" category="Produce" [ingredients]="userIngredients.produce" color="#cfffcf"></app-pantry-list>
+        <app-pantry-list *ngIf="userIngredients.refrigeratedFrozen.length" category="Frozen & Refrigerated" [ingredients]="userIngredients.refrigeratedFrozen" color="#91c3ff"></app-pantry-list>
+        <app-pantry-list *ngIf="userIngredients.seafood.length" category="Seafood" [ingredients]="userIngredients.seafood" color="#bcdbff"></app-pantry-list>
+        <app-pantry-list *ngIf="userIngredients.snacks.length" category="Snacks" [ingredients]="userIngredients.snacks" color="#fc979d"></app-pantry-list>
+        <app-pantry-list *ngIf="userIngredients.spicesSeasonings.length" category="Spices & Seasonings" [ingredients]="userIngredients.spicesSeasonings" color="#f8e8fc"></app-pantry-list>
+        <app-pantry-list *ngIf="userIngredients.spicesSeasonings.length" category="Jarred Goods" [ingredients]="userIngredients.jarredGoods" color="#ffedd4"></app-pantry-list>
+        <app-pantry-list *ngIf="userIngredients.misc.length" category="Miscellaneous" [ingredients]="userIngredients.misc" color="ebebeb"></app-pantry-list>
+    </div>
+
+
+
+    <!-- <div class="pantry-content">
+        <mat-card class="card-container" (click)="openDialog()" *ngIf="userIngredients.baking">
             <mat-card-title class="card-title">
-                <h1>Seafood</h1>
+                <h1>Baking</h1>
             </mat-card-title>
             <div class="card-body">
                 <ul>
-                    <li *ngFor="let item of pantry; let i = index">
+                    <li *ngFor="let item of userIngredients.baking; let i = index">
                         <h3>{{item}}</h3>
                         <hr>
                     </li>
@@ -39,7 +59,21 @@
         </mat-card>
     </div>
 
-
+    <div class="pantry-content">
+        <mat-card class="card-container" (click)="openDialog()" *ngIf="userIngredients.cannedJarred">
+            <mat-card-title class="card-title">
+                <h1>Canned & Jarred</h1>
+            </mat-card-title>
+            <div class="card-body">
+                <ul>
+                    <li *ngFor="let item of userIngredients.cannedJarred; let i = index">
+                        <h3>{{item}}</h3>
+                        <hr>
+                    </li>
+                </ul>
+            </div>
+        </mat-card>
+    </div> -->
 
 
     <!-- <div class="pantry-content">

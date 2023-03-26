@@ -23,7 +23,7 @@ export class FiltersDialogComponent implements OnInit {
 
   public intolerances = ["Dairy", "Egg", "Gluten", "Grain", "Peanut", "Seafood", "Sesame", "Shellfish", "Soy", "Sulfite", "Tree Nut", "Wheat"]
 
-  public mealTypes = ["Appetizer", "Beverage", "Breakfast", "Dessert", "Drink", "Finger Food", "Main Course", "Salad", "Sauce", "Side Dish", "Snack", "Soup"]
+  public mealTypes = ["Appetizers", "Beverages", "Breakfast", "Dessert", "Dinner", "Lunch", "Main Dishes", "Sauces & Rubs", "Side Dishes", "Salad", "Soup", "Snack"]
 
   public durationInSeconds = 2;
   public activated = false;

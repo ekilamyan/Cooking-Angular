@@ -24,6 +24,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { StartCookingComponent } from './start-cooking/start-cooking.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { IntolerancesDialogComponent } from './dialogs/intolerances-dialog/intolerances-dialog.component';
+import { PantryListComponent } from './shared/components/pantry-list/pantry-list.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { IntolerancesDialogComponent } from './dialogs/intolerances-dialog/intol
     StartCookingComponent,
     SignUpComponent,
     IntolerancesDialogComponent,
+    PantryListComponent,
   ],
   imports: [
     BrowserAnimationsModule,

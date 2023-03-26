@@ -13,11 +13,6 @@
     font-family: "Playfair", serif;
 }
 
-/* chips */
-.mat-chip {
-    background-color: #bcdbff;
-}
-
 
 /* Input box */
 .inputBox {
@@ -80,5 +75,4 @@
 
 .mat-dialog-actions button {
     border-radius: 20px;
-    background-color: #bcdbff;
 }

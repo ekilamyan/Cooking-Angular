@@ -10,7 +10,9 @@ import { User } from '../models/user.model';
 })
 export class LoginService {
   public durationInSeconds = 5;
+  public tempUser = new BehaviorSubject<User>(null);
   public user = new BehaviorSubject<User>(null);
+
   public url = "https://lbxlgv1fnj.execute-api.us-west-1.amazonaws.com/prod"; 
 
   constructor(private router: Router, private http: HttpClient, private snackBar: MatSnackBar) {

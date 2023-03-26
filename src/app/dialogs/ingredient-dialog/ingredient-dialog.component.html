@@ -1,7 +1,7 @@
-<h1 mat-dialog-title>Seafood</h1>
+<h1 mat-dialog-title>{{data.category}}</h1>
 <mat-chip-list #chipList aria-label="ingredients" fxLayout="row wrap">
-    <mat-chip *ngFor="let item of data; let i = index">
-        {{this.data[i]}}
+    <mat-chip *ngFor="let item of data.stuff; let i = index" [style.background-color]="data.color">
+        {{capitalizeFirstLetter(this.data.stuff[i])}}
         <button matChipRemove (click)="removeIngredient(i)">
             <mat-icon>cancel</mat-icon>
         </button>
@@ -22,5 +22,5 @@
 </form>
 
 <div mat-dialog-actions>
-    <button mat-flat-button mat-dialog-close>Save Changes</button>
+    <button mat-flat-button mat-dialog-close [style.background-color]="data.color">Save Changes</button>
 </div>

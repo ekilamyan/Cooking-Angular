@@ -20,16 +20,16 @@ export class SavedIngredients {
             this.cannedJarred = data.cannedJarred;
             this.condiments = data.condiments;
             this.dairy = data.dairy;
-            this.jarredGoods = [];
-            this.meats = [];
-            this.oilsDressings = [];
-            this.pastaRice = [];
-            this.produce = [];
-            this.refrigeratedFrozen = [];
-            this.seafood = [];
-            this.snacks = [];
-            this.spicesSeasonings = [];
-            this.misc = [];
+            this.jarredGoods = data.jarredGoods;
+            this.meats = data.meats;
+            this.oilsDressings = data.oilsDressings;
+            this.pastaRice = data.pastaRice;
+            this.produce = data.produce;
+            this.refrigeratedFrozen = data.refrigeratedFrozen;
+            this.seafood = data.seafood;
+            this.snacks = data.snacks;
+            this.spicesSeasonings = data.spicesSeasonings;
+            this.misc = data.misc;
         } else {
             this.baking = [];
             this.cannedJarred = [];

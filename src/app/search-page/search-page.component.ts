@@ -210,30 +210,5 @@ export class SearchPageComponent implements OnInit {
   removeRecipe(recipe: Recipe) {
     console.log("rmeove receipe alled");
     return true;
-    // let remove = false;
-    // for (let i = 0; i < this.filters.length; i++) {
-    //   if (recipe.cuisines.includes(this.filters[i])) {
-    //     remove = true;
-    //   }
-    //   if (recipe.diets.includes(this.filters[i])) {
-    //     remove = false;
-    //   }
-    //   if (recipe.dishTypes.includes(this.filters[i])) {
-    //     remove = true;
-    //   }
-    //   if (recipe.glutenFree == true) {
-    //     remove = true;
-    //   }
-    //   if (recipe.dairyFree == true) {
-    //     remove = true;
-    //   }
-    //   if (recipe.vegan == true) {
-    //     remove = true;
-    //   }
-    //   if (recipe.vegetarian == true) {
-    //     remove = true;
-    //   }
-    // }
-    // return !remove;
   }
 }

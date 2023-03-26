@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from '../models/user.model';
+import { LoginService } from './login.service';
+import { UserDataService } from './user-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +13,7 @@ export class SuggestionsService {
   public baseUrl_1 = 'https://api.spoonacular.com/recipes/';
   public baseUrl_2 = 'https://api.spoonacular.com/recipes/informationBulk?';
   public baseUrl_3 = 'https://api.spoonacular.com/recipes/random';
+  public baseUrl_4 = 'https://api.spoonacular.com/recipes/findByIngredients';
 
   public apiKey = '3418ce6d893644b08478660f70b775f4';
 
@@ -35,5 +39,4 @@ export class SuggestionsService {
   getSuggestionsBulk(ids: string): Observable<any> {
     return this.http.get(this.baseUrl_2 + '&apiKey=' + this.apiKey + '&ids=' + ids);
   }
-
 }

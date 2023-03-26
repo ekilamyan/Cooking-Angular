@@ -15,11 +15,10 @@ export class User {
             this.email = data.name;
             this.first_name = data.first_name;
             this.last_name = data.last_name;
-            this.saved_recipes = []; 
-            this.user_diets = [];
-            console.log(data.user_ingredients);
+            this.saved_recipes = data.saved_recipes; 
+            this.user_diets = data.user_diets;
             this.user_ingredients = new SavedIngredients(data.user_ingredients); 
-            this.saved_intolerances = []; 
+            this.saved_intolerances = data.user_intolerances; 
             
         }
         else {

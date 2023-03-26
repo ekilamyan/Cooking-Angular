@@ -16,6 +16,88 @@ hr {
     height: 1px;
 }
 
+/* Input box */
+.inputBox {
+    width: 100%;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 300;
+    margin-top: 20px;
+    font-family: "Inter", sans-serif;
+}
+
+/* //input outline color */
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: black !important;
+    /* // opacity: 1!important; */
+}
+
+
+/* // mat-input error carent color */
+::ng-deep .mat-form-field-invalid .mat-input-element,
+.mat-warn .mat-input-element {
+    caret-color: red !important;
+}
+
+/* // mat-label normal state style */
+::ng-deep .mat-form-field-label {
+    color: rgba(0, 0, 0, .6) !important;
+    /* // color: $mainColor!important; */
+}
+
+
+/* borders */
+
+/* left side */
+::ng-deep .mat-form-field-outline-start {
+    border-radius: 10px 0 0 10px !important;
+    min-width: 10px !important;
+}
+
+/*right side */
+::ng-deep .mat-form-field-outline-end {
+    border-radius: 0 10px 10px 0 !important;
+}
+
+::ng-deep.mat-form-field-outline-start,
+::ng-deep.mat-form-field-outline-gap,
+::ng-deep.mat-form-field-outline-end {
+    background-color: rgb(255, 255, 255) !important;
+}
+
+
+
+.mat-option {
+    font-family: "Inter", sans-serif;
+}
+
+
+/*  filter buttons */
+.mat-stroked-button {
+    width: 100%;
+    padding: 13px;
+    border-radius: 10px;
+    font-size: 18px;
+    border-style: solid;
+    border-color: rgb(92, 92, 92);
+    font-family: "Inter", sans-serif; 
+}
+
+/* dropdown menu */
+::ng-deep.mat-menu-panel {
+    font-family: "Inter", sans-serif;
+    margin-top: 10px;
+}
+
+::ng-deep.mat-menu-content {
+    border-radius: 100px;
+}
+
+.mat-menu-item {
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+}
+
 .pantry-content {
     padding-top: 50px;
 }

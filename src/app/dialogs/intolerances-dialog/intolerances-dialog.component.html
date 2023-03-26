@@ -1,8 +1,9 @@
-<h1 mat-dialog-title>One Quick Thing. . .</h1>
+<h1 mat-dialog-title *ngIf="this.url != '/settings'">One Quick Thing. . .</h1>
+<h1 mat-dialog-title >Edit Intolerances</h1>
 
 <hr>
 
-<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+<p *ngIf="this.url != '/settings'"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
     aliqua.
 </p>
 
@@ -10,7 +11,7 @@
 
     <h1>Diets</h1>
     <div class="diets-button-container" fxLayout="row wrap" fxLayoutAlign="center center">
-        <mat-checkbox mat-flat-mat-checkbox *ngFor="let diet of diets" fxFlex="30">
+        <mat-checkbox mat-flat-mat-checkbox *ngFor="let diet of diets" fxFlex="30" [checked]="checkUserData(diet)">
             {{diet}}
         </mat-checkbox>
     </div>
@@ -20,7 +21,7 @@
 
     <h1>Allergies</h1>
     <div class="intolerances-button-container" fxLayout="row wrap" fxLayoutAlign="center center">
-        <mat-checkbox mat-flat-mat-checkbox *ngFor="let intolerance of intolerances" fxFlex="30">
+        <mat-checkbox mat-flat-mat-checkbox *ngFor="let intolerance of intolerances" fxFlex="30" [checked]="checkUserData(intolerance)">
             {{intolerance}}
         </mat-checkbox>
     </div>
@@ -28,6 +29,7 @@
 </form>
 
 <div class="buttons" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="30">
-    <button mat-stroked-button color="warn" [mat-dialog-close]="true"> Add Later</button>
-    <button mat-flat-button color="primary" [routerLink]="['/my-pantry']" [mat-dialog-close]="true"> Save & Continue</button>
+    <button *ngIf="this.url != '/settings'" mat-stroked-button color="warn" [mat-dialog-close]="true"> Add Later</button>
+    <button *ngIf="this.url != '/settings'" mat-flat-button color="primary" [routerLink]="['/my-pantry']" [mat-dialog-close]="true"> Save & Continue</button>
+    <button *ngIf="this.url != '/sign-up'" mat-flat-button color="primary" [mat-dialog-close]="true"> Save Changes</button>
 </div>

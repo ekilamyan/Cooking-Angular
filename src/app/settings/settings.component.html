@@ -28,13 +28,42 @@
             </div>
         </div>
 
-        <div class="intolerances-container" fxLayout="column" fxLayoutAlign="center start">
-            <h2>INTOLERANCES</h2>
-            <div class="intolerances-box">
-
+        <div class="intolerances-section" fxLayout="column" fxLayoutAlign="center start">
+            <div class="title" fxLayout="row" fxLayoutAlign="start center">
+                <h1>Intolerances</h1>
+                <button mat-icon-button (click)="openDialog()">
+                    <mat-icon>edit</mat-icon>
+                </button>
             </div>
-        </div>
 
+            <hr>
+
+            <form class="intolerances">
+
+                <h2>DIETS</h2>
+                <div class="diets-container" fxLayout="row wrap" fxLayoutAlign="center center">
+                    <mat-checkbox mat-flat-mat-checkbox *ngFor="let diet of diets" fxFlex="30" [disabled]="true" [checked]="checkUserData(diet)">
+                        {{diet}}
+                    </mat-checkbox>
+                </div>
+
+                <hr>
+
+                <h2>ALLERGIES</h2>
+                <div class="intolerances-container" fxLayout="row wrap" fxLayoutAlign="center center">
+                    <mat-checkbox mat-flat-mat-checkbox *ngFor="let intolerance of intolerances" fxFlex="30" [disabled]="true" [checked]="checkUserData(intolerance)">
+                        {{intolerance}}
+                    </mat-checkbox>
+                </div>
+            </form>
+
+            <hr>
+
+        </div>
+    </div>
+
+    <div class="button-container" fxLayout="row" fxLayoutAlign="start center">
         <button mat-flat-button color="warn" mat-flat-button (click)="logout()"> Log out </button>
     </div>
+
 </div>

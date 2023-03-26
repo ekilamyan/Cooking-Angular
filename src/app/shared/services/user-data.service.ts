@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { User } from '../models/user.model';
 import { LoginService } from './login.service';
 
@@ -8,16 +9,19 @@ import { LoginService } from './login.service';
 })
 
 export class UserDataService {
-  user = this.loginService.user;
+  // user = this.loginService.user;
+  public user = new BehaviorSubject<User>(null);
   url = 'https://0gxlunxx4a.execute-api.us-west-1.amazonaws.com/prod/userdata'
 
-  constructor(private http: HttpClient, private loginService: LoginService) { }
+  constructor(private http: HttpClient, private loginService: LoginService) { 
+
+  }
 
   getUserData(email: string) {
-    return this.http.get(this.url + '?email=' + email)
+    return this.http.get(this.url + '?email=' + email);
   }
 
   saveUserData() {
-    return this.http.put(this.url, JSON.stringify(this.user))
+    return this.http.put(this.url, JSON.stringify(this.user));
   }
 }
