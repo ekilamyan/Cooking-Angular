@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { CookingData } from 'src/app/shared/models/cooking-data.model';
+import { CookingDataService } from 'src/app/shared/services/cooking-data.service';
 import { PantryIngredient } from '../../shared/models/pantry-ingredient.model';
 import { AutocompleteService } from '../../shared/services/autocomplete.service';
 
@@ -18,6 +20,8 @@ export class IngredientDialogComponent implements OnInit {
   public hasRanSearch = false;
   public durationInSeconds = 2;
 
+  public cookingData: CookingData;
+
   ingredientSearchForm = new FormGroup({
     ingredient: new FormControl(''),
   });
@@ -26,18 +30,18 @@ export class IngredientDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<IngredientDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private service: AutocompleteService,
-    private formBuilder: FormBuilder,
+    private formBuilder: FormBuilder,   
+    private cookingDataService: CookingDataService,
     private snackBar: MatSnackBar) {
 
   }
 
   ngOnInit(): void {
-    // this.myPantry.getUserData(this.loginService.user.value.email).subscribe((temp: any) => {
-    //   this.user = new User(temp);
-    //   this.userIngredients = this.user.user_ingredients;
-    //   // console.log(this.userIngredients);
-    //   console.log(this.user);
-    // })
+    this.cookingDataService.cookingData.subscribe((cookingData: CookingData) => {
+      if(cookingData){
+        this.cookingData = cookingData;
+      }
+    });
 
     this.refreshIngredients();
     this.ingredientSearchForm = this.formBuilder.group({
@@ -59,7 +63,7 @@ export class IngredientDialogComponent implements OnInit {
 
           if (this.data.category == 'Baking') {
             for (let i = 0; i < temp.length; i++) {
-              if (temp[i].aisle == 'baking') {            
+              if (temp[i].aisle == 'Baking') {
                 this.ingredients.push(new PantryIngredient(temp[i]));
               }
             }
@@ -67,7 +71,7 @@ export class IngredientDialogComponent implements OnInit {
 
           else if (this.data.category == 'Condiments') {
             for (let i = 0; i < temp.length; i++) {
-              if (temp[i].aisle == 'Condiments') {            
+              if (temp[i].aisle == 'Condiments') {
                 this.ingredients.push(new PantryIngredient(temp[i]));
               }
             }
@@ -75,7 +79,7 @@ export class IngredientDialogComponent implements OnInit {
 
           else if (this.data.category == 'Meats') {
             for (let i = 0; i < temp.length; i++) {
-              if (temp[i].aisle == 'Meat') {            
+              if (temp[i].aisle == 'Meat') {
                 this.ingredients.push(new PantryIngredient(temp[i]));
               }
             }
@@ -83,15 +87,15 @@ export class IngredientDialogComponent implements OnInit {
 
           else if (this.data.category == 'Produce') {
             for (let i = 0; i < temp.length; i++) {
-              if (temp[i].aisle == 'Produce') {            
+              if (temp[i].aisle == 'Produce') {
                 this.ingredients.push(new PantryIngredient(temp[i]));
               }
             }
           }
-          
+
           else if (this.data.category == 'Seafood') {
             for (let i = 0; i < temp.length; i++) {
-              if (temp[i].aisle == 'Seafood') {            
+              if (temp[i].aisle == 'Seafood') {
                 this.ingredients.push(new PantryIngredient(temp[i]));
               }
             }
@@ -99,7 +103,7 @@ export class IngredientDialogComponent implements OnInit {
 
           else if (this.data.category == 'Snacks') {
             for (let i = 0; i < temp.length; i++) {
-              if (temp[i].aisle == 'Snacks') {            
+              if (temp[i].aisle == 'Snacks') {
                 this.ingredients.push(new PantryIngredient(temp[i]));
               }
             }
@@ -107,7 +111,7 @@ export class IngredientDialogComponent implements OnInit {
 
           else if (this.data.category == 'Jarred Goods') {
             for (let i = 0; i < temp.length; i++) {
-              if (temp[i].aisle == 'jarredGoods') {            
+              if (temp[i].aisle == 'jarredGoods') {
                 this.ingredients.push(new PantryIngredient(temp[i]));
               }
             }
@@ -115,7 +119,7 @@ export class IngredientDialogComponent implements OnInit {
 
           else if (this.data.category == 'Canned & Jarred') {
             for (let i = 0; i < temp.length; i++) {
-              if (temp[i].aisle == 'Canned and Jarred') {            
+              if (temp[i].aisle == 'Canned and Jarred') {
                 this.ingredients.push(new PantryIngredient(temp[i]));
               }
             }
@@ -123,7 +127,7 @@ export class IngredientDialogComponent implements OnInit {
 
           else if (this.data.category == 'Spices & Seasonings') {
             for (let i = 0; i < temp.length; i++) {
-              if (temp[i].aisle == 'Spices and Seasonings') {            
+              if (temp[i].aisle == 'Spices and Seasonings') {
                 this.ingredients.push(new PantryIngredient(temp[i]));
               }
             }
@@ -132,7 +136,7 @@ export class IngredientDialogComponent implements OnInit {
 
           else if (this.data.category == 'Dairy') {
             for (let i = 0; i < temp.length; i++) {
-              if (temp[i].aisle == 'Dairy' || temp[i].aisle == 'Cheese') {            
+              if (temp[i].aisle == 'Dairy' || temp[i].aisle == 'Cheese') {
                 this.ingredients.push(new PantryIngredient(temp[i]));
               }
             }
@@ -140,7 +144,7 @@ export class IngredientDialogComponent implements OnInit {
 
           else if (this.data.category == 'Oils & Dressings') {
             for (let i = 0; i < temp.length; i++) {
-              if (temp[i].aisle == 'Oil, Vinegar, Salad Dressing') {            
+              if (temp[i].aisle == 'Oil, Vinegar, Salad Dressing') {
                 this.ingredients.push(new PantryIngredient(temp[i]));
               }
             }
@@ -148,7 +152,7 @@ export class IngredientDialogComponent implements OnInit {
 
           else if (this.data.category == 'Pastas & Rice') {
             for (let i = 0; i < temp.length; i++) {
-              if (temp[i].aisle == 'Pastas and Rice') {            
+              if (temp[i].aisle == 'Pastas and Rice') {
                 this.ingredients.push(new PantryIngredient(temp[i]));
               }
             }
@@ -156,7 +160,7 @@ export class IngredientDialogComponent implements OnInit {
 
           else if (this.data.category == 'Frozen & Refrigerated') {
             for (let i = 0; i < temp.length; i++) {
-              if (temp[i].aisle == 'Refrigerated' || temp[i].aisle == 'Frozen' ) {            
+              if (temp[i].aisle == 'Refrigerated' || temp[i].aisle == 'Frozen') {
                 this.ingredients.push(new PantryIngredient(temp[i]));
               }
             }
@@ -165,7 +169,7 @@ export class IngredientDialogComponent implements OnInit {
 
           else if (this.data.category == 'Miscellaneous') {
             for (let i = 0; i < temp.length; i++) {
-              if (temp[i].aisle == 'Health Foods' || temp[i].aisle == 'Ethnic Foods' || temp[i].aisle == 'Sweet Snacks' || temp[i].aisle == 'Dried Fruits' ) {            
+              if (temp[i].aisle == 'Health Foods' || temp[i].aisle == 'Ethnic Foods' || temp[i].aisle == 'Sweet Snacks' || temp[i].aisle == 'Dried Fruits') {
                 this.ingredients.push(new PantryIngredient(temp[i]));
               }
             }
@@ -180,10 +184,12 @@ export class IngredientDialogComponent implements OnInit {
   }
 
   removeIngredient(i: number) {
+    // this.cookingData.user_ingredients.
     this.data.stuff[i] = '';
     if (i !== -1) {
       this.data.stuff.splice(i, 1);
     }
+    this.cookingDataService.saveCookingData(this.cookingData);
   }
 
   addIngredient(i: PantryIngredient) {
@@ -202,30 +208,13 @@ export class IngredientDialogComponent implements OnInit {
 
     this.refreshIngredients();
     this.dialogRef.afterClosed().subscribe((res: any) => {
-      
+
     })
+    this.cookingDataService.saveCookingData(this.cookingData);
   }
 
   refreshIngredients() {
     this.data.stuff.sort();
   }
 
-
-
-
-  // addIngredient(i: PantryIngredient) {
-  //   if (this.pantry.includes(this.capitalizeFirstLetter(i.name))) {
-  //     this.snackBar.open('Ingredient already in pantry', 'Dismiss', {
-  //       duration: this.durationInSeconds * 1000,
-  //     });
-  //   } else {
-  //     this.pantry.splice((this.pantry.length - 1), 0, this.capitalizeFirstLetter(i.name));
-  //     this.refreshIngredients();
-  //     this.ingredientSearchForm.reset();
-
-  //     this.snackBar.open(this.capitalizeFirstLetter(i.name) + ' added', 'Dismiss', {
-  //       duration: (this.durationInSeconds + 3) * 1000,
-  //     });
-  //   }
-  // }
 }

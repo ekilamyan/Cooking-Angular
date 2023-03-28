@@ -1,4 +1,4 @@
-<app-navbar></app-navbar><!-- remove later -->
+<app-navbar></app-navbar>
 <div class="title-container">
     <div class="page-title">
         <h1>
@@ -42,7 +42,7 @@
 
                 <h2>DIETS</h2>
                 <div class="diets-container" fxLayout="row wrap" fxLayoutAlign="center center">
-                    <mat-checkbox mat-flat-mat-checkbox *ngFor="let diet of diets" fxFlex="30" [disabled]="true" [checked]="checkUserData(diet)">
+                    <mat-checkbox mat-flat-mat-checkbox *ngFor="let diet of diets" fxFlex="30" [disabled]="true" [checked]="checkDietsData(diet)">
                         {{diet}}
                     </mat-checkbox>
                 </div>
@@ -51,7 +51,7 @@
 
                 <h2>ALLERGIES</h2>
                 <div class="intolerances-container" fxLayout="row wrap" fxLayoutAlign="center center">
-                    <mat-checkbox mat-flat-mat-checkbox *ngFor="let intolerance of intolerances" fxFlex="30" [disabled]="true" [checked]="checkUserData(intolerance)">
+                    <mat-checkbox mat-flat-mat-checkbox *ngFor="let intolerance of intolerances" fxFlex="30" [disabled]="true" [checked]="checkIntolerancesData(intolerance)">
                         {{intolerance}}
                     </mat-checkbox>
                 </div>

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/models/user.model';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/shared/services/login.service';
-import { UserDataService } from 'src/app/shared/services/user-data.service';
+import { CookingDataService } from 'src/app/shared/services/cooking-data.service';
+import { CookingData } from 'src/app/shared/models/cooking-data.model';
 
 @Component({
   selector: 'app-intolerances-dialog',
@@ -10,6 +11,7 @@ import { UserDataService } from 'src/app/shared/services/user-data.service';
   styleUrls: ['./intolerances-dialog.component.css']
 })
 export class IntolerancesDialogComponent implements OnInit {
+  public cookingData: CookingData;
 
   diets = ["Gluten Free", "Ketogenic", "Lacto-Vegetarian", "Ovo-Vegetarian", "Paleo", "Pescetarian", "Vegan", "Vegetarian", "Whole 30"];
   intolerances = ["Dairy", "Egg", "Gluten", "Grain", "Peanut", "Seafood", "Sesame", "Shellfish", "Soy", "Sulfite", "Tree Nut", "Wheat"];
@@ -20,28 +22,64 @@ export class IntolerancesDialogComponent implements OnInit {
   url: string
 
 
-  constructor(private loginService: LoginService, private myUser: UserDataService, public router: Router) { 
-   
+  constructor(private loginService: LoginService, private cookingDataService: CookingDataService, public router: Router) { 
   }
 
+  
   ngOnInit(): void {
     this.url = this.router.url;
-    
-    this.myUser.getUserData(this.loginService.user.value.email).subscribe((temp: any) => {
-      this.user = new User(temp);
-      console.log(this.user);
-      this.userIntolerances = this.user.saved_intolerances;
-      this.userDiets = this.user.user_diets;
-    })
+
+    this.cookingDataService.cookingData.subscribe((cookingData: CookingData) => {
+      if (cookingData) {
+        this.cookingData = cookingData;
+      }
+    });
   }
 
-  checkUserData(item: string) {
-    if (this.userIntolerances.includes(item) || this.userDiets.includes(item)) {
-      return true;
+  checkIntolerancesData(item: string) {
+    if (this.cookingData.user_intolerances) {
+      if (this.cookingData.user_intolerances.includes(item)) {
+        return true;
+      }
+      else return false;
     }
-    else{
-      return false;
+    else return false;
+  }
+
+  checkDietsData(item: string) {
+    if (this.cookingData.user_diets) {
+      if (this.cookingData.user_diets.includes(item)) {
+        return true;
+      }
+      else return false;
     }
+    else return false;
+  }
+
+  addRemoveDiet(item: string) {
+    if (this.cookingData.user_diets.includes(item)) {
+      let index = this.cookingData.user_diets.indexOf(item);
+      if (index > -1) {
+        this.cookingData.user_diets.splice(index, 1);
+      }
+    } else {
+      this.cookingData.user_diets.push(item);
+    }
+  }
+
+  addRemoveIntolerances(item: string) {
+    if (this.cookingData.user_intolerances.includes(item)) {
+      let index = this.cookingData.user_intolerances.indexOf(item);
+      if (index > -1) {
+        this.cookingData.user_intolerances.splice(index, 1);
+      }
+    } else {
+      this.cookingData.user_intolerances.push(item);
+    }
+  }
+
+  saveChanges(){
+    this.cookingDataService.saveCookingData(this.cookingData);
   }
 
 }

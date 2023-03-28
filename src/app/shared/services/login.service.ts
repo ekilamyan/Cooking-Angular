@@ -4,40 +4,44 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user.model';
+import { Amplify, Auth } from 'aws-amplify';
+import { EmailValidator } from '@angular/forms';
+import { CognitoUser } from '@aws-amplify/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
   public durationInSeconds = 5;
-  public tempUser = new BehaviorSubject<User>(null);
   public user = new BehaviorSubject<User>(null);
+  private congitoUser: CognitoUser;
 
   public url = "https://lbxlgv1fnj.execute-api.us-west-1.amazonaws.com/prod"; 
 
   constructor(private router: Router, private http: HttpClient, private snackBar: MatSnackBar) {
-    if (localStorage.getItem("user")) {
-      const sessionUser = localStorage.getItem("user");
-      const user = JSON.parse(sessionUser);
-      this.user.next(user)
-    } else {
-      this.user.next(null);
-    }
-  }
-
-  login(username: string, password: string) {
-    this.checkLogin(username, password).subscribe( (res: any) => {
-      if ('status' in res && res.status === 'Login was successful!') {
-        this.snackBar.open(res.status, 'Dismiss', {
-          duration: this.durationInSeconds * 1000,
-        });
-        const user = <User>res.user;
-        this.user.next(user);
-        localStorage.setItem("user", JSON.stringify(user));
-      } else {
-        this.snackBar.open(res.status + ' Please Try Again', 'Dismiss');
+    Amplify.configure({
+      Auth: {
+        region: 'us-west-1',
+        userPoolId: 'us-west-1_gboVntmf4',
+        userPoolWebClientId: '5ue4le095a0i678ijiqgr719d4'
       }
     });
+
+    Auth.currentAuthenticatedUser().then((res: any) => {
+      const user = new User(res);
+      user.email = res.attributes.email;
+      user.first_name = res.attributes.given_name;
+      user.last_name = res.attributes.family_name;
+      this.congitoUser = res;
+      this.user.next(user);
+      // this.cookingDataService.getCookingData();
+    }, (error: any) => {
+      this.user.next(null);
+    })
+  }
+
+  login(email: string, password: string) {
+    return Auth.signIn(email, password);
   }
 
   checkLogin(username: string, password: string): Observable<any> {
@@ -46,12 +50,32 @@ export class LoginService {
   }
 
   logout() {
-    localStorage.removeItem("user");
+    Auth.signOut();
     this.user.next(null);
     this.router.navigate(['sign-in']);
   }
 
   createUser(user: User) {
-    return this.http.put(this.url + '/users', JSON.stringify(user));
+    return Auth.signUp({
+      username: user.email,
+      password: user.password,
+      attributes: {
+        email: user.email,
+        given_name: user.first_name,
+        family_name: user.last_name
+      }
+    })
+  }
+
+  verifyUser(email: string, confirmationCode: string) {
+    return Auth.confirmSignUp(email, confirmationCode);
+  }
+
+  setCognitoUser(cognitoUser: CognitoUser) {
+    this.congitoUser = cognitoUser;
+  }
+
+  getJwtToken() {
+    return this.congitoUser.getSignInUserSession().getIdToken().getJwtToken();
   }
 }

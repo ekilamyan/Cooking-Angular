@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { User } from '../shared/models/user.model';
 import { LoginService } from '../shared/services/login.service';
+import { CognitoUser } from 'amazon-cognito-identity-js';
 
 
 @Component({
@@ -46,8 +47,16 @@ export class SignInComponent implements OnInit {
   tryLogin(): void {
     const email = this.loginForm.get('email')?.value;
     const password = this.loginForm.get('password')?.value;
-    alert(email + password);
-    this.loginService.login(email, password);
+    this.loginService.login(email, password).then((res: any) => {
+      const user = new User(res);
+      user.email = res.attributes.email;
+      user.first_name = res.attributes.given_name;
+      user.last_name = res.attributes.family_name;
+      this.loginService.setCognitoUser(res);
+      this.loginService.user.next(user);
+    }, (err: any) => {
+
+    });
   }
 
   logout(): void {

@@ -73,7 +73,7 @@ export class FiltersDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
   }
 
   addRemoveFilter(i: string) {

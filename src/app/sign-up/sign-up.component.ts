@@ -4,6 +4,9 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { IntolerancesDialogComponent } from '../dialogs/intolerances-dialog/intolerances-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginService } from '../shared/services/login.service';
+import { User } from '../shared/models/user.model';
+import { ISignUpResult } from 'amazon-cognito-identity-js';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-sign-up',
@@ -20,6 +23,7 @@ export class SignUpComponent implements OnInit {
   disableBtn = false;
   hide = true;
   isEditable = true;
+  public showVerifyButton = false;
 
   public diets = ["Gluten Free", "Ketogenic", "Lacto-Vegetarian", "Ovo-Vegetarian", "Paleo", "Pescetarian", "Vegan", "Vegetarian", "Whole 30"]
   public intolerances = ["Dairy", "Egg", "Gluten", "Grain", "Peanut", "Seafood", "Sesame", "Shellfish", "Soy", "Sulfite", "Tree Nut", "Wheat"]
@@ -27,16 +31,18 @@ export class SignUpComponent implements OnInit {
   public selectedDiets = [''];
   public selectedIntolerances = [''];
 
-  constructor(private formBuilder: FormBuilder, public dialog: MatDialog) { }
+  constructor(private formBuilder: FormBuilder, public dialog: MatDialog, private loginService: LoginService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
     this.firstFormGroup = this.formBuilder.group({
-      name: [''],
-      lastname: [''],
-      email: [''],
-      password: [''],
-      confirmPassword: ['']
+      email: ['edgarkilamyan40@gmail.com'],
+      name: ['Edgar'],
+      lastname: ['Kilamyan'],
+      password: ['Kilamyan123!'],
+      confirmPassword: ['Kilamyan123!'],
+      confirmationCode: [{value: '', disabled: true}]
 
       // name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
       // lastname: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
@@ -51,8 +57,40 @@ export class SignUpComponent implements OnInit {
     });
   }
 
+  next() {
+    const user = new User(null);
+    user.email = <string>this.firstFormGroup.get('email').value;
+    user.first_name = <string>this.firstFormGroup.get('name').value;
+    user.last_name = <string>this.firstFormGroup.get('lastname').value;
+    user.password = <string>this.firstFormGroup.get('password').value;
+
+    this.loginService.createUser(user).then((res: ISignUpResult) => { 
+      this.firstFormGroup.get('confirmationCode').enable();
+      this.showVerifyButton = true;
+      this.snackBar.open('Signup successful - please enter the confirmation code below');
+      console.log(res);
+    }, (error: any) => {
+      console.log(error);
+    });
+  }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(IntolerancesDialogComponent, { disableClose: true });
+  }
+
+  verifyAndLogin(): void {
+    const email = this.firstFormGroup.get('email').value;
+    const password = this.firstFormGroup.get('password').value;
+    const confirmationCode = this.firstFormGroup.get('confirmationCode').value;
+    this.loginService.verifyUser(email, confirmationCode).then ((res: any) => {
+      this.loginService.login(email, password).then ((res: any) => {
+        // this.openDialog();
+      }, (error: any) => {
+        console.log(error);
+      });
+    }, (error: any) => {
+      console.log(error);
+    })
   }
 }
 
