@@ -4,6 +4,8 @@ import { Nutrients } from 'src/app/shared/models/nutrition/nutrients.model';
 import { Recipe } from '../shared/models/recipe.model';
 import { RecipeSearch } from 'src/app/shared/models/recipe-search.model';
 import { RecipeInstructionsService } from 'src/app/shared/services/recipe-instructions.service';
+import { CookingData } from '../shared/models/cooking-data.model';
+import { CookingDataService } from '../shared/services/cooking-data.service';
 
 @Component({
   selector: 'app-recipe-instructions-page',
@@ -17,45 +19,101 @@ export class RecipeInstructionsPageComponent implements OnInit {
 
   public checked = true;
   public ingredientCount = 0;
+  public cookingData: CookingData;
+  public saved = false;
+  public count = 0;
 
+  public allIngredeints: string[] = [];
+  public overlappingIngredients: string[] = [];
   public nutritionList: Nutrients[] = [];
+  public originalIngredientList: string[] = [];
   public ingredientList: string[] = [];
   public instructionsList: string[] = [];
 
-  constructor(private route: ActivatedRoute, private test: RecipeInstructionsService) {
+  constructor(private route: ActivatedRoute, private test: RecipeInstructionsService, private cookingDataService: CookingDataService) {
 
   }
 
   ngOnInit(): void {
+    console.log(this.count);
     this.route.queryParams.subscribe((param: any) => {
-      this.test.getRecipeWithId(param.id).subscribe((temp: Recipe) => {  // 
-        this.recipe = temp;
-
-        //console.log(this.recipe);
-
-        this.recipe.image = this.recipe.image.replace('556x370', '636x393');
-
-        for (let i = 0; i < 9; i++) {
-          this.recipe.nutrition.nutrients[i].amount = (Math.round(this.recipe.nutrition.nutrients[i].amount * 10) / 10);
-          this.nutritionList[i] = this.recipe.nutrition.nutrients[i];
+      this.test.getRecipeWithId(param.id).subscribe((temp: Recipe) => { 
+        if(temp){
+          this.recipe = temp;
+          // console.log(this.recipe);
+          this.recipe.id = String(this.recipe.id);
+  
+          this.recipe.image = this.recipe.image.replace('556x370', '636x393');
+  
+          for (let i = 0; i < 9; i++) {
+            this.recipe.nutrition.nutrients[i].amount = (Math.round(this.recipe.nutrition.nutrients[i].amount * 10) / 10);
+            this.nutritionList[i] = this.recipe.nutrition.nutrients[i];
+          }
+  
+          for (let i = 0; i < this.recipe.extendedIngredients.length; i++) {
+            this.originalIngredientList[i] = this.recipe.extendedIngredients[i].original;
+            this.ingredientList.push(this.recipe.extendedIngredients[i].nameClean);
+          }
+  
+          for (let i = 0; i < this.recipe.analyzedInstructions[0].steps.length; i++) {
+            this.instructionsList[i] = this.recipe.analyzedInstructions[0].steps[i].step;
+          }
+  
+          this.ingredientCount = this.ingredientList.length;
+  
+          this.cookingDataService.cookingData.subscribe((cookingData: CookingData) => {
+            if (cookingData) {
+              this.cookingData = cookingData;
+              this.saved = this.checkIfSaved();
+              // console.log(this.count);
+              // console.log(this.overlappingIngredients);
+            }
+          })
+          console.log(this.ingredientList);
+          this.compareIngredients();
         }
-
-        for (let i = 0; i < this.recipe.extendedIngredients.length; i++) {
-          this.ingredientList[i] = this.recipe.extendedIngredients[i].original;
-        }
-
-        for (let i = 0; i < this.recipe.analyzedInstructions[0].steps.length; i++) {
-          this.instructionsList[i] = this.recipe.analyzedInstructions[0].steps[i].step;
-        }
-
-        this.ingredientCount = this.ingredientList.length;
-
       });
     })
   }
 
+
   printPage() {
     window.print();
+  }
+
+  compareIngredients() {
+    for (let i = 0; i < Object.keys(this.cookingData.user_ingredients).length; i++) {
+      for (let j = 0; j < Object.entries(this.cookingData.user_ingredients)[i][1].length; j++) {
+        this.allIngredeints.push(Object.entries(this.cookingData.user_ingredients)[i][1][j]);
+      }
+    }
+    
+    for(let i = 0; i < this.ingredientList.length; i++){
+      if(this.allIngredeints.includes(this.ingredientList[i])){
+        this.count++;
+        this.overlappingIngredients.push(this.ingredientList[i]);
+      }
+    }
+  }
+
+  checkIfSaved() {
+    if (this.cookingData.saved_recipes.includes(this.recipe.id)) {
+      return true;
+    }
+    else return false;
+  }
+
+  addRemoveRecipe() {
+    if (this.cookingData.saved_recipes.includes(this.recipe.id)) {
+      let index = this.cookingData.saved_recipes.indexOf(this.recipe.id);
+      if (index > -1) {
+        this.cookingData.saved_recipes.splice(index, 1);
+      }
+    } else {
+      this.cookingData.saved_recipes.push(this.recipe.id);
+    }
+
+    this.cookingDataService.saveCookingData(this.cookingData);
   }
 
 }

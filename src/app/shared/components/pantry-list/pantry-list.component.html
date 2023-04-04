@@ -1,6 +1,6 @@
-<mat-card class="card-container" (click)="openDialog()" [style.background-color]="color"> <!-- (click)="openDialog()" -->
+<mat-card class="card-container" (click)="openDialog()" [style.background-color]="this.color"> <!-- (click)="openDialog()" -->
     <mat-card-title class="card-title">
-        <h1>{{category}}</h1>
+        <h1>{{this.title}}</h1>
     </mat-card-title>
     <div class="card-body">
         <ul>

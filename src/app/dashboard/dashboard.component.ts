@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Recipe } from '../shared/models/recipe.model';
 import { SearchService } from '../shared/services/search.service';
 import { SuggestionsService } from '../shared/services/suggestions.service';
+import { CookingData } from '../shared/models/cooking-data.model';
+import { CookingDataService } from '../shared/services/cooking-data.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,14 +17,22 @@ export class DashboardComponent implements OnInit {
   public categoryTitlesForSearching = ['breakfast', 'gluten free', 'vegan', 'pizza', 'smoothie', 'dessert'];
 
   public recipes: Recipe[] = [];
+  public cookingData: CookingData;
 
   constructor(private suggestions: SuggestionsService, 
     private searchService: SearchService,
+    private cookingDataService: CookingDataService, 
     private route: Router,
     public newRoute: Router,) {
   }
 
   ngOnInit(): void {
+    this.cookingDataService.cookingData.subscribe((cookingData: CookingData) => {
+      if (cookingData) {
+        this.cookingData = cookingData;
+      }
+    });
+
     this.suggestions.getRandomIds(1).subscribe((responce: any) => {
       for (let i = 0; i < responce.recipes.length; i++) {
         this.recipes[i] = responce.recipes[i];
@@ -47,21 +57,3 @@ export class DashboardComponent implements OnInit {
   }
 
 }
-
-/*
-this.suggestionsService.getIds(this.id, 3).subscribe((temp: any[]) => {
-  this.ids = this.id + ',';
-  for (let i = 0; i < temp.length; i++) {
-    this.ids = this.ids + temp[i].id;
-    if (i < temp.length - 1) {
-      this.ids = this.ids + ',';
-    }
-  }
-  this.suggestionsService.getSuggestionsBulk(this.ids).subscribe((esh: any[]) => {
-    for (let i = 0; i < esh.length; i++) {
-      this.recipes[i] = esh[i];
-    }
-    this.searchedWord = this.recipes[0].title;
-  });
-});  
-*/

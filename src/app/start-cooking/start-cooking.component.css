@@ -7,6 +7,11 @@
     margin-top: 40px;
 }
 
+h2 { 
+    font-size: 30px;
+    font-family: "Playfair", serif; 
+}
+
 hr {
     border: 0;
     clear: both;
@@ -65,8 +70,6 @@ hr {
     background-color: rgb(255, 255, 255) !important;
 }
 
-
-
 .mat-option {
     font-family: "Inter", sans-serif;
 }
@@ -75,7 +78,7 @@ hr {
 /*  filter buttons */
 .mat-stroked-button {
     width: 100%;
-    padding: 13px;
+    padding: 12px;
     border-radius: 10px;
     font-size: 18px;
     border-style: solid;

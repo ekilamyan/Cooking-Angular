@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CookingDataService } from '../shared/services/cooking-data.service';
 import { LoginService } from '../shared/services/login.service';
 import { CookingData } from '../shared/models/cooking-data.model';
+import { toBase64String } from '@angular/compiler/src/output/source_map';
 
 @Component({
   selector: 'app-my-pantry',
@@ -15,6 +16,8 @@ import { CookingData } from '../shared/models/cooking-data.model';
 })
 
 export class MyPantryComponent implements OnInit {
+  public array = ['test', 'god', 'apple'];
+
   public ingredients: PantryIngredient[] = [];
   public hasRanSearch = false;
   public cookingData: CookingData;
@@ -23,7 +26,12 @@ export class MyPantryComponent implements OnInit {
   public indexTwo: any[] = [];
   public indexThree: any[] = [];
 
-  public durationInSeconds = 2;
+  public ingredientArrays: any[];
+
+  public test: any[];
+
+
+  public durationInSeconds = 3;
 
   public count = 1;
 
@@ -41,26 +49,34 @@ export class MyPantryComponent implements OnInit {
   ngOnInit(): void {
     this.cookingDataService.cookingData.subscribe((cookingData: CookingData) => {
       if (cookingData) {
+        
         this.cookingData = cookingData;
 
-        for (let i = 0; i < Object.keys(this.cookingData.user_ingredients).length; i++) {
+        this.indexOne = [];
+        this.indexTwo = [];
+        this.indexThree = [];
 
-          if (this.count == 1 && Object.entries(this.cookingData.user_ingredients)[i]) {
-            this.indexOne.push(Object.entries(this.cookingData.user_ingredients)[i]);
+        this.count = 1;
+
+        console.log(Object.entries(this.cookingData.user_ingredients).sort());
+        console.log(Object.values(this.cookingData.user_ingredients).sort());
+
+        this.ingredientArrays = Object.entries(this.cookingData.user_ingredients).sort();
+
+        for (let i = 0; i < this.ingredientArrays.length; i++) {
+          if (this.count == 1 && this.ingredientArrays[i]) {
+            this.indexOne.push(this.ingredientArrays[i]);
             this.count++;
           }
-          else if (this.count == 2 && Object.entries(this.cookingData.user_ingredients)[i]) {
-            this.indexTwo.push(Object.entries(this.cookingData.user_ingredients)[i]);
+          else if (this.count == 2 && this.ingredientArrays[i]) {
+            this.indexTwo.push(this.ingredientArrays[i]);
             this.count++;
           }
-          else if (this.count == 3 && Object.entries(this.cookingData.user_ingredients)[i]) {
-            this.indexThree.push(Object.entries(this.cookingData.user_ingredients)[i]);
+          else if (this.count == 3 && this.ingredientArrays[i]) {
+            this.indexThree.push(this.ingredientArrays[i]);
             this.count = 1;
           }
         }
-        console.log(this.indexOne);
-        console.log(this.indexTwo);
-        console.log(this.indexThree);
       }
     });
 
@@ -82,7 +98,6 @@ export class MyPantryComponent implements OnInit {
           this.hasRanSearch = true;
           for (let i = 0; i < temp.length; i++) {
             this.ingredients.push(new PantryIngredient(temp[i]));
-            console.log(temp[i]);
           }
         });
       })
@@ -231,85 +246,20 @@ export class MyPantryComponent implements OnInit {
     }
 
     this.cookingDataService.saveCookingData(this.cookingData);
-  }
 
-  getColor(category: string) {
-    if (category == 'seafood') {
-      return '#bcdbff';
-    } else if (category == 'spicesSeasonings') {
-      return '#f8e8fc';
-    } else if (category == 'baking') {
-      return '#ffe3e3';
-    } else if (category == 'cannedJarred') {
-      return '#e4fcc7';
-    } else if (category == 'dairy') {
-      return '#f5fffe';
-    } else if (category == 'meats') {
-      return '#ff9c91';
-    } else if (category == 'produce') {
-      return '#cfffcf';
-    } else if (category == 'oilsDressings') {
-      return '#fcfcc7';
-    } else if (category == 'jarredGoods') {
-      return '#ffedd4';
-    } else if (category == 'misc') {
-      return 'ebebeb';
-    } else if (category == 'refrigeratedFrozen') {
-      return '#91c3ff';
-    } else if (category == 'condiments') {
-      return '#fce2c7';
-    } else if (category == 'pastaRice') {
-      return '#fcea97';
-    } else if (category == 'snacks') {
-      return '#fc979d';
-    } else return 'ebebeb';
-  }
+    // this.snackBar.open('Ingredient already in pantry', 'Dismiss', {
+    //   duration: this.durationInSeconds * 1000,
+    // });
 
-  getIngredients(category: string) {
-    if (category == 'seafood') {
-      return this.cookingData.user_ingredients.seafood;
-    } else if (category == 'spicesSeasonings') {
-      return this.cookingData.user_ingredients.spicesSeasonings;
-    } else if (category == 'baking') {
-      return this.cookingData.user_ingredients.baking;
-    } else if (category == 'cannedJarred') {
-      return this.cookingData.user_ingredients.cannedJarred;
-    } else if (category == 'dairy') {
-      return this.cookingData.user_ingredients.dairy;
-    } else if (category == 'meats') {
-      return this.cookingData.user_ingredients.meats;
-    } else if (category == 'produce') {
-      return this.cookingData.user_ingredients.produce;
-    } else if (category == 'oilsDressings') {
-      return this.cookingData.user_ingredients.oilsDressings;
-    } else if (category == 'jarredGoods') {
-      return this.cookingData.user_ingredients.jarredGoods;
-    } else if (category == 'misc') {
-      return this.cookingData.user_ingredients.misc;
-    } else if (category == 'refrigeratedFrozen') {
-      return this.cookingData.user_ingredients.refrigeratedFrozen;
-    } else if (category == 'condiments') {
-      return this.cookingData.user_ingredients.condiments;
-    } else if (category == 'pastaRice') {
-      return this.cookingData.user_ingredients.pastaRice;
-    } else if (category == 'snacks') {
-      return this.cookingData.user_ingredients.snacks;
-    } else return null;
+    // this.snackBar.open(this.capitalizeFirstLetter(ingredient.name) + ' added', 'Dismiss', {
+    //   duration: (this.durationInSeconds + 3) * 1000,
+    // });
   }
 
   capitalizeFirstLetter(word: string) {
     return word.charAt(0).toUpperCase() + word.slice(1);
   }
-
-  // refreshIngredients() {
-  //   this.pantry.sort();
-  // }
 }
 
 
-// indexOne, indexTwo, IndexThree: any;
-
-// for (let i = 0; i < this.total_cards; i++) {
-//   indexOne.append()
-// }
 

@@ -1,4 +1,4 @@
-<!-- <app-navbar class="navbar"></app-navbar>remove later -->
+<app-navbar class="navbar"></app-navbar>
 
 <body>
     <div class="recipe-title" fxLayout.gt-md="row" fxLayoutAlign.gt-md="space-between center">
@@ -15,14 +15,13 @@
                     </path>
                 </svg>
             </button>
-            <button mat-icon-button>
-                <svg data-name="feather-icon/share copy" xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                    viewBox="0 0 32 32">
-                    <path
-                        d="M20,26.669a1.318,1.318,0,0,1-.77-.251l-8.558-6.113L2.108,26.418a1.319,1.319,0,0,1-.77.251A1.362,1.362,0,0,1,.41,26.3,1.314,1.314,0,0,1,0,25.333V4A4,4,0,0,1,4,0H17.333a4,4,0,0,1,4,4V25.333A1.34,1.34,0,0,1,20,26.669Zm-9.329-9.336a1.329,1.329,0,0,1,.776.248l7.225,5.161V4a1.335,1.335,0,0,0-1.334-1.333H4A1.335,1.335,0,0,0,2.666,4V22.742l7.225-5.161A1.324,1.324,0,0,1,10.666,17.333Z"
-                        transform="translate(5.333 2.667)">
-                    </path>
-                </svg>
+
+            <button mat-icon-button *ngIf="!saved" (click)="addRemoveRecipe()">
+                <mat-icon>bookmark_border</mat-icon>
+            </button>
+
+            <button class="saved" mat-icon-button *ngIf="saved" (click)="addRemoveRecipe()">
+                <mat-icon>bookmark</mat-icon>
             </button>
         </div>
     </div>
@@ -46,24 +45,38 @@
     </div>
 
     <div class="quick-facts" fxLayout="row" fxLayoutAlign="start center">
-        <div class="item">
+        <div class="item" fxLayout="column" fxLayoutAlign="space-around center">
             <h5>PREP TIME</h5>
             <h4>{{recipe.readyInMinutes}} MIN</h4>
         </div>
 
         <hr>
 
-        <div class="item">
+        <div class="item" fxLayout="column" fxLayoutAlign="space-around center">
+            <h5>SERVINGS</h5>
+            <h4>{{recipe.servings}} PEOPLE</h4>
+        </div>
+
+        <hr>
+
+        <div class="item" fxLayout="column" fxLayoutAlign="space-around center">
             <h5>TOTAL INGREDIENTS</h5>
             <h4>{{ingredientCount}} INGREDIENTS</h4>
         </div>
 
         <hr>
 
-        <div class="item">
-            <h5>SERVINGS</h5>
-            <h4>{{recipe.servings}} PEOPLE</h4>
+        <!-- <div class="item" fxLayout="column" fxLayoutAlign="space-around center">
+            <h5>IN MY PANTRY</h5>
+            <h4>{{count}} INGREDIENTS</h4>
         </div>
+
+        <hr>
+
+        <div class="item" fxLayout="column" fxLayoutAlign="space-around center">
+            <h5>NOT IN MY PANTRY</h5>
+            <h4>{{ingredientCount - count}} INGREDIENTS</h4>
+        </div> -->
     </div>
 
     <!-- <button (click)="myFlag = !myFlag">Toggle</button>
@@ -71,11 +84,24 @@
     <div *ngIf="!myFlag" style="color:red">Hey I'm false</div> -->
 
     <div class="recipe-instruction-container" id="print" fxLayout.gt-md="row">
-
         <div class="ingredients-container" fxFlex="50">
             <h2>Ingredients</h2>
             <ul class="ingredients">
-                <li *ngFor="let ingredient of ingredientList; let i = index" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20" >
+                <li *ngFor="let ingredient of originalIngredientList; let i = index" fxLayout="row" fxLayoutAlign="start start"
+                    fxLayoutGap="20">
+                    <!-- <button class="bullet-point">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+                            <path
+                                d="M11,22A11,11,0,0,1,3.222,3.222,11,11,0,1,1,18.778,18.778,10.928,10.928,0,0,1,11,22ZM11,2a9,9,0,1,0,9,9A9.01,9.01,0,0,0,11,2Z"
+                                transform="translate(0 0)"></path>
+                        </svg>
+                    </button>
+                    <button>
+                        <div class="ingredient">
+                            {{ingredient}}
+                        </div>
+                    </button> -->
+
                     <button class="bullet-point">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
                             <path
@@ -83,12 +109,12 @@
                                 transform="translate(0 0)"></path>
                         </svg>
                     </button>
-                    <!-- <mat-checkbox></mat-checkbox> -->
                     <button>
                         <div class="ingredient">
                             {{ingredient}}
                         </div>
                     </button>
+
                 </li>
             </ul>
         </div>

@@ -23,6 +23,8 @@ export class SettingsComponent implements OnInit {
 
   diets = ["Gluten Free", "Ketogenic", "Lacto-Vegetarian", "Ovo-Vegetarian", "Paleo", "Pescetarian", "Vegan", "Vegetarian", "Whole 30"];
   intolerances = ["Dairy", "Egg", "Gluten", "Grain", "Peanut", "Seafood", "Sesame", "Shellfish", "Soy", "Sulfite", "Tree Nut", "Wheat"];
+  units = ["Imperial", "Metric"];
+  public userUnits = ''; 
 
   constructor(private loginService: LoginService, private cookingDataService: CookingDataService, public dialog: MatDialog) {
 
@@ -68,5 +70,9 @@ export class SettingsComponent implements OnInit {
     else return false;
   }
 
+  setUnits(unit: string) {
+    this.cookingData.user_units = unit;
+    this.cookingDataService.saveCookingData(this.cookingData);
+  }
 
 }

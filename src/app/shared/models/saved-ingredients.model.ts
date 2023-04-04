@@ -1,4 +1,7 @@
 export class SavedIngredients {
+    sort(arg0: (a: any, b: any) => any) {
+      throw new Error('Method not implemented.');
+    }
     baking: string[];
     cannedJarred: string[];
     condiments: string[];

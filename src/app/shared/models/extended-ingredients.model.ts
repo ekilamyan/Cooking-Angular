@@ -1,7 +1,7 @@
 import { Measurements } from "./measurements/measurements.model";
 
 export class ExtendedIngredients {
-    id: string;
+    id: String;
     aisle: string;
     image: string;
     consistency: string;

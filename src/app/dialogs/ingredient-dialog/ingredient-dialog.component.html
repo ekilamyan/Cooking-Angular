@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{data.category}}</h1>
+<h1 mat-dialog-title>{{data.title}}</h1>
 <mat-chip-list #chipList aria-label="ingredients" fxLayout="row wrap">
     <mat-chip *ngFor="let item of data.stuff; let i = index" [style.background-color]="data.color">
         {{capitalizeFirstLetter(this.data.stuff[i])}}

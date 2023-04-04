@@ -41,6 +41,17 @@ hr {
     font-size: 24px;
 }
 
+/* units */
+
+.mat-radio-button {
+    color: black;
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-right: 10px;
+}
+
 /* intolerances container and items */
 .intolerances-section h1 {
     font-family: "Playfair", serif;
@@ -63,7 +74,7 @@ hr {
 
 .intolerances h2 {
     font-size: 15px;
-    
+
     color: rgb(172, 172, 172);
     font-family: "Inter", sans-serif;
     margin: 0px;
@@ -101,4 +112,3 @@ hr {
     padding-left: 30px;
     padding-right: 30px;
 }
-

@@ -25,98 +25,27 @@
     </div>
 
     <div fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap="1">
-        <div class="user-pantry" fxLayout="column" fxLayoutAlign="space-around center" *ngIf="this.cookingData.user_ingredients">
+        <div class="user-pantry" fxLayout="column" fxLayoutAlign="space-around center" *ngIf="cookingData && cookingData.user_ingredients">
             <div class="index-one" *ngFor="let item of this.indexOne" >
-                <app-pantry-list *ngIf="item" category={{item[0]}} [ingredients]="getIngredients(item[0])" color="getColor(item[0])"></app-pantry-list>
+                <app-pantry-list *ngIf="item" category={{item[0]}} [ingredients]="item[1]"></app-pantry-list>
             </div>
         </div>
     
-        <div class="user-pantry" fxLayout="column" fxLayoutAlign="space-around center" *ngIf="this.cookingData.user_ingredients">
+        <div class="user-pantry" fxLayout="column" fxLayoutAlign="space-around center" *ngIf="cookingData && cookingData.user_ingredients">
             <div class="index-one" *ngFor="let item of this.indexTwo" >
-                <app-pantry-list *ngIf="item" category={{item[0]}} [ingredients]="getIngredients(item[0])" color="getColor(item[0])"></app-pantry-list>
+                <app-pantry-list *ngIf="item" category={{item[0]}} [ingredients]="item[1]"></app-pantry-list>
             </div>
         </div>
     
-        <div class="user-pantry" fxLayout="column" fxLayoutAlign="space-around center" *ngIf="this.cookingData.user_ingredients">
+        <div class="user-pantry" fxLayout="column" fxLayoutAlign="space-around center" *ngIf="cookingData && cookingData.user_ingredients">
             <div class="index-one" *ngFor="let item of this.indexThree" >
-                <app-pantry-list *ngIf="item" category={{item[0]}} [ingredients]="getIngredients(item[0])" color="getColor(item[0])"></app-pantry-list>
+                <app-pantry-list *ngIf="item" category={{item[0]}} [ingredients]="item[1]"></app-pantry-list>
             </div>
         </div>
     </div>
-
-
-    <!-- <div class="user-pantry" fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap="1" *ngIf="cookingData.user_ingredients">
-        <app-pantry-list *ngIf="cookingData.user_ingredients.baking.length" category="Baking" [ingredients]="cookingData.user_ingredients.baking" color="#ffe3e3"></app-pantry-list>
-        <app-pantry-list *ngIf="cookingData.user_ingredients.cannedJarred.length" category="Canned & Jarred" [ingredients]="cookingData.user_ingredients.cannedJarred" color="#e4fcc7"></app-pantry-list>
-        <app-pantry-list *ngIf="cookingData.user_ingredients.condiments.length"category="Condiments" [ingredients]="cookingData.user_ingredients.condiments" color="#fce2c7"></app-pantry-list>
-        <app-pantry-list *ngIf="cookingData.user_ingredients.dairy.length" category="Dairy" [ingredients]="cookingData.user_ingredients.dairy" color="#f5fffe"></app-pantry-list>
-        <app-pantry-list *ngIf="cookingData.user_ingredients.meats.length" category="Meats" [ingredients]="cookingData.user_ingredients.meats" color="#ff9c91"></app-pantry-list>
-        <app-pantry-list *ngIf="cookingData.user_ingredients.oilsDressings.length" category="Oils & Dressings" [ingredients]="cookingData.user_ingredients.oilsDressings" color="#fcfcc7"></app-pantry-list>
-        <app-pantry-list *ngIf="cookingData.user_ingredients.pastaRice.length" category="Pastas & Rice" [ingredients]="cookingData.user_ingredients.pastaRice" color="#fcea97"></app-pantry-list>
-        <app-pantry-list *ngIf="cookingData.user_ingredients.produce.length" category="Produce" [ingredients]="cookingData.user_ingredients.produce" color="#cfffcf"></app-pantry-list>
-        <app-pantry-list *ngIf="cookingData.user_ingredients.refrigeratedFrozen.length" category="Frozen & Refrigerated" [ingredients]="cookingData.user_ingredients.refrigeratedFrozen" color="#91c3ff"></app-pantry-list>
-        <app-pantry-list *ngIf="cookingData.user_ingredients.seafood.length" category="Seafood" [ingredients]="cookingData.user_ingredients.seafood" color="#bcdbff"></app-pantry-list>
-        <app-pantry-list *ngIf="cookingData.user_ingredients.snacks.length" category="Snacks" [ingredients]="cookingData.user_ingredients.snacks" color="#fc979d"></app-pantry-list>
-        <app-pantry-list *ngIf="cookingData.user_ingredients.spicesSeasonings.length" category="Spices & Seasonings" [ingredients]="cookingData.user_ingredients.spicesSeasonings" color="#f8e8fc"></app-pantry-list>
-        <app-pantry-list *ngIf="cookingData.user_ingredients.jarredGoods.length" category="Jarred Goods" [ingredients]="cookingData.user_ingredients.jarredGoods" color="#ffedd4"></app-pantry-list>
-        <app-pantry-list *ngIf="cookingData.user_ingredients.misc.length" category="Miscellaneous" [ingredients]="cookingData.user_ingredients.misc" color="ebebeb"></app-pantry-list>
-    </div> -->
-
-
-
-    <!-- <div class="pantry-content">
-        <mat-card class="card-container" (click)="openDialog()" *ngIf="userIngredients.baking">
-            <mat-card-title class="card-title">
-                <h1>Baking</h1>
-            </mat-card-title>
-            <div class="card-body">
-                <ul>
-                    <li *ngFor="let item of userIngredients.baking; let i = index">
-                        <h3>{{item}}</h3>
-                        <hr>
-                    </li>
-                </ul>
-            </div>
-        </mat-card>
-    </div>
-
-    <div class="pantry-content">
-        <mat-card class="card-container" (click)="openDialog()" *ngIf="userIngredients.cannedJarred">
-            <mat-card-title class="card-title">
-                <h1>Canned & Jarred</h1>
-            </mat-card-title>
-            <div class="card-body">
-                <ul>
-                    <li *ngFor="let item of userIngredients.cannedJarred; let i = index">
-                        <h3>{{item}}</h3>
-                        <hr>
-                    </li>
-                </ul>
-            </div>
-        </mat-card>
-    </div> -->
-
-
-    <!-- <div class="pantry-content">
-        <mat-card class="card-container" (click)="openDialog()">
-            <mat-card-title class="card-title">
-                <h1>Seafood</h1>
-            </mat-card-title>
-            <div class="card-body">
-                <ul>
-                    <li *ngFor="let item of pantry; let i = index">
-                        <h3>{{item}}</h3>
-                        <hr>
-                    </li>
-                </ul>
-            </div>
-        </mat-card>
-    </div> -->
-
-
-
 
     <hr>
+
     <div class="tip" fxLayout="column" fxLayoutAlign="center center">
         <h2>Ready to start cooking?</h2>
         <p>click here to see what what you can make right now</p>

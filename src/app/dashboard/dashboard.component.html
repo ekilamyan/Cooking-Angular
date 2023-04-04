@@ -8,11 +8,7 @@
                     {{recipe.title}}
                     <p> Try your hand at {{recipe.title}} a very delicious and delightfull meal.</p>
                     <button mat-icon-button class="example-icon" (click)="navToRecipeIntructions(recipe.id)">
-                        <svg width="16px" height="16px" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M7.293,15.707a1,1,0,0,1,0-1.414L12.586,9H1A1,1,0,1,1,1,7H12.586L7.293,1.707A1,1,0,0,1,8.708.293l7,7a1,1,0,0,1,0,1.423l-7,7a1,1,0,0,1-1.415,0Z">
-                            </path>
-                        </svg>
+                        <mat-icon>arrow_forward</mat-icon>
                     </button>
                 </div>
             </div>
@@ -37,5 +33,15 @@
         <h1>Try Something New</h1>
     </div>
     <app-suggestions></app-suggestions>
+
+    <div class="card-container-title">
+        <h1>Things To Cook Right Now</h1>
+    </div>
+    <app-suggestions type="pantry"></app-suggestions>
+
+    <div *ngIf=" cookingData && (cookingData.saved_recipes.length > 3)" class="card-container-title">
+        <h1>My Saved Recipes</h1>
+    </div>
+    <app-suggestions *ngIf=" cookingData && (cookingData.saved_recipes.length > 3)" type="saved"></app-suggestions>
 
 </div>

@@ -26,6 +26,15 @@
                 <h2>EMAIL</h2>
                 <h1>{{email}}</h1>
             </div>
+
+            <div class="profile-item" fxLayout="column" fxLayoutAlign="center start">
+                <h2>MEASUREMENT SYSTEM</h2>
+                <mat-radio-group>
+                    <mat-radio-button class="units" *ngFor="let unit of units" [value]="unit">
+                        {{unit}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
         </div>
 
         <div class="intolerances-section" fxLayout="column" fxLayoutAlign="center start">
@@ -42,7 +51,8 @@
 
                 <h2>DIETS</h2>
                 <div class="diets-container" fxLayout="row wrap" fxLayoutAlign="center center">
-                    <mat-checkbox mat-flat-mat-checkbox *ngFor="let diet of diets" fxFlex="30" [disabled]="true" [checked]="checkDietsData(diet)">
+                    <mat-checkbox mat-flat-mat-checkbox *ngFor="let diet of diets" fxFlex="30" [disabled]="true"
+                        [checked]="checkDietsData(diet)">
                         {{diet}}
                     </mat-checkbox>
                 </div>
@@ -51,7 +61,8 @@
 
                 <h2>ALLERGIES</h2>
                 <div class="intolerances-container" fxLayout="row wrap" fxLayoutAlign="center center">
-                    <mat-checkbox mat-flat-mat-checkbox *ngFor="let intolerance of intolerances" fxFlex="30" [disabled]="true" [checked]="checkIntolerancesData(intolerance)">
+                    <mat-checkbox mat-flat-mat-checkbox *ngFor="let intolerance of intolerances" fxFlex="30"
+                        [disabled]="true" [checked]="checkIntolerancesData(intolerance)">
                         {{intolerance}}
                     </mat-checkbox>
                 </div>
