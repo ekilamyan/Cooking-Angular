@@ -16,7 +16,6 @@ import { toBase64String } from '@angular/compiler/src/output/source_map';
 })
 
 export class MyPantryComponent implements OnInit {
-  public array = ['test', 'god', 'apple'];
 
   public ingredients: PantryIngredient[] = [];
   public hasRanSearch = false;
@@ -28,9 +27,9 @@ export class MyPantryComponent implements OnInit {
 
   public ingredientArrays: any[];
 
-  public test: any[];
-
-
+  public added: boolean;
+  public blank = false;
+  public ingredientcount = 0;
   public durationInSeconds = 3;
 
   public count = 1;
@@ -49,8 +48,10 @@ export class MyPantryComponent implements OnInit {
   ngOnInit(): void {
     this.cookingDataService.cookingData.subscribe((cookingData: CookingData) => {
       if (cookingData) {
-        
         this.cookingData = cookingData;
+        this.ingredientcount = 0;
+
+        this.sortIngredients();
 
         this.indexOne = [];
         this.indexTwo = [];
@@ -59,23 +60,39 @@ export class MyPantryComponent implements OnInit {
         this.count = 1;
 
         console.log(Object.entries(this.cookingData.user_ingredients).sort());
-        console.log(Object.values(this.cookingData.user_ingredients).sort());
 
         this.ingredientArrays = Object.entries(this.cookingData.user_ingredients).sort();
 
         for (let i = 0; i < this.ingredientArrays.length; i++) {
           if (this.count == 1 && this.ingredientArrays[i]) {
+            if(this.ingredientArrays[i][1].length > 0) {
+              this.ingredientcount++;
+            }
             this.indexOne.push(this.ingredientArrays[i]);
             this.count++;
           }
           else if (this.count == 2 && this.ingredientArrays[i]) {
+            if(this.ingredientArrays[i][1].length > 0) {
+              this.ingredientcount++;
+            }
             this.indexTwo.push(this.ingredientArrays[i]);
             this.count++;
           }
           else if (this.count == 3 && this.ingredientArrays[i]) {
+            if(this.ingredientArrays[i][1].length > 0) {
+              this.ingredientcount++;
+            }
             this.indexThree.push(this.ingredientArrays[i]);
             this.count = 1;
           }
+        }
+
+        console.log(this.ingredientcount);
+
+        if(this.ingredientcount > 0) {
+          this.blank = true;
+        } else {
+          this.blank = false
         }
       }
     });
@@ -106,160 +123,137 @@ export class MyPantryComponent implements OnInit {
   addIngredient(ingredient: PantryIngredient) {
     if (ingredient.aisle == 'Baking') {
       if (this.cookingData.user_ingredients.baking.includes(ingredient.name)) {
-        this.snackBar.open('Ingredient already in pantry', 'Dismiss', {
-          duration: this.durationInSeconds * 1000,
-        });
+        this.added = false;
       } else {
         this.cookingData.user_ingredients.baking.push(ingredient.name);
-        this.cookingData.user_ingredients.baking.sort();
+        this.added = true;
       }
-    }
-    else if (ingredient.aisle == 'Canned and Jarred') {
+    } else if (ingredient.aisle == 'Canned and Jarred') {
       if (this.cookingData.user_ingredients.cannedJarred.includes(ingredient.name)) {
-        this.snackBar.open('Ingredient already in pantry', 'Dismiss', {
-          duration: this.durationInSeconds * 1000,
-        });
+        this.added = false;
       } else {
         this.cookingData.user_ingredients.cannedJarred.push(ingredient.name);
-        this.cookingData.user_ingredients.cannedJarred.sort();
+        this.added = true;
       }
-    }
-    else if (ingredient.aisle == 'Condiments') {
+    } else if (ingredient.aisle == 'Condiments') {
       if (this.cookingData.user_ingredients.condiments.includes(ingredient.name)) {
-        this.snackBar.open('Ingredient already in pantry', 'Dismiss', {
-          duration: this.durationInSeconds * 1000,
-        });
+        this.added = false;
       } else {
         this.cookingData.user_ingredients.condiments.push(ingredient.name);
-        this.cookingData.user_ingredients.condiments.sort();
+        this.added = true;
       }
-    }
-    else if (ingredient.aisle == 'Dairy' || ingredient.aisle == 'Cheese') {
+    } else if (ingredient.aisle == 'Dairy' || ingredient.aisle == 'Cheese') {
       if (this.cookingData.user_ingredients.dairy.includes(ingredient.name)) {
-        this.snackBar.open('Ingredient already in pantry', 'Dismiss', {
-          duration: this.durationInSeconds * 1000,
-        });
+        this.added = false;
       } else {
         this.cookingData.user_ingredients.dairy.push(ingredient.name);
-        this.cookingData.user_ingredients.dairy.sort();
+        this.added = true;
       }
-    }
-    else if (ingredient.aisle == 'Meat') {
+    } else if (ingredient.aisle == 'Meat') {
       if (this.cookingData.user_ingredients.meats.includes(ingredient.name)) {
-        this.snackBar.open('Ingredient already in pantry', 'Dismiss', {
-          duration: this.durationInSeconds * 1000,
-        });
+        this.added = false;
       } else {
         this.cookingData.user_ingredients.meats.push(ingredient.name);
-        this.cookingData.user_ingredients.meats.sort();
+        this.added = true;
       }
-    }
-    else if (ingredient.aisle == 'Oil, Vinegar, Salad Dressing') {
+    } else if (ingredient.aisle == 'Oil, Vinegar, Salad Dressing') {
       if (this.cookingData.user_ingredients.oilsDressings.includes(ingredient.name)) {
-        this.snackBar.open('Ingredient already in pantry', 'Dismiss', {
-          duration: this.durationInSeconds * 1000,
-        });
+        this.added = false;
       } else {
         this.cookingData.user_ingredients.oilsDressings.push(ingredient.name);
-        this.cookingData.user_ingredients.oilsDressings.sort();
+        this.added = true;
       }
-    }
-    else if (ingredient.aisle == 'Pasta and Rice') {
+    } else if (ingredient.aisle == 'Pasta and Rice') {
       if (this.cookingData.user_ingredients.pastaRice.includes(ingredient.name)) {
-        this.snackBar.open('Ingredient already in pantry', 'Dismiss', {
-          duration: this.durationInSeconds * 1000,
-        });
+        this.added = false;
       } else {
         this.cookingData.user_ingredients.pastaRice.push(ingredient.name);
-        this.cookingData.user_ingredients.pastaRice.sort();
+        this.added = true;
       }
-    }
-    else if (ingredient.aisle == 'Produce') {
+    } else if (ingredient.aisle == 'Produce') {
       if (this.cookingData.user_ingredients.produce.includes(ingredient.name)) {
-        this.snackBar.open('Ingredient already in pantry', 'Dismiss', {
-          duration: this.durationInSeconds * 1000,
-        });
+        this.added = false;
       } else {
         this.cookingData.user_ingredients.produce.push(ingredient.name);
-        this.cookingData.user_ingredients.produce.sort();
+        this.added = true;
       }
-    }
-    else if (ingredient.aisle == 'Refrigerated' || ingredient.aisle == 'Frozen') {
+    } else if (ingredient.aisle == 'Refrigerated' || ingredient.aisle == 'Frozen') {
       if (this.cookingData.user_ingredients.refrigeratedFrozen.includes(ingredient.name)) {
-        this.snackBar.open('Ingredient already in pantry', 'Dismiss', {
-          duration: this.durationInSeconds * 1000,
-        });
+        this.added = false;
       } else {
         this.cookingData.user_ingredients.refrigeratedFrozen.push(ingredient.name);
-        this.cookingData.user_ingredients.refrigeratedFrozen.sort();
+        this.added = true;
       }
-    }
-    else if (ingredient.aisle == 'Seafood') {
+    } else if (ingredient.aisle == 'Seafood') {
       if (this.cookingData.user_ingredients.seafood.includes(ingredient.name)) {
-        this.snackBar.open('Ingredient already in pantry', 'Dismiss', {
-          duration: this.durationInSeconds * 1000,
-        });
+        this.added = false;
       } else {
         this.cookingData.user_ingredients.seafood.push(ingredient.name);
-        this.cookingData.user_ingredients.seafood.sort();
+        this.added = true;
       }
-    }
-    else if (ingredient.aisle == 'Sweet Snacks' || ingredient.aisle == 'Savory Snacks') {
+    } else if (ingredient.aisle == 'Sweet Snacks' || ingredient.aisle == 'Savory Snacks') {
       if (this.cookingData.user_ingredients.snacks.includes(ingredient.name)) {
-        this.snackBar.open('Ingredient already in pantry', 'Dismiss', {
-          duration: this.durationInSeconds * 1000,
-        });
+        this.added = false;
       } else {
         this.cookingData.user_ingredients.snacks.push(ingredient.name);
-        this.cookingData.user_ingredients.snacks.sort();
+        this.added = true;
       }
-    }
-    else if (ingredient.aisle == 'Spices and Seasonings') {
+    } else if (ingredient.aisle == 'Spices and Seasonings') {
       if (this.cookingData.user_ingredients.spicesSeasonings.includes(ingredient.name)) {
-        this.snackBar.open('Ingredient already in pantry', 'Dismiss', {
-          duration: this.durationInSeconds * 1000,
-        });
+        this.added = false;
       } else {
         this.cookingData.user_ingredients.spicesSeasonings.push(ingredient.name);
-        this.cookingData.user_ingredients.spicesSeasonings.sort();
+        this.added = true;
       }
-    }
-    else if (ingredient.aisle == 'Jarred Goods') {
+    } else if (ingredient.aisle == 'Jarred Goods') {
       if (this.cookingData.user_ingredients.jarredGoods.includes(ingredient.name)) {
-        this.snackBar.open('Ingredient already in pantry', 'Dismiss', {
-          duration: this.durationInSeconds * 1000,
-        });
+        this.added = false;
       } else {
         this.cookingData.user_ingredients.jarredGoods.push(ingredient.name);
-        this.cookingData.user_ingredients.jarredGoods.sort();
+        this.added = true;
       }
-    }
-    else {
+    } else {
       if (this.cookingData.user_ingredients.misc.includes(ingredient.name)) {
-        this.snackBar.open('Ingredient already in pantry', 'Dismiss', {
-          duration: this.durationInSeconds * 1000,
-        });
+        this.added = false;
       } else {
         this.cookingData.user_ingredients.misc.push(ingredient.name);
-        this.cookingData.user_ingredients.misc.sort();
+        this.added = true;
       }
+      this.sortIngredients();
+    }
+
+    // opening dialog box
+    if (this.added == true) {
+      this.snackBar.open(this.capitalizeFirstLetter(ingredient.name) + ' added', 'Dismiss', {
+        duration: (this.durationInSeconds + 3) * 1000,
+      });
+
+    } else {
+      this.snackBar.open('Ingredient already in pantry', 'Dismiss', {
+        duration: this.durationInSeconds * 1000,
+      });
     }
 
     this.cookingDataService.saveCookingData(this.cookingData);
+  }
 
-    // this.snackBar.open('Ingredient already in pantry', 'Dismiss', {
-    //   duration: this.durationInSeconds * 1000,
-    // });
-
-    // this.snackBar.open(this.capitalizeFirstLetter(ingredient.name) + ' added', 'Dismiss', {
-    //   duration: (this.durationInSeconds + 3) * 1000,
-    // });
+  sortIngredients() {
+    this.cookingData.user_ingredients.baking = this.cookingData.user_ingredients.baking.sort();
+    this.cookingData.user_ingredients.cannedJarred = this.cookingData.user_ingredients.cannedJarred.sort();
+    this.cookingData.user_ingredients.condiments = this.cookingData.user_ingredients.condiments.sort();
+    this.cookingData.user_ingredients.dairy = this.cookingData.user_ingredients.dairy.sort();
+    this.cookingData.user_ingredients.jarredGoods = this.cookingData.user_ingredients.jarredGoods.sort();
+    this.cookingData.user_ingredients.meats = this.cookingData.user_ingredients.meats.sort();
+    this.cookingData.user_ingredients.oilsDressings = this.cookingData.user_ingredients.oilsDressings.sort();
+    this.cookingData.user_ingredients.pastaRice = this.cookingData.user_ingredients.pastaRice.sort();
+    this.cookingData.user_ingredients.produce = this.cookingData.user_ingredients.produce.sort();
+    this.cookingData.user_ingredients.refrigeratedFrozen = this.cookingData.user_ingredients.refrigeratedFrozen.sort();
+    this.cookingData.user_ingredients.seafood = this.cookingData.user_ingredients.seafood.sort();
+    this.cookingData.user_ingredients.snacks = this.cookingData.user_ingredients.snacks.sort()
+    this.cookingData.user_ingredients.misc = this.cookingData.user_ingredients.misc.sort();
   }
 
   capitalizeFirstLetter(word: string) {
     return word.charAt(0).toUpperCase() + word.slice(1);
   }
 }
-
-
-

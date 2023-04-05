@@ -24,33 +24,53 @@
         </form>
     </div>
 
-    <div fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap="1">
-        <div class="user-pantry" fxLayout="column" fxLayoutAlign="space-around center" *ngIf="cookingData && cookingData.user_ingredients">
-            <div class="index-one" *ngFor="let item of this.indexOne" >
+    <div *ngIf="!blank" fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap="1">
+        <div class="user-pantry" fxLayout="column" fxLayoutAlign="space-around center"
+            *ngIf="cookingData && cookingData.user_ingredients">
+            <div  class="index-one" *ngFor="let item of this.indexOne">
                 <app-pantry-list *ngIf="item" category={{item[0]}} [ingredients]="item[1]"></app-pantry-list>
             </div>
         </div>
-    
-        <div class="user-pantry" fxLayout="column" fxLayoutAlign="space-around center" *ngIf="cookingData && cookingData.user_ingredients">
-            <div class="index-one" *ngFor="let item of this.indexTwo" >
+
+        <div class="user-pantry" fxLayout="column" fxLayoutAlign="space-around center"
+            *ngIf="cookingData && cookingData.user_ingredients">
+            <div class="index-one" *ngFor="let item of this.indexTwo">
                 <app-pantry-list *ngIf="item" category={{item[0]}} [ingredients]="item[1]"></app-pantry-list>
             </div>
         </div>
-    
-        <div class="user-pantry" fxLayout="column" fxLayoutAlign="space-around center" *ngIf="cookingData && cookingData.user_ingredients">
-            <div class="index-one" *ngFor="let item of this.indexThree" >
+
+        <div class="user-pantry" fxLayout="column" fxLayoutAlign="space-around center"
+            *ngIf="cookingData && cookingData.user_ingredients">
+            <div class="index-one" *ngFor="let item of this.indexThree">
                 <app-pantry-list *ngIf="item" category={{item[0]}} [ingredients]="item[1]"></app-pantry-list>
             </div>
         </div>
+
     </div>
 
-    <hr>
+    <div *ngIf="blank" class="getting-started">
+        <p>Welcome to your very own pantry! </p>
+        <p>
+            Here, you can simply the ingredients you have at home, and we'll provide
+            you with a plethora of delicious recipes to make with them. The more ingredients you have, the better the
+            results will be. Let's get started!"
+        </p>
+        <p>
+            To begin, simply enter your ingredients using the search bar above and let us take care of the rest. Our
+            system will automatically sort and organize them for you, making the process effortless and hassle-free.
+            Let's get cooking
+        </p>
+    </div>
 
-    <div class="tip" fxLayout="column" fxLayoutAlign="center center">
+
+
+
+    <div *ngIf="!blank" class="tip" fxLayout="column" fxLayoutAlign="center center">
+        <hr>
         <h2>Ready to start cooking?</h2>
         <p>click here to see what what you can make right now</p>
         <button mat-flat-button color="warn" [routerLink]="['/start-cooking']">Start Cooking</button>
+        <hr>
     </div>
-    <hr>
 
 </div>

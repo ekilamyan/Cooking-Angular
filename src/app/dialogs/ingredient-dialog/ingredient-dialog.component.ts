@@ -18,6 +18,7 @@ export class IngredientDialogComponent implements OnInit {
   public searchCategory = '';
   public ingredients: PantryIngredient[] = [];
   public hasRanSearch = false;
+  public added = false;
   public durationInSeconds = 2;
 
   public cookingData: CookingData;
@@ -40,10 +41,10 @@ export class IngredientDialogComponent implements OnInit {
     this.cookingDataService.cookingData.subscribe((cookingData: CookingData) => {
       if (cookingData) {
         this.cookingData = cookingData;
+        this.sortIngredients();
       }
     });
 
-    this.refreshIngredients();
     this.ingredientSearchForm = this.formBuilder.group({
       'ingredient': ['']
     });
@@ -166,7 +167,7 @@ export class IngredientDialogComponent implements OnInit {
             }
           }
 
-          else if (this.data.term == 'Miscellaneous') {
+          else {
             for (let i = 0; i < temp.length; i++) {
               if (temp[i].aisle == 'Health Foods' || temp[i].aisle == 'Ethnic Foods' || temp[i].aisle == 'Dried Fruits') {
                 this.ingredients.push(new PantryIngredient(temp[i]));
@@ -178,46 +179,178 @@ export class IngredientDialogComponent implements OnInit {
       })
   }
 
-  capitalizeFirstLetter(word: string) {
-    return word.charAt(0).toUpperCase() + word.slice(1);
-  }
-
-  removeIngredient(i: number) {
-    // this.cookingData.user_ingredients.
-    this.data.stuff[i] = '';
-    if (i !== -1) {
-      this.data.stuff.splice(i, 1);
+  removeIngredient(ingredient: string) {
+    if (this.data.term == 'Baking') {
+      this.cookingData.user_ingredients.baking.splice(this.cookingData.user_ingredients.baking.indexOf(ingredient), 1);
+    } else if (this.data.term == 'Condiments') {
+      this.cookingData.user_ingredients.condiments.splice(this.cookingData.user_ingredients.condiments.indexOf(ingredient), 1);
+    } else if (this.data.term == 'Meats') {
+      this.cookingData.user_ingredients.meats.splice(this.cookingData.user_ingredients.meats.indexOf(ingredient), 1);
+    } else if (this.data.term == 'Produce') {
+      this.cookingData.user_ingredients.produce.splice(this.cookingData.user_ingredients.produce.indexOf(ingredient), 1);
+    } else if (this.data.term == 'Seafood') {
+      this.cookingData.user_ingredients.seafood.splice(this.cookingData.user_ingredients.seafood.indexOf(ingredient), 1);
+    } else if (this.data.term == 'Snacks') {
+      this.cookingData.user_ingredients.snacks.splice(this.cookingData.user_ingredients.snacks.indexOf(ingredient), 1);
+    } else if (this.data.term == 'Jarred Goods') {
+      this.cookingData.user_ingredients.jarredGoods.splice(this.cookingData.user_ingredients.jarredGoods.indexOf(ingredient), 1);
+    } else if (this.data.term == 'Canned & Jarred') {
+      this.cookingData.user_ingredients.cannedJarred.splice(this.cookingData.user_ingredients.cannedJarred.indexOf(ingredient), 1);
+    } else if (this.data.term == 'Spices & Seasonings') {
+      this.cookingData.user_ingredients.spicesSeasonings.splice(this.cookingData.user_ingredients.spicesSeasonings.indexOf(ingredient), 1);
+    } else if (this.data.term == 'Dairy') {
+      this.cookingData.user_ingredients.dairy.splice(this.cookingData.user_ingredients.dairy.indexOf(ingredient), 1);
+    } else if (this.data.term == 'Oils & Dressings') {
+      this.cookingData.user_ingredients.oilsDressings.splice(this.cookingData.user_ingredients.oilsDressings.indexOf(ingredient), 1);
+    } else if (this.data.term == 'Pastas & Rice') {
+      this.cookingData.user_ingredients.pastaRice.splice(this.cookingData.user_ingredients.pastaRice.indexOf(ingredient), 1);
+    } else if (this.data.term == 'Frozen & Refrigerated') {
+      this.cookingData.user_ingredients.refrigeratedFrozen.splice(this.cookingData.user_ingredients.condiments.indexOf(ingredient), 1);
+    } else {
+      this.cookingData.user_ingredients.misc.splice(this.cookingData.user_ingredients.misc.indexOf(ingredient), 1);
     }
-    
+    this.sortIngredients();
+
+    this.snackBar.open(this.capitalizeFirstLetter(ingredient) + ' removed', 'Dismiss', {
+      duration: (this.durationInSeconds + 3) * 1000,
+    });
+
     this.cookingDataService.saveCookingData(this.cookingData);
-    this.refreshIngredients();
   }
 
-  addIngredient(i: PantryIngredient) {
-    if (this.data.stuff.includes(this.capitalizeFirstLetter(i.name))) {
+  addIngredient(ingredient: PantryIngredient) {
+    if (ingredient.aisle == 'Baking') {
+      if (this.cookingData.user_ingredients.baking.includes(ingredient.name)) {
+        this.added = false;
+      } else {
+        this.cookingData.user_ingredients.baking.push(ingredient.name);
+        this.added = true;
+      }
+    } else if (ingredient.aisle == 'Canned and Jarred') {
+      if (this.cookingData.user_ingredients.cannedJarred.includes(ingredient.name)) {
+        this.added = false;
+      } else {
+        this.cookingData.user_ingredients.cannedJarred.push(ingredient.name);
+        this.added = true;
+      }
+    } else if (ingredient.aisle == 'Condiments') {
+      if (this.cookingData.user_ingredients.condiments.includes(ingredient.name)) {
+        this.added = false;
+      } else {
+        this.cookingData.user_ingredients.condiments.push(ingredient.name);
+        this.added = true;
+      }
+    } else if (ingredient.aisle == 'Dairy' || ingredient.aisle == 'Cheese') {
+      if (this.cookingData.user_ingredients.dairy.includes(ingredient.name)) {
+        this.added = false;
+      } else {
+        this.cookingData.user_ingredients.dairy.push(ingredient.name);
+        this.added = true;
+      }
+    } else if (ingredient.aisle == 'Meat') {
+      if (this.cookingData.user_ingredients.meats.includes(ingredient.name)) {
+        this.added = false;
+      } else {
+        this.cookingData.user_ingredients.meats.push(ingredient.name);
+        this.added = true;
+      }
+    } else if (ingredient.aisle == 'Oil, Vinegar, Salad Dressing') {
+      if (this.cookingData.user_ingredients.oilsDressings.includes(ingredient.name)) {
+        this.added = false;
+      } else {
+        this.cookingData.user_ingredients.oilsDressings.push(ingredient.name);
+        this.added = true;
+      }
+    } else if (ingredient.aisle == 'Pasta and Rice') {
+      if (this.cookingData.user_ingredients.pastaRice.includes(ingredient.name)) {
+        this.added = false;
+      } else {
+        this.cookingData.user_ingredients.pastaRice.push(ingredient.name);
+        this.added = true;
+      }
+    } else if (ingredient.aisle == 'Produce') {
+      if (this.cookingData.user_ingredients.produce.includes(ingredient.name)) {
+        this.added = false;
+      } else {
+        this.cookingData.user_ingredients.produce.push(ingredient.name);
+        this.added = true;
+      }
+    } else if (ingredient.aisle == 'Refrigerated' || ingredient.aisle == 'Frozen') {
+      if (this.cookingData.user_ingredients.refrigeratedFrozen.includes(ingredient.name)) {
+        this.added = false;
+      } else {
+        this.cookingData.user_ingredients.refrigeratedFrozen.push(ingredient.name);
+        this.added = true;
+      }
+    } else if (ingredient.aisle == 'Seafood') {
+      if (this.cookingData.user_ingredients.seafood.includes(ingredient.name)) {
+        this.added = false;
+      } else {
+        this.cookingData.user_ingredients.seafood.push(ingredient.name);
+        this.added = true;
+      }
+    } else if (ingredient.aisle == 'Sweet Snacks' || ingredient.aisle == 'Savory Snacks') {
+      if (this.cookingData.user_ingredients.snacks.includes(ingredient.name)) {
+        this.added = false;
+      } else {
+        this.cookingData.user_ingredients.snacks.push(ingredient.name);
+        this.added = true;
+      }
+    } else if (ingredient.aisle == 'Spices and Seasonings') {
+      if (this.cookingData.user_ingredients.spicesSeasonings.includes(ingredient.name)) {
+        this.added = false;
+      } else {
+        this.cookingData.user_ingredients.spicesSeasonings.push(ingredient.name);
+        this.added = true;
+      }
+    } else if (ingredient.aisle == 'Jarred Goods') {
+      if (this.cookingData.user_ingredients.jarredGoods.includes(ingredient.name)) {
+        this.added = false;
+      } else {
+        this.cookingData.user_ingredients.jarredGoods.push(ingredient.name);
+        this.added = true;
+      }
+    } else {
+      if (this.cookingData.user_ingredients.misc.includes(ingredient.name)) {
+        this.added = false;
+      } else {
+        this.cookingData.user_ingredients.misc.push(ingredient.name);
+        this.added = true;
+      }
+      this.sortIngredients();
+    }
+
+    // opening dialog box
+    if (this.added == true) {
+      this.snackBar.open(this.capitalizeFirstLetter(ingredient.name) + ' added', 'Dismiss', {
+        duration: (this.durationInSeconds + 3) * 1000,
+      });
+      this.cookingDataService.saveCookingData(this.cookingData);
+    } else {
       this.snackBar.open('Ingredient already in pantry', 'Dismiss', {
         duration: this.durationInSeconds * 1000,
       });
-    } else {
-      this.data.stuff.splice((this.data.stuff.length - 1), 0, this.capitalizeFirstLetter(i.name));
-      this.ingredientSearchForm.reset();
-
-      this.snackBar.open(this.capitalizeFirstLetter(i.name) + ' added', 'Dismiss', {
-        duration: (this.durationInSeconds + 3) * 1000,
-      });
     }
-
-    this.dialogRef.afterClosed().subscribe((res: any) => {
-    })
-
-    this.refreshIngredients();
-    this.cookingDataService.saveCookingData(this.cookingData);
   }
 
-  refreshIngredients() {
-    for(let i = 0; i < Object.entries(this.cookingData.user_ingredients).length; i++) {
-      Object.entries(this.cookingData.user_ingredients)[i][1].sort();
-    }
+  sortIngredients() {
+    this.cookingData.user_ingredients.baking = this.cookingData.user_ingredients.baking.sort();
+    this.cookingData.user_ingredients.cannedJarred = this.cookingData.user_ingredients.cannedJarred.sort();
+    this.cookingData.user_ingredients.condiments = this.cookingData.user_ingredients.condiments.sort();
+    this.cookingData.user_ingredients.dairy = this.cookingData.user_ingredients.dairy.sort();
+    this.cookingData.user_ingredients.jarredGoods = this.cookingData.user_ingredients.jarredGoods.sort();
+    this.cookingData.user_ingredients.meats = this.cookingData.user_ingredients.meats.sort();
+    this.cookingData.user_ingredients.oilsDressings = this.cookingData.user_ingredients.oilsDressings.sort();
+    this.cookingData.user_ingredients.pastaRice = this.cookingData.user_ingredients.pastaRice.sort();
+    this.cookingData.user_ingredients.produce = this.cookingData.user_ingredients.produce.sort();
+    this.cookingData.user_ingredients.refrigeratedFrozen = this.cookingData.user_ingredients.refrigeratedFrozen.sort();
+    this.cookingData.user_ingredients.seafood = this.cookingData.user_ingredients.seafood.sort();
+    this.cookingData.user_ingredients.snacks = this.cookingData.user_ingredients.snacks.sort()
+    this.cookingData.user_ingredients.misc = this.cookingData.user_ingredients.misc.sort();
+  }
+
+  capitalizeFirstLetter(word: string) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
   }
 
 }

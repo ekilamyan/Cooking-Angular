@@ -21,6 +21,17 @@ hr {
     padding-bottom: 50px;
 }
 
+.getting-started p {
+    font-size: 23px;
+    line-height: 30px;
+
+    padding: 10px;
+
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    color: #6b6b6b;
+}
+
 /* Input box */
 .form {
     width: 100%;

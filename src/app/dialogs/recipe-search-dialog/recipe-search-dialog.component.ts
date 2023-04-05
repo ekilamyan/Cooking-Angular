@@ -22,7 +22,9 @@ export class RecipeSearchDialogComponent implements OnInit {
   });
 
   constructor(public dialogRef: MatDialogRef<RecipeSearchDialogComponent>,
-    private service: AutocompleteService, private formBuilder: FormBuilder, private snackBar: MatSnackBar, 
+    private service: AutocompleteService, 
+    private formBuilder: FormBuilder, 
+    private snackBar: MatSnackBar, 
     private route: Router,
     private searchService: SearchService) {
   }
