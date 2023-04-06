@@ -38,17 +38,19 @@ export class SuggestionsComponent implements OnInit {
 
     if (this.type == 'similar') {
       this.service.getIds(this.recipeId, this.numOfResults).subscribe((temp: any[]) => {
-        for (let i = 0; i < temp.length; i++) {
-          this.ids = this.ids + temp[i].id;
-          if (i < temp.length - 1) {
-            this.ids = this.ids + ',';
-          }
-        }
-        this.service.getSuggestionsBulk(this.ids).subscribe((temp: any[]) => {
+        if(temp) {
           for (let i = 0; i < temp.length; i++) {
-            this.recipes[i] = temp[i];
+            this.ids = this.ids + temp[i].id;
+            if (i < temp.length - 1) {
+              this.ids = this.ids + ',';
+            }
           }
-        });
+          this.service.getSuggestionsBulk(this.ids).subscribe((temp: any[]) => {
+            for (let i = 0; i < temp.length; i++) {
+              this.recipes[i] = temp[i];
+            }
+          });
+        }
       });
     } else if (this.type == 'saved') {
       this.cookingDataService.cookingData.subscribe((cookingData: CookingData) => {

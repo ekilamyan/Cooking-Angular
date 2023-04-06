@@ -1,6 +1,6 @@
 <div class="suggestions-wrapper" fxLayout="row wrap" fxLayoutAlign="space-between stretch">
     <div class="card" *ngFor=" let recipe of recipes"  fxLayout="column" fxLayoutAlign="start start" (click)="navToRecipeIntructions(recipe.id)">
-        <img src="{{recipe.image}}"/>
+        <img *ngIf="recipe.image" src="{{recipe.image}}"/>
         <div class="card-body" fxLayout="row wrap">
             <h2 class="card-title">{{recipe.title}}</h2>
         </div>

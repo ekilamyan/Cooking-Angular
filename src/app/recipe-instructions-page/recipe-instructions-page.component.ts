@@ -24,9 +24,10 @@ export class RecipeInstructionsPageComponent implements OnInit {
   public count = 0;
 
   public allIngredeints: string[] = [];
-  public overlappingIngredients: string[] = [];
   public nutritionList: Nutrients[] = [];
+
   public originalIngredientList: string[] = [];
+  public metricOriginalIngredientList: string[] = [];
   public ingredientList: string[] = [];
   public instructionsList: string[] = [];
 
@@ -58,6 +59,16 @@ export class RecipeInstructionsPageComponent implements OnInit {
           for (let i = 0; i < this.recipe.analyzedInstructions[0].steps.length; i++) {
             this.instructionsList[i] = this.recipe.analyzedInstructions[0].steps[i].step;
           }
+
+          // metric data
+          for (let i = 0; i < this.recipe.extendedIngredients.length; i++) {
+            let ingredient = (Math.ceil(this.recipe.extendedIngredients[i].measures.metric.amount)).toString()
+             + ' ' + this.recipe.extendedIngredients[i].measures.metric.unitLong 
+             + ' ' + this.recipe.extendedIngredients[i].originalName;
+            this.metricOriginalIngredientList.push(ingredient);
+          }
+
+          console.log(this.metricOriginalIngredientList);
 
           this.ingredientCount = this.ingredientList.length;
 
@@ -119,7 +130,7 @@ export class RecipeInstructionsPageComponent implements OnInit {
     if (units == 'Imperial') {
       this.units = 'Metric';
     } else {
-     this. units = 'Imperial';
+      this.units = 'Imperial';
     }
   }
 

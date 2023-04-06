@@ -8,10 +8,11 @@ export class ExtendedIngredients {
     name: string;
     nameClean: string;
     original: string;
+    originalName: string;
     amount: number;
     unit: string;
     meta: string[];
-    measurement: Measurements
+    measures: Measurements
 
     constructor(data: any) {
        if(data) {
@@ -22,10 +23,11 @@ export class ExtendedIngredients {
             this.name = data.name;
             this.nameClean = data.nameClean;
             this.original = data.original;
+            this.originalName = data.originalName;
             this.amount = data.amount;
             this.unit = data.unit;
             this.meta = [];
-            this.measurement = new Measurements(data.measures);
+            this.measures = new Measurements(data.measures);
        } else {
             this.id = '';
             this.aisle = '';
@@ -34,10 +36,11 @@ export class ExtendedIngredients {
             this.name = '';
             this.nameClean = '';
             this.original = '';
+            this.originalName = '';
             this.amount = 0;
             this.unit = '';
             this.meta = [];
-            this.measurement = new Measurements(null);
+            this.measures = new Measurements(null);
        }
     }
 }

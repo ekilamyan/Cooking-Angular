@@ -131,7 +131,7 @@
         <div  *ngIf="units == 'Metric'" class="ingredients-container" fxFlex="50">
             <h2>Ingredients</h2>
             <ul class="ingredients">
-                <li *ngFor="let ingredient of originalIngredientList; let i = index" fxLayout="row"
+                <li *ngFor="let ingredient of metricOriginalIngredientList; let i = index" fxLayout="row"
                     fxLayoutAlign="start start" fxLayoutGap="20">
                     <!-- <button class="bullet-point">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
@@ -185,3 +185,5 @@
         <h1>{{ingredient}}</h1>
     </li>
 </div>
+
+<app-footer></app-footer>

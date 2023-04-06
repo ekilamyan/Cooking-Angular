@@ -8,7 +8,7 @@ export class Measurements {
     constructor(data: any) {
         if(data) {
             this.us = new UsMeasurements(data.us);
-            this.metric = new MetricMeasurements(data.us);
+            this.metric = new MetricMeasurements(data.metric);
         } else {
             this.us = new UsMeasurements(null);
             this.metric = new MetricMeasurements(null);   

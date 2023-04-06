@@ -16,6 +16,9 @@ export class DashboardComponent implements OnInit {
   public categoryTitles = ['Breakfast', 'Gluten Free', 'Vegan', 'Pizza', 'Smoothies', 'Desserts'];
   public categoryTitlesForSearching = ['breakfast', 'gluten free', 'vegan', 'pizza', 'smoothie', 'dessert'];
 
+  public ingredientArrays: any[];
+  public ingredientcount = 0;
+
   public recipes: Recipe[] = [];
   public cookingData: CookingData;
 
@@ -32,6 +35,14 @@ export class DashboardComponent implements OnInit {
         this.cookingData = cookingData;
       }
     });
+
+    this.ingredientArrays = Object.entries(this.cookingData.user_ingredients).sort();
+
+    for(let i = 0; i < this.ingredientArrays.length; i++) {
+      if(this.ingredientArrays[i][1].length > 0) {
+        this.ingredientcount++;
+      }
+    }
 
     this.suggestions.getRandomIds(1).subscribe((responce: any) => {
       for (let i = 0; i < responce.recipes.length; i++) {
