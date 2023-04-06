@@ -13,11 +13,11 @@ import { CookingDataService } from '../shared/services/cooking-data.service';
   styleUrls: ['./recipe-instructions-page.component.css']
 })
 export class RecipeInstructionsPageComponent implements OnInit {
+  public units = 'Imperial';
 
   public searchItem = new RecipeSearch(null);
   public recipe = new Recipe(null);
 
-  public checked = true;
   public ingredientCount = 0;
   public cookingData: CookingData;
   public saved = false;
@@ -37,30 +37,30 @@ export class RecipeInstructionsPageComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.count);
     this.route.queryParams.subscribe((param: any) => {
-      this.test.getRecipeWithId(param.id).subscribe((temp: Recipe) => { 
-        if(temp){
+      this.test.getRecipeWithId(param.id).subscribe((temp: Recipe) => {
+        if (temp) {
           this.recipe = temp;
-          // console.log(this.recipe);
+          console.log(this.recipe);
           this.recipe.id = String(this.recipe.id);
-  
+
           this.recipe.image = this.recipe.image.replace('556x370', '636x393');
-  
+
           for (let i = 0; i < 9; i++) {
             this.recipe.nutrition.nutrients[i].amount = (Math.round(this.recipe.nutrition.nutrients[i].amount * 10) / 10);
             this.nutritionList[i] = this.recipe.nutrition.nutrients[i];
           }
-  
+
           for (let i = 0; i < this.recipe.extendedIngredients.length; i++) {
             this.originalIngredientList[i] = this.recipe.extendedIngredients[i].original;
             this.ingredientList.push(this.recipe.extendedIngredients[i].nameClean);
           }
-  
+
           for (let i = 0; i < this.recipe.analyzedInstructions[0].steps.length; i++) {
             this.instructionsList[i] = this.recipe.analyzedInstructions[0].steps[i].step;
           }
-  
+
           this.ingredientCount = this.ingredientList.length;
-  
+
           this.cookingDataService.cookingData.subscribe((cookingData: CookingData) => {
             if (cookingData) {
               this.cookingData = cookingData;
@@ -69,8 +69,7 @@ export class RecipeInstructionsPageComponent implements OnInit {
               // console.log(this.overlappingIngredients);
             }
           })
-          console.log(this.ingredientList);
-          this.compareIngredients();
+          // this.compareIngredients();
         }
       });
     })
@@ -81,20 +80,20 @@ export class RecipeInstructionsPageComponent implements OnInit {
     window.print();
   }
 
-  compareIngredients() {
-    for (let i = 0; i < Object.keys(this.cookingData.user_ingredients).length; i++) {
-      for (let j = 0; j < Object.entries(this.cookingData.user_ingredients)[i][1].length; j++) {
-        this.allIngredeints.push(Object.entries(this.cookingData.user_ingredients)[i][1][j]);
-      }
-    }
-    
-    for(let i = 0; i < this.ingredientList.length; i++){
-      if(this.allIngredeints.includes(this.ingredientList[i])){
-        this.count++;
-        this.overlappingIngredients.push(this.ingredientList[i]);
-      }
-    }
-  }
+  // compareIngredients() {
+  //   for (let i = 0; i < Object.keys(this.cookingData.user_ingredients).length; i++) {
+  //     for (let j = 0; j < Object.entries(this.cookingData.user_ingredients)[i][1].length; j++) {
+  //       this.allIngredeints.push(Object.entries(this.cookingData.user_ingredients)[i][1][j]);
+  //     }
+  //   }
+
+  //   for(let i = 0; i < this.ingredientList.length; i++){
+  //     if(this.allIngredeints.includes(this.ingredientList[i])){
+  //       this.count++;
+  //       this.overlappingIngredients.push(this.ingredientList[i]);
+  //     }
+  //   }
+  // }
 
   checkIfSaved() {
     if (this.cookingData.saved_recipes.includes(this.recipe.id)) {
@@ -114,6 +113,14 @@ export class RecipeInstructionsPageComponent implements OnInit {
     }
 
     this.cookingDataService.saveCookingData(this.cookingData);
+  }
+
+  changeUnits(units: string) {
+    if (units == 'Imperial') {
+      this.units = 'Metric';
+    } else {
+     this. units = 'Imperial';
+    }
   }
 
 }

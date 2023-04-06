@@ -24,7 +24,7 @@
         </form>
     </div>
 
-    <div *ngIf="!blank" fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap="1">
+    <div *ngIf="blank" fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap="1">
         <div class="user-pantry" fxLayout="column" fxLayoutAlign="space-around center"
             *ngIf="cookingData && cookingData.user_ingredients">
             <div  class="index-one" *ngFor="let item of this.indexOne">
@@ -48,7 +48,7 @@
 
     </div>
 
-    <div *ngIf="blank" class="getting-started">
+    <div *ngIf="!blank" class="getting-started">
         <p>Welcome to your very own pantry! </p>
         <p>
             Here, you can simply the ingredients you have at home, and we'll provide
@@ -64,8 +64,7 @@
 
 
 
-
-    <div *ngIf="!blank" class="tip" fxLayout="column" fxLayoutAlign="center center">
+    <div *ngIf="blank" class="tip" fxLayout="column" fxLayoutAlign="center center">
         <hr>
         <h2>Ready to start cooking?</h2>
         <p>click here to see what what you can make right now</p>

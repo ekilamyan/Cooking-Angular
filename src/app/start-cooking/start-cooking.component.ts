@@ -112,7 +112,6 @@ export class StartCookingComponent implements OnInit {
   }
 
   setCookingObjects() {
-    /* 
     const userIngredients = this.cookingData.user_ingredients;
     const keys = Object.keys(userIngredients);
   
@@ -126,8 +125,7 @@ export class StartCookingComponent implements OnInit {
     }
   
     console.log(this.userIngredients);
-  
-    */
+    
 
     for (let i = 0; i < this.cookingData.user_ingredients.baking.length; i++) {
       this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.baking[i] + ',';
