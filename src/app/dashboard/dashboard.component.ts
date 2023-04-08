@@ -30,6 +30,14 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.suggestions.getRandomIds(1).subscribe((responce: any) => {
+      console.log('here');
+      for (let i = 0; i < responce.recipes.length; i++) {
+        this.recipes[i] = responce.recipes[i];
+        this.recipes[i].image = responce.recipes[i].image.replace('556x370', '636x393');    
+      }
+    })
+    
     this.cookingDataService.cookingData.subscribe((cookingData: CookingData) => {
       if (cookingData) {
         this.cookingData = cookingData;
@@ -43,13 +51,6 @@ export class DashboardComponent implements OnInit {
         this.ingredientcount++;
       }
     }
-
-    this.suggestions.getRandomIds(1).subscribe((responce: any) => {
-      for (let i = 0; i < responce.recipes.length; i++) {
-        this.recipes[i] = responce.recipes[i];
-        this.recipes[i].image = responce.recipes[i].image.replace('556x370', '636x393');    
-      }
-    })
   }
 
   navToRecipeIntructions(id: string) {

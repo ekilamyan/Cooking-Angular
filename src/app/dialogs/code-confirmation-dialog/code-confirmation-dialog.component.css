@@ -1,0 +1,82 @@
+/*  */
+::ng-deep.mat-dialog-container {
+
+    min-height: 200px;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.mat-dialog-title {
+    font-size: 40px;
+    font-family: "Playfair", serif;
+}
+
+p {
+    width: 350px;
+    font-family: "Inter", sans-serif;
+    font-size: 15px;
+}
+
+
+/* Input box */
+.inputBox {
+    width: 300px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 300;
+    margin-top: 20px;
+    font-family: "Inter", sans-serif;
+}
+
+/* //input outline color */
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: black !important;
+    /* // opacity: 1!important; */
+}
+
+
+/* // mat-input error carent color */
+::ng-deep .mat-form-field-invalid .mat-input-element,
+.mat-warn .mat-input-element {
+    caret-color: red !important;
+}
+
+/* // mat-label normal state style */
+::ng-deep .mat-form-field-label {
+    color: rgba(0, 0, 0, .6) !important;
+    /* // color: $mainColor!important; */
+}
+
+/* input background color */
+::ng-deep.mat-form-field-outline-start,
+::ng-deep.mat-form-field-outline-gap,
+::ng-deep.mat-form-field-outline-end {
+    background-color: rgb(255, 255, 255) !important;
+}
+
+
+/* borders */
+
+/* left side */
+::ng-deep .mat-form-field-outline-start {
+    border-radius: 10px 0 0 10px !important;
+    min-width: 10px !important;
+}
+
+/*right side */
+::ng-deep .mat-form-field-outline-end {
+    border-radius: 0 10px 10px 0 !important;
+}
+
+.mat-option {
+    font-family: "Inter", sans-serif;
+}
+
+.mat-dialog-actions {
+    margin-top: auto;
+    justify-content: center;
+}
+
+.mat-dialog-actions button {
+    border-radius: 20px;
+}

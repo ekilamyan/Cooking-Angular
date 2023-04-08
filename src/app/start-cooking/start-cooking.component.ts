@@ -113,18 +113,18 @@ export class StartCookingComponent implements OnInit {
 
   setCookingObjects() {
     const userIngredients = this.cookingData.user_ingredients;
-    const keys = Object.keys(userIngredients);
+    // const keys = Object.keys(userIngredients);
   
-    for (let i = 0; i < keys.length; i++) {
-      const myKey = <string>keys[i];
-      const values = Object.values(userIngredients);
+    // for (let i = 0; i < keys.length; i++) {
+    //   const myKey = <string>keys[i];
+    //   const values = Object.values(userIngredients);
   
-      for (let j = 0; j < values.length; j++) {
-        this.userIngredients = this.userIngredients + values[j] + ',';
-      }
-    }
+    //   for (let j = 0; j < values.length; j++) {
+    //     this.userIngredients = this.userIngredients + values[j] + ',';
+    //   }
+    // }
   
-    console.log(this.userIngredients);
+    // console.log(this.userIngredients);
     
 
     for (let i = 0; i < this.cookingData.user_ingredients.baking.length; i++) {

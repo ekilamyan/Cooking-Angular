@@ -22,7 +22,7 @@ export class SignInComponent implements OnInit {
   public password = '';
   
 
-  loginForm = new FormGroup({       /* ask vav if this is correct*/
+  loginForm = new FormGroup({     
     email: new FormControl(''),
     password: new FormControl(''),
   });
@@ -31,7 +31,6 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.loginForm.valueChanges.subscribe((changedObj: any) => {
       this.disableBtn = this.loginForm.valid;
       console.log(this.disableBtn);

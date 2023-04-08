@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user.model';
 import { Amplify, Auth } from 'aws-amplify';
-import { EmailValidator } from '@angular/forms';
 import { CognitoUser } from '@aws-amplify/auth';
 
 @Injectable({
@@ -77,5 +76,9 @@ export class LoginService {
 
   getJwtToken() {
     return this.congitoUser.getSignInUserSession().getIdToken().getJwtToken();
+  }
+
+  setUserCookign(){
+
   }
 }

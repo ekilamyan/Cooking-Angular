@@ -67,10 +67,4 @@ export class SettingsComponent implements OnInit {
     }
     else return false;
   }
-
-  setUnits(unit: string) {
-    this.cookingData.user_units = unit;
-    this.cookingDataService.saveCookingData(this.cookingData);
-  }
-
 }

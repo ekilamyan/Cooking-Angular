@@ -88,9 +88,6 @@ export class MyPantryComponent implements OnInit {
         } else {
           this.blank = false
         }
-
-        console.log(this.ingredientcount);
-        console.log(this.blank);
       }
     });
 

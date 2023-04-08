@@ -1,0 +1,13 @@
+<div fxLayout="column" fxLayoutAlign="space-around center">
+    <h1 mat-dialog-title>Confirmation Code</h1>
+    <p>Please enter the confirmation code to complete setting up an account</p>
+    <form class="recipe-search-form" [formGroup]="codeForm" fxLayoutAlign="center">
+        <mat-form-field class="inputBox" appearance="outline">
+            <mat-label> Enter confirmation code...</mat-label>
+            <input matInput placeholder="Enter confirmation code.." formControlName="code">
+        </mat-form-field>
+    </form>
+    <button mat-flat-button color="primary" (click)="verifyAndLogin()"> 
+        Finish
+    </button>
+</div>

@@ -7,6 +7,7 @@ import { LoginService } from '../shared/services/login.service';
 import { User } from '../shared/models/user.model';
 import { ISignUpResult } from 'amazon-cognito-identity-js';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CodeConfirmationDialogComponent } from '../dialogs/code-confirmation-dialog/code-confirmation-dialog.component';
 
 @Component({
   selector: 'app-sign-up',
@@ -65,9 +66,8 @@ export class SignUpComponent implements OnInit {
     user.password = <string>this.firstFormGroup.get('password').value;
 
     this.loginService.createUser(user).then((res: ISignUpResult) => { 
-      this.firstFormGroup.get('confirmationCode').enable();
-      this.showVerifyButton = true;
-      this.snackBar.open('Signup successful - please enter the confirmation code below');
+      this.snackBar.open('Successful - please enter the confirmation code');
+      this.openDialog();
       console.log(res);
     }, (error: any) => {
       console.log(error);
@@ -75,22 +75,14 @@ export class SignUpComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(IntolerancesDialogComponent, { disableClose: true });
-  }
-
-  verifyAndLogin(): void {
-    const email = this.firstFormGroup.get('email').value;
-    const password = this.firstFormGroup.get('password').value;
-    const confirmationCode = this.firstFormGroup.get('confirmationCode').value;
-    this.loginService.verifyUser(email, confirmationCode).then ((res: any) => {
-      this.loginService.login(email, password).then ((res: any) => {
-        // this.openDialog();
-      }, (error: any) => {
-        console.log(error);
-      });
-    }, (error: any) => {
-      console.log(error);
-    })
+    console.log('here');
+    const dialogRef = this.dialog.open(CodeConfirmationDialogComponent, { 
+      disableClose: true,
+      data: {
+        email: this.firstFormGroup.get('email').value,
+        password: this.firstFormGroup.get('password').value,
+      }
+    });
   }
 }
 
