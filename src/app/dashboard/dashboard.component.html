@@ -39,7 +39,7 @@
     </div>
     <app-suggestions type="pantry"></app-suggestions>
 
-    <div *ngIf=" cookingData && (ingredientcount > 0)" class="card-container-title">
+    <div *ngIf=" cookingData" class="card-container-title">
         <h1>My Saved Recipes</h1>
     </div>
     <app-suggestions *ngIf=" cookingData && (cookingData.saved_recipes.length > 3)" type="saved"></app-suggestions>

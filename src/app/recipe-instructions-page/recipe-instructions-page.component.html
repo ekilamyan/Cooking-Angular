@@ -87,10 +87,6 @@
         </div> -->
     </div>
 
-    <!-- <button (click)="myFlag = !myFlag">Toggle</button>
-    <div *ngIf="myFlag" style="color:green">Hey I'm true</div>
-    <div *ngIf="!myFlag" style="color:red">Hey I'm false</div> -->
-
     <div class="recipe-instruction-container" id="print" fxLayout.gt-md="row">
 
         <div *ngIf="units == 'Imperial'" class="ingredients-container" fxFlex="50">
@@ -98,26 +94,9 @@
             <ul class="ingredients">
                 <li *ngFor="let ingredient of originalIngredientList; let i = index" fxLayout="row"
                     fxLayoutAlign="start start" fxLayoutGap="20">
-                    <!-- <button class="bullet-point">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
-                            <path
-                                d="M11,22A11,11,0,0,1,3.222,3.222,11,11,0,1,1,18.778,18.778,10.928,10.928,0,0,1,11,22ZM11,2a9,9,0,1,0,9,9A9.01,9.01,0,0,0,11,2Z"
-                                transform="translate(0 0)"></path>
-                        </svg>
-                    </button>
-                    <button>
-                        <div class="ingredient">
-                            {{ingredient}}
-                        </div>
-                    </button> -->
 
-                    <button class="bullet-point">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
-                            <path
-                                d="M11,22A11,11,0,0,1,3.222,3.222,11,11,0,1,1,18.778,18.778,10.928,10.928,0,0,1,11,22ZM11,2a9,9,0,1,0,9,9A9.01,9.01,0,0,0,11,2Z"
-                                transform="translate(0 0)"></path>
-                        </svg>
-                    </button>
+
+                    <mat-checkbox class="custom-frame" (click)="checkUncheckFilter(ingredient)"> </mat-checkbox>
                     <button>
                         <div class="ingredient">
                             {{ingredient}}
@@ -128,31 +107,13 @@
             </ul>
         </div>
 
-        <div  *ngIf="units == 'Metric'" class="ingredients-container" fxFlex="50">
+        <div *ngIf="units == 'Metric'" class="ingredients-container" fxFlex="50">
             <h2>Ingredients</h2>
             <ul class="ingredients">
                 <li *ngFor="let ingredient of metricOriginalIngredientList; let i = index" fxLayout="row"
                     fxLayoutAlign="start start" fxLayoutGap="20">
-                    <!-- <button class="bullet-point">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
-                            <path
-                                d="M11,22A11,11,0,0,1,3.222,3.222,11,11,0,1,1,18.778,18.778,10.928,10.928,0,0,1,11,22ZM11,2a9,9,0,1,0,9,9A9.01,9.01,0,0,0,11,2Z"
-                                transform="translate(0 0)"></path>
-                        </svg>
-                    </button>
-                    <button>
-                        <div class="ingredient">
-                            {{ingredient}}
-                        </div>
-                    </button> -->
 
-                    <button class="bullet-point">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
-                            <path
-                                d="M11,22A11,11,0,0,1,3.222,3.222,11,11,0,1,1,18.778,18.778,10.928,10.928,0,0,1,11,22ZM11,2a9,9,0,1,0,9,9A9.01,9.01,0,0,0,11,2Z"
-                                transform="translate(0 0)"></path>
-                        </svg>
-                    </button>
+                    <mat-checkbox class="custom-frame" (click)="checkUncheckFilter(ingredient)"> </mat-checkbox>
                     <button>
                         <div class="ingredient">
                             {{ingredient}}
@@ -177,6 +138,10 @@
             </ul>
         </div>
     </div>
+
+    <h1 class="similar">Similar Recipes</h1>
+    <app-suggestions></app-suggestions>
+
 </body>
 
 <div class="test">

@@ -12,6 +12,7 @@
 
 }
 
+
 /* adjust media queure and .test for printing*/
 .test {
     visibility: hidden;
@@ -33,6 +34,7 @@
 }
 
 
+
 /* buttons */
 .buttons svg:hover {
     fill: red;
@@ -51,7 +53,6 @@
 .saved {
     color: coral;
 }
-
 
 
 /* Image & nutrition label */
@@ -96,7 +97,6 @@ hr {
     list-style-type: none;
 }
 
-
 .nutrition-label .data {
     float: right;
     color: black;
@@ -110,12 +110,13 @@ hr {
 }
 
 h2 {
+    color: #303030;
     font-family: "Playfair", serif;
     font-size: 30px;
 }
 
-/* quick facts */
 
+/* quick facts */
 .quick-facts {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -140,6 +141,7 @@ h4 {
     width: 1px;
 }
 
+
 /* Ingredients & instruction*/
 .ingredients,
 .instructions {
@@ -150,6 +152,7 @@ h4 {
 .ingredients li {
     line-height: 1.5;
     padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .ingredients .ingredient {
@@ -178,26 +181,24 @@ h4 {
 }
 
 
-
 /* bullet point */
 li button {
     padding: 0px;
     margin: 0px;
 
+
     background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
 }
 
-.bullet-point svg{
+.bullet-point svg {
     padding-top: 2px;
 }
-
-
 
 .step-decor {
     font-size: 14px;
@@ -232,7 +233,7 @@ li button {
 
 .helpful-info .info h2 {
     font-size: 14px;
-    color: black;
+    color: #303030;
     font-family: "Inter", sans-serif;
 }
 
@@ -246,9 +247,37 @@ li button {
     fill: #525252;
 }
 
+h1 {
+    color: #303030;
+    font-family: "Playfair", serif;
+    font-size: 40px;
+    width: 100%;
+    margin-top: 40px;
+}
 
 
+.similar hr {
+    border: 0;
+    clear: both;
+    display: block;
+    width: 100%;
+    background-color: #000000;
+    height: 1px;
+}
 
+:host ::ng-deep .custom-frame .mat-checkbox-background,
+:host ::ng-deep .custom-frame .mat-checkbox-frame {
+    border-radius: 70% !important;
+}
 
+:host ::ng-deep .mat-checkbox-inner-container {
+    margin-top: 2px;
+    height: 23px;
+    width: 23px;
+}
 
-
+:host ::ng-deep .mat-checkbox-label {
+    color: #303030;
+    font-size: 18px;
+    font-family: "Inter", sans-serif;
+}

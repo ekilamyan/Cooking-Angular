@@ -54,7 +54,7 @@ export class FiltersDialogComponent implements OnInit {
         filters = this.intolerances;
         break;
       case 'mealTypes':
-        filters = this.mealTypes;
+        filters = this.mealTypes;10
         break;
       default:
         break;

@@ -21,6 +21,10 @@ hr {
     height: 1px;
 }
 
+.clear-all-chips {
+    background-color: rgb(233, 143, 143);
+}
+
 /* Input box */
 .inputBox {
     width: 100%;

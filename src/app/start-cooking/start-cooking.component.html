@@ -4,6 +4,25 @@
         <h1>Start Cooking</h1>
 
         <hr>
+        
+        <div class="filters">
+            <mat-chip-list #chipList>
+                <mat-chip *ngFor="let item of filters; let i = index">
+                    {{filters[i]}}
+                    <button matChipRemove (click)="removeFilter(i)">
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip>
+    
+                <mat-chip class="clear-all-chips" *ngIf="filters.length >= 2">
+                    Clear All
+                    <button matChipRemove (click)="removeAllChips()">
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip>
+    
+            </mat-chip-list>
+        </div>
 
         <div class="search-bar" fxLayout="row" fxLayoutAlign="space-between center">
             <form class="ingredient-search" [formGroup]="ingredientSearchForm" fxFlex="75">
@@ -14,7 +33,7 @@
                         [matAutocomplete]="auto">
                     <mat-autocomplete #auto="matAutocomplete">
                         <!-- <mat-spinner></mat-spinner> -->
-                        <mat-option *ngFor="let option of ingredients">
+                        <mat-option *ngFor="let option of ingredients" (click)="addfilter(option.name)">
                             {{capitalizeFirstLetter(option.name)}}
                         </mat-option>
                     </mat-autocomplete>
@@ -24,10 +43,10 @@
             <div class="filter-button" fxFlex="10">
                 <button mat-stroked-button [matMenuTriggerFor]="belowMenu">Sort</button>
                 <mat-menu #belowMenu="matMenu" yPosition="below">
-                    <button mat-menu-item (click)="sortAlphabetically()">A-Z</button>
+                    <button mat-menu-item>A-Z</button> <!-- (click)="sortAlphabetically()" -->
                     <!-- <button mat-menu-item (click)="maximizeMissing()">Maximize Used Ingredients</button>
                     <button mat-menu-item (click)="minimizeMissing()">Minimize Missing Ingredients</button> -->
-                    <button mat-menu-item (click)="sortRecipesByType()">Recipe Type</button>
+                    <button mat-menu-item >Recipe Type</button> <!-- (click)="sortRecipesByType()" -->
                     <button mat-menu-item> Saved Recipes</button>
                 </mat-menu>
             </div>
@@ -44,7 +63,7 @@
         <div *ngIf="!sortByType">
             <div class="search-content">
                 <div class="suggestions-wrapper" fxLayoutGap="25" fxLayout="row wrap" fxLayoutAlign="start center">
-                    <div class="card" *ngFor=" let recipe of recipes" (click)="navToRecipeIntructions(recipe.id)">
+                    <div class="card" *ngFor=" let recipe of filteredRecipes" (click)="navToRecipeIntructions(recipe.id)">
                         <img src="{{recipe.image}}" />
                         <div class="title" fxLayout="wrap">
                             {{recipe.title}}
@@ -56,7 +75,7 @@
 
         <!-- recipes from pantry sorted by category -->
         <div class="sorted-by-type" *ngIf="sortByType" fxLayout="column" fxLayoutAlign="space-between start">
-            <div *ngIf="appetizerCategory.length > 0" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
+            <!-- <div *ngIf="appetizerCategory.length > 0" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
                 <h1>Appetizers</h1>
                 <div class="search-content">
                     <div class="suggestions-wrapper" fxLayoutGap="25" fxLayout="row wrap" fxLayoutAlign="start center">
@@ -236,7 +255,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
         </div>
 
@@ -255,7 +274,6 @@
                 </div>
             </div>
         </div>
-
 
         <hr>
         <div class="tip" fxLayout="column" fxLayoutAlign="center center">

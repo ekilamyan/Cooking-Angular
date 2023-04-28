@@ -1,3 +1,4 @@
+
 import { temporaryAllocator } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -20,21 +21,25 @@ import { CookingData } from '../shared/models/cooking-data.model';
   templateUrl: './start-cooking.component.html',
   styleUrls: ['./start-cooking.component.css']
 })
+
 export class StartCookingComponent implements OnInit {
   public cookingData: CookingData;
   public user: User;
-  public userIngredients = '';
+  public allUserIngredients = '';
   public ingredients: PantryIngredient[] = [];
   public hasRanSearch = false;
 
   public recipeIds = '';
   public savedRecipeIds = '';
+
   public recipesWithMoreInfo: Recipe[] = []
   public savedRecipes: Recipe[] = [];
-  public recipes: Recipe[] = []
+  public tempRecipes: Recipe[] = [];
+  public pantryRecipes: Recipe[] = [];
 
   public filters = [''];
   public filteredRecipes: Recipe[] = [];
+  public filteredIngredients: string[] = [];
 
   public sortByType: boolean = false
 
@@ -56,7 +61,7 @@ export class StartCookingComponent implements OnInit {
   public soupCategory: Recipe[] = [];
   public miscCategory: Recipe[] = [];
 
-  constructor(private myRecipes: PantryService,
+  constructor(private pantryService: PantryService,
     private newRoute: Router,
     private cookingDataService: CookingDataService,
     private service: AutocompleteService,
@@ -65,9 +70,94 @@ export class StartCookingComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.filters = [];
+    this.getPantryRecipes();
+    this.applyFilters();
+  }
+
+  getAllUserIngredients() {
+    for (let i = 0; i < this.cookingData.user_ingredients.meats.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.meats[i] + ',';
+    }
+
+    for (let i = 0; i < this.cookingData.user_ingredients.dairy.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.dairy[i] + ',';
+    }
+
+    for (let i = 0; i < this.cookingData.user_ingredients.baking.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.baking[i] + ',';
+    }
+
+    for (let i = 0; i < this.cookingData.user_ingredients.cannedJarred.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.cannedJarred[i] + ',';
+    }
+
+    for (let i = 0; i < this.cookingData.user_ingredients.condiments.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.condiments[i] + ',';
+    }
+
+    for (let i = 0; i < this.cookingData.user_ingredients.jarredGoods.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.jarredGoods[i] + ',';
+    }
+
+    for (let i = 0; i < this.cookingData.user_ingredients.oilsDressings.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.oilsDressings[i] + ',';
+    }
+
+    for (let i = 0; i < this.cookingData.user_ingredients.pastaRice.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.pastaRice[i] + ',';
+    }
+
+    for (let i = 0; i < this.cookingData.user_ingredients.produce.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.produce[i] + ',';
+    }
+
+    for (let i = 0; i < this.cookingData.user_ingredients.refrigeratedFrozen.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.refrigeratedFrozen[i] + ',';
+    }
+
+    for (let i = 0; i < this.cookingData.user_ingredients.seafood.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.seafood[i] + ',';
+    }
+
+    for (let i = 0; i < this.cookingData.user_ingredients.snacks.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.snacks[i] + ',';
+    }
+
+    for (let i = 0; i < this.cookingData.user_ingredients.spicesSeasonings.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.spicesSeasonings[i] + ',';
+    }
+
+    for (let i = 0; i < this.cookingData.user_ingredients.misc.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.misc[i] + ',';
+    }
+  }
+
+  getPantryRecipes() {
     this.cookingDataService.cookingData.subscribe((cookingData: CookingData) => {
       if (cookingData) {
         this.cookingData = cookingData;
+        this.getAllUserIngredients();
+        // console.log(this.allUserIngredients);
+
+        this.pantryService.recipesWithPantry(this.allUserIngredients).subscribe((res: Recipe[]) => {
+          if (res) {
+            this.tempRecipes = res;
+          }
+          // console.log(this.tempRecipes);
+          for (let i = 0; i < this.tempRecipes.length; i++) {
+            this.recipeIds = this.recipeIds + this.tempRecipes[i].id + ',';
+          }
+
+          this.suggestionsService.getSuggestionsBulk(this.recipeIds).subscribe((temp: Recipe[]) => {
+            if (temp) {
+              for (let i = 0; i < temp.length; i++) {
+                this.pantryRecipes[i] = new Recipe(temp[i]);
+              }
+              console.log(this.pantryRecipes);
+            }
+          });
+        });
 
         if (this.cookingData.saved_recipes) {
           for (let i = 0; i < this.cookingData.saved_recipes.length; i++) {
@@ -76,7 +166,7 @@ export class StartCookingComponent implements OnInit {
               this.savedRecipeIds = this.savedRecipeIds + ',';
             }
           }
-  
+
           this.suggestionsService.getSuggestionsBulk(this.savedRecipeIds).subscribe((temp: any[]) => {
             if (temp) {
               for (let i = 0; i < temp.length; i++) {
@@ -85,216 +175,34 @@ export class StartCookingComponent implements OnInit {
             }
           });
         }
+      }
+    });
 
-        if (this.cookingData) {
-          this.setCookingObjects();
+    this.ingredientSearchForm.get('ingredient')?.valueChanges.pipe(
+      debounceTime(400),
+      distinctUntilChanged()).subscribe((searchTerm: string) => {
+        if (!searchTerm || searchTerm === '') {
+          this.ingredients = [];
+          return;
         }
-      }
-    });
 
-    // this.ingredientSearchForm.get('ingredient')?.valueChanges.pipe(
-    // debounceTime(400),
-    // distinctUntilChanged()).subscribe((searchTerm: string) => {
-    //   if (!searchTerm || searchTerm === '') {
-    //     this.ingredients = [];
-    //     return;
-    //   }
-
-    //   this.service.getIngredientAutocomplete(searchTerm).subscribe((temp: any[]) => {
-    //     this.ingredients = [];
-    //     this.hasRanSearch = true;
-    //     for (let i = 0; i < temp.length; i++) {
-    //       this.ingredients.push(new PantryIngredient(temp[i]));
-    //       console.log(temp[i]);
-    //     }
-    //   });
-    // })
-  }
-
-  setCookingObjects() {
-    const userIngredients = this.cookingData.user_ingredients;
-    // const keys = Object.keys(userIngredients);
-  
-    // for (let i = 0; i < keys.length; i++) {
-    //   const myKey = <string>keys[i];
-    //   const values = Object.values(userIngredients);
-  
-    //   for (let j = 0; j < values.length; j++) {
-    //     this.userIngredients = this.userIngredients + values[j] + ',';
-    //   }
-    // }
-  
-    // console.log(this.userIngredients);
-    
-
-    for (let i = 0; i < this.cookingData.user_ingredients.baking.length; i++) {
-      this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.baking[i] + ',';
-    }
-
-    for (let i = 0; i < this.cookingData.user_ingredients.cannedJarred.length; i++) {
-      this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.cannedJarred[i] + ',';
-    }
-
-    for (let i = 0; i < this.cookingData.user_ingredients.condiments.length; i++) {
-      this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.condiments[i] + ',';
-    }
-
-    for (let i = 0; i < this.cookingData.user_ingredients.dairy.length; i++) {
-      this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.dairy[i] + ',';
-    }
-
-    for (let i = 0; i < this.cookingData.user_ingredients.jarredGoods.length; i++) {
-      this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.jarredGoods[i] + ',';
-    }
-
-    for (let i = 0; i < this.cookingData.user_ingredients.meats.length; i++) {
-      this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.meats[i] + ',';
-    }
-
-    for (let i = 0; i < this.cookingData.user_ingredients.oilsDressings.length; i++) {
-      this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.oilsDressings[i] + ',';
-    }
-
-    for (let i = 0; i < this.cookingData.user_ingredients.pastaRice.length; i++) {
-      this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.pastaRice[i] + ',';
-    }
-
-    for (let i = 0; i < this.cookingData.user_ingredients.produce.length; i++) {
-      this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.produce[i] + ',';
-    }
-
-    for (let i = 0; i < this.cookingData.user_ingredients.refrigeratedFrozen.length; i++) {
-      this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.refrigeratedFrozen[i] + ',';
-    }
-
-    for (let i = 0; i < this.cookingData.user_ingredients.seafood.length; i++) {
-      this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.seafood[i] + ',';
-    }
-
-    for (let i = 0; i < this.cookingData.user_ingredients.snacks.length; i++) {
-      this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.snacks[i] + ',';
-    }
-
-    for (let i = 0; i < this.cookingData.user_ingredients.spicesSeasonings.length; i++) {
-      this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.spicesSeasonings[i] + ',';
-    }
-
-    for (let i = 0; i < this.cookingData.user_ingredients.misc.length; i++) {
-      this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.misc[i] + ',';
-    }
-
-    this.myRecipes.recipesWithPantry(this.userIngredients).subscribe((temp: any) => {
-      if (temp) {
-        for (let i = 0; i < temp.length; i++) {
-          this.recipes[i] = temp[i];
-        }
-      }
-    });
-
-  }
-
-  navToRecipeIntructions(id: string) {
-    this.newRoute.navigate(['/recipe-instructions'], { queryParams: { id } });
-  }
-
-  sortRecipesByType() {
-    for (let i = 0; i < this.recipes.length; i++) {
-      this.recipeIds = this.recipeIds + this.recipes[i].id;
-      if (i < this.recipes.length - 1) {
-        this.recipeIds = this.recipeIds + ',';
-      }
-    }
-
-    this.suggestionsService.getSuggestionsBulk(this.recipeIds).subscribe((temp: any[]) => {
-      if (temp) {
-        for (let i = 0; i < temp.length; i++) {
-          this.recipesWithMoreInfo[i] = temp[i];
-
-          if (this.recipesWithMoreInfo[i].dishTypes.includes('appetizer') || this.recipesWithMoreInfo[i].dishTypes[0] == 'finger food') {
-            this.appetizerCategory.push(this.recipesWithMoreInfo[i]);
+        this.service.getIngredientAutocomplete(searchTerm).subscribe((temp: any[]) => {
+          this.ingredients = [];
+          this.hasRanSearch = true;
+          for (let i = 0; i < temp.length; i++) {
+            this.ingredients.push(new PantryIngredient(temp[i]));
+            console.log(temp[i]);
           }
-          else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'beverage' || this.recipesWithMoreInfo[i].dishTypes[0] == 'drink') {
-            this.beverageCategory.push(this.recipesWithMoreInfo[i]);
-          }
-          else if (this.recipesWithMoreInfo[i].dishTypes.includes('breakfast') || this.recipesWithMoreInfo[0].dishTypes.includes('morning meal')) {
-            this.breakfastCategory.push(this.recipesWithMoreInfo[i]);
-          }
-          else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'dessert' || this.recipesWithMoreInfo[i].dishTypes[0] == 'bread') {
-            this.dessertCategory.push(this.recipesWithMoreInfo[i]);
-          }
-          else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'dinner') {
-            this.dinnerCategory.push(this.recipesWithMoreInfo[i]);
-          }
-          else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'lunch') {
-            this.lunchCategory.push(this.recipesWithMoreInfo[i]);
-          }
-          else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'main course' || this.recipesWithMoreInfo[i].dishTypes[0] == 'main dish') {
-            this.mainCourseCategory.push(this.recipesWithMoreInfo[i]);
-          }
-          else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'sauce' || this.recipesWithMoreInfo[i].dishTypes[0] == 'marinade') {
-            this.sauceCategory.push(this.recipesWithMoreInfo[i]);
-          }
-          else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'side dish') {
-            this.sideDishCategory.push(this.recipesWithMoreInfo[i]);
-          }
-          else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'salad') {
-            this.saladCategory.push(this.recipesWithMoreInfo[i]);
-          }
-          else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'soup') {
-            this.soupCategory.push(this.recipesWithMoreInfo[i]);
-          }
-          else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'snack') {
-            this.snackCategory.push(this.recipesWithMoreInfo[i]);
-          } else {
-            this.miscCategory.push(this.recipesWithMoreInfo[i]);
-          }
-        }
-        this.appetizerCategory.sort((a, b) => a.title.localeCompare(b.title));
-        this.beverageCategory.sort((a, b) => a.title.localeCompare(b.title));
-        this.breakfastCategory.sort((a, b) => a.title.localeCompare(b.title));
-        this.dessertCategory.sort((a, b) => a.title.localeCompare(b.title));
-        this.dinnerCategory.sort((a, b) => a.title.localeCompare(b.title));
-        this.lunchCategory.sort((a, b) => a.title.localeCompare(b.title));
-        this.mainCourseCategory.sort((a, b) => a.title.localeCompare(b.title));
-        this.sauceCategory.sort((a, b) => a.title.localeCompare(b.title));
-        this.sideDishCategory.sort((a, b) => a.title.localeCompare(b.title));
-        this.saladCategory.sort((a, b) => a.title.localeCompare(b.title));
-        this.soupCategory.sort((a, b) => a.title.localeCompare(b.title));
-        this.snackCategory.sort((a, b) => a.title.localeCompare(b.title));
-        this.miscCategory.sort((a, b) => a.title.localeCompare(b.title));
-      }
-    });
-
-    this.sortByType = !this.sortByType;
-  }
-
-  sortAlphabetically() {
-    this.recipes.sort((a, b) => a.title.localeCompare(b.title));
-    this.sortByType = !this.sortByType;
-  }
-
-  minimizeMissing() {
-    console.log(this.userIngredients);
-    this.myRecipes.recipesWithPantryMinimizeMissing(this.userIngredients).subscribe((temp: any) => {
-      for (let i = 0; i < temp.length; i++) {
-        this.recipes[i] = temp[i];
-      }
-      console.log(this.recipes);
-    });
-  }
-
-  maximizeMissing() {
-    console.log(this.userIngredients);
-    this.myRecipes.recipesWithPantryMaximizeMissing(this.userIngredients).subscribe((temp: any) => {
-      for (let i = 0; i < temp.length; i++) {
-        this.recipes[i] = temp[i];
-      }
-      console.log(this.recipes);
-    });
+        });
+      })
   }
 
   capitalizeFirstLetter(word: string) {
     return word.charAt(0).toUpperCase() + word.slice(1);
+  }
+
+  navToRecipeIntructions(id: string) {
+    this.newRoute.navigate(['/recipe-instructions'], { queryParams: { id } });
   }
 
   openDialog(): void {
@@ -309,15 +217,16 @@ export class StartCookingComponent implements OnInit {
   }
 
   applyFilters() {
+    console.log(this.filters);
     if (this.filters.length === 0) {
-      this.filteredRecipes = this.recipes;
+      this.filteredRecipes = this.pantryRecipes;
       return;
     }
 
     const tempRecipies: Recipe[] = [];
 
-    for (let i = 0; i < this.recipes.length; i++) {
-      const filtersTag = this.recipes[i].filterTags;
+    for (let i = 0; i < this.pantryRecipes.length; i++) {
+      const filtersTag = this.pantryRecipes[i].filterTags;
 
       if (this.hasAllFilterTags(filtersTag)) {
         tempRecipies.push(this.filteredRecipes[i]);
@@ -330,27 +239,227 @@ export class StartCookingComponent implements OnInit {
   hasAllFilterTags(recipeFiltersTag: string[]): boolean {
     for (let i = 0; i < this.filters.length; i++) {
       const filter = this.filters[i];
-      console.log(this.filters[i]);
-      console.log("check filter: " + filter);
-
       if (!recipeFiltersTag.includes(filter)) {
         return false;
       }
     }
-
     return true;
+  }
+
+  addfilter(filter: string) {
+    this.filters.push(filter);
+    this.applyFilters();
   }
 
   removeFilter(i: number) {
     if (i > -1) {
       this.filters.splice(i, 1);
     }
+    this.applyFilters();
   }
 
   removeAllChips() {
     this.filters = [];
+    this.applyFilters();
   }
-
 }
 
 
+
+
+    //   // this.ingredientSearchForm.get('ingredient')?.valueChanges.pipe(
+    //   // debounceTime(400),
+    //   // distinctUntilChanged()).subscribe((searchTerm: string) => {
+    //   //   if (!searchTerm || searchTerm === '') {
+    //   //     this.ingredients = [];
+    //   //     return;
+    //   //   }
+
+    //   //   this.service.getIngredientAutocomplete(searchTerm).subscribe((temp: any[]) => {
+    //   //     this.ingredients = [];
+    //   //     this.hasRanSearch = true;
+    //   //     for (let i = 0; i < temp.length; i++) {
+    //   //       this.ingredients.push(new PantryIngredient(temp[i]));
+    //   //       console.log(temp[i]);
+    //   //     }
+    //   //   });
+    //   // })
+    // }
+
+    // setCookingObjects() {
+    //   const userIngredients = this.cookingData.user_ingredients;
+    //   // const keys = Object.keys(userIngredients);
+
+    //   // for (let i = 0; i < keys.length; i++) {
+    //   //   const myKey = <string>keys[i];
+    //   //   const values = Object.values(userIngredients);
+
+    //   //   for (let j = 0; j < values.length; j++) {
+    //   //     this.userIngredients = this.userIngredients + values[j] + ',';
+    //   //   }
+    //   // }
+
+    //   // console.log(this.userIngredients);
+
+
+    //   for (let i = 0; i < this.cookingData.user_ingredients.baking.length; i++) {
+    //     this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.baking[i] + ',';
+    //   }
+
+    //   for (let i = 0; i < this.cookingData.user_ingredients.cannedJarred.length; i++) {
+    //     this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.cannedJarred[i] + ',';
+    //   }
+
+    //   for (let i = 0; i < this.cookingData.user_ingredients.condiments.length; i++) {
+    //     this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.condiments[i] + ',';
+    //   }
+
+    //   for (let i = 0; i < this.cookingData.user_ingredients.dairy.length; i++) {
+    //     this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.dairy[i] + ',';
+    //   }
+
+    //   for (let i = 0; i < this.cookingData.user_ingredients.jarredGoods.length; i++) {
+    //     this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.jarredGoods[i] + ',';
+    //   }
+
+    //   for (let i = 0; i < this.cookingData.user_ingredients.meats.length; i++) {
+    //     this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.meats[i] + ',';
+    //   }
+
+    //   for (let i = 0; i < this.cookingData.user_ingredients.oilsDressings.length; i++) {
+    //     this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.oilsDressings[i] + ',';
+    //   }
+
+    //   for (let i = 0; i < this.cookingData.user_ingredients.pastaRice.length; i++) {
+    //     this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.pastaRice[i] + ',';
+    //   }
+
+    //   for (let i = 0; i < this.cookingData.user_ingredients.produce.length; i++) {
+    //     this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.produce[i] + ',';
+    //   }
+
+    //   for (let i = 0; i < this.cookingData.user_ingredients.refrigeratedFrozen.length; i++) {
+    //     this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.refrigeratedFrozen[i] + ',';
+    //   }
+
+    //   for (let i = 0; i < this.cookingData.user_ingredients.seafood.length; i++) {
+    //     this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.seafood[i] + ',';
+    //   }
+
+    //   for (let i = 0; i < this.cookingData.user_ingredients.snacks.length; i++) {
+    //     this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.snacks[i] + ',';
+    //   }
+
+    //   for (let i = 0; i < this.cookingData.user_ingredients.spicesSeasonings.length; i++) {
+    //     this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.spicesSeasonings[i] + ',';
+    //   }
+
+    //   for (let i = 0; i < this.cookingData.user_ingredients.misc.length; i++) {
+    //     this.userIngredients = this.userIngredients + this.cookingData.user_ingredients.misc[i] + ',';
+    //   }
+
+    //   this.myRecipes.recipesWithPantry(this.userIngredients).subscribe((temp: any) => {
+    //     if (temp) {
+    //       for (let i = 0; i < temp.length; i++) {
+    //         this.recipes[i] = temp[i];
+    //       }
+    //     }
+    //   });
+
+    // }
+
+    // sortRecipesByType() {
+    //   for (let i = 0; i < this.recipes.length; i++) {
+    //     this.recipeIds = this.recipeIds + this.recipes[i].id;
+    //     if (i < this.recipes.length - 1) {
+    //       this.recipeIds = this.recipeIds + ',';
+    //     }
+    //   }
+
+    //   this.suggestionsService.getSuggestionsBulk(this.recipeIds).subscribe((temp: any[]) => {
+    //     if (temp) {
+    //       for (let i = 0; i < temp.length; i++) {
+    //         this.recipesWithMoreInfo[i] = temp[i];
+
+    //         if (this.recipesWithMoreInfo[i].dishTypes.includes('appetizer') || this.recipesWithMoreInfo[i].dishTypes[0] == 'finger food') {
+    //           this.appetizerCategory.push(this.recipesWithMoreInfo[i]);
+    //         }
+    //         else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'beverage' || this.recipesWithMoreInfo[i].dishTypes[0] == 'drink') {
+    //           this.beverageCategory.push(this.recipesWithMoreInfo[i]);
+    //         }
+    //         else if (this.recipesWithMoreInfo[i].dishTypes.includes('breakfast') || this.recipesWithMoreInfo[0].dishTypes.includes('morning meal')) {
+    //           this.breakfastCategory.push(this.recipesWithMoreInfo[i]);
+    //         }
+    //         else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'dessert' || this.recipesWithMoreInfo[i].dishTypes[0] == 'bread') {
+    //           this.dessertCategory.push(this.recipesWithMoreInfo[i]);
+    //         }
+    //         else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'dinner') {
+    //           this.dinnerCategory.push(this.recipesWithMoreInfo[i]);
+    //         }
+    //         else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'lunch') {
+    //           this.lunchCategory.push(this.recipesWithMoreInfo[i]);
+    //         }
+    //         else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'main course' || this.recipesWithMoreInfo[i].dishTypes[0] == 'main dish') {
+    //           this.mainCourseCategory.push(this.recipesWithMoreInfo[i]);
+    //         }
+    //         else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'sauce' || this.recipesWithMoreInfo[i].dishTypes[0] == 'marinade') {
+    //           this.sauceCategory.push(this.recipesWithMoreInfo[i]);
+    //         }
+    //         else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'side dish') {
+    //           this.sideDishCategory.push(this.recipesWithMoreInfo[i]);
+    //         }
+    //         else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'salad') {
+    //           this.saladCategory.push(this.recipesWithMoreInfo[i]);
+    //         }
+    //         else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'soup') {
+    //           this.soupCategory.push(this.recipesWithMoreInfo[i]);
+    //         }
+    //         else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'snack') {
+    //           this.snackCategory.push(this.recipesWithMoreInfo[i]);
+    //         } else {
+    //           this.miscCategory.push(this.recipesWithMoreInfo[i]);
+    //         }
+    //       }
+    //       this.appetizerCategory.sort((a, b) => a.title.localeCompare(b.title));
+    //       this.beverageCategory.sort((a, b) => a.title.localeCompare(b.title));
+    //       this.breakfastCategory.sort((a, b) => a.title.localeCompare(b.title));
+    //       this.dessertCategory.sort((a, b) => a.title.localeCompare(b.title));
+    //       this.dinnerCategory.sort((a, b) => a.title.localeCompare(b.title));
+    //       this.lunchCategory.sort((a, b) => a.title.localeCompare(b.title));
+    //       this.mainCourseCategory.sort((a, b) => a.title.localeCompare(b.title));
+    //       this.sauceCategory.sort((a, b) => a.title.localeCompare(b.title));
+    //       this.sideDishCategory.sort((a, b) => a.title.localeCompare(b.title));
+    //       this.saladCategory.sort((a, b) => a.title.localeCompare(b.title));
+    //       this.soupCategory.sort((a, b) => a.title.localeCompare(b.title));
+    //       this.snackCategory.sort((a, b) => a.title.localeCompare(b.title));
+    //       this.miscCategory.sort((a, b) => a.title.localeCompare(b.title));
+    //     }
+    //   });
+
+    //   this.sortByType = !this.sortByType;
+    // }
+
+    // sortAlphabetically() {
+    //   this.recipes.sort((a, b) => a.title.localeCompare(b.title));
+    //   this.sortByType = !this.sortByType;
+    // }
+
+    // minimizeMissing() {
+    //   console.log(this.userIngredients);
+    //   this.myRecipes.recipesWithPantryMinimizeMissing(this.userIngredients).subscribe((temp: any) => {
+    //     for (let i = 0; i < temp.length; i++) {
+    //       this.recipes[i] = temp[i];
+    //     }
+    //     console.log(this.recipes);
+    //   });
+    // }
+
+    // maximizeMissing() {
+    //   console.log(this.userIngredients);
+    //   this.myRecipes.recipesWithPantryMaximizeMissing(this.userIngredients).subscribe((temp: any) => {
+    //     for (let i = 0; i < temp.length; i++) {
+    //       this.recipes[i] = temp[i];
+    //     }
+    //     console.log(this.recipes);
+    //   });
+    // }

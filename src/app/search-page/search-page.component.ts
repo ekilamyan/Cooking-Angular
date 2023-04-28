@@ -10,7 +10,6 @@ import { FiltersDialogComponent } from '../dialogs/filters-dialog/filters-dialog
 import { Recipe } from '../shared/models/recipe.model';
 import { SuggestionsService } from '../shared/services/suggestions.service';
 import { SearchService } from '../shared/services/search.service';
-import { resourceLimits } from 'worker_threads';
 
 @Component({
   selector: 'app-search-page',
@@ -91,7 +90,7 @@ export class SearchPageComponent implements OnInit {
           else if (id == 'smoothie') {
             this.id = '125319';
           }
-          this.suggestionsService.getIds(this.id, 3).subscribe((temp: any[]) => {
+          this.suggestionsService.getIds(this.id, 20).subscribe((temp: any[]) => {
             this.ids = this.id + ',';
             for (let i = 0; i < temp.length; i++) {
               this.ids = this.ids + temp[i].id;
@@ -100,9 +99,9 @@ export class SearchPageComponent implements OnInit {
               }
             }
             /* find recipes with list of ids */
-            this.suggestionsService.getSuggestionsBulk(this.ids).subscribe((esh: any[]) => {
-              for (let i = 0; i < esh.length; i++) {
-                this.recipes[i] = new Recipe(esh[i]);
+            this.suggestionsService.getSuggestionsBulk(this.ids).subscribe((res: any[]) => {
+              for (let i = 0; i < res.length; i++) {
+                this.recipes[i] = new Recipe(res[i]);
               }
               this.searchedWord = this.recipes[0].title;
               this.applyFilters();
@@ -111,6 +110,7 @@ export class SearchPageComponent implements OnInit {
           });
         }
       }
+
     })
 
     this.recipeSearchForm = this.formBuilder.group({
@@ -137,18 +137,14 @@ export class SearchPageComponent implements OnInit {
       })
   }
 
-  ngOnDestroy() {
-    this.searchSubscription.unsubscribe();
-  }
-
   openDialog(): void {
     const dialogRef = this.dialog.open(FiltersDialogComponent, {
       data: this.filters,
       panelClass: 'custom-modalbox'
     });
 
-    dialogRef.afterClosed().subscribe( (res: any) => {
-        this.applyFilters();
+    dialogRef.afterClosed().subscribe((res: any) => {
+      this.applyFilters();
     })
   }
 
@@ -190,17 +186,16 @@ export class SearchPageComponent implements OnInit {
     if (i > -1) {
       this.filters.splice(i, 1);
     }
+    this.applyFilters();
   }
+
   removeAllChips() {
     this.filters = [];
+    this.applyFilters();
   }
 
   capitalizeFirstLetter(word: string) {
     return word.charAt(0).toUpperCase() + word.slice(1);
-  }
-
-  changeResults(id: string) {
-    this.searchService.lastSearchId.next(id);
   }
 
   navToRecipeIntructions(id: string) {
@@ -208,7 +203,15 @@ export class SearchPageComponent implements OnInit {
   }
 
   removeRecipe(recipe: Recipe) {
-    console.log("rmeove receipe alled");
+    console.log("remove receipe alled");
     return true;
+  }
+
+  changeResults(id: string) {
+    this.searchService.lastSearchId.next(id);
+  }
+
+  ngOnDestroy() {
+    this.searchSubscription.unsubscribe();
   }
 }

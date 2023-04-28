@@ -63,28 +63,36 @@ export class MyPantryComponent implements OnInit {
 
         this.ingredientArrays = Object.entries(this.cookingData.user_ingredients).sort();
 
-        for(let i = 0; i < this.ingredientArrays.length; i++) {
-          if(this.ingredientArrays[i][1].length > 0) {
+        for (let i = 0; i < this.ingredientArrays.length; i++) {
+          if (this.ingredientArrays[i][1].length > 0) {
             this.ingredientcount++;
           }
         }
 
-        if(this.ingredientcount > 0) {
+        if (this.ingredientcount > 0) {
+          let misc;
           this.blank = true;
           for (let i = 0; i < this.ingredientArrays.length; i++) {
-            if (this.count == 1 && this.ingredientArrays[i] && this.ingredientArrays[i][1].length > 0) {
-              this.indexOne.push(this.ingredientArrays[i]);
+            if (this.ingredientArrays[i][0] == 'misc') {
+              misc = this.ingredientArrays[i];
               this.count++;
-            }
-            else if (this.count == 2 && this.ingredientArrays[i] && this.ingredientArrays[i][1].length > 0) {
-              this.indexTwo.push(this.ingredientArrays[i]);
-              this.count++;
-            }
-            else if (this.count == 3 && this.ingredientArrays[i] && this.ingredientArrays[i][1].length > 0) {
-              this.indexThree.push(this.ingredientArrays[i]);
-              this.count = 1;
-            }
+            } else
+              if (this.count == 1 && this.ingredientArrays[i] && this.ingredientArrays[i][1].length > 0) {
+                this.indexOne.push(this.ingredientArrays[i]);
+                this.count++;
+              }
+              else if (this.count == 2 && this.ingredientArrays[i] && this.ingredientArrays[i][1].length > 0) {
+                this.indexTwo.push(this.ingredientArrays[i]);
+                this.count++;
+              }
+              else if (this.count == 3 && this.ingredientArrays[i] && this.ingredientArrays[i][1].length > 0) {
+                this.indexThree.push(this.ingredientArrays[i]);
+                this.count = 1;
+              }
           }
+
+          this.indexThree.push(misc);
+
         } else {
           this.blank = false
         }

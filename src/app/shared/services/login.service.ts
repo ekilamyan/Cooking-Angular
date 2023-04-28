@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user.model';
 import { Amplify, Auth } from 'aws-amplify';
 import { CognitoUser } from '@aws-amplify/auth';
+import { CookingData } from '../models/cooking-data.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class LoginService {
   public durationInSeconds = 5;
   public user = new BehaviorSubject<User>(null);
   private congitoUser: CognitoUser;
+  private cookingData: CookingData;
 
   public url = "https://lbxlgv1fnj.execute-api.us-west-1.amazonaws.com/prod"; 
 

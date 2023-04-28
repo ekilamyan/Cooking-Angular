@@ -5,6 +5,7 @@ import { SearchService } from '../shared/services/search.service';
 import { SuggestionsService } from '../shared/services/suggestions.service';
 import { CookingData } from '../shared/models/cooking-data.model';
 import { CookingDataService } from '../shared/services/cooking-data.service';
+import { log } from 'console';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,39 +23,43 @@ export class DashboardComponent implements OnInit {
   public recipes: Recipe[] = [];
   public cookingData: CookingData;
 
-  constructor(private suggestions: SuggestionsService, 
+  constructor(private suggestions: SuggestionsService,
     private searchService: SearchService,
-    private cookingDataService: CookingDataService, 
+    private cookingDataService: CookingDataService,
     private route: Router,
     public newRoute: Router,) {
   }
 
   ngOnInit(): void {
-    this.suggestions.getRandomIds(1).subscribe((responce: any) => {
-      console.log('here');
-      for (let i = 0; i < responce.recipes.length; i++) {
-        this.recipes[i] = responce.recipes[i];
-        this.recipes[i].image = responce.recipes[i].image.replace('556x370', '636x393');    
-      }
-    })
-    
+
+    this.getShowcaseRecipe();
+
     this.cookingDataService.cookingData.subscribe((cookingData: CookingData) => {
       if (cookingData) {
         this.cookingData = cookingData;
       }
     });
 
-    this.ingredientArrays = Object.entries(this.cookingData.user_ingredients).sort();
+  }
 
-    for(let i = 0; i < this.ingredientArrays.length; i++) {
-      if(this.ingredientArrays[i][1].length > 0) {
-        this.ingredientcount++;
-      }
-    }
+  getShowcaseRecipe() {
+    let length = 0;
+    //  do {
+      this.suggestions.getRandomIds(1).subscribe((responce: any) => {
+        if (responce) {
+          console.log(responce);
+          this.recipes[0] = responce.recipes[0];
+          this.recipes[0].image = responce.recipes[0].image.replace('556x370', '636x393');
+          length = (this.recipes[0].title).length;
+
+          console.log(length);
+        }
+      })
+    //  } while(length > 45);
   }
 
   navToRecipeIntructions(id: string) {
-    this.newRoute.navigate(['/recipe-instructions'], {queryParams:{id}});
+    this.newRoute.navigate(['/recipe-instructions'], { queryParams: { id } });
   }
 
   navToSearchPage(id: string) {
