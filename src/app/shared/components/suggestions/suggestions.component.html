@@ -1,4 +1,24 @@
-<div class="suggestions-wrapper" fxLayout="row wrap" fxLayoutAlign="space-between stretch">
+<div *ngIf="isLoading" class="skeleton-loader-wrapper">
+   <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
+        <div fxFlex="25">
+            <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+        </div>
+        <div fxFlex="25">
+            <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+        </div>
+        <div fxFlex="25">
+            <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+        </div>
+        <div fxFlex="25">
+            <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+        </div>
+    </div>
+</div>
+<div *ngIf="!isLoading" class="suggestions-wrapper" fxLayout="row wrap" fxLayoutAlign="space-between stretch">
     <div class="card" *ngFor=" let recipe of recipes"  fxLayout="column" fxLayoutAlign="start start" (click)="navToRecipeIntructions(recipe.id)">
         <img *ngIf="recipe.image" src="{{recipe.image}}"/>
         <div class="card-body" fxLayout="row wrap">

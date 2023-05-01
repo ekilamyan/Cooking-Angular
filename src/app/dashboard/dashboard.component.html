@@ -1,6 +1,13 @@
 <app-navbar></app-navbar>
 <div class="main-container">
     <div class="showcase-container">
+        <div *ngIf="isLoading" class="skeleton-loader-wrapper">
+            <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
+                <div fxFlex="100">
+                    <ngx-skeleton-loader [theme]="{ height: '450px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                </div>
+            </div>
+        </div>
         <div class="items" *ngFor="let recipe of recipes">
             <div class="showcase-area">
                 <img fxFlex="60" src="{{recipe.image}}">

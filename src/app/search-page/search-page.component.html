@@ -45,7 +45,80 @@
             <button mat-stroked-button (click)="openDialog()">Filters</button>
         </div>
     </div>
-
+    <div *ngIf="isLoading" class="skeleton-loader-wrapper">
+        <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
+            <div fxFlex="25">
+                <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            </div>
+            <div fxFlex="25">
+                <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            </div>
+            <div fxFlex="25">
+                <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            </div>
+            <div fxFlex="25">
+                <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
+            <div fxFlex="25">
+                <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            </div>
+            <div fxFlex="25">
+                <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            </div>
+            <div fxFlex="25">
+                <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            </div>
+            <div fxFlex="25">
+                <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
+            <div fxFlex="25">
+                <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            </div>
+            <div fxFlex="25">
+                <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            </div>
+            <div fxFlex="25">
+                <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            </div>
+            <div fxFlex="25">
+                <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
+            <div fxFlex="25">
+                <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            </div>
+            <div fxFlex="25">
+                <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            </div>
+            <div fxFlex="25">
+                <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            </div>
+            <div fxFlex="25">
+                <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            </div>
+        </div>
+    </div>
     <div class="search-content">
         <div class="suggestions-wrapper" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
             <div class="card" *ngFor="let recipe of filteredRecipes" (click)="navToRecipeIntructions(recipe.id)">

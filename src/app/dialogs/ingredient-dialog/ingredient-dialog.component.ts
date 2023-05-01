@@ -194,17 +194,17 @@ export class IngredientDialogComponent implements OnInit {
       this.cookingData.user_ingredients.snacks.splice(this.cookingData.user_ingredients.snacks.indexOf(ingredient), 1);
     } else if (this.data.term == 'Jarred Goods') {
       this.cookingData.user_ingredients.jarredGoods.splice(this.cookingData.user_ingredients.jarredGoods.indexOf(ingredient), 1);
-    } else if (this.data.term == 'Canned & Jarred') {
+    } else if (this.data.term == 'Canned and Jarred') {
       this.cookingData.user_ingredients.cannedJarred.splice(this.cookingData.user_ingredients.cannedJarred.indexOf(ingredient), 1);
-    } else if (this.data.term == 'Spices & Seasonings') {
+    } else if (this.data.term == 'Spices and Seasonings') {
       this.cookingData.user_ingredients.spicesSeasonings.splice(this.cookingData.user_ingredients.spicesSeasonings.indexOf(ingredient), 1);
     } else if (this.data.term == 'Dairy') {
       this.cookingData.user_ingredients.dairy.splice(this.cookingData.user_ingredients.dairy.indexOf(ingredient), 1);
-    } else if (this.data.term == 'Oils & Dressings') {
+    } else if (this.data.term == 'Oils and Dressings') {
       this.cookingData.user_ingredients.oilsDressings.splice(this.cookingData.user_ingredients.oilsDressings.indexOf(ingredient), 1);
-    } else if (this.data.term == 'Pastas & Rice') {
+    } else if (this.data.term == 'Pastas and Rice') {
       this.cookingData.user_ingredients.pastaRice.splice(this.cookingData.user_ingredients.pastaRice.indexOf(ingredient), 1);
-    } else if (this.data.term == 'Frozen & Refrigerated') {
+    } else if (this.data.term == 'Frozen and Refrigerated') {
       this.cookingData.user_ingredients.refrigeratedFrozen.splice(this.cookingData.user_ingredients.condiments.indexOf(ingredient), 1);
     } else {
       this.cookingData.user_ingredients.misc.splice(this.cookingData.user_ingredients.misc.indexOf(ingredient), 1);

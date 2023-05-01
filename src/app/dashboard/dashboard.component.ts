@@ -10,12 +10,33 @@ import { log } from 'console';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  public categoryImages = ['assets/photos/breakfast.jpg', 'assets/photos/gluten-free.jpg', 'assets/photos/vegan.jpg', 'assets/photos/pizza.jpg', 'assets/photos/smoothie.jpg', 'assets/photos/dessert.jpg'];
-  public categoryTitles = ['Breakfast', 'Gluten Free', 'Vegan', 'Pizza', 'Smoothies', 'Desserts'];
-  public categoryTitlesForSearching = ['breakfast', 'gluten free', 'vegan', 'pizza', 'smoothie', 'dessert'];
+  public categoryImages = [
+    'assets/photos/breakfast.jpg',
+    'assets/photos/gluten-free.jpg',
+    'assets/photos/vegan.jpg',
+    'assets/photos/pizza.jpg',
+    'assets/photos/smoothie.jpg',
+    'assets/photos/dessert.jpg',
+  ];
+  public categoryTitles = [
+    'Breakfast',
+    'Gluten Free',
+    'Vegan',
+    'Pizza',
+    'Smoothies',
+    'Desserts',
+  ];
+  public categoryTitlesForSearching = [
+    'breakfast',
+    'gluten free',
+    'vegan',
+    'pizza',
+    'smoothie',
+    'dessert',
+  ];
 
   public ingredientArrays: any[];
   public ingredientcount = 0;
@@ -23,38 +44,45 @@ export class DashboardComponent implements OnInit {
   public recipes: Recipe[] = [];
   public cookingData: CookingData;
 
-  constructor(private suggestions: SuggestionsService,
+  public isLoading: boolean = true;
+
+  constructor(
+    private suggestions: SuggestionsService,
     private searchService: SearchService,
     private cookingDataService: CookingDataService,
     private route: Router,
-    public newRoute: Router,) {
-  }
+    public newRoute: Router
+  ) {}
 
   ngOnInit(): void {
-
     this.getShowcaseRecipe();
 
-    this.cookingDataService.cookingData.subscribe((cookingData: CookingData) => {
-      if (cookingData) {
-        this.cookingData = cookingData;
+    this.cookingDataService.cookingData.subscribe(
+      (cookingData: CookingData) => {
+        if (cookingData) {
+          this.cookingData = cookingData;
+        }
       }
-    });
-
+    );
   }
 
   getShowcaseRecipe() {
     let length = 0;
     //  do {
-      this.suggestions.getRandomIds(1).subscribe((responce: any) => {
-        if (responce) {
-          console.log(responce);
-          this.recipes[0] = responce.recipes[0];
-          this.recipes[0].image = responce.recipes[0].image.replace('556x370', '636x393');
-          length = (this.recipes[0].title).length;
+    this.suggestions.getRandomIds(1).subscribe((responce: any) => {
+      if (responce) {
+        console.log(responce);
+        this.recipes[0] = responce.recipes[0];
+        this.recipes[0].image = responce.recipes[0].image.replace(
+          '556x370',
+          '636x393'
+        );
+        length = this.recipes[0].title.length;
 
-          console.log(length);
-        }
-      })
+        console.log(length);
+        this.isLoading = false;
+      }
+    });
     //  } while(length > 45);
   }
 
@@ -72,5 +100,4 @@ export class DashboardComponent implements OnInit {
       this.route.navigate(['search']);
     }
   }
-
 }

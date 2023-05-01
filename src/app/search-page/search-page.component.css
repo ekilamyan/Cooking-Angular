@@ -130,3 +130,9 @@ img:hover {
     width: 250px;
     margin-bottom: auto;
 }
+
+.skeleton-loader-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}

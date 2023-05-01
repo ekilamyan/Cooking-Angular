@@ -73,22 +73,34 @@ export class MyPantryComponent implements OnInit {
           let misc;
           this.blank = true;
           for (let i = 0; i < this.ingredientArrays.length; i++) {
-            if (this.ingredientArrays[i][0] == 'misc') {
+            if (
+              this.ingredientArrays[i][0] == 'misc' &&
+              this.ingredientArrays[i][1].length > 0
+            ) {
               misc = this.ingredientArrays[i];
               this.count++;
-            } else
-              if (this.count == 1 && this.ingredientArrays[i] && this.ingredientArrays[i][1].length > 0) {
-                this.indexOne.push(this.ingredientArrays[i]);
-                this.count++;
-              }
-              else if (this.count == 2 && this.ingredientArrays[i] && this.ingredientArrays[i][1].length > 0) {
-                this.indexTwo.push(this.ingredientArrays[i]);
-                this.count++;
-              }
-              else if (this.count == 3 && this.ingredientArrays[i] && this.ingredientArrays[i][1].length > 0) {
-                this.indexThree.push(this.ingredientArrays[i]);
-                this.count = 1;
-              }
+            } else if (
+              this.count == 1 &&
+              this.ingredientArrays[i] &&
+              this.ingredientArrays[i][1].length > 0
+            ) {
+              this.indexOne.push(this.ingredientArrays[i]);
+              this.count++;
+            } else if (
+              this.count == 2 &&
+              this.ingredientArrays[i] &&
+              this.ingredientArrays[i][1].length > 0
+            ) {
+              this.indexTwo.push(this.ingredientArrays[i]);
+              this.count++;
+            } else if (
+              this.count == 3 &&
+              this.ingredientArrays[i] &&
+              this.ingredientArrays[i][1].length > 0
+            ) {
+              this.indexThree.push(this.ingredientArrays[i]);
+              this.count = 1;
+            }
           }
 
           this.indexThree.push(misc);

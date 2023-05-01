@@ -144,3 +144,9 @@ img:hover {
     transition: 0.3s;
     cursor: pointer;
 }
+
+.skeleton-loader-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}

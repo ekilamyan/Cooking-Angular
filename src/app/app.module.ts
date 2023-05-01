@@ -27,6 +27,7 @@ import { IntolerancesDialogComponent } from './dialogs/intolerances-dialog/intol
 import { PantryListComponent } from './shared/components/pantry-list/pantry-list.component';
 import { CodeConfirmationDialogComponent } from './dialogs/code-confirmation-dialog/code-confirmation-dialog.component';
 
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [
@@ -57,8 +58,9 @@ import { CodeConfirmationDialogComponent } from './dialogs/code-confirmation-dia
     HttpClientModule,
     MaterialImportsModule,
     ReactiveFormsModule,
+    NgxSkeletonLoaderModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
