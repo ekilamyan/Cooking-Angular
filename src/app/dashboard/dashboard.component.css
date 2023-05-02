@@ -36,7 +36,7 @@ img {
 }
 
 .main-container button:hover{
-    background-color: coral;
+    background-color: #ef4439;
     transition: 0.2s;
 }
 
@@ -84,7 +84,7 @@ img {
 }
 
 .popular-categories-showcase .card:hover .card-title{
-    color: #ff642f;
+    color: #ef4439;
     transition: all ease 0.6s;
 }
 
@@ -93,27 +93,3 @@ img {
     flex-direction: column;
     gap: 25px;
 }
-
-/*
-.btn {
-    background-color: white;
-    border-color: white;
-    transition: 0.5s;
-}
-
-.btn:hover {
-    background-color: #ff642f;
-    border-color: #ff642f;
-    transition: 0.5s;
-}
-
-.btn svg {
-    fill: #ff642f;
-    transition: 0.5s;
-}
-
-.btn:hover svg {
-    fill: white;
-    transition: 0.5s;
-}
-*/

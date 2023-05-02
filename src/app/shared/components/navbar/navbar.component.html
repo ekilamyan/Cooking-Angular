@@ -1,6 +1,6 @@
 <mat-toolbar>
   <div class="navbar-start">
-    <a class="logo"><img src="assets/Logos/logo.png" alt=""></a>
+    <a class="logo"><img src="assets/Logos/logo.png" [routerLink]="['/dashboard']"></a>
   </div>
   <span class="example-spacer"></span>
   <button *ngIf="this.url != '/start-cooking'" [routerLink]="['/start-cooking']" mat-flat-button>Start Cooking</button>

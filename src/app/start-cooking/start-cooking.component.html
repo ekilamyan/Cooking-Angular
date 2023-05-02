@@ -4,7 +4,7 @@
         <h1>Start Cooking</h1>
 
         <hr>
-        
+
         <div class="filters">
             <mat-chip-list #chipList>
                 <mat-chip *ngFor="let item of filters; let i = index">
@@ -13,14 +13,14 @@
                         <mat-icon>cancel</mat-icon>
                     </button>
                 </mat-chip>
-    
+
                 <mat-chip class="clear-all-chips" *ngIf="filters.length >= 2">
                     Clear All
                     <button matChipRemove (click)="removeAllChips()">
                         <mat-icon>cancel</mat-icon>
                     </button>
                 </mat-chip>
-    
+
             </mat-chip-list>
         </div>
 
@@ -46,7 +46,7 @@
                     <button mat-menu-item>A-Z</button> <!-- (click)="sortAlphabetically()" -->
                     <!-- <button mat-menu-item (click)="maximizeMissing()">Maximize Used Ingredients</button>
                     <button mat-menu-item (click)="minimizeMissing()">Minimize Missing Ingredients</button> -->
-                    <button mat-menu-item >Recipe Type</button> <!-- (click)="sortRecipesByType()" -->
+                    <button mat-menu-item>Recipe Type</button> <!-- (click)="sortRecipesByType()" -->
                     <button mat-menu-item> Saved Recipes</button>
                 </mat-menu>
             </div>
@@ -55,11 +55,47 @@
                 <button mat-stroked-button (click)="openDialog()">Filters</button>
             </div>
         </div>
-        
+
         <h2>Recipes With My Pantry</h2>
         <hr>
 
         <div *ngIf="isLoading" class="skeleton-loader-wrapper">
+            <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
+                <div fxFlex="25">
+                    <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                    <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                </div>
+                <div fxFlex="25">
+                    <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                    <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                </div>
+                <div fxFlex="25">
+                    <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                    <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                </div>
+                <div fxFlex="25">
+                    <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                    <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
+                <div fxFlex="25">
+                    <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                    <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                </div>
+                <div fxFlex="25">
+                    <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                    <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                </div>
+                <div fxFlex="25">
+                    <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                    <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                </div>
+                <div fxFlex="25">
+                    <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                    <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                </div>
+            </div>
             <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
                 <div fxFlex="25">
                     <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
@@ -101,7 +137,8 @@
         <div *ngIf="!sortByType && !isLoading">
             <div class="search-content">
                 <div class="suggestions-wrapper" fxLayoutGap="25" fxLayout="row wrap" fxLayoutAlign="start center">
-                    <div class="card" *ngFor=" let recipe of filteredRecipes" (click)="navToRecipeIntructions(recipe.id)">
+                    <div class="card" *ngFor=" let recipe of filteredRecipes"
+                        (click)="navToRecipeIntructions(recipe.id)">
                         <img src="{{recipe.image}}" />
                         <div class="title" fxLayout="wrap">
                             {{recipe.title}}
@@ -297,8 +334,8 @@
 
         </div>
 
-         <!-- users saved recipes -->
-        <div *ngIf="cookingData && (this.cookingData.saved_recipes.length > 0)">
+        <!-- users saved recipes -->
+        <div *ngIf="cookingData && (this.cookingData.saved_recipes.length > 0) && !isLoading">
             <h2>Saved Recipes</h2>
             <hr>
             <div class="search-content">
@@ -309,6 +346,45 @@
                             {{recipe.title}}
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="isLoading" class="skeleton-loader-wrapper">
+            <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
+                <div fxFlex="25">
+                    <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                    <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                </div>
+                <div fxFlex="25">
+                    <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                    <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                </div>
+                <div fxFlex="25">
+                    <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                    <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                </div>
+                <div fxFlex="25">
+                    <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                    <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
+                <div fxFlex="25">
+                    <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                    <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                </div>
+                <div fxFlex="25">
+                    <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                    <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                </div>
+                <div fxFlex="25">
+                    <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                    <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                </div>
+                <div fxFlex="25">
+                    <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                    <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
                 </div>
             </div>
         </div>

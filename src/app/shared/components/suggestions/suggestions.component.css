@@ -11,6 +11,8 @@ img {
     transform: scale(1);
     transition: 0.4s;
     cursor: pointer;
+    border: 1px solid rgb(235, 235, 235);
+    
 }
 
  h2 {
@@ -35,7 +37,7 @@ img:hover{
 }
 
 .card:hover .card-title{
-    color: #ff642f;
+    color: #ef4439;
     transition: all ease 0.6s;
 }
 
@@ -43,33 +45,3 @@ img:hover{
 .inner {
     position: absolute;
   }
-
-    
-
-    /* 
-
-    <div class="one">
-        <p>prep time: 10 min</p>
-        <p>matching ingredients: 10</p>
-    </div>
-    <div class="two">
-        <img src="{{recipe.image}}" />
-        <div class="card-body" fxLayout="row wrap">
-            <h2 class="card-title">{{recipe.title}}</h2>
-        </div>
-    </div> 
-
-    */
-
-
-    /* 
-    .one:hover + .two {
-        display: block;
-        color: red;
-      } 
-    */
-
-    /* 
-    <div class="myDIV">Hover over me.</div>
-    <div class="hide">I am shown when someone hovers over the div above.</div> 
-    */

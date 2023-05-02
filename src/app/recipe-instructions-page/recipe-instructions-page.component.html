@@ -68,7 +68,7 @@
 
         <div class="item" fxLayout="column" fxLayoutAlign="space-around center">
             <h5>MEASUREMENTS</h5>
-            <mat-slide-toggle class="changeUnits" (click)="changeUnits(units)">
+            <mat-slide-toggle class="changeUnits" color="warn" (click)="changeUnits(units)">
                 {{units}}
             </mat-slide-toggle>
         </div>
@@ -94,9 +94,7 @@
             <ul class="ingredients">
                 <li *ngFor="let ingredient of originalIngredientList; let i = index" fxLayout="row"
                     fxLayoutAlign="start start" fxLayoutGap="20">
-
-
-                    <mat-checkbox class="custom-frame" (click)="checkUncheckFilter(ingredient)"> </mat-checkbox>
+                    <mat-checkbox color="warn" class="custom-frame" (click)="checkUncheckFilter(ingredient)"> </mat-checkbox>
                     <button>
                         <div class="ingredient">
                             {{ingredient}}
@@ -113,7 +111,7 @@
                 <li *ngFor="let ingredient of metricOriginalIngredientList; let i = index" fxLayout="row"
                     fxLayoutAlign="start start" fxLayoutGap="20">
 
-                    <mat-checkbox class="custom-frame" (click)="checkUncheckFilter(ingredient)"> </mat-checkbox>
+                    <mat-checkbox color="warn" class="custom-frame" (click)="checkUncheckFilter(ingredient)"> </mat-checkbox>
                     <button>
                         <div class="ingredient">
                             {{ingredient}}
@@ -139,8 +137,8 @@
         </div>
     </div>
 
-    <h1 class="similar">Similar Recipes</h1>
-    <app-suggestions></app-suggestions>
+    <!-- <h1 class="similar">Similar Recipes</h1>
+    <app-suggestions type="similar" [recipeId]="this.recipeId"></app-suggestions> -->
 
 </body>
 

@@ -31,7 +31,7 @@ export class SuggestionsComponent implements OnInit {
     private cookingDataService: CookingDataService,
     private suggestionsService: SuggestionsService,
     private newRoute: Router
-  ) {}
+  ) { }
 
   public isLoading: boolean = true;
 

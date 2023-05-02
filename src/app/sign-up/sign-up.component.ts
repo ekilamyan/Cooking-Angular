@@ -70,12 +70,14 @@ export class SignUpComponent implements OnInit {
       this.openDialog();
       console.log(res);
     }, (error: any) => {
+      this.snackBar.open('ERROR : An account with this email already exists', 'Dismiss', {
+        duration: 10 * 1000,
+      });
       console.log(error);
     });
   }
 
   openDialog(): void {
-    console.log('here');
     const dialogRef = this.dialog.open(CodeConfirmationDialogComponent, { 
       disableClose: true,
       data: {
@@ -85,6 +87,4 @@ export class SignUpComponent implements OnInit {
     });
   }
 }
-
-
 

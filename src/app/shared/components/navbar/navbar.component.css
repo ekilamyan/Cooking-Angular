@@ -12,8 +12,16 @@
  
  img {
     width: 130px;
+    cursor: pointer;
     height: auto;
+    transition: all ease 0.2s;
  }
+
+img:hover {
+   cursor: pointer;
+   transform: scale(1.1);
+   transition: all ease 0.2s;
+}
  
  
  button {
@@ -26,7 +34,7 @@
  
  
  .active-button {
-    background-color: #ff642f;
+    background-color: #ef4439;
     color: white;
     font-family: "Inter", sans-serif;
     font-size: 18px;

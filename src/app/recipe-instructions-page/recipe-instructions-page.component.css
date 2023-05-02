@@ -37,7 +37,7 @@
 
 /* buttons */
 .buttons svg:hover {
-    fill: red;
+    fill: #ef4439;
     transition: 0.2s;
 }
 
@@ -51,7 +51,7 @@
 }
 
 .saved {
-    color: coral;
+    color: #ef4439;
 }
 
 

@@ -118,6 +118,7 @@ img {
     transition: 0.3s;
     margin-top: 10px;
     margin-bottom: 10px;
+    border: 1px solid rgb(235, 235, 235);
 }
 
 img:hover {
@@ -140,7 +141,7 @@ img:hover {
 }
 
 .card:hover .title {
-    color: coral;
+    color: #ef4439;
     transition: 0.3s;
     cursor: pointer;
 }

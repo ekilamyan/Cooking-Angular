@@ -49,7 +49,7 @@
                 </mat-form-field>
             </div>
 
-            <div fxLayout="column" fxLayoutAlign="space-around center">
+            <div  fxLayout="row wrap" fxLayoutAlign="center center">
                 <!-- <button mat-flat-button color="primary" matStepperNext [disabled]="!disableBtn">Next</button> -->
                 <!-- <button mat-flat-button color="primary" (click)="next()" *ngIf="!showVerifyButton"> 
                     Next
@@ -58,7 +58,11 @@
                     Verify and Login
                 </button> -->
 
-                <button mat-flat-button color="primary" (click)="next()" *ngIf="!showVerifyButton"> 
+                <button mat-stroked-button color="warn" [routerLink]="['/sign-in']"> 
+                    Back
+                </button>
+
+                <button mat-flat-button color="warn" (click)="next()" *ngIf="!showVerifyButton"> 
                     Next
                 </button>
 

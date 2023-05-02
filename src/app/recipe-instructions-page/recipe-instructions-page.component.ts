@@ -24,6 +24,7 @@ export class RecipeInstructionsPageComponent implements OnInit {
 
  public searchItem = new RecipeSearch(null);
  public recipe = new Recipe(null);
+ public recipeId:string;
 
 
  public ingredientCount = 0;
@@ -56,10 +57,9 @@ export class RecipeInstructionsPageComponent implements OnInit {
          this.recipe = temp;
          console.log(this.recipe);
          this.recipe.id = String(this.recipe.id);
-
+         this.recipeId = this.recipe.id;
 
          this.recipe.image = this.recipe.image.replace('556x370', '636x393');
-
 
          for (let i = 0; i < 9; i++) {
            this.recipe.nutrition.nutrients[i].amount = (Math.round(this.recipe.nutrition.nutrients[i].amount * 10) / 10);
@@ -192,6 +192,10 @@ export class RecipeInstructionsPageComponent implements OnInit {
      this.checkedIngredients.push(i);
    }
    console.log(this.checkedIngredients);
+ }
+
+ getRecipeId() {
+  return this.recipeId;
  }
 
 
