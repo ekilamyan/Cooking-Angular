@@ -4,7 +4,7 @@
         <mat-tab label="Cuisines">
             <div class="cuisines-button-container" fxLayout="row wrap" fxLayoutAlign="space-around center">
                 <mat-checkbox mat-flat-mat-checkbox *ngFor="let country of cuisines; let i = index"
-                    (click)="addRemoveFilter(country)" [formControlName]="'cuisines' + i">
+                    (click)="addRemoveFilter(country)" [formControlName]="'cuisines' + i" color="warn">
                     {{country}}
                 </mat-checkbox>
             </div>
@@ -13,7 +13,7 @@
         <mat-tab label="Diets">
             <div class="diets-button-container" fxLayout="row wrap" fxLayoutAlign="space-around center">
                 <mat-checkbox mat-flat-mat-checkbox *ngFor="let diet of diets; let i = index"
-                    (click)="addRemoveFilter(diet)" [formControlName]="'diets' + i">
+                    (click)="addRemoveFilter(diet)" [formControlName]="'diets' + i" color="warn">
                     {{diet}}
                 </mat-checkbox>
             </div>
@@ -22,7 +22,7 @@
         <mat-tab label="Intolerances">
             <div class="intolerances-button-container" fxLayout="row wrap" fxLayoutAlign="space-around center">
                 <mat-checkbox mat-flat-mat-checkbox *ngFor="let intolerance of intolerances; let i = index"
-                    (click)="addRemoveFilter(intolerance)" [formControlName]="'intolerances' + i">
+                    (click)="addRemoveFilter(intolerance)" [formControlName]="'intolerances' + i" color="warn">
                     {{intolerance}}
                 </mat-checkbox>
             </div>
@@ -31,7 +31,7 @@
         <mat-tab label="Type">
             <div class="types-button-container" fxLayout="row wrap" fxLayoutAlign="center center">
                 <mat-checkbox mat-flat-mat-checkbox *ngFor="let type of mealTypes; let i = index"
-                    (click)="addRemoveFilter(type)" [formControlName]="'mealTypes' + i">
+                    (click)="addRemoveFilter(type)" [formControlName]="'mealTypes' + i" color="warn">
                     {{type}}
                 </mat-checkbox>
             </div>

@@ -75,147 +75,17 @@ export class StartCookingComponent implements OnInit {
     this.filters = [];
     this.getPantryRecipes();
     this.applyFilters();
-  }
-
-  getAllUserIngredients() {
-    for (let i = 0; i < this.cookingData.user_ingredients.meats.length; i++) {
-      this.allUserIngredients =
-        this.allUserIngredients +
-        this.cookingData.user_ingredients.meats[i] +
-        ',';
-    }
-
-    for (let i = 0; i < this.cookingData.user_ingredients.dairy.length; i++) {
-      this.allUserIngredients =
-        this.allUserIngredients +
-        this.cookingData.user_ingredients.dairy[i] +
-        ',';
-    }
-
-    for (let i = 0; i < this.cookingData.user_ingredients.baking.length; i++) {
-      this.allUserIngredients =
-        this.allUserIngredients +
-        this.cookingData.user_ingredients.baking[i] +
-        ',';
-    }
-
-    for (
-      let i = 0;
-      i < this.cookingData.user_ingredients.cannedJarred.length;
-      i++
-    ) {
-      this.allUserIngredients =
-        this.allUserIngredients +
-        this.cookingData.user_ingredients.cannedJarred[i] +
-        ',';
-    }
-
-    for (
-      let i = 0;
-      i < this.cookingData.user_ingredients.condiments.length;
-      i++
-    ) {
-      this.allUserIngredients =
-        this.allUserIngredients +
-        this.cookingData.user_ingredients.condiments[i] +
-        ',';
-    }
-
-    for (
-      let i = 0;
-      i < this.cookingData.user_ingredients.jarredGoods.length;
-      i++
-    ) {
-      this.allUserIngredients =
-        this.allUserIngredients +
-        this.cookingData.user_ingredients.jarredGoods[i] +
-        ',';
-    }
-
-    for (
-      let i = 0;
-      i < this.cookingData.user_ingredients.oilsDressings.length;
-      i++
-    ) {
-      this.allUserIngredients =
-        this.allUserIngredients +
-        this.cookingData.user_ingredients.oilsDressings[i] +
-        ',';
-    }
-
-    for (
-      let i = 0;
-      i < this.cookingData.user_ingredients.pastaRice.length;
-      i++
-    ) {
-      this.allUserIngredients =
-        this.allUserIngredients +
-        this.cookingData.user_ingredients.pastaRice[i] +
-        ',';
-    }
-
-    for (let i = 0; i < this.cookingData.user_ingredients.produce.length; i++) {
-      this.allUserIngredients =
-        this.allUserIngredients +
-        this.cookingData.user_ingredients.produce[i] +
-        ',';
-    }
-
-    for (
-      let i = 0;
-      i < this.cookingData.user_ingredients.refrigeratedFrozen.length;
-      i++
-    ) {
-      this.allUserIngredients =
-        this.allUserIngredients +
-        this.cookingData.user_ingredients.refrigeratedFrozen[i] +
-        ',';
-    }
-
-    for (let i = 0; i < this.cookingData.user_ingredients.seafood.length; i++) {
-      this.allUserIngredients =
-        this.allUserIngredients +
-        this.cookingData.user_ingredients.seafood[i] +
-        ',';
-    }
-
-    for (let i = 0; i < this.cookingData.user_ingredients.snacks.length; i++) {
-      this.allUserIngredients =
-        this.allUserIngredients +
-        this.cookingData.user_ingredients.snacks[i] +
-        ',';
-    }
-
-    for (
-      let i = 0;
-      i < this.cookingData.user_ingredients.spicesSeasonings.length;
-      i++
-    ) {
-      this.allUserIngredients =
-        this.allUserIngredients +
-        this.cookingData.user_ingredients.spicesSeasonings[i] +
-        ',';
-    }
-
-    for (let i = 0; i < this.cookingData.user_ingredients.misc.length; i++) {
-      this.allUserIngredients =
-        this.allUserIngredients +
-        this.cookingData.user_ingredients.misc[i] +
-        ',';
-    }
+    
   }
 
   getPantryRecipes() {
-    this.cookingDataService.cookingData.subscribe(
-      (cookingData: CookingData) => {
+    this.cookingDataService.cookingData.subscribe((cookingData: CookingData) => {
         if (cookingData) {
           this.cookingData = cookingData;
           this.getAllUserIngredients();
           // console.log(this.allUserIngredients);
 
-          this.pantryService
-            .recipesWithPantry(this.allUserIngredients)
-            .subscribe((res: Recipe[]) => {
+          this.pantryService.recipesWithPantry(this.allUserIngredients).subscribe((res: Recipe[]) => {
               if (res) {
                 this.tempRecipes = res;
               }
@@ -224,9 +94,7 @@ export class StartCookingComponent implements OnInit {
                 this.recipeIds = this.recipeIds + this.tempRecipes[i].id + ',';
               }
 
-              this.suggestionsService
-                .getSuggestionsBulk(this.recipeIds)
-                .subscribe((temp: Recipe[]) => {
+              this.suggestionsService.getSuggestionsBulk(this.recipeIds).subscribe((temp: Recipe[]) => {
                   if (temp) {
                     for (let i = 0; i < temp.length; i++) {
                       this.pantryRecipes[i] = new Recipe(temp[i]);
@@ -235,6 +103,7 @@ export class StartCookingComponent implements OnInit {
                   }
                   this.isLoading = false;
                 });
+                this.sortRecipesByType();
             });
 
           if (this.cookingData.saved_recipes) {
@@ -246,9 +115,7 @@ export class StartCookingComponent implements OnInit {
               }
             }
 
-            this.suggestionsService
-              .getSuggestionsBulk(this.savedRecipeIds)
-              .subscribe((temp: any[]) => {
+            this.suggestionsService.getSuggestionsBulk(this.savedRecipeIds).subscribe((temp: any[]) => {
                 if (temp) {
                   for (let i = 0; i < temp.length; i++) {
                     this.savedRecipes[i] = temp[i];
@@ -260,8 +127,7 @@ export class StartCookingComponent implements OnInit {
       }
     );
 
-    this.ingredientSearchForm
-      .get('ingredient')
+    this.ingredientSearchForm.get('ingredient')
       ?.valueChanges.pipe(debounceTime(400), distinctUntilChanged())
       .subscribe((searchTerm: string) => {
         if (!searchTerm || searchTerm === '') {
@@ -281,6 +147,134 @@ export class StartCookingComponent implements OnInit {
           });
       });
   }
+
+  getAllUserIngredients() {
+    for (let i = 0; i < this.cookingData.user_ingredients.meats.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.meats[i] + ',';
+    }
+
+    for (let i = 0; i < this.cookingData.user_ingredients.dairy.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.dairy[i] + ',';
+    }
+
+    for (let i = 0; i < this.cookingData.user_ingredients.baking.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.baking[i] + ',';
+    }
+
+    for (let i = 0; i < this.cookingData.user_ingredients.cannedJarred.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.cannedJarred[i] + ',';
+    }
+
+    for (let i = 0; i < this.cookingData.user_ingredients.condiments.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.condiments[i] + ',';
+    }
+
+    for ( let i = 0; i < this.cookingData.user_ingredients.jarredGoods.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.jarredGoods[i] + ',';
+    }
+
+    for ( let i = 0; i < this.cookingData.user_ingredients.oilsDressings.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.oilsDressings[i] + ',';
+    }
+
+    for (let i = 0; i < this.cookingData.user_ingredients.pastaRice.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.pastaRice[i] + ',';
+    }
+    for (let i = 0; i < this.cookingData.user_ingredients.produce.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.produce[i] + ',';
+    }
+
+    for (let i = 0; i < this.cookingData.user_ingredients.refrigeratedFrozen.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.refrigeratedFrozen[i] + ',';
+    }
+
+    for (let i = 0; i < this.cookingData.user_ingredients.seafood.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.seafood[i] + ',';
+    }
+
+    for (let i = 0; i < this.cookingData.user_ingredients.snacks.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.snacks[i] + ',';
+    }
+
+    for (let i = 0; i < this.cookingData.user_ingredients.spicesSeasonings.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.spicesSeasonings[i] + ',';
+    }
+
+    for (let i = 0; i < this.cookingData.user_ingredients.misc.length; i++) {
+      this.allUserIngredients = this.allUserIngredients + this.cookingData.user_ingredients.misc[i] + ',';
+    }
+  }
+
+  sortRecipesByType() {
+    console.log("called");
+    console.log(this.recipeIds);
+  
+    this.suggestionsService.getSuggestionsBulk(this.recipeIds).subscribe((temp: any[]) => {
+    console.log(this.recipesWithMoreInfo);
+      if (temp) {
+        for (let i = 0; i < temp.length; i++) {
+          this.recipesWithMoreInfo[i] = temp[i];
+  
+          if (this.recipesWithMoreInfo[i].dishTypes.includes('appetizer') || this.recipesWithMoreInfo[i].dishTypes[0] == 'finger food') {
+            this.appetizerCategory.push(this.recipesWithMoreInfo[i]);
+          }
+          else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'beverage' || this.recipesWithMoreInfo[i].dishTypes[0] == 'drink') {
+            this.beverageCategory.push(this.recipesWithMoreInfo[i]);
+          }
+          else if (this.recipesWithMoreInfo[i].dishTypes.includes('breakfast') || this.recipesWithMoreInfo[0].dishTypes.includes('morning meal')) {
+            this.breakfastCategory.push(this.recipesWithMoreInfo[i]);
+          }
+          else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'dessert' || this.recipesWithMoreInfo[i].dishTypes[0] == 'bread') {
+            this.dessertCategory.push(this.recipesWithMoreInfo[i]);
+          }
+          else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'dinner') {
+            this.dinnerCategory.push(this.recipesWithMoreInfo[i]);
+          }
+          else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'lunch') {
+            this.lunchCategory.push(this.recipesWithMoreInfo[i]);
+          }
+          else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'main course' || this.recipesWithMoreInfo[i].dishTypes[0] == 'main dish') {
+            this.mainCourseCategory.push(this.recipesWithMoreInfo[i]);
+          }
+          else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'sauce' || this.recipesWithMoreInfo[i].dishTypes[0] == 'marinade') {
+            this.sauceCategory.push(this.recipesWithMoreInfo[i]);
+          }
+          else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'side dish') {
+            this.sideDishCategory.push(this.recipesWithMoreInfo[i]);
+          }
+          else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'salad') {
+            this.saladCategory.push(this.recipesWithMoreInfo[i]);
+          }
+          else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'soup') {
+            this.soupCategory.push(this.recipesWithMoreInfo[i]);
+          }
+          else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'snack') {
+            this.snackCategory.push(this.recipesWithMoreInfo[i]);
+          } else {
+            this.miscCategory.push(this.recipesWithMoreInfo[i]);
+          }
+        }
+        this.appetizerCategory.sort((a, b) => a.title.localeCompare(b.title));
+        this.beverageCategory.sort((a, b) => a.title.localeCompare(b.title));
+        this.breakfastCategory.sort((a, b) => a.title.localeCompare(b.title));
+        this.dessertCategory.sort((a, b) => a.title.localeCompare(b.title));
+        this.dinnerCategory.sort((a, b) => a.title.localeCompare(b.title));
+        this.lunchCategory.sort((a, b) => a.title.localeCompare(b.title));
+        this.mainCourseCategory.sort((a, b) => a.title.localeCompare(b.title));
+        this.sauceCategory.sort((a, b) => a.title.localeCompare(b.title));
+        this.sideDishCategory.sort((a, b) => a.title.localeCompare(b.title));
+        this.saladCategory.sort((a, b) => a.title.localeCompare(b.title));
+        this.soupCategory.sort((a, b) => a.title.localeCompare(b.title));
+        this.snackCategory.sort((a, b) => a.title.localeCompare(b.title));
+        this.miscCategory.sort((a, b) => a.title.localeCompare(b.title));
+      }
+    });
+  }
+  
+  changeSortingType() {
+    this.sortByType = !this.sortByType;
+  }
+
 
   capitalizeFirstLetter(word: string) {
     return word.charAt(0).toUpperCase() + word.slice(1);
@@ -347,6 +341,12 @@ export class StartCookingComponent implements OnInit {
     this.filters = [];
     this.applyFilters();
   }
+
+  sortAlphabetically() {
+    this.pantryRecipes.sort((a, b) => a.title.localeCompare(b.title));
+    this.sortByType = !this.sortByType;
+  }
+
 }
 
 
@@ -453,82 +453,7 @@ export class StartCookingComponent implements OnInit {
 
     // }
 
-    // sortRecipesByType() {
-    //   for (let i = 0; i < this.recipes.length; i++) {
-    //     this.recipeIds = this.recipeIds + this.recipes[i].id;
-    //     if (i < this.recipes.length - 1) {
-    //       this.recipeIds = this.recipeIds + ',';
-    //     }
-    //   }
-
-    //   this.suggestionsService.getSuggestionsBulk(this.recipeIds).subscribe((temp: any[]) => {
-    //     if (temp) {
-    //       for (let i = 0; i < temp.length; i++) {
-    //         this.recipesWithMoreInfo[i] = temp[i];
-
-    //         if (this.recipesWithMoreInfo[i].dishTypes.includes('appetizer') || this.recipesWithMoreInfo[i].dishTypes[0] == 'finger food') {
-    //           this.appetizerCategory.push(this.recipesWithMoreInfo[i]);
-    //         }
-    //         else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'beverage' || this.recipesWithMoreInfo[i].dishTypes[0] == 'drink') {
-    //           this.beverageCategory.push(this.recipesWithMoreInfo[i]);
-    //         }
-    //         else if (this.recipesWithMoreInfo[i].dishTypes.includes('breakfast') || this.recipesWithMoreInfo[0].dishTypes.includes('morning meal')) {
-    //           this.breakfastCategory.push(this.recipesWithMoreInfo[i]);
-    //         }
-    //         else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'dessert' || this.recipesWithMoreInfo[i].dishTypes[0] == 'bread') {
-    //           this.dessertCategory.push(this.recipesWithMoreInfo[i]);
-    //         }
-    //         else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'dinner') {
-    //           this.dinnerCategory.push(this.recipesWithMoreInfo[i]);
-    //         }
-    //         else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'lunch') {
-    //           this.lunchCategory.push(this.recipesWithMoreInfo[i]);
-    //         }
-    //         else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'main course' || this.recipesWithMoreInfo[i].dishTypes[0] == 'main dish') {
-    //           this.mainCourseCategory.push(this.recipesWithMoreInfo[i]);
-    //         }
-    //         else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'sauce' || this.recipesWithMoreInfo[i].dishTypes[0] == 'marinade') {
-    //           this.sauceCategory.push(this.recipesWithMoreInfo[i]);
-    //         }
-    //         else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'side dish') {
-    //           this.sideDishCategory.push(this.recipesWithMoreInfo[i]);
-    //         }
-    //         else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'salad') {
-    //           this.saladCategory.push(this.recipesWithMoreInfo[i]);
-    //         }
-    //         else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'soup') {
-    //           this.soupCategory.push(this.recipesWithMoreInfo[i]);
-    //         }
-    //         else if (this.recipesWithMoreInfo[i].dishTypes[0] == 'snack') {
-    //           this.snackCategory.push(this.recipesWithMoreInfo[i]);
-    //         } else {
-    //           this.miscCategory.push(this.recipesWithMoreInfo[i]);
-    //         }
-    //       }
-    //       this.appetizerCategory.sort((a, b) => a.title.localeCompare(b.title));
-    //       this.beverageCategory.sort((a, b) => a.title.localeCompare(b.title));
-    //       this.breakfastCategory.sort((a, b) => a.title.localeCompare(b.title));
-    //       this.dessertCategory.sort((a, b) => a.title.localeCompare(b.title));
-    //       this.dinnerCategory.sort((a, b) => a.title.localeCompare(b.title));
-    //       this.lunchCategory.sort((a, b) => a.title.localeCompare(b.title));
-    //       this.mainCourseCategory.sort((a, b) => a.title.localeCompare(b.title));
-    //       this.sauceCategory.sort((a, b) => a.title.localeCompare(b.title));
-    //       this.sideDishCategory.sort((a, b) => a.title.localeCompare(b.title));
-    //       this.saladCategory.sort((a, b) => a.title.localeCompare(b.title));
-    //       this.soupCategory.sort((a, b) => a.title.localeCompare(b.title));
-    //       this.snackCategory.sort((a, b) => a.title.localeCompare(b.title));
-    //       this.miscCategory.sort((a, b) => a.title.localeCompare(b.title));
-    //     }
-    //   });
-
-    //   this.sortByType = !this.sortByType;
-    // }
-
-    // sortAlphabetically() {
-    //   this.recipes.sort((a, b) => a.title.localeCompare(b.title));
-    //   this.sortByType = !this.sortByType;
-    // }
-
+ 
     // minimizeMissing() {
     //   console.log(this.userIngredients);
     //   this.myRecipes.recipesWithPantryMinimizeMissing(this.userIngredients).subscribe((temp: any) => {

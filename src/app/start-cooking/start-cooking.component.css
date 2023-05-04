@@ -7,9 +7,9 @@
     margin-top: 40px;
 }
 
-h2 { 
+h2 {
     font-size: 30px;
-    font-family: "Playfair", serif; 
+    font-family: "Playfair", serif;
 }
 
 hr {
@@ -23,6 +23,31 @@ hr {
 
 .clear-all-chips {
     background-color: rgb(233, 143, 143);
+}
+
+/* no results */
+.no-results {
+    padding: 10px;
+}
+
+.no-results-button {
+    transition: all ease 0.2s;
+}
+
+.no-results-button:hover {
+    transform: scale(1.1);
+    transition: all ease 0.2s;
+}
+
+p {
+    font-size: 23px;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    color: #6b6b6b;
+}
+
+.no-results-button {
+    width: 15%;
 }
 
 /* Input box */
@@ -87,7 +112,7 @@ hr {
     font-size: 18px;
     border-style: solid;
     border-color: rgb(92, 92, 92);
-    font-family: "Inter", sans-serif; 
+    font-family: "Inter", sans-serif;
 }
 
 /* dropdown menu */
@@ -150,4 +175,15 @@ img:hover {
     display: flex;
     flex-direction: column;
     gap: 25px;
+}
+
+/* tip button */
+
+.tip-button {
+    transition: all ease 0.2s;
+}
+
+.tip-button:hover {
+    transform: scale(1.1);
+    transition: all ease 0.2s;
 }

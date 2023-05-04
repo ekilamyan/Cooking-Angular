@@ -88,3 +88,26 @@ hr {
     background-color: rgb(255, 255, 255) !important;
 }
 
+/* tip button */
+
+.tip h2 {
+    font-size: 30px;
+    font-family: "Playfair", serif;
+}
+
+.tip p {
+    font-size: 23px;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    color: #6b6b6b;
+}
+
+.tip-button {
+    transition: all ease 0.2s;
+}
+
+.tip-button:hover {
+    transform: scale(1.1);
+    transition: all ease 0.2s;
+}
+

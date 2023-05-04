@@ -43,10 +43,10 @@
             <div class="filter-button" fxFlex="10">
                 <button mat-stroked-button [matMenuTriggerFor]="belowMenu">Sort</button>
                 <mat-menu #belowMenu="matMenu" yPosition="below">
-                    <button mat-menu-item>A-Z</button> <!-- (click)="sortAlphabetically()" -->
+                    <button mat-menu-item (click)="sortAlphabetically()">A-Z</button> <!--  -->
                     <!-- <button mat-menu-item (click)="maximizeMissing()">Maximize Used Ingredients</button>
                     <button mat-menu-item (click)="minimizeMissing()">Minimize Missing Ingredients</button> -->
-                    <button mat-menu-item>Recipe Type</button> <!-- (click)="sortRecipesByType()" -->
+                    <button mat-menu-item (click)="changeSortingType()">Recipe Type</button> <!--  -->
                     <button mat-menu-item> Saved Recipes</button>
                 </mat-menu>
             </div>
@@ -58,6 +58,7 @@
 
         <h2>Recipes With My Pantry</h2>
         <hr>
+
 
         <div *ngIf="isLoading" class="skeleton-loader-wrapper">
             <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
@@ -133,8 +134,16 @@
                 </div>
             </div>
         </div>
+
         <!-- recipes from pantry not sorted -->
         <div *ngIf="!sortByType && !isLoading">
+
+            <div class="no-results" *ngIf="filteredRecipes.length <= 0" fxLayout="column" fxLayoutAlign="space-around center">
+                <p>Oops! </p>
+                <p>There are no recipes that match any of the selected filters</p>
+                <button class="no-results-button" mat-flat-button color="warn" (click)="removeAllChips()">Remove All Filters</button>
+            </div>
+
             <div class="search-content">
                 <div class="suggestions-wrapper" fxLayoutGap="25" fxLayout="row wrap" fxLayoutAlign="start center">
                     <div class="card" *ngFor=" let recipe of filteredRecipes"
@@ -150,11 +159,13 @@
 
         <!-- recipes from pantry sorted by category -->
         <div class="sorted-by-type" *ngIf="sortByType" fxLayout="column" fxLayoutAlign="space-between start">
-            <!-- <div *ngIf="appetizerCategory.length > 0" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
-                <h1>Appetizers</h1>
+            <div *ngIf="appetizerCategory.length > 0" fxFlex="100" fxLayout="row wrap"
+                fxLayoutAlign="space-between end">
+                <h2>Appetizers</h2>
                 <div class="search-content">
                     <div class="suggestions-wrapper" fxLayoutGap="25" fxLayout="row wrap" fxLayoutAlign="start center">
-                        <div class="card" *ngFor=" let recipe of appetizerCategory" (click)="navToRecipeIntructions(recipe.id)">
+                        <div class="card" *ngFor=" let recipe of appetizerCategory"
+                            (click)="navToRecipeIntructions(recipe.id)">
                             <img src="{{recipe.image}}" />
                             <div class="title" fxLayout="wrap">
                                 {{recipe.title}}
@@ -165,10 +176,12 @@
             </div>
 
             <div *ngIf="beverageCategory.length > 0" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
-                <h1>Beverages</h1>
+                <h2>Beverages</h2>
                 <div class="search-content">
-                    <div class="suggestions-wrapper" fxLayoutGap="25" fxLayout="column" fxLayoutAlign="space-between start">
-                        <div class="card" *ngFor=" let recipe of beverageCategory" (click)="navToRecipeIntructions(recipe.id)">
+                    <div class="suggestions-wrapper" fxLayoutGap="25" fxLayout="column"
+                        fxLayoutAlign="space-between start">
+                        <div class="card" *ngFor=" let recipe of beverageCategory"
+                            (click)="navToRecipeIntructions(recipe.id)">
                             <img src="{{recipe.image}}" />
                             <div class="title" fxLayout="wrap">
                                 {{recipe.title}}
@@ -178,11 +191,13 @@
                 </div>
             </div>
 
-            <div *ngIf="breakfastCategory.length > 0" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
-                <h1>Breakfast</h1>
+            <div *ngIf="breakfastCategory.length > 0" fxFlex="100" fxLayout="row wrap"
+                fxLayoutAlign="space-between end">
+                <h2>Breakfast</h2>
                 <div class="search-content">
                     <div class="suggestions-wrapper" fxLayoutGap="25" fxLayout="row wrap" fxLayoutAlign="start center">
-                        <div class="card" *ngFor=" let recipe of breakfastCategory" (click)="navToRecipeIntructions(recipe.id)">
+                        <div class="card" *ngFor=" let recipe of breakfastCategory"
+                            (click)="navToRecipeIntructions(recipe.id)">
                             <img src="{{recipe.image}}" />
                             <div class="title" fxLayout="wrap">
                                 {{recipe.title}}
@@ -193,10 +208,11 @@
             </div>
 
             <div *ngIf="dessertCategory.length > 0" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
-                <h1>Dessert</h1>
+                <h2>Dessert</h2>
                 <div class="search-content">
                     <div class="suggestions-wrapper" fxLayoutGap="25" fxLayout="row wrap" fxLayoutAlign="start center">
-                        <div class="card" *ngFor=" let recipe of dessertCategory" (click)="navToRecipeIntructions(recipe.id)">
+                        <div class="card" *ngFor=" let recipe of dessertCategory"
+                            (click)="navToRecipeIntructions(recipe.id)">
                             <img src="{{recipe.image}}" />
                             <div class="title" fxLayout="wrap">
                                 {{recipe.title}}
@@ -207,10 +223,11 @@
             </div>
 
             <div *ngIf="dinnerCategory.length > 0" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
-                <h1>Dinner</h1>
+                <h2>Dinner</h2>
                 <div class="search-content">
                     <div class="suggestions-wrapper" fxLayoutGap="25" fxLayout="row wrap" fxLayoutAlign="start center">
-                        <div class="card" *ngFor=" let recipe of dinnerCategory" (click)="navToRecipeIntructions(recipe.id)">
+                        <div class="card" *ngFor=" let recipe of dinnerCategory"
+                            (click)="navToRecipeIntructions(recipe.id)">
                             <img src="{{recipe.image}}" />
                             <div class="title" fxLayout="wrap">
                                 {{recipe.title}}
@@ -221,10 +238,11 @@
             </div>
 
             <div *ngIf="lunchCategory.length > 0" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
-                <h1>Lunch</h1>
+                <h2>Lunch</h2>
                 <div class="search-content">
                     <div class="suggestions-wrapper" fxLayoutGap="25" fxLayout="row wrap" fxLayoutAlign="start center">
-                        <div class="card" *ngFor=" let recipe of lunchCategory" (click)="navToRecipeIntructions(recipe.id)">
+                        <div class="card" *ngFor=" let recipe of lunchCategory"
+                            (click)="navToRecipeIntructions(recipe.id)">
                             <img src="{{recipe.image}}" />
                             <div class="title" fxLayout="wrap">
                                 {{recipe.title}}
@@ -234,11 +252,13 @@
                 </div>
             </div>
 
-            <div *ngIf="mainCourseCategory.length > 0" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
-                <h1>Main Courses</h1>
+            <div *ngIf="mainCourseCategory.length > 0" fxFlex="100" fxLayout="row wrap"
+                fxLayoutAlign="space-between end">
+                <h2>Main Courses</h2>
                 <div class="search-content">
                     <div class="suggestions-wrapper" fxLayoutGap="25" fxLayout="row wrap" fxLayoutAlign="start center">
-                        <div class="card" *ngFor=" let recipe of mainCourseCategory" (click)="navToRecipeIntructions(recipe.id)">
+                        <div class="card" *ngFor=" let recipe of mainCourseCategory"
+                            (click)="navToRecipeIntructions(recipe.id)">
                             <img src="{{recipe.image}}" />
                             <div class="title" fxLayout="wrap">
                                 {{recipe.title}}
@@ -249,10 +269,11 @@
             </div>
 
             <div *ngIf="sauceCategory.length > 0" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
-                <h1>Sauces & Marinades</h1>
+                <h2>Sauces & Marinades</h2>
                 <div class="search-content">
                     <div class="suggestions-wrapper" fxLayoutGap="25" fxLayout="row wrap" fxLayoutAlign="start center">
-                        <div class="card" *ngFor=" let recipe of sauceCategory" (click)="navToRecipeIntructions(recipe.id)">
+                        <div class="card" *ngFor=" let recipe of sauceCategory"
+                            (click)="navToRecipeIntructions(recipe.id)">
                             <img src="{{recipe.image}}" />
                             <div class="title" fxLayout="wrap">
                                 {{recipe.title}}
@@ -263,10 +284,11 @@
             </div>
 
             <div *ngIf="sideDishCategory.length > 0" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
-                <h1>Side Dishes</h1>
+                <h2>Side Dishes</h2>
                 <div class="search-content">
                     <div class="suggestions-wrapper" fxLayoutGap="25" fxLayout="row wrap" fxLayoutAlign="start center">
-                        <div class="card" *ngFor=" let recipe of sideDishCategory" (click)="navToRecipeIntructions(recipe.id)">
+                        <div class="card" *ngFor=" let recipe of sideDishCategory"
+                            (click)="navToRecipeIntructions(recipe.id)">
                             <img src="{{recipe.image}}" />
                             <div class="title" fxLayout="wrap">
                                 {{recipe.title}}
@@ -277,10 +299,11 @@
             </div>
 
             <div *ngIf="saladCategory.length > 0" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
-                <h1>Salads</h1>
+                <h2>Salads</h2>
                 <div class="search-content">
                     <div class="suggestions-wrapper" fxLayoutGap="25" fxLayout="row wrap" fxLayoutAlign="start center">
-                        <div class="card" *ngFor=" let recipe of saladCategory" (click)="navToRecipeIntructions(recipe.id)">
+                        <div class="card" *ngFor=" let recipe of saladCategory"
+                            (click)="navToRecipeIntructions(recipe.id)">
                             <img src="{{recipe.image}}" />
                             <div class="title" fxLayout="wrap">
                                 {{recipe.title}}
@@ -291,10 +314,11 @@
             </div>
 
             <div *ngIf="soupCategory.length > 0" fxLayout="column" fxLayoutAlign="space-between start">
-                <h1>Soups</h1>
+                <h2>Soups</h2>
                 <div class="search-content">
                     <div class="suggestions-wrapper" fxLayoutGap="25" fxLayout="row wrap" fxLayoutAlign="start center">
-                        <div class="card" *ngFor=" let recipe of soupCategory" (click)="navToRecipeIntructions(recipe.id)">
+                        <div class="card" *ngFor=" let recipe of soupCategory"
+                            (click)="navToRecipeIntructions(recipe.id)">
                             <img src="{{recipe.image}}" />
                             <div class="title" fxLayout="wrap">
                                 {{recipe.title}}
@@ -305,10 +329,11 @@
             </div>
 
             <div *ngIf="snackCategory.length > 0" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
-                <h1>Snacks</h1>
+                <h2>Snacks</h2>
                 <div class="search-content">
                     <div class="suggestions-wrapper" fxLayoutGap="25" fxLayout="row wrap" fxLayoutAlign="start center">
-                        <div class="card" *ngFor=" let recipe of snackCategory" (click)="navToRecipeIntructions(recipe.id)">
+                        <div class="card" *ngFor=" let recipe of snackCategory"
+                            (click)="navToRecipeIntructions(recipe.id)">
                             <img src="{{recipe.image}}" />
                             <div class="title" fxLayout="wrap">
                                 {{recipe.title}}
@@ -319,10 +344,11 @@
             </div>
 
             <div *ngIf="miscCategory.length > 0" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-between end">
-                <h1>Miscellaneous</h1>
+                <h2>Miscellaneous</h2>
                 <div class="search-content">
                     <div class="suggestions-wrapper" fxLayoutGap="25" fxLayout="row wrap" fxLayoutAlign="start center">
-                        <div class="card" *ngFor=" let recipe of miscCategory" (click)="navToRecipeIntructions(recipe.id)">
+                        <div class="card" *ngFor=" let recipe of miscCategory"
+                            (click)="navToRecipeIntructions(recipe.id)">
                             <img src="{{recipe.image}}" />
                             <div class="title" fxLayout="wrap">
                                 {{recipe.title}}
@@ -330,7 +356,7 @@
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
 
         </div>
 
@@ -393,7 +419,7 @@
         <div class="tip" fxLayout="column" fxLayoutAlign="center center">
             <h2>Don't like these results?</h2>
             <p>click here to add more ingredients to your pantry</p>
-            <button mat-flat-button color="warn" [routerLink]="['/my-pantry']">Edit Pantry</button>
+            <button class="tip-button" mat-flat-button color="warn" [routerLink]="['/my-pantry']">Edit Pantry</button>
         </div>
         <hr>
 

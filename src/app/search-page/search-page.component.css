@@ -94,6 +94,32 @@ hr {
 }
 
 
+/* no results */
+.no-results {
+    padding: 10px;
+}
+
+.no-results-button {
+    transition: all ease 0.2s;
+}
+
+.no-results-button:hover {
+    transform: scale(1.1);
+    transition: all ease 0.2s;
+}
+
+p {
+    font-size: 23px;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    color: #6b6b6b;
+}
+
+.no-results-button {
+    width: 15%;
+}
+
+
 
 /* suggestions in content */
 
