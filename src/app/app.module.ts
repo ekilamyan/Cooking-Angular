@@ -28,6 +28,7 @@ import { PantryListComponent } from './shared/components/pantry-list/pantry-list
 import { CodeConfirmationDialogComponent } from './dialogs/code-confirmation-dialog/code-confirmation-dialog.component';
 
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { ShowcaseRecipeComponent } from './shared/components/showcase-recipe/showcase-recipe.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     IntolerancesDialogComponent,
     PantryListComponent,
     CodeConfirmationDialogComponent,
+    ShowcaseRecipeComponent,
   ],
   imports: [
     BrowserAnimationsModule,

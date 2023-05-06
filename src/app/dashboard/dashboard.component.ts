@@ -55,8 +55,6 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getShowcaseRecipe();
-
     this.cookingDataService.cookingData.subscribe(
       (cookingData: CookingData) => {
         if (cookingData) {
@@ -64,26 +62,6 @@ export class DashboardComponent implements OnInit {
         }
       }
     );
-  }
-
-  getShowcaseRecipe() {
-    let length = 0;
-    //  do {
-    this.suggestions.getRandomIds(1).subscribe((responce: any) => {
-      if (responce) {
-        console.log(responce);
-        this.recipes[0] = responce.recipes[0];
-        this.recipes[0].image = responce.recipes[0].image.replace(
-          '556x370',
-          '636x393'
-        );
-        length = this.recipes[0].title.length;
-
-        console.log(length);
-        this.isLoading = false;
-      }
-    });
-    //  } while(length > 45);
   }
 
   navToRecipeIntructions(id: string) {

@@ -1,32 +1,13 @@
 <app-navbar></app-navbar>
 <div class="main-container">
-    <div class="showcase-container">
-        <div *ngIf="isLoading" class="skeleton-loader-wrapper">
-            <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
-                <div fxFlex="100">
-                    <ngx-skeleton-loader [theme]="{ height: '430px', borderRadius: '10px' }"></ngx-skeleton-loader>
-                </div>
-            </div>
-        </div>
-        <div class="items" *ngFor="let recipe of recipes">
-            <div class="showcase-area">
-                <img fxFlex="60" src="{{recipe.image}}">
-                <div class="info" fxFlex="40" fxLayout="column" fxLayoutAlign="space-between end">
-                    {{recipe.title}}
-                    <p> Try your hand at {{recipe.title}} a very delicious and delightfull meal.</p>
-                    <button mat-icon-button class="example-icon" (click)="navToRecipeIntructions(recipe.id)">
-                        <mat-icon>arrow_forward</mat-icon>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    <app-showcase-recipe></app-showcase-recipe>
 
     <div class="card-container-title">
         <h1>Popular Categories</h1>
     </div>
 
-    <div class="popular-categories-showcase" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="popular-categories-showcase" fxLayout="row wrap" fxLayoutAlign="space-between center">
         <div class="card" *ngFor="let category of categoryTitles; let i = index" fxLayout="column"
             fxLayoutAlign="center center" (click)="navToSearchPage(categoryTitlesForSearching[i])">
             <img src={{categoryImages[i]}} />

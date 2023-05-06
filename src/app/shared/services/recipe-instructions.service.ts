@@ -22,6 +22,15 @@ export class RecipeInstructionsService {
 
     return (this.http.get(this.url + id + '/information?includeNutrition=true', { 'headers': headers }))
   }
+
+  convertIngredientMetric(ingredientName: string, targetUnits: string, sourceUnit: string, sourceAmount: string) {
+    const headers = new HttpHeaders()
+      .set('content-type', 'application/octet-stream')
+      .set('X-RapidAPI-Key', '0fe077be1emshd40962bc735f0ccp1ca7dcjsnc61b720bed51')
+      .set('X-RapidAPI-Host', 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com');
+
+    return (this.http.get(this.url + 'convert?ingredientName=' + ingredientName + '&targetUnit=' + targetUnits + '&sourceUnit=' + sourceUnit + '&sourceAmount=' + sourceAmount, { 'headers': headers }));
+  }
 }
 
   // Keys

@@ -11,6 +11,7 @@ import { RecipeSearchDialogComponent } from 'src/app/dialogs/recipe-search-dialo
 
 export class NavbarComponent implements OnInit {
  url: string
+ isVisibleOnMobile = true;
 
  constructor(public dialog: MatDialog, public router: Router) { }
 
@@ -23,4 +24,3 @@ export class NavbarComponent implements OnInit {
    });
  }
 }
-0
