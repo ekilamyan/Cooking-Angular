@@ -36,6 +36,10 @@ export class SuggestionsComponent implements OnInit {
   public isLoading: boolean = true;
 
   ngOnInit(): void {
+    console.log(this.type);
+    console.log(this.recipeId);
+    console.log(this.numOfResults);
+
     this.recipes = [];
 
     if (this.type == 'similar') {

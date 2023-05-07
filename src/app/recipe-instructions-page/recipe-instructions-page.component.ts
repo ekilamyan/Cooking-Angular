@@ -35,12 +35,15 @@ export class RecipeInstructionsPageComponent implements OnInit {
 
   public allIngredeints: string[] = [];
   public nutritionList: Nutrients[] = [];
+  public loadingNutritionList = true;
 
 
   public originalIngredientList: string[] = [];
   public metricOriginalIngredientList: string[] = [];
   public ingredientList: string[] = [];
   public instructionsList: string[] = [];
+
+  public showSuggestions = false;
 
 
   constructor(private route: ActivatedRoute, private recipeInstructionsService: RecipeInstructionsService, private cookingDataService: CookingDataService) { }
@@ -55,6 +58,7 @@ export class RecipeInstructionsPageComponent implements OnInit {
           console.log(this.recipe);
           this.recipe.id = String(this.recipe.id);
           this.recipeId = this.recipe.id;
+          this.showSuggestions = true;
           console.log(this.recipe.id)
 
           for(let i = 0; i < this.recipe.extendedIngredients.length; i++) {
@@ -74,6 +78,7 @@ export class RecipeInstructionsPageComponent implements OnInit {
           for (let i = 0; i < 9; i++) {
             this.recipe.nutrition.nutrients[i].amount = (Math.round(this.recipe.nutrition.nutrients[i].amount * 10) / 10);
             this.nutritionList[i] = this.recipe.nutrition.nutrients[i];
+            this.loadingNutritionList = false;
           }
 
 

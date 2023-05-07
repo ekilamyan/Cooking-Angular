@@ -106,7 +106,7 @@ export class StartCookingComponent implements OnInit {
                 this.sortRecipesByType();
             });
 
-          if (this.cookingData.saved_recipes) {
+          if (this.cookingData.saved_recipes.length > 0) {
             for (let i = 0; i < this.cookingData.saved_recipes.length; i++) {
               this.savedRecipeIds =
                 this.savedRecipeIds + this.cookingData.saved_recipes[i];

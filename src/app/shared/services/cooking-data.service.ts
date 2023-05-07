@@ -16,6 +16,11 @@ export class CookingDataService {
 
   constructor(private http: HttpClient, private loginService: LoginService) { }
 
+  initializeCookingData() {
+    const temp = new CookingData(null);
+    this.saveCookingData(temp);
+  }
+
   getCookingData() {
     const token = this.loginService.getJwtToken();
     const headers = new HttpHeaders()

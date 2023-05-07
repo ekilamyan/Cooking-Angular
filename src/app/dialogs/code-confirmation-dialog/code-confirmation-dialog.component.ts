@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { CookingDataService } from 'src/app/shared/services/cooking-data.service';
 import { LoginService } from 'src/app/shared/services/login.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class CodeConfirmationDialogComponent implements OnInit {
     recipe: new FormControl(''),
   });
 
-  constructor(private dialogRef: MatDialogRef<CodeConfirmationDialogComponent>,private loginService: LoginService, private formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, private newRoute: Router) { }
+  constructor(private dialogRef: MatDialogRef<CodeConfirmationDialogComponent>,private loginService: LoginService, private cookingService: CookingDataService, private formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, private newRoute: Router) { }
 
   ngOnInit(): void {
     this.codeForm = this.formBuilder.group({
@@ -32,7 +33,10 @@ export class CodeConfirmationDialogComponent implements OnInit {
   
     this.loginService.verifyUser(email, confirmationCode).then((res: any) => {
       this.loginService.login(email, password).then((res: any) => {
+        this.loginService.setCognitoUser(res);
+        this.cookingService.initializeCookingData();
         this.newRoute.navigate(['/my-pantry']);
+        
         this.dialogRef.close();
         
       }, (error: any) => {

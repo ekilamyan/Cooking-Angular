@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <div class="wrapper" fxLayout.gt-md="row" fxLayoutAlign.gt-md="space-between center">
+    <div class="wrapper" fxLayout.gt-md="row" fxLayoutAlign.gt-md="space-between center" *ngIf="!loadingNutritionList">
         <div class="image-wrapper">
             <img src="{{this.recipe.image}}" width="680" />
         </div>
@@ -135,8 +135,9 @@
         </div>
     </div>
 
-    <!-- <h1 class="similar">Similar Recipes</h1>
-    <app-suggestions type="similar" [recipeId]="this.recipeId"></app-suggestions> -->
+    <h1 class="similar">Similar Recipes</h1>
+
+    <app-suggestions *ngIf="showSuggestions" [type]="'similar'" [recipeId]="recipeId" [numOfResults]="3"></app-suggestions>
 
 </body>
 
