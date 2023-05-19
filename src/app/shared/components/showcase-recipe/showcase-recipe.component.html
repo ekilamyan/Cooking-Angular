@@ -1,21 +1,90 @@
-<div class="showcase-container">
-    <!-- <div *ngIf="isLoading" class="skeleton-loader-wrapper">
-        <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
-            <div fxFlex="100">
-                <ngx-skeleton-loader [theme]="{ height: '430px', borderRadius: '10px' }"></ngx-skeleton-loader>
+<div *ngIf="!isLoading" fxLayout="column" fxLayoutAlign="space-around center">
+    <div id="first" class="showcase-container" fxHide.lt-md>
+        <div *ngIf="isLoading" class="skeleton-loader-wrapper">
+            <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
+                <div fxFlex="100">
+                    <ngx-skeleton-loader [theme]="{ height: '430px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                </div>
+            </div>
+        </div>
+        <div class="items">
+            <div class="showcase-area">
+                <img fxFlex="60" src="{{recipe.image}}">
+                <div class="info" fxFlex="40" fxLayout="column" fxLayoutAlign="space-between end">
+                    {{recipe.title}}
+                    <p> Try your hand at {{recipe.title}}, impress your friends and family with your culinary skills and
+                        this very delicious and delightful meal.</p>
+                    <button mat-icon-button class="example-icon" (click)="navToRecipeIntructions(recipe.id)">
+                        <mat-icon>arrow_forward</mat-icon>
+                    </button>
+                </div>
+
+                <!-- <div class="info" fxFlex="40" fxLayout="column" fxLayoutAlign="space-between start">
+                    <h1>{{recipe.title}}</h1>
+                    <p> Try your hand at {{recipe.title}} a very delicious and delightfull meal.</p>
+                    <button mat-icon-button class="example-icon" (click)="navToRecipeIntructions(recipe.id)">
+                        <mat-icon>arrow_forward</mat-icon>
+                    </button>
+                </div> -->
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Smaller version
+    <div *ngIf="!isLoading" id="second" class="showcase-container" fxHide.gt-sm fxHide.lt-sm> fxHide.gt-sm fxHide.lt-sm 
+        <div *ngIf="isLoading" class="skeleton-loader-wrapper">
+            <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
+                <div fxFlex="100">
+                    <ngx-skeleton-loader [theme]="{ height: '430px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                </div>
+            </div>
+        </div>
+        <div class="items" *ngFor="let recipe of recipes">
+            <div class="showcase-area">
+                <img fxFlex="60" src="{{recipe.image}}">
+                <div class="info" fxFlex="40" fxLayout="column" fxLayoutAlign="space-between end">
+                    {{recipe.title}}
+                    <p> Try your hand at {{recipe.title}} a very delicious and delightfull meal.</p>
+                    <button mat-icon-button class="example-icon" (click)="navToRecipeIntructions(recipe.id)">
+                        <mat-icon>arrow_forward</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!isLoading" id="third" class="showcase-container" fxHide.gt-xs> fxHide.gt-sm fxHide.lt-sm
+        <div *ngIf="isLoading" class="skeleton-loader-wrapper">
+            <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
+                <div fxFlex="100">
+                    <ngx-skeleton-loader [theme]="{ height: '430px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                </div>
+            </div>
+        </div>
+        <div class="items" *ngFor="let recipe of recipes">
+            <div class="showcase-area" fxLayout="column" fxLayoutAlign="center center">
+                <img src="{{recipe.image}}">
+                <div class="info-two" fxFlex="40" fxLayout="column" fxLayoutAlign="center start">
+                    <div class="title">{{recipe.title}}</div>
+                    <p> Try your hand at {{recipe.title}} a very delicious and delightfull meal.</p>
+                    <div class="button-container" fxLayout="column" fxLayoutAlign="center end">
+                        <button mat-icon-button class="example-icon" (click)="navToRecipeIntructions(recipe.id)">
+                            <mat-icon>arrow_forward</mat-icon>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div> -->
-    <div class="items" *ngFor="let recipe of recipes">
-        <div class="showcase-area">
-            <img fxFlex="60" src="{{recipe.image}}">
-            <div class="info" fxFlex="40" fxLayout="column" fxLayoutAlign="space-between end">
-                {{recipe.title}}
-                <p> Try your hand at {{recipe.title}} a very delicious and delightfull meal.</p>
-                <button mat-icon-button class="example-icon" (click)="navToRecipeIntructions(recipe.id)">
-                    <mat-icon>arrow_forward</mat-icon>
-                </button>
-            </div>
+</div>
+
+<div *ngIf="isLoading" class="skeleton-loader-wrapper">
+    <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
+        <div fxFlex="25">
+            <ngx-skeleton-loader
+                [theme]="{ height: '408px', width: '1110px', borderRadius: '10px' }"></ngx-skeleton-loader>
         </div>
     </div>
 </div>

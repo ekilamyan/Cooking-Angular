@@ -7,23 +7,20 @@
     </div>
 </div>
 
-<div *ngIf="isLoading" class="skeleton-loader-wrapper">
-    <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
-         <div fxFlex="25">
-             <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
-             <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
+ <div *ngIf="isLoading" class="skeleton-loader-wrapper">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+         <div>
+             <ngx-skeleton-loader [theme]="{ height: '218px', width: '352px', borderRadius: '10px' }"></ngx-skeleton-loader>
+             <ngx-skeleton-loader [theme]="{ height: '30px', width: '352px', borderRadius: '10px' }"></ngx-skeleton-loader>
          </div>
-         <div fxFlex="25">
-             <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
-             <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
-         </div>
-         <div fxFlex="25">
-             <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
-             <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
-         </div>
-         <div fxFlex="25">
-             <ngx-skeleton-loader [theme]="{ height: '150px', borderRadius: '10px' }"></ngx-skeleton-loader>
-             <ngx-skeleton-loader [theme]="{ height: '30px', borderRadius: '10px' }"></ngx-skeleton-loader>
-         </div>
+         <div>
+            <ngx-skeleton-loader [theme]="{ height: '218px', width: '352px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{ height: '30px', width: '352px', borderRadius: '10px' }"></ngx-skeleton-loader>
+        </div>
+        <div>
+            <ngx-skeleton-loader [theme]="{ height: '218px', width: '352px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{ height: '30px', width: '352px', borderRadius: '10px' }"></ngx-skeleton-loader>
+        </div>
      </div>
  </div>
+

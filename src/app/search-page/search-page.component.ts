@@ -76,21 +76,14 @@ export class SearchPageComponent implements OnInit {
           /* For random recipes with categories */
           this.isLoading = true;
 
-          if (
-            id == 'breakfast' ||
-            id == 'gluten free' ||
-            id == 'vegan' ||
-            id == 'dessert'
-          ) {
+          if (id == 'breakfast' || id == 'gluten free' || id == 'vegan' || id == 'dessert') {
             this.id = id;
-            this.suggestionsService
-              .getRandomIdsByCuisine(this.id, 4)
-              .subscribe((temp: any) => {
-                for (let i = 0; i < temp.recipes.length; i++) {
-                  this.recipes[i] = temp.recipes[i];
-                }
-                this.isLoading = false;
-              });
+            this.suggestionsService.getRandomIdsByCuisine(this.id, 20).subscribe((temp: any) => {
+              for (let i = 0; i < temp.recipes.length; i++) {
+                this.recipes[i] = temp.recipes[i];
+              }
+              this.isLoading = false;
+            });
           } else {
             /* For results from a actual search */
             /* Get list of ids */
@@ -99,30 +92,26 @@ export class SearchPageComponent implements OnInit {
             } else if (id == 'smoothie') {
               this.id = '125319';
             }
-            this.suggestionsService
-              .getIds(this.id, 20)
-              .subscribe((temp: any[]) => {
-                this.ids = this.id + ',';
-                for (let i = 0; i < temp.length; i++) {
-                  this.ids = this.ids + temp[i].id;
-                  if (i < temp.length - 1) {
-                    this.ids = this.ids + ',';
-                  }
+            this.suggestionsService.getIds(this.id, 19).subscribe((temp: any[]) => {
+              this.ids = this.id + ',';
+              for (let i = 0; i < temp.length; i++) {
+                this.ids = this.ids + temp[i].id;
+                if (i < temp.length - 1) {
+                  this.ids = this.ids + ',';
                 }
-                /* find recipes with list of ids */
-                this.suggestionsService
-                  .getSuggestionsBulk(this.ids)
-                  .subscribe((res: any[]) => {
-                    for (let i = 0; i < res.length; i++) {
-                      this.recipes[i] = new Recipe(res[i]);
-                    }
-                    this.searchedWord = this.recipes[0].title;
-                    this.applyFilters();
-                    console.log(this.filteredRecipes);
+              }
+              /* find recipes with list of ids */
+              this.suggestionsService.getSuggestionsBulk(this.ids).subscribe((res: any[]) => {
+                for (let i = 0; i < res.length; i++) {
+                  this.recipes[i] = new Recipe(res[i]);
+                }
+                this.searchedWord = this.recipes[0].title;
+                this.applyFilters();
+                console.log(this.filteredRecipes);
 
-                    this.isLoading = false;
-                  });
+                this.isLoading = false;
               });
+            });
           }
         }
       }
@@ -132,9 +121,7 @@ export class SearchPageComponent implements OnInit {
       recipe: [''],
     });
 
-    this.recipeSearchForm
-      .get('recipe')
-      ?.valueChanges.pipe(debounceTime(400), distinctUntilChanged())
+    this.recipeSearchForm.get('recipe')?.valueChanges.pipe(debounceTime(400), distinctUntilChanged())
       .subscribe((searchTerm: string) => {
         if (!searchTerm || searchTerm === '') {
           this.searchedWord = searchTerm;
@@ -186,9 +173,7 @@ export class SearchPageComponent implements OnInit {
   hasAllFilterTags(recipeFiltersTag: string[]): boolean {
     for (let i = 0; i < this.filters.length; i++) {
       const filter = this.filters[i];
-      console.log(this.filters[i]);
-      console.log(i);
-      console.log('check filter: ' + filter);
+
 
       if (!recipeFiltersTag.includes(filter)) {
         return false;

@@ -1,6 +1,6 @@
 <mat-toolbar fxHide.lt-md>
   <div class="navbar-start">
-    <a class="logo"><img src="assets/Logos/logo.png" [routerLink]="['/dashboard']"></a>
+    <img src="assets/Logos/logo.png" [routerLink]="['/dashboard']">
   </div>
   <span class="example-spacer"></span>
   <button *ngIf="this.url != '/start-cooking'" [routerLink]="['/start-cooking']" mat-flat-button>Start Cooking</button>
@@ -30,7 +30,6 @@
   </button>
 
 </mat-toolbar>
-
 
 
 <!-- alternate for smaller screens -->

@@ -17,7 +17,7 @@ export class LoginService {
   private congitoUser: CognitoUser;
   private cookingData: CookingData;
 
-  public url = "https://lbxlgv1fnj.execute-api.us-west-1.amazonaws.com/prod"; 
+  public url = "https://lbxlgv1fnj.execute-api.us-west-1.amazonaws.com/prod";
 
   constructor(private router: Router, private http: HttpClient, private snackBar: MatSnackBar) {
     Amplify.configure({
@@ -42,16 +42,18 @@ export class LoginService {
   }
 
   login(email: string, password: string) {
+    
     return Auth.signIn(email, password);
   }
 
   checkLogin(username: string, password: string): Observable<any> {
-    const obj = {'email': username, 'password': password};
+    const obj = { 'email': username, 'password': password };
     return this.http.post(this.url + '/checkLogin', JSON.stringify(obj));
   }
 
   logout() {
     Auth.signOut();
+    localStorage.removeItem("user");
     this.user.next(null);
     this.router.navigate(['sign-in']);
   }
@@ -80,7 +82,7 @@ export class LoginService {
     return this.congitoUser.getSignInUserSession().getIdToken().getJwtToken();
   }
 
-  setUserCookign(){
-
+  getUser() {
+    return this.user;
   }
 }

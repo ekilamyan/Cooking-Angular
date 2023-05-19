@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { User } from './shared/models/user.model';
 import { CookingDataService } from './shared/services/cooking-data.service';
 import { LoginService } from './shared/services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +12,11 @@ import { LoginService } from './shared/services/login.service';
 export class AppComponent {
   title = 'Cooking-Angular';
   
-  constructor(private loginService: LoginService, private cookingDataService: CookingDataService) {
+  constructor(private route :Router, private loginService: LoginService, private cookingDataService: CookingDataService) {
     this.loginService.user.subscribe((user: User) => {
-      if (user) {
+      if(user) {
         this.cookingDataService.getCookingData();
-      }
+      } 
     })
   }
 

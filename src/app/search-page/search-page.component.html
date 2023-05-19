@@ -121,7 +121,7 @@
         </div>
     </div>
 
-    <div class="no-results" *ngIf="filteredRecipes.length <= 0" fxLayout="column" fxLayoutAlign="space-around center">
+    <div class="no-results" *ngIf="!isLoading && filteredRecipes.length <= 0" fxLayout="column" fxLayoutAlign="space-around center">
         <p>Oops! </p>
         <p>There are no recipes that match any of the selected filters</p>
         <button class="no-results-button" mat-flat-button color="warn" (click)="removeAllChips()">Remove All Filters</button>

@@ -20,14 +20,14 @@ export class SignInComponent implements OnInit {
 
   public username = '';
   public password = '';
-  
 
-  loginForm = new FormGroup({     
+
+  loginForm = new FormGroup({
     email: new FormControl(''),
     password: new FormControl(''),
   });
 
-  constructor(private route:Router, private loginService: LoginService, public dialog: MatDialog, private snackBar: MatSnackBar) {
+  constructor(private route: Router, private loginService: LoginService, public dialog: MatDialog, private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -36,7 +36,7 @@ export class SignInComponent implements OnInit {
       console.log(this.disableBtn);
     });
 
-    this.loginService.user.subscribe ( (user: User) => {
+    this.loginService.user.subscribe((user: User) => {
       if (user) {
         this.route.navigate(['/']);
       }
@@ -53,8 +53,11 @@ export class SignInComponent implements OnInit {
       user.last_name = res.attributes.family_name;
       this.loginService.setCognitoUser(res);
       this.loginService.user.next(user);
-    }, (err: any) => {
-
+      localStorage.setItem("user", JSON.stringify(user));
+    }, (error: any) => {
+      this.snackBar.open('Invalid email or password', 'Dismiss', {
+        duration: 10 * 1000,
+      });
     });
   }
 

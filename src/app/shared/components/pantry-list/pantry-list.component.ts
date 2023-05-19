@@ -43,7 +43,7 @@ export class PantryListComponent implements OnInit {
       this.term = 'Canned and Jarred'
 
     } else if (category == 'dairy') {
-      this.color = '#f5fffe';
+      this.color = '#dcfaf7';
       this.term = 'Dairy'
 
     } else if (category == 'meats') {
@@ -82,6 +82,10 @@ export class PantryListComponent implements OnInit {
       this.color = '#fc979d';
       this.term = 'Snacks'
 
+    } else if (category == 'drinksBeverages') {
+      this.color = '#dab3ff';
+      this.term = 'Beverages'
+
     } else this.color = 'ebebeb';
   }
 
@@ -114,6 +118,8 @@ export class PantryListComponent implements OnInit {
       this.title = 'Pastas & Rice';
     } else if (category == 'snacks') {
       this.title = 'Snacks';
+    } else if (category == 'drinksBeverages') {
+      this.title = 'Beverages';
     } else this.color = 'ebebeb';
   }
 

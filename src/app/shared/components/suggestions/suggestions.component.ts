@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { CookingData } from '../../models/cooking-data.model';
 import { Recipe } from '../../models/recipe.model';
 import { CookingDataService } from '../../services/cooking-data.service';
@@ -25,69 +25,76 @@ export class SuggestionsComponent implements OnInit {
   public savedRecipes: Recipe[] = [];
   public savedRecipeIds = '';
 
+  public isLoading: boolean = true;
+  public someSubscription: any;
+
   constructor(
     private myRecipes: PantryService,
     private service: SuggestionsService,
     private cookingDataService: CookingDataService,
     private suggestionsService: SuggestionsService,
     private newRoute: Router
-  ) { }
-
-  public isLoading: boolean = true;
+  ) {
+    this.newRoute.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
+    this.someSubscription = this.newRoute.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Here is the dashing line comes in the picture.
+        // You need to tell the router that, you didn't visit or load the page previously, so mark the navigated flag to false as below.
+        this.newRoute.navigated = false;
+      }
+    });
+  }
 
   ngOnInit(): void {
-    console.log(this.type);
-    console.log(this.recipeId);
-    console.log(this.numOfResults);
+    // console.log(this.type);
+    // console.log(this.recipeId);
+    // console.log(this.numOfResults);
 
     this.recipes = [];
 
     if (this.type == 'similar') {
-      this.service
-        .getIds(this.recipeId, this.numOfResults)
-        .subscribe((temp: any[]) => {
-          if (temp) {
-            for (let i = 0; i < temp.length; i++) {
-              this.ids = this.ids + temp[i].id;
-              if (i < temp.length - 1) {
-                this.ids = this.ids + ',';
-              }
+      this.service.getIds(this.recipeId, 5).subscribe((temp: any[]) => {
+        console.log(temp);
+        if (temp) {
+          for (let i = 0; i < temp.length; i++) {
+            this.ids = this.ids + temp[i].id;
+            if (i < temp.length - 1) {
+              this.ids = this.ids + ',';
             }
-            this.service
-              .getSuggestionsBulk(this.ids)
-              .subscribe((temp: any[]) => {
-                for (let i = 0; i < temp.length; i++) {
-                  this.recipes[i] = temp[i];
-                }
-                this.isLoading = false;
-              });
           }
-        });
-    } else if (this.type == 'saved') {
-      this.cookingDataService.cookingData.subscribe(
-        (cookingData: CookingData) => {
-          if (cookingData) {
-            this.cookingData = cookingData;
-
+          this.service.getSuggestionsBulk(this.ids).subscribe((temp: any[]) => {
             for (let i = 0; i < 3; i++) {
-              this.ids = this.ids + this.cookingData.saved_recipes[i];
-              if (i < this.cookingData.saved_recipes.length - 1) {
-                this.ids = this.ids + ',';
+              this.recipes[i] = temp[i];
+            }
+            console.log(this.recipes);
+            this.isLoading = false;
+          });
+        }
+      });
+    } else if (this.type == 'saved') {
+      this.cookingDataService.cookingData.subscribe((cookingData: CookingData) => {
+        if (cookingData) {
+          this.cookingData = cookingData;
+
+          for (let i = 0; i < 3; i++) {
+            this.ids = this.ids + this.cookingData.saved_recipes[i];
+            if (i < this.cookingData.saved_recipes.length - 1) {
+              this.ids = this.ids + ',';
+            }
+          }
+
+          this.suggestionsService.getSuggestionsBulk(this.ids).subscribe((temp: any[]) => {
+            if (temp) {
+              for (let i = 0; i < temp.length; i++) {
+                this.recipes[i] = temp[i];
               }
             }
-
-            this.suggestionsService
-              .getSuggestionsBulk(this.ids)
-              .subscribe((temp: any[]) => {
-                if (temp) {
-                  for (let i = 0; i < temp.length; i++) {
-                    this.recipes[i] = temp[i];
-                  }
-                }
-                this.isLoading = false;
-              });
-          }
+            this.isLoading = false;
+          });
         }
+      }
       );
     } else if (this.type == 'pantry') {
       this.cookingDataService.cookingData.subscribe(
@@ -263,19 +270,19 @@ export class SuggestionsComponent implements OnInit {
       );
     } else {
       this.service.getRandomIds(3).subscribe((responce: any) => {
-        for (let i = 0; i < responce.recipes.length; i++) {
-          this.recipes[i] = responce.recipes[i];
-          this.recipes[i].image = responce.recipes[i].image.replace(
-            '556x370',
-            '636x393'
-          );
-          this.isLoading = false;
+        if (responce) {
+          for (let i = 0; i < responce.recipes.length; i++) {
+            this.recipes[i] = responce.recipes[i];
+            // this.recipes[i].image = responce.recipes[i].image.replace('556x370', '636x393');
+          }
         }
+        this.isLoading = false;
       });
     }
   }
 
   navToRecipeIntructions(id: string) {
     this.newRoute.navigate(['/recipe-instructions'], { queryParams: { id } });
+    window.scrollTo(0, 0);
   }
 }

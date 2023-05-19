@@ -9,16 +9,20 @@
 
     <div class="search-bar">
         <form class="ingredient-search" [formGroup]="ingredientSearchForm">
-
             <mat-form-field class="inputBox" appearance="outline">
-                <mat-label> Search for an ingredient. . .</mat-label>
+                <mat-label> Find an ingredient . .</mat-label>
                 <input matInput placeholder="Search for an ingredient..." formControlName="ingredient"
                     [matAutocomplete]="auto">
                 <mat-autocomplete #auto="matAutocomplete">
-                    <!-- <mat-spinner></mat-spinner> -->
+
                     <mat-option *ngFor="let option of ingredients" (click)="addIngredient(option)">
                         {{capitalizeFirstLetter(option.name)}}
                     </mat-option>
+
+                    <mat-option *ngIf="hasRanSearch && ingredients.length <= 0">
+                        No Results
+                    </mat-option>
+
                 </mat-autocomplete>
             </mat-form-field>
         </form>
@@ -27,7 +31,7 @@
     <div *ngIf="blank" fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap="1">
         <div class="user-pantry" fxLayout="column" fxLayoutAlign="space-around center"
             *ngIf="cookingData && cookingData.user_ingredients">
-            <div  class="index-one" *ngFor="let item of this.indexOne">
+            <div class="index-one" *ngFor="let item of this.indexOne">
                 <app-pantry-list *ngIf="item" category={{item[0]}} [ingredients]="item[1]"></app-pantry-list>
             </div>
         </div>
@@ -51,7 +55,7 @@
     <div *ngIf="!blank" class="getting-started">
         <p>Welcome to your very own pantry! </p>
         <p>
-            Here, you can simply the ingredients you have at home, and we'll provide
+            Here, you can simply add the ingredients you have at home, and we'll provide
             you with a plethora of delicious recipes to make with them. The more ingredients you have, the better the
             results will be. Let's get started!"
         </p>

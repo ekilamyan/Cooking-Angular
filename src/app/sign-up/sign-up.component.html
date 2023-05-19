@@ -62,7 +62,7 @@
                     Back
                 </button>
 
-                <button mat-flat-button color="warn" (click)="next()" *ngIf="!showVerifyButton"> 
+                <button mat-flat-button color="warn" (click)="next()" [disabled]="firstFormGroup.invalid" *ngIf="!showVerifyButton"> 
                     Next
                 </button>
 

@@ -38,18 +38,19 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void {
 
     this.firstFormGroup = this.formBuilder.group({
-      email: ['sashasirush08@gmail.com'],
-      name: ['Edgar'],
-      lastname: ['Kilamyan'],
-      password: ['Kilamyan123!'],
-      confirmPassword: ['Kilamyan123!'],
-      confirmationCode: [{value: '', disabled: true}]
+      // email: ['edgarkilamyan40@gmail.com'],
+      // name: ['Edgar'],
+      // lastname: ['Kilamyan'],
+      // password: ['Kilamyan'],
+      // confirmPassword: ['Kilamyan'],
+      // confirmationCode: [{ value: '', disabled: true }]
 
-      // name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
-      // lastname: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
-      // email: ['', Validators.compose([Validators.required, Validators.email])],
-      // password: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
-      // confirmPassword: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])]
+      name: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(50)])],
+      lastname: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(50)])],
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
+      confirmPassword: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
+      confirmationCode: [{value: '', disabled: true}]
     });
 
     this.firstFormGroup.valueChanges.subscribe((changedObj: any) => {
@@ -65,26 +66,45 @@ export class SignUpComponent implements OnInit {
     user.last_name = <string>this.firstFormGroup.get('lastname').value;
     user.password = <string>this.firstFormGroup.get('password').value;
 
-    this.loginService.createUser(user).then((res: ISignUpResult) => { 
-      this.snackBar.open('Successful - please enter the confirmation code');
+    this.loginService.createUser(user).then((res: ISignUpResult) => {
+      this.snackBar.open('Successful - please enter the confirmation code', 'Dismiss', {
+        duration: 10 * 1000,
+      });
+
       this.openDialog();
       console.log(res);
     }, (error: any) => {
-      this.snackBar.open('ERROR : An account with this email already exists', 'Dismiss', {
+
+      console.log(error);
+
+      const err = String(error);
+      this.snackBar.open(this.handleError(err), 'Dismiss', {
         duration: 10 * 1000,
       });
-      console.log(error);
     });
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(CodeConfirmationDialogComponent, { 
+    const dialogRef = this.dialog.open(CodeConfirmationDialogComponent, {
       disableClose: true,
       data: {
         email: this.firstFormGroup.get('email').value,
         password: this.firstFormGroup.get('password').value,
       }
     });
+  }
+
+  handleError(error: string) {
+    if (error == "InvalidPasswordException: Password did not conform with policy: Password must have numeric characters"
+      || error == "InvalidPasswordException: Password did not conform with policy: Password must have symbol characters") {
+      return "Password must have least one number and special character";
+    } else if (error == "InvalidParameterException: Invalid email address format.") {
+      return "Please enter a valid email address";
+    }
+
+    else {
+      return "error has occured";
+    }
   }
 }
 

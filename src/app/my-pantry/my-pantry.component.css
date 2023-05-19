@@ -46,6 +46,10 @@ hr {
     font-family: "Inter", sans-serif;
 }
 
+.search-bar {
+    margin-bottom: 20px;
+}
+
 
 /* //input outline color */
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {

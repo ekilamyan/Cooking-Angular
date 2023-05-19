@@ -56,8 +56,17 @@ p {
     border-radius: 10px;
     font-size: 16px;
     font-weight: 300;
-    margin-top: 20px;
     font-family: "Inter", sans-serif;
+}
+
+.search-bar {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+::ng-deep .mat-form-field-wrapper {
+    margin: 0;
+    padding: 0;
 }
 
 /* //input outline color */

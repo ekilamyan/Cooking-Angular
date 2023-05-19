@@ -12,6 +12,7 @@ export class SuggestionsService {
   public baseUrl_1 = 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/';
   public baseUrl_2 = 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/informationBulk';
   public baseUrl_3 = 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random';
+  public baseUrl_4 = 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/';
 
   public apiKey = '8319610fbfb04bbb93883d1d8ad1f890';
 
@@ -37,6 +38,10 @@ export class SuggestionsService {
 
   getSuggestionsBulk(ids: string): Observable<any> {
     return this.http.get(this.baseUrl_2 + '?ids=' + ids , { 'headers': this.headers });
+  }
+
+  getRecipeById(id: string) {
+    return this.http.get(this.baseUrl_4 + id + '/information?includeNutrition=false', { 'headers': this.headers });
   }
 }
 

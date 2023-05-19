@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Lets Get Started</h1>
+<hr>
+<p>Below are some ingredients to get you started, click any to add to your pantry.</p>
+<p>You can always add more later</p>
+
+<div>
+    <mat-chip-list>
+        <mat-chip *ngFor="let i of dairy">
+            {{i}}
+            <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+            </button>
+        </mat-chip>
+    </mat-chip-list>
+</div>

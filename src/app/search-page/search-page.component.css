@@ -7,6 +7,11 @@
     margin-top: 40px;
 }
 
+h2 {
+    font-size: 30px;
+    font-family: "Playfair", serif;
+}
+
 hr {
     border: 0;
     clear: both;
@@ -16,11 +21,34 @@ hr {
     height: 1px;
 }
 
-/* Chips */
 .clear-all-chips {
     background-color: rgb(233, 143, 143);
 }
 
+/* no results */
+.no-results {
+    padding: 10px;
+}
+
+.no-results-button {
+    transition: all ease 0.2s;
+}
+
+.no-results-button:hover {
+    transform: scale(1.1);
+    transition: all ease 0.2s;
+}
+
+p {
+    font-size: 23px;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    color: #6b6b6b;
+}
+
+.no-results-button {
+    width: 15%;
+}
 
 /* Input box */
 .inputBox {
@@ -28,8 +56,17 @@ hr {
     border-radius: 10px;
     font-size: 16px;
     font-weight: 300;
-    margin-top: 20px;
     font-family: "Inter", sans-serif;
+}
+
+.search-bar {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+::ng-deep .mat-form-field-wrapper {
+    margin: 0;
+    padding: 0;
 }
 
 /* //input outline color */
@@ -71,8 +108,6 @@ hr {
     background-color: rgb(255, 255, 255) !important;
 }
 
-
-
 .mat-option {
     font-family: "Inter", sans-serif;
 }
@@ -81,45 +116,32 @@ hr {
 /*  filter buttons */
 .mat-stroked-button {
     width: 100%;
-    padding: 13px;
+    padding: 12px;
     border-radius: 10px;
     font-size: 18px;
     border-style: solid;
     border-color: rgb(92, 92, 92);
-    font-family: "Inter", sans-serif; 
+    font-family: "Inter", sans-serif;
+}
+
+/* dropdown menu */
+::ng-deep.mat-menu-panel {
+    font-family: "Inter", sans-serif;
+    margin-top: 10px;
+}
+
+::ng-deep.mat-menu-content {
+    border-radius: 100px;
 }
 
 .mat-menu-item {
+    font-family: "Inter", sans-serif;
     font-size: 16px;
 }
 
-
-/* no results */
-.no-results {
-    padding: 10px;
+.pantry-content {
+    padding-top: 50px;
 }
-
-.no-results-button {
-    transition: all ease 0.2s;
-}
-
-.no-results-button:hover {
-    transform: scale(1.1);
-    transition: all ease 0.2s;
-}
-
-p {
-    font-size: 23px;
-    text-align: center;
-    font-family: "Inter", sans-serif;
-    color: #6b6b6b;
-}
-
-.no-results-button {
-    width: 15%;
-}
-
-
 
 /* suggestions in content */
 
@@ -130,6 +152,7 @@ img {
     transition: 0.3s;
     margin-top: 10px;
     margin-bottom: 10px;
+    border: 1px solid rgb(235, 235, 235);
 }
 
 img:hover {
@@ -143,18 +166,18 @@ img:hover {
     font-weight: 500;
     margin-bottom: 20px;
     font-family: "Inter", sans-serif;
-    transition: 0.3s;
-}
-
-.card:hover .title {
-    color: coral;
-    cursor: pointer;
     transition: 0.2s;
 }
 
 .card {
     width: 250px;
     margin-bottom: auto;
+}
+
+.card:hover .title {
+    color: #ef4439;
+    transition: 0.3s;
+    cursor: pointer;
 }
 
 .skeleton-loader-wrapper {

@@ -1,4 +1,12 @@
-<h1 mat-dialog-title>Filters</h1>
+<div class="heading" fxLayout="row" fxLayoutAlign="space-between center">
+    <h1 mat-dialog-title>Filters</h1>
+
+    <button mat-icon-button mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+
 <form [formGroup]="filtersForm">
     <mat-tab-group mat-align-tabs="center">
         <mat-tab label="Cuisines">

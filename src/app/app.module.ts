@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthGuardService } from './shared/services/auth-guard.service';
 
 import { MaterialImportsModule } from 'src/material-imports.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -29,6 +30,7 @@ import { CodeConfirmationDialogComponent } from './dialogs/code-confirmation-dia
 
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ShowcaseRecipeComponent } from './shared/components/showcase-recipe/showcase-recipe.component';
+import { EmptyPantryDialogComponent } from './dialogs/empty-pantry-dialog/empty-pantry-dialog.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { ShowcaseRecipeComponent } from './shared/components/showcase-recipe/sho
     PantryListComponent,
     CodeConfirmationDialogComponent,
     ShowcaseRecipeComponent,
+    EmptyPantryDialogComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -62,7 +65,7 @@ import { ShowcaseRecipeComponent } from './shared/components/showcase-recipe/sho
     ReactiveFormsModule,
     NgxSkeletonLoaderModule,
   ],
-  providers: [],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

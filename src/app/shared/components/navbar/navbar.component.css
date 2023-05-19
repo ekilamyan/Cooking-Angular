@@ -1,75 +1,63 @@
 .example-spacer {
-    flex: 1 1 auto;
-  }
- 
- 
- .mat-toolbar {
-    background-color: white;
-    height: 90px;
-    padding: 0px;
- }
- 
- 
- img {
-    width: 130px;
-    cursor: pointer;
-    height: auto;
-    transition: all ease 0.2s;
- }
+   flex: 1 1 auto;
+}
+
+.mat-toolbar {
+   background-color: white;
+   height: 90px;
+   padding: 0px;
+}
+
+img {
+   width: 300px;
+   cursor: pointer;
+   height: auto;
+   transition: all ease 0.2s;
+}
 
 img:hover {
    cursor: pointer;
    transform: scale(1.1);
    transition: all ease 0.2s;
 }
- 
- 
- button {
-    font-family: "Inter", sans-serif;
-    font-size: 18px;
-    border-radius: 25px;
-    margin-right: 5px;
-    margin-left: 5px;
- }
- 
- 
- .active-button {
-    background-color: #ef4439;
-    color: white;
-    font-family: "Inter", sans-serif;
-    font-size: 18px;
-    border-radius: 25px;
-    margin-right: 5px;
-    margin-left: 5px;
- } 
- 
- 
- 
- 
- button {
-    transition: all ease 0.2s;
- }
- 
- 
- button:hover {
-    transform: scale(1.1);
-    transition: all ease 0.2s;
- }
- 
- 
- .mat-accordion {
-    margin: 10px;
- }
- 
- 
- .mat-expansion-panel {
-    box-shadow: none;
- }
- 
- 
- .mat-expansion-panel-header {
-    padding: 0px;
-    margin-top: 20px;
-    margin-bottom: 20px;
- }
- 
+
+button {
+   font-family: "Inter", sans-serif;
+   font-size: 18px;
+   border-radius: 25px;
+   margin-right: 5px;
+   margin-left: 5px;
+}
+
+.active-button {
+   background-color: #ef4439;
+   color: white;
+   font-family: "Inter", sans-serif;
+   font-size: 18px;
+   border-radius: 25px;
+   margin-right: 5px;
+   margin-left: 5px;
+}
+
+button {
+   transition: all ease 0.2s;
+}
+
+button:hover {
+   transform: scale(1.1);
+   transition: all ease 0.2s;
+}
+
+.mat-accordion {
+   margin: 10px;
+}
+
+.mat-expansion-panel {
+   box-shadow: none;
+}
+
+.mat-expansion-panel-header {
+   padding: 0px;
+   margin-top: 20px;
+   margin-bottom: 20px;
+}

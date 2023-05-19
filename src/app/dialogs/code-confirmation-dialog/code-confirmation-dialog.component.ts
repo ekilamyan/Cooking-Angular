@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { User } from 'src/app/shared/models/user.model'; 
 import { CookingDataService } from 'src/app/shared/services/cooking-data.service';
 import { LoginService } from 'src/app/shared/services/login.service';
 
@@ -33,8 +34,10 @@ export class CodeConfirmationDialogComponent implements OnInit {
   
     this.loginService.verifyUser(email, confirmationCode).then((res: any) => {
       this.loginService.login(email, password).then((res: any) => {
+        const user = new User(res);
         this.loginService.setCognitoUser(res);
         this.cookingService.initializeCookingData();
+        localStorage.setItem("user", JSON.stringify(user));
         this.newRoute.navigate(['/my-pantry']);
         
         this.dialogRef.close();

@@ -1,7 +1,7 @@
 @media only screen and (max-width: 600px) {
     body {
         max-width: 100%;
-        background-color: lightblue;
+        /* background-color: lightblue; */
         min-height: 100vh;
         color: #303030;
     }
@@ -9,9 +9,12 @@
 
 @media only screen and (min-width: 600px) {
     body {
+        padding: 0px;
+        margin: 0px;
         max-width: 1100px;
         margin-right: auto;
         margin-left: auto;
+        /* padding: 20px; */
         min-height: 100vh;
         color: #303030;
     }

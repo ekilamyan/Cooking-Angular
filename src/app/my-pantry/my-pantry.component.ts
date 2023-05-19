@@ -8,6 +8,8 @@ import { CookingDataService } from '../shared/services/cooking-data.service';
 import { LoginService } from '../shared/services/login.service';
 import { CookingData } from '../shared/models/cooking-data.model';
 import { toBase64String } from '@angular/compiler/src/output/source_map';
+import { EmptyPantryDialogComponent } from '../dialogs/empty-pantry-dialog/empty-pantry-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-my-pantry',
@@ -32,6 +34,9 @@ export class MyPantryComponent implements OnInit {
   public ingredientcount = 0;
   public durationInSeconds = 3;
 
+  public isLoading: boolean = true;
+  public searchLoading: boolean = true;
+
   public count = 1;
 
   ingredientSearchForm = new FormGroup({
@@ -42,7 +47,8 @@ export class MyPantryComponent implements OnInit {
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
     private cookingDataService: CookingDataService,
-    private loginService: LoginService) {
+    private loginService: LoginService,
+    private dialog: MatDialog,) {
   }
 
   ngOnInit(): void {
@@ -50,6 +56,8 @@ export class MyPantryComponent implements OnInit {
       if (cookingData) {
         this.cookingData = cookingData;
         this.ingredientcount = 0;
+
+        console.log(cookingData.user_ingredients);
 
         this.sortIngredients();
 
@@ -59,7 +67,7 @@ export class MyPantryComponent implements OnInit {
 
         this.count = 1;
 
-        console.log(Object.entries(this.cookingData.user_ingredients).sort());
+        // console.log(Object.entries(this.cookingData.user_ingredients).sort());
 
         this.ingredientArrays = Object.entries(this.cookingData.user_ingredients).sort();
 
@@ -68,6 +76,7 @@ export class MyPantryComponent implements OnInit {
             this.ingredientcount++;
           }
         }
+        console.log(this.ingredientcount);
 
         if (this.ingredientcount > 0) {
           let misc;
@@ -107,6 +116,7 @@ export class MyPantryComponent implements OnInit {
 
         } else {
           this.blank = false
+          // this.openDialog();
         }
       }
     });
@@ -116,22 +126,28 @@ export class MyPantryComponent implements OnInit {
       'ingredient': ['']
     });
 
-    this.ingredientSearchForm.get('ingredient')?.valueChanges.pipe(
-      debounceTime(400),
-      distinctUntilChanged()).subscribe((searchTerm: string) => {
+    this.ingredientSearchForm.get('ingredient')
+      ?.valueChanges.pipe(debounceTime(400), distinctUntilChanged()).subscribe((searchTerm: string) => {
+        this.searchLoading = true;
+        this.hasRanSearch = false;
+
         if (!searchTerm || searchTerm === '') {
           this.ingredients = [];
           return;
         }
 
+        // this.searchTermLength = this.ingredients.length;
+
         this.service.getIngredientAutocomplete(searchTerm).subscribe((temp: any[]) => {
-          this.ingredients = [];
-          this.hasRanSearch = true;
-          for (let i = 0; i < temp.length; i++) {
-            this.ingredients.push(new PantryIngredient(temp[i]));
-          }
-        });
-      })
+            this.ingredients = [];
+            this.hasRanSearch = true;
+            for (let i = 0; i < temp.length; i++) {
+              this.ingredients.push(new PantryIngredient(temp[i]));
+              console.log(this.ingredients);
+              // console.log(temp[i]);
+            }
+          });
+      });
   }
 
   addIngredient(ingredient: PantryIngredient) {
@@ -156,7 +172,7 @@ export class MyPantryComponent implements OnInit {
         this.cookingData.user_ingredients.condiments.push(ingredient.name);
         this.added = true;
       }
-    } else if (ingredient.aisle == 'Dairy' || ingredient.aisle == 'Cheese') {
+    } else if (ingredient.aisle == 'Milk, Eggs, Other Dairy' || ingredient.aisle == 'Cheese') {
       if (this.cookingData.user_ingredients.dairy.includes(ingredient.name)) {
         this.added = false;
       } else {
@@ -219,11 +235,19 @@ export class MyPantryComponent implements OnInit {
         this.cookingData.user_ingredients.spicesSeasonings.push(ingredient.name);
         this.added = true;
       }
-    } else if (ingredient.aisle == 'Jarred Goods') {
+    } else if (ingredient.aisle == 'Jarred Goods' || ingredient.aisle == 'Nut butters, Jams, and Honey') {
       if (this.cookingData.user_ingredients.jarredGoods.includes(ingredient.name)) {
         this.added = false;
       } else {
         this.cookingData.user_ingredients.jarredGoods.push(ingredient.name);
+        this.added = true;
+      }
+
+    } else if (ingredient.aisle == 'Beverages' || ingredient.aisle == 'Alcoholic Beverages') {
+      if (this.cookingData.user_ingredients.drinksBeverages.includes(ingredient.name)) {
+        this.added = false;
+      } else {
+        this.cookingData.user_ingredients.drinksBeverages.push(ingredient.name);
         this.added = true;
       }
     } else {
@@ -264,7 +288,15 @@ export class MyPantryComponent implements OnInit {
     this.cookingData.user_ingredients.refrigeratedFrozen = this.cookingData.user_ingredients.refrigeratedFrozen.sort();
     this.cookingData.user_ingredients.seafood = this.cookingData.user_ingredients.seafood.sort();
     this.cookingData.user_ingredients.snacks = this.cookingData.user_ingredients.snacks.sort()
+    this.cookingData.user_ingredients.drinksBeverages = this.cookingData.user_ingredients.drinksBeverages.sort();
     this.cookingData.user_ingredients.misc = this.cookingData.user_ingredients.misc.sort();
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(EmptyPantryDialogComponent, { panelClass: 'custom-modalbox',  } ); //disableClose: true
+
+    // dialogRef.afterClosed().subscribe((res: any) => {
+    // });
   }
 
   capitalizeFirstLetter(word: string) {

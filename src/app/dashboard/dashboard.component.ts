@@ -52,13 +52,22 @@ export class DashboardComponent implements OnInit {
     private cookingDataService: CookingDataService,
     private route: Router,
     public newRoute: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.cookingDataService.cookingData.subscribe(
       (cookingData: CookingData) => {
         if (cookingData) {
           this.cookingData = cookingData;
+
+          this.ingredientArrays = Object.entries(this.cookingData.user_ingredients).sort();
+
+          for (let i = 0; i < this.ingredientArrays.length; i++) {
+            if (this.ingredientArrays[i][1].length > 0) {
+              this.ingredientcount++;
+            }
+          }
+          console.log(this.ingredientcount);
         }
       }
     );

@@ -15,6 +15,7 @@ export class SavedIngredients {
     seafood: string[];
     snacks: string[];
     spicesSeasonings: string[];
+    drinksBeverages: string[];
     misc: string[];
 
     constructor(data: any) {
@@ -32,6 +33,7 @@ export class SavedIngredients {
             this.seafood = data.seafood;
             this.snacks = data.snacks;
             this.spicesSeasonings = data.spicesSeasonings;
+            this.drinksBeverages = data.drinksBeverages
             this.misc = data.misc;
         } else {
             this.baking = [];
@@ -47,6 +49,7 @@ export class SavedIngredients {
             this.seafood = [];
             this.snacks = [];
             this.spicesSeasonings = [];
+            this.drinksBeverages = [];
             this.misc = [];
         }
     }

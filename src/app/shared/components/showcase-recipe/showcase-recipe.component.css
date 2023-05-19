@@ -1,51 +1,125 @@
-
-/* showcase */ 
-img {
-    height: 430px;
+/* showcase */
+#first img {
     padding: 0px;
     margin: 0px;
     border-radius: 20px 0px 0px 20px;
+    border: 1px solid rgb(235, 235, 235);
 }
 
-.showcase-area {
-    width: 99%;
-    height: 430px;
+
+#first .showcase-area {
     background-color: rgb(245, 245, 245);
     border-radius: 20px 20px 20px 20px;
 }
 
-.showcase-area .info {
-    padding: 40px;
+#first .showcase-area .info {
+    text-align: left;
     font-family: "Playfair", serif;
-    font-size: 50px;
+    font-size: 45px;
+    padding: 20px;
     line-height: 1;
-    height: 100%;
 }
 
-.showcase-area p {
-    margin: 10px, 10px, 10px, 0px;
+#first .showcase-area p {
+    text-align: left;
     font-family: "Inter", sans-serif;
     font-size: 20px;
     line-height: 1.3;
 }
 
-.skeleton-loader-wrapper {
+
+#first .skeleton-loader-wrapper {
     display: flex;
     flex-direction: column;
     gap: 25px;
 }
 
-button {
+
+#first button {
     background-color: white;
     transition: 0.2s;
 }
 
-button:hover{
+#first button:hover {
     background-color: #ef4439;
     transition: 0.2s;
 }
 
-button:hover, svg :hover{
+#first button:hover, svg :hover {
     color: white;
     transition: 0.2s;
+}
+
+
+/* second */
+#second img {
+    padding: 0px;
+    margin: 0px;
+    border-radius: 20px 0px 0px 20px;
+}
+
+#second .showcase-area {
+    background-color: rgb(245, 245, 245);
+    border-radius: 20px 20px 20px 20px;
+    width: 100%;
+    height: auto;
+}
+
+#second .showcase-area .info {
+    text-align: left;
+    font-family: "Playfair", serif;
+    font-size: 4.5vw;
+    padding: 20px;
+    line-height: 1;
+}
+
+#second .showcase-area p {
+    text-align: left;
+    font-family: "Inter", sans-serif;
+    font-size: 2vw;
+    line-height: 1.3;
+}
+
+
+
+
+/* Third */
+#third img {
+    padding: 0px;
+    margin: 0px;
+    width: 95%;
+    height: auto;
+    border-radius: 20px 20px 0px 0px;
+}
+
+#third .info-two {
+    width: 95%;
+    background-color: rgb(245, 245, 245);
+    border-radius: 0px 0px 20px 20px;
+}
+
+
+#third .info-two {
+    text-align: left;
+    font-family: "Playfair", serif;
+    font-size: 6vw;
+    line-height: 1;
+}
+
+#third .info-two .title {
+    margin: 10px;
+    padding: 10px;
+}
+
+#third .info-two p {
+    margin: 10px;
+    padding: 10px;
+    text-align: left;
+    font-family: "Inter", sans-serif;
+    font-size: 3vw;
+    line-height: 1.3;
+}
+
+#third .info-two .button {
+    padding: 10px;
 }

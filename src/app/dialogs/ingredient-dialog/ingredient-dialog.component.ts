@@ -40,6 +40,7 @@ export class IngredientDialogComponent implements OnInit {
   ngOnInit(): void {
     this.cookingDataService.cookingData.subscribe((cookingData: CookingData) => {
       if (cookingData) {
+        console.log(this.data);
         this.cookingData = cookingData;
         this.sortIngredients();
       }
@@ -118,7 +119,7 @@ export class IngredientDialogComponent implements OnInit {
             }
           }
 
-          else if (this.data.term == 'Canned & Jarred') {
+          else if (this.data.term == 'Canned and Jarred') {
             for (let i = 0; i < temp.length; i++) {
               if (temp[i].aisle == 'Canned and Jarred') {
                 this.ingredients.push(new PantryIngredient(temp[i]));
@@ -126,7 +127,7 @@ export class IngredientDialogComponent implements OnInit {
             }
           }
 
-          else if (this.data.term == 'Spices & Seasonings') {
+          else if (this.data.term == 'Spices and Seasonings') {
             for (let i = 0; i < temp.length; i++) {
               if (temp[i].aisle == 'Spices and Seasonings') {
                 this.ingredients.push(new PantryIngredient(temp[i]));
@@ -143,7 +144,7 @@ export class IngredientDialogComponent implements OnInit {
             }
           }
 
-          else if (this.data.term == 'Oils & Dressings') {
+          else if (this.data.term == 'Oil, Vinegar, Salad Dressing') {
             for (let i = 0; i < temp.length; i++) {
               if (temp[i].aisle == 'Oil, Vinegar, Salad Dressing') {
                 this.ingredients.push(new PantryIngredient(temp[i]));
@@ -151,7 +152,7 @@ export class IngredientDialogComponent implements OnInit {
             }
           }
 
-          else if (this.data.term == 'Pastas & Rice') {
+          else if (this.data.term == 'Pastas and Rice') {
             for (let i = 0; i < temp.length; i++) {
               if (temp[i].aisle == 'Pastas and Rice') {
                 this.ingredients.push(new PantryIngredient(temp[i]));
@@ -162,6 +163,14 @@ export class IngredientDialogComponent implements OnInit {
           else if (this.data.term == 'Frozen & Refrigerated') {
             for (let i = 0; i < temp.length; i++) {
               if (temp[i].aisle == 'Refrigerated' || temp[i].aisle == 'Frozen') {
+                this.ingredients.push(new PantryIngredient(temp[i]));
+              }
+            }
+          }
+
+          else if (this.data.term == 'Beverages') {
+            for (let i = 0; i < temp.length; i++) {
+              if (temp[i].aisle == 'Beverages' || temp[i].aisle == 'Alcoholic Beverages') {
                 this.ingredients.push(new PantryIngredient(temp[i]));
               }
             }
@@ -200,12 +209,14 @@ export class IngredientDialogComponent implements OnInit {
       this.cookingData.user_ingredients.spicesSeasonings.splice(this.cookingData.user_ingredients.spicesSeasonings.indexOf(ingredient), 1);
     } else if (this.data.term == 'Dairy') {
       this.cookingData.user_ingredients.dairy.splice(this.cookingData.user_ingredients.dairy.indexOf(ingredient), 1);
-    } else if (this.data.term == 'Oils and Dressings') {
+    } else if (this.data.term == 'Oil, Vinegar, Salad Dressing') {
       this.cookingData.user_ingredients.oilsDressings.splice(this.cookingData.user_ingredients.oilsDressings.indexOf(ingredient), 1);
-    } else if (this.data.term == 'Pastas and Rice') {
+    } else if (this.data.term == 'Pastas & Rice') {
       this.cookingData.user_ingredients.pastaRice.splice(this.cookingData.user_ingredients.pastaRice.indexOf(ingredient), 1);
-    } else if (this.data.term == 'Frozen and Refrigerated') {
+    } else if (this.data.term == 'Frozen & Refrigerated') {
       this.cookingData.user_ingredients.refrigeratedFrozen.splice(this.cookingData.user_ingredients.condiments.indexOf(ingredient), 1);
+    } else if (this.data.term == 'Beverages' || this.data.term == 'Alcoholic Beverages') {
+      this.cookingData.user_ingredients.drinksBeverages.splice(this.cookingData.user_ingredients.drinksBeverages.indexOf(ingredient), 1);
     } else {
       this.cookingData.user_ingredients.misc.splice(this.cookingData.user_ingredients.misc.indexOf(ingredient), 1);
     }
