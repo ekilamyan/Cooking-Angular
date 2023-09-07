@@ -159,7 +159,6 @@ button:hover {
 
 
 /* second */
-
 #second {
     margin-top: 40px;
 
@@ -205,7 +204,6 @@ iframe {
     gap: 25px;
 }
 
-
 #second button {
     transition: all ease 0.2s;
 }
@@ -214,6 +212,181 @@ iframe {
     transform: scale(1.1);
     transition: all ease 0.2s;
 }
+
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+/* small screen version */
+
+/* small navbar */
+#small-navbar .mat-toolbar {
+    background-color: white;
+    height: 90px;
+    padding: 35px;
+}
+
+#small-navbar .navbar-start img {
+    width: 150px;
+    cursor: pointer;
+    height: auto;
+    transition: all ease 0.2s;
+}
+
+.navbar-start img:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: all ease 0.2s;
+}
+
+
+#small-showcase-area {
+    width: 300px;
+}
+
+#small-showcase-area .info img{
+    border-radius: 20px 20px 0px 0px;
+    width: 300px;
+}
+
+#small-showcase-area h1 {
+    font-family: "Playfair", serif;
+    padding-top: 10px;
+    font-size: 25px;
+    line-height: 25px;
+}
+
+#small-showcase-area .info {
+    background-color: rgb(245, 245, 245);
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 20px;
+    border-radius: 25px;
+    margin-bottom: 40px;
+}
+
+#small-showcase-area p {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    line-height: 15px;
+}
+
+#small-showcase-area button {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    border-radius: 25px;
+    width: 100px;
+    transition: all ease 0.2s;
+}
+
+#small-showcase-area button:hover {
+    transform: scale(1.1);
+    transition: all ease 0.2s;
+}
+
+/* small circles */
+
+#small-showcase-area .title {
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+
+#small-showcase-area .circle img {
+    width: 40px;
+    height: auto;
+}
+
+#small-showcase-area .oneTwoThree {
+    margin: none;
+}
+
+#small-showcase-area #one {
+    width: 80px;
+    height: 80px;
+    background-color: #e3f4fa;
+}
+
+#small-showcase-area #two {
+    width: 80px;
+    height: 80px;
+    background-color: #d9e2d7;
+}
+
+#small-showcase-area #three {
+    width: 80px;
+    height: 80px;
+    background-color: #f9c6d7;
+}
+
+#small-showcase-area #three img {
+    width: 50px;
+    height: auto;
+    background-color: #f9c6d7;
+}
+
+#small-showcase-area .oneTwoThree h2 {
+    font-family: "Playfair", serif;
+    font-size: 12px;
+}
+
+#small-showcase-area .oneTwoThree {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+
+
+/* small second */
+#small-showcase-area #second {
+    margin-top: 40px;
+}
+
+#small-showcase-area #second .showcase-area {
+    border-radius: 20px 20px 0px 0px;
+    width: 300px;
+}
+
+#small-showcase-area #second .showcase-area .info {
+    padding: 20px;
+}
+
+#small-showcase-area .video-container {
+    border-radius: 20px 20px 0px 0px;
+    width: 300px;
+}
+
+#small-showcase-area iframe {
+    border-radius: 20px 20px 0px 0px;
+    width: 300px;
+}
+
+#small-showcase-area #second .showcase-area {
+    border-radius: 0px 0px 20px 20px;
+}
+
+#small-showcase-area #second .showcase-area .info {
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 20px;
+}
+
+#small-showcase-area #second .showcase-area h1 {
+    font-family: "Playfair", serif;
+    font-size: 25px;
+    line-height: 25px;
+    margin: 0px;
+    padding: 0px;
+}
+
+#small-showcase-area #second .showcase-area p {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    line-height: 14px;
+}
+
 
 hr {
     margin-top: 10px;

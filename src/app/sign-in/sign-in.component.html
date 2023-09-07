@@ -1,5 +1,6 @@
-<body fxLayout="column" fxLayoutAlign="center center">
-    <img src="assets/Logos/logo.png" alt="">
+ 
+<body fxHide.lt-md fxLayout="column" fxLayoutAlign="center center">
+    <a [routerLink]="['/homepage']"><img src="assets/Logos/logo.png" alt="" ></a>
     <div class="content">
         <div class="info" fxFlex="50" fxLayout="column" fxLayoutAlign="center center">
             <form [formGroup]="loginForm" (submit)="tryLogin()" fxLayout="column" fxLayoutAlign="center center">
@@ -34,5 +35,42 @@
                 <button mat-flat-button [routerLink]="['/sign-up']"> Sign up </button>
             </div>
         </div>
+    </div> 
+</body>
+
+
+<body fxHide.gt-sm fxLayout="column" fxLayoutAlign="start center">
+    <img src="assets/Logos/logo.png" alt="">
+    <div class="small-content" fxLayout="column" fxLayoutAlign="center center">
+        <h1>Sign in</h1>
+        <div class="info" fxLayout="column" fxLayoutAlign="center center">
+            <form [formGroup]="loginForm" (submit)="tryLogin()" fxLayout="column" fxLayoutAlign="center center">
+                
+                <div class="login" fxLayout="column" fxLayoutAlign="space-between stretch">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="Email" formControlName="email">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+
+                </div>
+            </form>
+
+            <div fxLayout="column" fxLayoutAlign="space-around center">
+                <button mat-flat-button color="warn" (click)="tryLogin()"> Login </button>
+            </div>
+
+        </div>
     </div>
+
+    <h3>don't have an account? <a [routerLink]="['/sign-up']">click here</a> </h3>
+
 </body>

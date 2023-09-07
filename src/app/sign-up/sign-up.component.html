@@ -1,8 +1,7 @@
 <body fxLayout="column" fxLayoutAlign="center center">
-
+    <a class="logo" fxLayoutAlign="center center"><img src="assets/Logos/logo.png" alt=""></a>
     <div class="container">
-        <a class="logo" fxLayoutAlign="center center"><img src="assets/Logos/logo.png" alt=""></a>
-        <div class="title" fxLayout="column" fxLayoutAlign="space-between stretch">
+        <div class="title" fxLayout="column" fxLayoutAlign="center center">
             <h1>Sign Up</h1>
             <label>Please fill in this form to create an account!</label>
         </div>
@@ -49,7 +48,7 @@
                 </mat-form-field>
             </div>
 
-            <div  fxLayout="row wrap" fxLayoutAlign="center center">
+            <div fxLayout="row wrap" fxLayoutAlign="center center">
                 <!-- <button mat-flat-button color="primary" matStepperNext [disabled]="!disableBtn">Next</button> -->
                 <!-- <button mat-flat-button color="primary" (click)="next()" *ngIf="!showVerifyButton"> 
                     Next
@@ -58,16 +57,16 @@
                     Verify and Login
                 </button> -->
 
-                <button mat-stroked-button color="warn" [routerLink]="['/sign-in']"> 
+                <button mat-stroked-button color="warn" [routerLink]="['/sign-in']">
                     Back
                 </button>
 
-                <button mat-flat-button color="warn" (click)="next()" [disabled]="firstFormGroup.invalid" *ngIf="!showVerifyButton"> 
+                <button mat-flat-button color="warn" (click)="next()" [disabled]="firstFormGroup.invalid"
+                    *ngIf="!showVerifyButton">
                     Next
                 </button>
 
             </div>
         </form>
     </div>
-    
 </body>

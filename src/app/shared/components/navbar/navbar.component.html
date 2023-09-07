@@ -4,9 +4,11 @@
   </div>
   <span class="example-spacer"></span>
   <button *ngIf="this.url != '/start-cooking'" [routerLink]="['/start-cooking']" mat-flat-button>Start Cooking</button>
-  <button *ngIf="this.url == '/start-cooking'" class="active-button" [routerLink]="['/start-cooking']" mat-flat-button>Start Cooking</button>
+  <button *ngIf="this.url == '/start-cooking'" class="active-button" [routerLink]="['/start-cooking']"
+    mat-flat-button>Start Cooking</button>
   <button *ngIf="this.url != '/my-pantry'" [routerLink]="['/my-pantry']" mat-flat-button> My Pantry </button>
-  <button *ngIf="this.url == '/my-pantry'" class="active-button" [routerLink]="['/my-pantry']" mat-flat-button> My Pantry </button>
+  <button *ngIf="this.url == '/my-pantry'" class="active-button" [routerLink]="['/my-pantry']" mat-flat-button> My
+    Pantry </button>
 
 
   <button *ngIf="this.url != '/dashboard'" [routerLink]="['/dashboard']" mat-flat-button> Dashboard </button>
@@ -33,7 +35,51 @@
 
 
 <!-- alternate for smaller screens -->
-<mat-toolbar fxHide.gt-sm>
+<!-- <mat-toolbar fxHide.gt-sm>
+  <div class="navbar-start">
+    <a class="logo"><img src="assets/Logos/logo.png" [routerLink]="['/dashboard']"></a>
+  </div>
+
+  <span class="example-spacer"></span>
+
+  <button mat-icon-button (click)="openDialog()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 26.667 26.667">
+      <path
+        d="M24.39,26.276l-4.9-4.9a12.012,12.012,0,1,1,1.885-1.885l4.9,4.9a1.334,1.334,0,0,1-1.886,1.886ZM2.666,12a9.329,9.329,0,0,0,15.827,6.7,1.338,1.338,0,0,1,.206-.206A9.332,9.332,0,1,0,2.666,12Z">
+      </path>
+    </svg>
+  </button>
+
+  <button mat-icon-button *ngIf="this.url != '/settings'" [routerLink]="['/settings']">
+    <mat-icon>settings</mat-icon>
+  </button>
+  <button mat-icon-button class="active-button" *ngIf="this.url == '/settings'" [routerLink]="['/settings']">
+    <mat-icon>settings</mat-icon>
+  </button>
+
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item [routerLink]="['/start-cooking']">
+      <span>Start Cooking</span>
+    </button>
+
+    <button mat-menu-item [routerLink]="['/my-pantry']">
+      <span>My Pantry</span>
+    </button>
+
+    <button mat-menu-item [routerLink]="['/dashboard']">
+      <span>Dashboard</span>
+    </button>
+
+  </mat-menu>
+
+</mat-toolbar> -->
+
+
+<mat-toolbar id="small-navbar" fxHide.gt-sm>
   <div class="navbar-start">
     <a class="logo"><img src="assets/Logos/logo.png" [routerLink]="['/dashboard']"></a>
   </div>
@@ -75,7 +121,3 @@
   </mat-menu>
 
 </mat-toolbar>
-
-
-<!-- <button *ngIf="this.url != '/settings'" [routerLink]="['/dashboard']" mat-flat-button> Dashboard </button>
-  <button *ngIf="this.url == '/settings'" class="active-button" [routerLink]="['/dashboard']" mat-flat-button> Dashboard </button> -->

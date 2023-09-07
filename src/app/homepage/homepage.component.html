@@ -1,76 +1,167 @@
-<mat-toolbar fxHide.lt-md>
-    <div class="navbar-start">
-        <img src="assets/Logos/logo.png" [routerLink]="['/homepage']">
-    </div>
-    <span class="example-spacer"></span>
-    <button mat-stroked-button [routerLink]="['/sign-in']" mat-flat-button>Login In</button>
-    <button mat-flat-button color="warn" [routerLink]="['/sign-up']" mat-flat-button>Sign Up</button>
-</mat-toolbar>
 
-<div id="first">
-    <div class="showcase-area">
-        <div class="info" fxFlex="60" fxLayout="column" fxLayoutAlign="space-between start">
-            <h1>Too Many Ingredients Not Enough Time?</h1>
-            <p> Got a bunch of ingredients sitting at home with no clue what to cook? Say hello to Pantry Pal! We're
-                here to
-                rescue your taste buds from boredom. Join now and start creating delicious dishes with ease!.</p>
-            <button mat-flat-button color="warn" [routerLink]="['/sign-up']" mat-flat-button>Sign Up</button>
+
+<div fxHide.lt-md>
+    <mat-toolbar fxHide.lt-md>
+        <div class="navbar-start">
+            <img src="assets/Logos/logo.png" [routerLink]="['/homepage']">
         </div>
-        <!-- <img fxFlex="40" src="assets/photos/breakfast.jpg"> -->
-        <img fxFlex="=40" src="assets/photos/StockPhotos/stock1.jpg">
-    </div>
-</div>
+        <span class="example-spacer"></span>
+        <button mat-stroked-button [routerLink]="['/sign-in']" mat-flat-button>Login In</button>
+        <button mat-flat-button color="warn" [routerLink]="['/sign-up']" mat-flat-button>Sign Up</button>
+    </mat-toolbar>
 
-<hr>
-<div class="oneTwoThree" fxLayout="row" fxLayoutAlign="space-evenly center">
-    <div class="item" fxLayout="column" fxLayoutAlign="space-around center">
-        <div id="one" class="circle" fxLayout="row" fxLayoutAlign="center center">
-            <img src="assets/icons/writing.png">
+
+    <div id="first">
+        <div class="showcase-area">
+            <div class="info" fxFlex="60" fxLayout="column" fxLayoutAlign="space-between start">
+                <h1>Too Many Ingredients Not Enough Time?</h1>
+                <p> Got a bunch of ingredients sitting at home with no clue what to cook? Say hello to Pantry Pal! We're
+                    here to
+                    rescue your taste buds from boredom. Join now and start creating delicious dishes with ease!.</p>
+                <button mat-flat-button color="warn" [routerLink]="['/sign-up']" mat-flat-button>Sign Up</button>
+            </div>
+            <img fxFlex="=40" src="assets/photos/StockPhotos/stock1.jpg">
         </div>
-        <h2>1 Sign Up</h2>
     </div>
-
-    <div class="item" fxLayout="column" fxLayoutAlign="space-around center">
-        <div id="two" class="circle" fxLayout="row" fxLayoutAlign="center center">
-            <img src="assets/icons/harvest.png">
+    
+    <hr>
+    
+    <div class="oneTwoThree" fxLayout="row" fxLayoutAlign="space-evenly center">
+        <div class="item" fxLayout="column" fxLayoutAlign="space-around center">
+            <div id="one" class="circle" fxLayout="row" fxLayoutAlign="center center">
+                <img src="assets/icons/writing.png">
+            </div>
+            <h2>1 Sign Up</h2>
         </div>
-        <h2>2 Enter Pantry</h2>
+    
+        <div class="item" fxLayout="column" fxLayoutAlign="space-around center">
+            <div id="two" class="circle" fxLayout="row" fxLayoutAlign="center center">
+                <img src="assets/icons/harvest.png">
+            </div>
+            <h2>2 Enter Pantry</h2>
+        </div>
+    
+        <div class="item" fxLayout="column" fxLayoutAlign="space-around center">
+            <div id="three" class="circle" fxLayout="row" fxLayoutAlign="center center">
+                <img src="assets/icons/cooking.png">
+            </div>
+            <h2>3 Start Cooking</h2>
+        </div>
+    
     </div>
-
-    <div class="item" fxLayout="column" fxLayoutAlign="space-around center">
-        <div id="three" class="circle" fxLayout="row" fxLayoutAlign="center center">
-            <img src="assets/icons/cooking.png">
-        </div>
-        <h2>3 Start Cooking</h2>
-    </div>
-
-</div>
-
-<hr>
-
-
-<div id="second">
-    <div class="showcase-area">
-        <div class="video-container" fxLayout="row" fxLayoutAlign="center center">
-            <iframe width="600" height="350" src="https://www.youtube.com/embed/FVXXRiXl9w8"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay=1&mute=1; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
-        </div>
-        <div class="info" fxFlex="60" fxLayout="column" fxLayoutAlign="space-between start">
-            <h1>Still Don't Know How it Works?</h1>
-            <p> In this video, we'll take you on a quick tour of our website, highlighting all
-                the fantastic features that make managing your pantry a piece of cake.</p>
+    
+    <hr>
+    
+    
+    <div id="second">
+        <div class="showcase-area">
+            <div class="video-container" fxLayout="row" fxLayoutAlign="center center">
+                <iframe width="600" height="350" src="https://www.youtube.com/embed/FVXXRiXl9w8"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay=1&mute=1; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+            </div>
+            <div class="info" fxFlex="60" fxLayout="column" fxLayoutAlign="space-between start">
+                <h1>Still Don't Know How it Works?</h1>
+                <p> In this video, we'll take you on a quick tour of our website, highlighting all
+                    the fantastic features that make managing your pantry a piece of cake.</p>
                 <div fxLayout="row" fxLayoutAlign="end center">
                     <button mat-flat-button color="warn" [routerLink]="['/sign-up']" mat-flat-button>Sign Up</button>
                 </div>
-            
+    
+            </div>
         </div>
+    </div>
+    
+    
+    <div class="sign-up-button" fxLayout="row" fxLayoutAlign="center center">
+        <button mat-flat-button color="warn" [routerLink]="['/sign-in']" mat-flat-button>Sign Up</button>
     </div>
 </div>
 
-<!-- <div class="sign-up-button" fxLayout="row" fxLayoutAlign="center center">
-    <button mat-flat-button color="warn" [routerLink]="['/sign-in']" mat-flat-button>Sign Up</button>
-</div> -->
+
+<div fxHide.gt-sm class="container" fxLayout="column" fxLayoutAlign="center center">
+
+    <mat-toolbar id="small-navbar" >
+        <div class="navbar-start">
+            <img src="assets/Logos/logo.png" [routerLink]="['/homepage']">
+        </div>
+        <span class="example-spacer"></span>
+        <button mat-icon-button [routerLink]="['/sign-in']">
+            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 26.667 26.667">
+                <path
+                    d="M24.39,26.276l-4.9-4.9a12.012,12.012,0,1,1,1.885-1.885l4.9,4.9a1.334,1.334,0,0,1-1.886,1.886ZM2.666,12a9.329,9.329,0,0,0,15.827,6.7,1.338,1.338,0,0,1,.206-.206A9.332,9.332,0,1,0,2.666,12Z">
+                </path>
+            </svg>
+        </button>
+    
+        <button mat-icon-button [routerLink]="['/sign-in']">
+            <mat-icon>settings</mat-icon>
+        </button>
+    </mat-toolbar>
+
+    <div id="small-showcase-area">
+        <div class="info" fxLayout="column" fxLayoutAlign="space-around center">
+            <img src="assets/photos/StockPhotos/stock1.jpg">
+            <h1>Too Many Ingredients Not Enough Time?</h1>
+            <p> Got a bunch of ingredients sitting at home with no clue what to cook? Say hello to Pantry Pal! We're
+                here to
+                rescue your taste buds from boredom. Join now and start creating delicious dishes with ease!</p>
+            <button mat-flat-button color="warn" [routerLink]="['/sign-up']" mat-flat-button>Sign Up</button>
+        </div>
+
+        <hr>
+
+        <h1 class="title">Easy as 1 2 3 . . . </h1>
+
+        <div class="oneTwoThree" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="item" fxLayout="column" fxLayoutAlign="space-around center">
+                <div id="one" class="circle" fxLayout="row" fxLayoutAlign="center center">
+                    <img src="assets/icons/writing.png">
+                </div>
+                <h2>1 Sign Up</h2>
+            </div>
+
+            <div class="item" fxLayout="column" fxLayoutAlign="space-around center">
+                <div id="two" class="circle" fxLayout="row" fxLayoutAlign="center center">
+                    <img src="assets/icons/harvest.png">
+                </div>
+                <h2>2 Enter Pantry</h2>
+            </div>
+
+            <div class="item" fxLayout="column" fxLayoutAlign="space-around center">
+                <div id="three" class="circle" fxLayout="row" fxLayoutAlign="center center">
+                    <img src="assets/icons/cooking.png">
+                </div>
+                <h2>3 Start Cooking</h2>
+            </div>
+        </div>
+
+        <hr>
+
+        <div id="second">
+            <div class="showcase-area" fxLayout="column" fxLayoutAlign="center center">
+                <div class="video-container" fxLayout="column" fxLayoutAlign="center center">
+                    <iframe width="300" height="200" src="https://www.youtube.com/embed/FVXXRiXl9w8"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay=1&mute=1; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+                <div class="info" fxFlex="60" fxLayout="column" fxLayoutAlign="center center">
+                    <h1>Still Don't Know How it Works?</h1>
+                    <p> In this video, we'll take you on a quick tour of our website, highlighting all
+                        the fantastic features that make managing your pantry a piece of cake.</p>
+                    <div fxLayout="row" fxLayoutAlign="end center">
+                        <button mat-flat-button color="warn" [routerLink]="['/sign-up']" mat-flat-button>Sign
+                            Up</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
 
 <app-footer></app-footer>
