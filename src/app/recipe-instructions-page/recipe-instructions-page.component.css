@@ -44,16 +44,19 @@ h1 svg {
 }
 
 img {
+    height: 418px;
     border-radius: 10px;
 }
+
 
 /*nutrition-label*/
 .nutrition-label {
     padding: 25px;
     height: 370px;
-    width: 300px;
+    min-width: 300px;
     border-radius: 15px;
     background-color: whitesmoke;
+    /* max-width: 100%; */
 }
 
 hr {
@@ -61,7 +64,7 @@ hr {
 }
 
 .nutrients {
-    padding: 10px;
+    padding: 0px;
     margin-top: 0px;
     margin-bottom: 0px;
 }
@@ -87,7 +90,6 @@ h2 {
     font-family: "Playfair", serif;
     font-size: 30px;
 }
-
 
 /* quick facts */
 .quick-facts {
@@ -115,9 +117,34 @@ h4 {
 }
 
 
+/* small quick facts */
+.small-quick-facts {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.small-quick-facts .item h5 {
+    margin: 0px;
+    color: grey;
+    font-family: "Inter", sans-serif;
+}
+
+.small-quick-facts .item h4 {
+    margin: 0px;
+    font-family: "Inter", sans-serif;
+}
+
+ .small-quick-facts .horizontal {
+    border: none;
+
+    border-left: 1px solid hsla(200, 10%, 50%, 100);
+    height: 35px;
+    width: 1px;
+}
+
+
 /* Ingredients & instruction*/
-.ingredients,
-.instructions {
+.ingredients, .instructions {
     list-style: none;
     padding: 0px;
 }
@@ -254,4 +281,158 @@ h1 {
     color: #303030;
     font-size: 18px;
     font-family: "Inter", sans-serif;
+}
+
+@media screen and (max-width: 1000px) {
+    .title {
+        font-family: "Playfair", serif;
+        font-size: 60px;
+        line-height: 1;
+        color: #303030;
+    }
+}
+
+@media screen and (max-width: 1130px) {
+    body {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .title {
+        font-family: "Playfair", serif;
+        font-size: 60px;
+        line-height: 1;
+        color: #303030;
+    }
+}
+
+@media screen and (max-width: 1130px) {
+    body {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+@media screen and (max-width: 1060px) {
+    img {
+        height: 390px;
+        border-radius: 10px;
+    }
+    
+    /*nutrition-label*/
+
+    h2 {
+        padding: 10px;
+        margin: 0px;
+        color: #303030;
+        font-family: "Playfair", serif;
+        font-size: 25px;
+    }
+
+    .nutrition-label {
+        padding: 10px;
+        height: 360px;
+        border-radius: 15px;
+        background-color: whitesmoke;
+    }
+    
+    hr {
+        margin-bottom: 3px;
+    }
+    
+    .nutrients {
+        padding: 10px 10px 10px 10px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .nutrition-label {
+        height: 100%;
+    }
+    
+    .nutrition-label li {
+        list-style-type: none;
+    }
+    
+    .nutrition-label .data {
+        float: right;
+        color: black;
+    }
+    
+    .nutrition-label li {
+        font-size: 12px;
+        font-family: "Inter", sans-serif;
+        color: grey;
+        padding: 1px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    
+    .title {
+        font-size: 40px;
+    }
+
+    img {
+        height: 350px;
+        border-radius: 10px;
+    }
+    
+    /*nutrition-label*/
+
+    h2 {
+        padding: 10px 10px 0px 10px;
+        margin: 0px;
+        color: #303030;
+        font-family: "Playfair", serif;
+        font-size: 25px;
+    }
+
+    .nutrition-label {
+        padding: 10px;
+        height: 360px;
+        border-radius: 15px;
+        background-color: whitesmoke;
+    }
+    
+    hr {
+        margin-bottom: 3px;
+    }
+    
+    .nutrients {
+        padding: 0px 10px 10px 10px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .nutrition-label {
+        height: 100%;
+    }
+    
+    .nutrition-label li {
+        list-style-type: none;
+    }
+    
+    .nutrition-label .data {
+        float: right;
+        color: black;
+    }
+    
+    .nutrition-label li {
+        font-size: 10px;
+        font-family: "Inter", sans-serif;
+        color: grey;
+        padding: 1px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .title {
+        font-size: 25px;
+    }
+}
+
+.small-wrapper img {
+    width: 100%;
+    height: auto;
 }

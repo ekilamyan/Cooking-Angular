@@ -27,14 +27,6 @@
     line-height: 1.3;
 }
 
-
-#first .skeleton-loader-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
-
-
 #first button {
     background-color: white;
     transition: 0.2s;
@@ -122,4 +114,8 @@
 
 #third .info-two .button {
     padding: 10px;
+}
+
+.skeleton-loader-wrapper {
+    width: 100%;
 }

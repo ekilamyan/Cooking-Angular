@@ -5,7 +5,7 @@
 
         <hr>
 
-        <div class="filters">
+        <div fxHide.lt-md class="filters">
             <mat-chip-list id="#chipList">
                 <mat-chip *ngFor="let item of filters; let i = index">
                     {{filters[i]}}
@@ -24,7 +24,7 @@
             </mat-chip-list>
         </div>
 
-        <div class="search-bar" fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxHide.lt-md class="search-bar" fxLayout="row" fxLayoutAlign="space-between center">
             <form class="ingredient-search" [formGroup]="ingredientSearchForm" fxFlex="75">
 
                 <mat-form-field class="inputBox" appearance="outline">
@@ -44,7 +44,7 @@
                 </mat-form-field>
             </form>
 
-            <div class="filter-button" fxFlex="10">
+            <div fxHide.lt-md class="filter-button" fxFlex="10">
                 <button mat-stroked-button [matMenuTriggerFor]="belowMenu">Sort</button>
                 <mat-menu #belowMenu="matMenu" yPosition="below">
                     <button mat-menu-item (click)="sortAlphabetically()">A-Z</button>
@@ -57,8 +57,8 @@
             </div>
         </div>
 
-        <h2>Recipes With My Pantry</h2>
-        <hr>
+        <h2 fxHide.lt-md>Recipes With My Pantry</h2>
+        <hr fxHide.lt-md>
 
 
         <div *ngIf="isLoading" class="skeleton-loader-wrapper">
@@ -148,10 +148,10 @@
             </div>
 
             <div class="search-content">
-                <div class="suggestions-wrapper" fxLayoutGap="25" fxLayout="row wrap" fxLayoutAlign="start center">
+                <div class="suggestions-wrapper" fxLayoutGap="25" fxLayout="row wrap" fxLayoutAlign="center center">
                     <div class="card" *ngFor=" let recipe of filteredRecipes"
                         (click)="navToRecipeIntructions(recipe.id)">
-                        <img src="{{recipe.image}}" />
+                        <img src="{{recipe.image}}" alt="Not Found"/>
                         <div class="title" fxLayout="wrap">
                             {{recipe.title}}
                         </div>

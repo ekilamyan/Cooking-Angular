@@ -115,3 +115,11 @@ hr {
     transition: all ease 0.2s;
 }
 
+
+@media (max-width: 1140px) {
+    .pantry-container{
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+}
+

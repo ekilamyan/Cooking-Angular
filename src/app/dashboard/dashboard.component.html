@@ -1,13 +1,13 @@
 <app-navbar></app-navbar>
 <div class="main-container">
-
     <app-showcase-recipe></app-showcase-recipe>
 
-    <div class="card-container-title">
+    <!-- regular -->
+    <div fxHide.lt-md class="card-container-title">
         <h1>Popular Categories</h1>
     </div>
 
-    <div class="popular-categories-showcase" fxLayout="row wrap" fxLayoutAlign="space-between center">
+    <div fxHide.lt-md class="popular-categories-showcase" fxLayout="row wrap" fxLayoutAlign="space-between center">
         <div class="card" *ngFor="let category of categoryTitles; let i = index" fxLayout="column"
             fxLayoutAlign="center center" (click)="navToSearchPage(categoryTitlesForSearching[i])">
             <img src={{categoryImages[i]}} />
@@ -17,17 +17,44 @@
         </div>
     </div>
 
-    <div class="card-container-title">
+    <!-- small -->
+    <div fxHide.gt-sm class="small-card-container-title">
+        <h1>Popular Categories</h1>
+    </div>
+    
+    <div fxHide.gt-sm class="small-popular-categories-showcase" fxLayout="row wrap" fxLayoutAlign="space-between center">
+        <div class="card" *ngFor="let category of categoryTitles; let i = index" fxLayout="column"
+            fxLayoutAlign="center center" (click)="navToSearchPage(categoryTitlesForSearching[i])">
+            <img src={{categoryImages[i]}} />
+            <div class="card-body">
+                <h2 class="card-title">{{categoryTitles[i]}}</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- regular -->
+    <!-- <div fxHide.lt-md class="card-container-title">
         <h1>Try Something New</h1>
     </div>
-    <app-suggestions></app-suggestions>
+    <div fxHide.gt-sm class="small-card-container-title">
+        <h1>Try Something New</h1>
+    </div>
+    <app-suggestions></app-suggestions> -->
 
-    <div *ngIf=" cookingData && (ingredientcount > 0)" class="card-container-title">
+
+    <!-- <div fxHide.lt-md *ngIf=" cookingData && (ingredientcount > 0)" class="card-container-title">
         <h1>Things To Cook Right Now</h1>
     </div>
-    <app-suggestions *ngIf=" cookingData && (ingredientcount > 0)" type="pantry"></app-suggestions>
+    <div fxHide.gt-sm *ngIf=" cookingData && (ingredientcount > 0)" class="small-card-container-title">
+        <h1>Things To Cook Right Now</h1>
+    </div>
+    <app-suggestions *ngIf=" cookingData && (ingredientcount > 0)" type="pantry"></app-suggestions> -->
 
-    <div *ngIf=" cookingData && (cookingData.saved_recipes.length > 3)" class="card-container-title">
+
+    <div fxHide.lt-md *ngIf=" cookingData && (cookingData.saved_recipes.length > 3)" class="card-container-title">
+        <h1>My Saved Recipes</h1>
+    </div>
+    <div fxHide.gt-sm *ngIf=" cookingData && (cookingData.saved_recipes.length > 3)" class="small-card-container-title">
         <h1>My Saved Recipes</h1>
     </div>
     <app-suggestions *ngIf=" cookingData && (cookingData.saved_recipes.length > 3)" type="saved"></app-suggestions>

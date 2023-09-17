@@ -59,7 +59,7 @@ button:hover {
 
 .mat-expansion-panel-header {
    padding: 0px;
-   margin-top: 20px;
+   margin-top: 2px;
    margin-bottom: 20px;
 }
 
@@ -70,4 +70,8 @@ button:hover {
 
 .mat-menu::ng-deep {
    overflow: hidden !important;
+}
+
+#small-navbar .mat-icon {
+   transform: scale(1.2);
 }

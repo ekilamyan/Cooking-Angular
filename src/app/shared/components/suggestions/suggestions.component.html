@@ -1,26 +1,58 @@
-<div *ngIf="!isLoading" class="suggestions-wrapper" fxLayout="row wrap" fxLayoutAlign="space-between stretch">
-    <div class="card" *ngFor=" let recipe of recipes"  fxLayout="column" fxLayoutAlign="start start" (click)="navToRecipeIntructions(recipe.id)">
-        <img *ngIf="recipe.image" src="{{recipe.image}}"/>
-        <div class="card-body" fxLayout="row wrap">
-            <h2 class="card-title">{{recipe.title}}</h2>
+
+<body>
+    <div fxHide.lt-md *ngIf="!isLoading" id="grid" class="suggestions-wrapper">
+        <div class="card" *ngFor=" let recipe of recipes"  fxLayout="column" fxLayoutAlign="start start" (click)="navToRecipeIntructions(recipe.id)">
+            <img *ngIf="recipe.image" src="{{recipe.image}}"/>
+            <div class="card-body" fxLayout="row wrap">
+                <h2 class="card-title">{{recipe.title}}</h2>
+            </div>
         </div>
     </div>
-</div>
-
- <div *ngIf="isLoading" class="skeleton-loader-wrapper">
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-         <div>
-             <ngx-skeleton-loader [theme]="{ height: '218px', width: '352px', borderRadius: '10px' }"></ngx-skeleton-loader>
-             <ngx-skeleton-loader [theme]="{ height: '30px', width: '352px', borderRadius: '10px' }"></ngx-skeleton-loader>
+    
+    <div fxHide.gt-md *ngIf="!isLoading" class="small-suggestions-wrapper" fxLayout="column" fxLayoutAlign="space-around center">
+        <div class="card" *ngFor=" let recipe of recipes"  fxLayout="column" fxLayoutAlign="start start" (click)="navToRecipeIntructions(recipe.id)">
+            <img *ngIf="recipe.image" src="{{recipe.image}}"/>
+            <div class="card-body" fxLayout="row wrap">
+                <h2 class="card-title">{{recipe.title}}</h2>
+            </div>
+        </div>
+    </div>
+    
+    <!-- normal -->
+     <div fxHide.lt-md *ngIf="isLoading" class="skeleton-loader-wrapper">
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10">
+             <div fxLayout="column" fxFlex="33">
+                 <ngx-skeleton-loader [theme]="{ height: '218px', width: '100%', borderRadius: '10px' }"></ngx-skeleton-loader>
+                 <ngx-skeleton-loader [theme]="{ height: '30px', width: '100%', borderRadius: '10px' }"></ngx-skeleton-loader>
+             </div>
+             <div fxLayout="column" fxFlex="33">
+                <ngx-skeleton-loader [theme]="{ height: '218px', width: '100%', borderRadius: '10px' }"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{ height: '30px', width: '100%', borderRadius: '10px' }"></ngx-skeleton-loader>
+            </div>
+            <div fxLayout="column" fxFlex="33">
+                <ngx-skeleton-loader [theme]="{ height: '218px', width: '100%', borderRadius: '10px' }"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{ height: '30px', width: '100%', borderRadius: '10px' }"></ngx-skeleton-loader>
+            </div>
          </div>
-         <div>
-            <ngx-skeleton-loader [theme]="{ height: '218px', width: '352px', borderRadius: '10px' }"></ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '30px', width: '352px', borderRadius: '10px' }"></ngx-skeleton-loader>
-        </div>
-        <div>
-            <ngx-skeleton-loader [theme]="{ height: '218px', width: '352px', borderRadius: '10px' }"></ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '30px', width: '352px', borderRadius: '10px' }"></ngx-skeleton-loader>
-        </div>
      </div>
- </div>
+    
+     <!-- smaller -->
+     <div fxHide.gt-sm *ngIf="isLoading" class="small-skeleton-loader-wrapper">
+        <div fxLayout="column" fxLayoutAlign="space-around center">
+             <div fxLayout="column">
+                 <ngx-skeleton-loader [theme]="{ height: '218px', width: '352px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                 <ngx-skeleton-loader [theme]="{ height: '30px', width: '352px', borderRadius: '10px' }"></ngx-skeleton-loader>
+             </div>
+             <div fxLayout="column">
+                <ngx-skeleton-loader [theme]="{ height: '218px', width: '352px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{ height: '30px', width: '352px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            </div>
+            <div fxLayout="column">
+                <ngx-skeleton-loader [theme]="{ height: '218px', width: '352px', borderRadius: '10px' }"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{ height: '30px', width: '352px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            </div>
+         </div>
+     </div>
+</body>
+
 

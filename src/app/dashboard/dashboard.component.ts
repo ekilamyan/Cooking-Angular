@@ -5,7 +5,6 @@ import { SearchService } from '../shared/services/search.service';
 import { SuggestionsService } from '../shared/services/suggestions.service';
 import { CookingData } from '../shared/models/cooking-data.model';
 import { CookingDataService } from '../shared/services/cooking-data.service';
-import { log } from 'console';
 
 @Component({
   selector: 'app-dashboard',
@@ -51,7 +50,7 @@ export class DashboardComponent implements OnInit {
     private searchService: SearchService,
     private cookingDataService: CookingDataService,
     private route: Router,
-    public newRoute: Router
+    public newRoute: Router,
   ) { }
 
   ngOnInit(): void {

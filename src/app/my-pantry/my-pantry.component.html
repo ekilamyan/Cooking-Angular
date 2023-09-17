@@ -28,7 +28,7 @@
         </form>
     </div>
 
-    <div *ngIf="blank" fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap="1">
+    <div fxHide.lt-lg ="pantry-container" *ngIf="blank" fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="1">
         <div class="user-pantry" fxLayout="column" fxLayoutAlign="space-around center"
             *ngIf="cookingData && cookingData.user_ingredients">
             <div class="index-one" *ngFor="let item of this.indexOne">
@@ -49,7 +49,33 @@
                 <app-pantry-list *ngIf="item" category={{item[0]}} [ingredients]="item[1]"></app-pantry-list>
             </div>
         </div>
+    </div>
 
+    <!-- double column -->
+    <div fxHide.lt-md fxHide.gt-md class="pantry-container" *ngIf="blank"  fxLayout="row" fxLayoutAlign="space-around start"  fxLayoutGap="20">
+        <div class="user-pantry" fxLayout="column" fxLayoutAlign="space-around center"
+            *ngIf="cookingData && cookingData.user_ingredients">
+            <div class="index-one" *ngFor="let item of mediumIndexOne">
+                <app-pantry-list *ngIf="item" category={{item[0]}} [ingredients]="item[1]"></app-pantry-list>
+            </div>
+        </div>
+
+        <div class="user-pantry" fxLayout="column" fxLayoutAlign="space-around center"
+            *ngIf="cookingData && cookingData.user_ingredients">
+            <div class="index-one" *ngFor="let item of mediumIndexTwo">
+                <app-pantry-list *ngIf="item" category={{item[0]}} [ingredients]="item[1]"></app-pantry-list>
+            </div>
+        </div>
+    </div>
+
+    <!-- single column -->
+    <div fxHide.gt-sm class="pantry-container" *ngIf="blank" fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="1">
+        <div class="user-pantry" fxLayout="column" fxLayoutAlign="space-around center"
+            *ngIf="cookingData && cookingData.user_ingredients">
+            <div class="index-one" *ngFor="let item of singleColumn">
+                <app-pantry-list *ngIf="item" category={{item[0]}} [ingredients]="item[1]"></app-pantry-list>
+            </div>
+        </div>
     </div>
 
     <div *ngIf="!blank" class="getting-started">

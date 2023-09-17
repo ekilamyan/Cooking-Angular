@@ -1,6 +1,6 @@
 /*  */
 ::ng-deep.mat-dialog-container {
-
+    max-width: 350px;
     min-height: 200px;
     padding: 30px;
     border-radius: 20px;
@@ -12,7 +12,7 @@
 }
 
 p {
-    width: 350px;
+    width: 100%;
     font-family: "Inter", sans-serif;
     font-size: 15px;
 }
@@ -20,7 +20,7 @@ p {
 
 /* Input box */
 .inputBox {
-    width: 300px;
+    width: 100%;
     border-radius: 10px;
     font-size: 16px;
     font-weight: 300;

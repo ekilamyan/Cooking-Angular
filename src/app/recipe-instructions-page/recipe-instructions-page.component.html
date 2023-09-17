@@ -1,11 +1,11 @@
 <app-navbar class="navbar"></app-navbar>
 
 <body *ngIf="!isLoading">
-    <div class="recipe-title" fxLayout.gt-md="row" fxLayoutAlign.gt-md="space-between center">
-        <div class="title" fxFlex="90">
+    <div class="recipe-title" fxLayout="row wrap" fxLayoutAlign="space-between center">
+        <div class="title" fxFlex="75">
             {{this.recipe.title}}
         </div>
-        <div class="buttons" fxFlex="10" fxLayoutAlign="end center">
+        <div class="buttons" fxLayoutAlign="end center" fxFlex="20">
             <button mat-icon-button (click)="printPage()">
                 <svg data-name="feather-icon/printer" xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                     viewBox="0 0 20 22.041">
@@ -26,10 +26,8 @@
         </div>
     </div>
 
-    <div class="wrapper" fxLayout.gt-md="row" fxLayoutAlign.gt-md="space-between center" *ngIf="!loadingNutritionList">
-        <div class="image-wrapper">
-            <img src="{{this.recipe.image}}" width="680" />
-        </div>
+    <div fxHide.lt-md class="wrapper" *ngIf="!loadingNutritionList" fxLayout="row" fxLayoutAlign="space-between center">
+        <img src="{{this.recipe.image}}" />
         <div class="nutrition-wrapper">
             <div class="nutrition-label">
                 <h2>Nutrition Label</h2>
@@ -44,7 +42,11 @@
         </div>
     </div>
 
-    <div class="quick-facts" fxLayout="row" fxLayoutAlign="start center">
+    <div fxHide.gt-sm class="small-wrapper" *ngIf="!loadingNutritionList">
+        <img src="{{this.recipe.image}}" />
+    </div>
+
+    <div fxHide.lt-md class="quick-facts" fxLayout="row" fxLayoutAlign="start center">
         <div class="item" fxLayout="column" fxLayoutAlign="space-around center">
             <h5>PREP TIME</h5>
             <h4>{{recipe.readyInMinutes}} MIN</h4>
@@ -72,10 +74,48 @@
                 {{units}}
             </mat-slide-toggle>
         </div>
-        <hr>
     </div>
 
-    <div class="recipe-instruction-container" fxLayout.gt-md="row">
+    <!-- <div fxHide.gt-sm fxLayout="row" fxLayoutAlign="center center" class="small-quick-facts">
+        <hr>
+
+        <div fxLayout="column" fxLayoutAlign="center center">
+            <div class="item" fxLayout="column" fxLayoutAlign="space-around center">
+                <h5>PREP TIME</h5>
+                <h4>{{recipe.readyInMinutes}} MIN</h4>
+            </div>
+            
+            <hr>
+
+            <div class="item" fxLayout="column" fxLayoutAlign="space-around center">
+                <h5>SERVINGS</h5>
+                <h4>{{recipe.servings}} PEOPLE</h4>
+            </div>
+        </div>
+        
+        <hr class="horizontal">
+
+        <div fxLayout="column" fxLayoutAlign="center center">
+            <div class="item" fxLayout="column" fxLayoutAlign="space-around center">
+                <h5>TOTAL INGREDIENTS</h5>
+                <h4>{{ingredientCount}} INGREDIENTS</h4>
+            </div>
+    
+            <hr>
+    
+            <div class="item" fxLayout="column" fxLayoutAlign="space-around center">
+                <h5>MEASUREMENTS</h5>
+                <mat-slide-toggle class="changeUnits" color="warn" (click)="changeUnits(units)">
+                    {{units}}
+                </mat-slide-toggle>
+            </div>
+        </div>
+
+        <hr>
+    </div> -->
+    
+
+    <div fxHide.lt-sm class="recipe-instruction-container" fxLayout="row">
         <div *ngIf="units == 'Imperial'" class="ingredients-container" fxFlex="50">
             <h2>Ingredients</h2>
             <ul class="ingredients">
@@ -123,10 +163,65 @@
                 </li>
             </ul>
         </div>
+
     </div>
+
+    <!-- smaller version -->
+    <div fxHide.gt-xs class="recipe-instruction-container" fxLayout="column">
+
+        <div class="instructions-container">
+            <h2>Instructions</h2>
+            <ul class="instructions">
+                <li *ngFor="let step of instructionsList; let i = index">
+                    <div class="bullet-point" fxFlex="10">
+                        <p class="step-decor" fxLayoutAlign="center center"> {{i + 1}} </p>
+                    </div>
+                    <p class="instruction" fxFlex="90">
+                        {{step}}
+                    </p>
+                </li>
+            </ul>
+        </div>
+        
+        <div *ngIf="units == 'Imperial'" class="ingredients-container">
+            <h2>Ingredients</h2>
+            <ul class="ingredients">
+                <li *ngFor="let ingredient of originalIngredientList; let i = index" fxLayout="row"
+                    fxLayoutAlign="start start" fxLayoutGap="20">
+                    <mat-checkbox color="warn" class="custom-frame" (click)="checkUncheckFilter(ingredient)">
+                    </mat-checkbox>
+                    <button>
+                        <div class="ingredient">
+                            {{ingredient}}
+                        </div>
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <div *ngIf="units == 'Metric'" class="ingredients-container" >
+            <h2>Ingredients</h2>
+            <ul class="ingredients">
+                <li *ngFor="let ingredient of metricOriginalIngredientList; let i = index" fxLayout="row"
+                    fxLayoutAlign="start start" fxLayoutGap="20">
+
+                    <mat-checkbox color="warn" class="custom-frame" (click)="checkUncheckFilter(ingredient)">
+                    </mat-checkbox>
+                    <button>
+                        <div class="ingredient">
+                            {{ingredient}}
+                        </div>
+                    </button>
+
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
 </body>
 
-<div *ngIf="!isLoading" class="suggestions">
+<!-- <div *ngIf="!isLoading" class="suggestions">
     <h1 class="similar">Similar Recipes</h1>
     <app-suggestions *ngIf="showSuggestions" [type]="'similar'" [recipeId]="recipeId"
         [numOfResults]="3"></app-suggestions>
@@ -144,7 +239,7 @@
         <h1>My Saved Recipes</h1>
     </div>
     <app-suggestions *ngIf=" cookingData && (cookingData.saved_recipes.length > 3)" type="saved"></app-suggestions>
-</div>
+</div> -->
 
 <div *ngIf="isLoading" class="skeleton skeleton-loader">
     <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -163,28 +258,46 @@
     </div>
 
     <div fxLayout="row" fxLayoutAlign="space-between center">
-        <div fxLayout="column" fxLayoutAlign="space-around center" >
-            <ngx-skeleton-loader [theme]="{ height: '45px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
+        <div fxLayout="column" fxLayoutAlign="space-around center">
+            <ngx-skeleton-loader
+                [theme]="{ height: '45px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader
+                [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader
+                [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader
+                [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader
+                [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader
+                [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader
+                [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader
+                [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader
+                [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
         </div>
 
-        <div fxLayout="column" fxLayoutAlign="space-around center" >
-            <ngx-skeleton-loader [theme]="{ height: '45px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
+        <div fxLayout="column" fxLayoutAlign="space-around center">
+            <ngx-skeleton-loader
+                [theme]="{ height: '45px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader
+                [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader
+                [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader
+                [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader
+                [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader
+                [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader
+                [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader
+                [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader
+                [theme]="{ height: '25px', width: '520px', borderRadius: '10px' }"></ngx-skeleton-loader>
         </div>
     </div>
 

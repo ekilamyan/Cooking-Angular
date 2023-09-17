@@ -4,18 +4,19 @@
 }
 
 img {
-    object-fit: cover;
-    height: auto;
+
+    width: 100%;
+    max-width: 350px;
+
     border-radius: 10px;
-    width: 350px;
     transform: scale(1);
     transition: 0.4s;
     cursor: pointer;
     border: 1px solid rgb(235, 235, 235);
-    
+
 }
 
- h2 {
+h2 {
     margin-top: 10px;
     line-height: 1;
     font-family: "Inter", sans-serif;
@@ -23,25 +24,27 @@ img {
     cursor: pointer;
 }
 
-img:hover{
+img:hover {
     transform: scale(1.08);
     /* opacity: 0.1; */
 }
 
 .card-body {
     max-width: 350px;
+    margin-bottom: 10px;
 }
 
-.card .card-title{
+.card .card-title {
     transition: all ease 0.6s;
 }
 
-.card:hover .card-title{
+.card:hover .card-title {
     color: #ef4439;
     transition: all ease 0.6s;
 }
 
-/* layers */
-.inner {
-    position: absolute;
-  }
+@media only screen and (max-width: 1130px) {
+    .suggestions-wrapper {
+        font-size: 14px;
+    }
+}

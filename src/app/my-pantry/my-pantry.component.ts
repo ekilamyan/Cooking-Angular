@@ -27,6 +27,11 @@ export class MyPantryComponent implements OnInit {
   public indexTwo: any[] = [];
   public indexThree: any[] = [];
 
+  public mediumIndexOne: any[] = [];
+  public mediumIndexTwo: any[] = [];
+
+  public singleColumn: any[] = [];
+
   public ingredientArrays: any[];
 
   public added: boolean;
@@ -67,7 +72,7 @@ export class MyPantryComponent implements OnInit {
 
         this.count = 1;
 
-        // console.log(Object.entries(this.cookingData.user_ingredients).sort());
+        console.log(Object.entries(this.cookingData.user_ingredients).sort());
 
         this.ingredientArrays = Object.entries(this.cookingData.user_ingredients).sort();
 
@@ -78,6 +83,8 @@ export class MyPantryComponent implements OnInit {
         }
         console.log(this.ingredientcount);
 
+
+        // creates three columns
         if (this.ingredientcount > 0) {
           let misc;
           this.blank = true;
@@ -119,6 +126,67 @@ export class MyPantryComponent implements OnInit {
           // this.openDialog();
         }
       }
+
+      // create two columns
+      if (this.ingredientcount > 0) {
+        this.count = 1;
+        let misc;
+        this.blank = true;
+        for (let i = 0; i < this.ingredientArrays.length; i++) {
+          if (
+            this.ingredientArrays[i][0] == 'misc' &&
+            this.ingredientArrays[i][1].length > 0
+          ) {
+            misc = this.ingredientArrays[i];
+            this.count++;
+          } else if (
+            this.count == 1 &&
+            this.ingredientArrays[i] &&
+            this.ingredientArrays[i][1].length > 0
+          ) {
+            this.mediumIndexOne.push(this.ingredientArrays[i]);
+            this.count++;
+          } else if (
+            this.count == 2 &&
+            this.ingredientArrays[i] &&
+            this.ingredientArrays[i][1].length > 0
+          ) {
+            this.mediumIndexTwo.push(this.ingredientArrays[i]);
+            this.count++;
+            this.count = 1;
+          }
+        }
+
+        this.mediumIndexTwo.push(misc);
+
+      } else {
+        this.blank = false
+        // this.openDialog();
+      }
+
+      // single column
+      if (this.ingredientcount > 0) {
+        let misc;
+        this.blank = true;
+        for (let i = 0; i < this.ingredientArrays.length; i++) {
+          if (
+            this.ingredientArrays[i][0] == 'misc' &&
+            this.ingredientArrays[i][1].length > 0
+          ) {
+            misc = this.ingredientArrays[i];
+          } else if (
+            this.ingredientArrays[i] &&
+            this.ingredientArrays[i][1].length > 0
+          ) {
+            this.singleColumn.push(this.ingredientArrays[i]);
+          } 
+        }
+        this.singleColumn.push(misc);
+        
+      } else {
+        this.blank = false
+        // this.openDialog();
+      }
     });
 
     // this.refreshIngredients();
@@ -139,14 +207,14 @@ export class MyPantryComponent implements OnInit {
         // this.searchTermLength = this.ingredients.length;
 
         this.service.getIngredientAutocomplete(searchTerm).subscribe((temp: any[]) => {
-            this.ingredients = [];
-            this.hasRanSearch = true;
-            for (let i = 0; i < temp.length; i++) {
-              this.ingredients.push(new PantryIngredient(temp[i]));
-              console.log(this.ingredients);
-              // console.log(temp[i]);
-            }
-          });
+          this.ingredients = [];
+          this.hasRanSearch = true;
+          for (let i = 0; i < temp.length; i++) {
+            this.ingredients.push(new PantryIngredient(temp[i]));
+            console.log(this.ingredients);
+            // console.log(temp[i]);
+          }
+        });
       });
   }
 
@@ -293,7 +361,7 @@ export class MyPantryComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(EmptyPantryDialogComponent, { panelClass: 'custom-modalbox',  } ); //disableClose: true
+    const dialogRef = this.dialog.open(EmptyPantryDialogComponent, { panelClass: 'custom-modalbox', }); //disableClose: true
 
     // dialogRef.afterClosed().subscribe((res: any) => {
     // });
